@@ -23,7 +23,7 @@
 - id: unbold
   name: unbold
   description: "Strip markdown bold markers (** and __) in place"
-  entry: go run ./unbold --write
-  language: system
+  entry: unbold --write
+  language: golang
   types: [markdown]
   require_serial: true
