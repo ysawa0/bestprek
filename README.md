@@ -10,7 +10,7 @@ Install:
 ```yaml
 repos:
 - repo: https://github.com/ysawa0/precommit
-  rev: main
+  rev: v0.1.0
   hooks:
   - id: unbold
 ```
