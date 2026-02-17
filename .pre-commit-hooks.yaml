@@ -27,3 +27,13 @@
   language: golang
   types: [markdown]
   require_serial: true
+
+- id: mdformat
+  name: mdformat
+  description: "Format markdown with mdformat"
+  entry: mdformat
+  language: python
+  types: [markdown]
+  require_serial: true
+  additional_dependencies: [mdformat]
+  minimum_pre_commit_version: "2.9.2"
