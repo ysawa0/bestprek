@@ -1,6 +1,8 @@
-# Unbold Pre-Commit Hook
+# Pre-Commit Hooks
 
-Strip markdown bold markers (`**` and `__`) in place.
+Hooks in this repo:
+- `unbold`: strip markdown bold markers (`**` and `__`) in place
+- `mdformat`: format markdown files
 
 Requirements:
 - `pre-commit`
@@ -11,13 +13,15 @@ Install:
 repos:
 - repo: https://github.com/ysawa0/precommit
   rev: v0.1.0
-  hooks:
+hooks:
   - id: unbold
+  - id: mdformat
 ```
 
 Run:
 ```sh
 pre-commit run unbold -a
+pre-commit run mdformat -a
 ```
 
 Local run:
