@@ -2,7 +2,7 @@
 
 Hooks in this repo:
 - `unbold`: strip markdown bold markers (`**` and `__`) in place
-- `mdformat`: format markdown files
+- `mdformat`: format markdown files (commonly used in Google-hosted docs workflows)
 
 Requirements:
 - `pre-commit`
