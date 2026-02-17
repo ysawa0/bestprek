@@ -30,7 +30,7 @@
 
 - id: mdformat
   name: mdformat
-  description: "Format markdown with mdformat"
+  description: "Format markdown with mdformat (commonly used in Google docs workflows)"
   entry: mdformat
   language: python
   types: [markdown]
