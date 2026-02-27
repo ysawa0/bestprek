@@ -16,7 +16,7 @@ Install:
 ```yaml
 repos:
 - repo: https://github.com/ysawa0/precommit
-  rev: v0.1.0
+  rev: v1.1
 hooks:
   - id: unbold
   - id: mdformat
