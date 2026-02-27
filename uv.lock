@@ -1,0 +1,8 @@
+version = 1
+revision = 1
+requires-python = ">=3.9"
+
+[[package]]
+name = "ysawa0-precommit-hooks"
+version = "1.0.1"
+source = { editable = "." }
