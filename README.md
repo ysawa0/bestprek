@@ -14,6 +14,11 @@ Requirements:
 - `shellcheck` (for the `shellcheck` hook)
 - `shfmt` v3+ (for the `shfmt` hook)
 
+Install rumdl:
+```sh
+brew install rumdl
+```
+
 Install:
 ```yaml
 repos:
