@@ -37,3 +37,20 @@
   require_serial: true
   additional_dependencies: [mdformat]
   minimum_pre_commit_version: "2.9.2"
+
+- id: shellcheck
+  name: shellcheck
+  description: "Run shellcheck for shell script linting"
+  entry: shellcheck
+  language: system
+  types: [shell]
+  args: [-e, SC1091]
+  require_serial: true
+
+- id: shfmt
+  name: shfmt
+  description: "Format shell scripts with shfmt"
+  entry: shfmt -w
+  language: system
+  types: [shell]
+  require_serial: true
