@@ -1,8 +1,11 @@
 repos:
-- repo: local
+- repo: https://github.com/ysawa0/precommit
+  rev: ddce3a3
   hooks:
+  - id: ruff-check
+  - id: ruff-format
   - id: unbold
-    name: unbold
-    entry: go run ./unbold --write
-    language: system
-    types: [markdown]
+  - id: rumdl
+  - id: rumdl-fmt
+  - id: shellcheck
+  - id: shfmt
