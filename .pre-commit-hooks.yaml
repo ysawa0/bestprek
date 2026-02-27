@@ -30,13 +30,11 @@
 
 - id: mdformat
   name: mdformat
-  description: "Format markdown with mdformat (commonly used in Google docs workflows)"
-  entry: mdformat
-  language: python
+  description: "Format markdown with the local Go markdown formatter"
+  entry: mdfmt --write
+  language: golang
   types: [markdown]
   require_serial: true
-  additional_dependencies: [mdformat]
-  minimum_pre_commit_version: "2.9.2"
 
 - id: shellcheck
   name: shellcheck
