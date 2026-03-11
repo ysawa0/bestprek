@@ -91,7 +91,10 @@ Cut a release:
 ```sh
 make release VERSION=1.4
 ```
-3. Update any example `rev:` pins in this repo if you want them to point at the new tag.
+3. Update this repo to use the new tag everywhere:
+   - `.pre-commit-config.yaml`
+   - README example `rev:` pins
+4. Commit and push that follow-up version bump.
 
 This will:
 - push `main` to `origin`
