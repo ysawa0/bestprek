@@ -1,36 +1,24 @@
 # Pre-Commit Hooks
 
-Custom pre-commit hooks for Python, JavaScript/TypeScript, Markdown, and shell files.
+Small pre-commit hook bundle for ysawa0 repos.
 
-Available hooks:
+Published hooks:
+- `oxfmt`: format JavaScript, JSX, TypeScript, TSX, and JSON files with `oxfmt --no-error-on-unmatched-pattern`
 - `ruff-check`: lint Python files with `ruff check --force-exclude`
 - `ruff-format`: format Python files with `ruff format --force-exclude`
-- `oxfmt`: format JavaScript, JSX, TypeScript, TSX, and JSON files with `oxfmt`
 - `unbold`: strip markdown bold markers (`**` and `__`) in place
 - `rumdl-fmt`: format Markdown files with `rumdl check --fix`
 - `shellcheck`: lint shell scripts with `shellcheck`
 - `shfmt`: format shell scripts with `shfmt -w`
 
-Requirements:
-- `pre-commit`
-- Go toolchain for the `unbold` hook
-- `ruff` on your `PATH`
-- `oxfmt` on your `PATH`
-- `rumdl` on your `PATH`
-- `shellcheck` on your `PATH`
-- `shfmt` v3+ on your `PATH`
+Quickstart:
 
-Install required CLI tools:
+1. Install the required tools:
 ```sh
 brew install pre-commit ruff rumdl shellcheck shfmt
 ```
 
-If `oxfmt` is not globally installed, install it in your repo with `pnpm`:
-```sh
-pnpm add -D oxfmt
-```
-
-Published config:
+2. Add this to `.pre-commit-config.yaml`:
 ```yaml
 repos:
 - repo: https://github.com/ysawa0/precommit
@@ -45,9 +33,33 @@ repos:
   - id: shfmt
 ```
 
-Run:
+3. Install and run:
 ```sh
+pre-commit install
 pre-commit run -a
+```
+
+Notes:
+- The published hooks expect `ruff`, `rumdl`, `shellcheck`, and `shfmt` to already be on your `PATH`.
+- `unbold` is built by pre-commit using Go, so you need a Go toolchain installed.
+- The published `oxfmt` hook also expects `oxfmt` on your `PATH`.
+
+If you want `oxfmt` installed per-repo instead of globally, install it with `pnpm` and use a local hook:
+
+```sh
+pnpm add -D oxfmt
+```
+
+```yaml
+repos:
+- repo: local
+  hooks:
+  - id: oxfmt
+    name: oxfmt
+    entry: pnpm exec oxfmt --no-error-on-unmatched-pattern
+    language: system
+    types_or: [javascript, jsx, ts, tsx, json]
+    pass_filenames: true
 ```
 
 Run individual hooks:
@@ -70,17 +82,4 @@ go run ./unbold --write README.md
 rumdl check --fix README.md
 shellcheck script.sh
 shfmt -w script.sh
-```
-
-If you want to run `oxfmt` through `pnpm` instead of relying on `PATH`, use a local hook:
-```yaml
-repos:
-- repo: local
-  hooks:
-  - id: oxfmt
-    name: oxfmt
-    entry: pnpm exec oxfmt --no-error-on-unmatched-pattern
-    language: system
-    types_or: [javascript, jsx, ts, tsx, json]
-    pass_filenames: true
 ```
