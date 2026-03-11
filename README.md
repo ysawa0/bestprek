@@ -1,34 +1,44 @@
 # Pre-Commit Hooks
 
-Hooks in this repo:
-- `oxfmt`: format JavaScript, JSX, TypeScript, TSX, and JSON files with oxfmt
+Custom pre-commit hooks for Python, JavaScript/TypeScript, Markdown, and shell files.
+
+Available hooks:
+- `ruff-check`: lint Python files with `ruff check --force-exclude`
+- `ruff-format`: format Python files with `ruff format --force-exclude`
+- `oxfmt`: format JavaScript, JSX, TypeScript, TSX, and JSON files with `oxfmt`
 - `unbold`: strip markdown bold markers (`**` and `__`) in place
-- `rumdl-fmt`: format Markdown files with rumdl
-- `shellcheck`: lint shell scripts with shellcheck
-- `shfmt`: format shell scripts with shfmt
+- `rumdl-fmt`: format Markdown files with `rumdl check --fix`
+- `shellcheck`: lint shell scripts with `shellcheck`
+- `shfmt`: format shell scripts with `shfmt -w`
 
 Requirements:
 - `pre-commit`
-- Go toolchain
-- `oxfmt` on your `PATH` (for the `oxfmt` hook)
-- `ruff` on your `PATH` (for the `ruff-check` and `ruff-format` hooks)
-- `rumdl` (for the `rumdl-fmt` hook)
-- `shellcheck` (for the `shellcheck` hook)
-- `shfmt` v3+ (for the `shfmt` hook)
+- Go toolchain for the `unbold` hook
+- `ruff` on your `PATH`
+- `oxfmt` on your `PATH`
+- `rumdl` on your `PATH`
+- `shellcheck` on your `PATH`
+- `shfmt` v3+ on your `PATH`
 
 Install required CLI tools:
 ```sh
-brew install ruff
-brew install rumdl
+brew install pre-commit ruff rumdl shellcheck shfmt
 ```
 
-Install:
+If `oxfmt` is not globally installed, install it in your repo with `pnpm`:
+```sh
+pnpm add -D oxc
+```
+
+Published config:
 ```yaml
 repos:
 - repo: https://github.com/ysawa0/precommit
-  rev: v1.1
-hooks:
+  rev: "1.2"
+  hooks:
   - id: oxfmt
+  - id: ruff-check
+  - id: ruff-format
   - id: unbold
   - id: rumdl-fmt
   - id: shellcheck
@@ -37,74 +47,40 @@ hooks:
 
 Run:
 ```sh
-pre-commit run unbold -a
+pre-commit run -a
+```
+
+Run individual hooks:
+```sh
 pre-commit run oxfmt -a
+pre-commit run ruff-check -a
+pre-commit run ruff-format -a
+pre-commit run unbold -a
 pre-commit run rumdl-fmt -a
 pre-commit run shellcheck -a
 pre-commit run shfmt -a
 ```
 
-Local run:
+Direct CLI equivalents:
 ```sh
-go run ./unbold --write README.md
 oxfmt --no-error-on-unmatched-pattern path/to/file.ts
+ruff check --force-exclude .
+ruff format --force-exclude .
+go run ./unbold --write README.md
 rumdl check --fix README.md
+shellcheck script.sh
+shfmt -w script.sh
 ```
 
-Local `oxfmt` example:
+If you want to run `oxfmt` through `pnpm` instead of relying on `PATH`, use a local hook:
 ```yaml
 repos:
-  - repo: local
-    hooks:
-      - id: oxfmt
-        name: oxfmt
-        entry: oxfmt --no-error-on-unmatched-pattern
-        language: system
-        types_or: [javascript, jsx, ts, tsx, json]
-        pass_filenames: true
-```
-
-If `oxfmt` is installed via npm, pnpm, or bun and is not already on your `PATH`, prefer calling it through your package manager:
-
-```yaml
-repos:
-  - repo: local
-    hooks:
-      - id: oxfmt
-        name: oxfmt
-        entry: npx oxfmt --no-error-on-unmatched-pattern
-        language: system
-        types_or: [javascript, jsx, ts, tsx, json]
-        pass_filenames: true
-```
-
-```yaml
-repos:
-  - repo: local
-    hooks:
-      - id: oxfmt
-        name: oxfmt
-        entry: pnpm exec oxfmt --no-error-on-unmatched-pattern
-        language: system
-        types_or: [javascript, jsx, ts, tsx, json]
-        pass_filenames: true
-```
-
-Only add `yaml` if your installed `oxfmt` version supports it in your repo:
-
-```yaml
-types_or: [javascript, jsx, ts, tsx, json, yaml]
-```
-
-Most minimal version:
-
-```yaml
-repos:
-  - repo: local
-    hooks:
-      - id: oxfmt
-        name: oxfmt
-        entry: oxfmt --no-error-on-unmatched-pattern
-        language: system
-        files: \.(js|jsx|ts|tsx|json)$
+- repo: local
+  hooks:
+  - id: oxfmt
+    name: oxfmt
+    entry: pnpm exec oxfmt --no-error-on-unmatched-pattern
+    language: system
+    types_or: [javascript, jsx, ts, tsx, json]
+    pass_filenames: true
 ```
