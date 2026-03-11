@@ -22,7 +22,7 @@ brew install pre-commit ruff rumdl shellcheck shfmt
 ```yaml
 repos:
 - repo: https://github.com/ysawa0/precommit
-  rev: "1.3"
+  rev: "1.4"
   hooks:
   - id: oxfmt
   - id: ruff-check
@@ -45,6 +45,8 @@ Notes:
 - The published `oxfmt` hook also expects `oxfmt` on your `PATH`.
 
 If you want `oxfmt` installed per-repo instead of globally, install it with `pnpm` and use a local hook:
+
+`pnpm add -D oxfmt` by itself does not make the published `oxfmt` hook work. The published hook expects `oxfmt` on your `PATH`; the local hook below uses `pnpm exec oxfmt` instead.
 
 ```sh
 pnpm add -D oxfmt
@@ -89,14 +91,12 @@ Cut a release:
 1. Commit the changes you want to release on `main`.
 2. Run:
 ```sh
-make release VERSION=1.4
+make release VERSION=1.5
 ```
-3. Update this repo to use the new tag everywhere:
-   - `.pre-commit-config.yaml`
-   - README example `rev:` pins
+3. Update `.pre-commit-config.yaml` and README example `rev:` pins to the new tag.
 4. Commit and push that follow-up version bump.
 
 This will:
 - push `main` to `origin`
-- create an annotated numeric tag such as `1.4`
+- create an annotated numeric tag such as `1.5`
 - push that tag to GitHub
