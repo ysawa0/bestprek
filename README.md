@@ -3,7 +3,6 @@
 Hooks in this repo:
 - `oxfmt`: format JavaScript, JSX, TypeScript, TSX, and JSON files with oxfmt
 - `unbold`: strip markdown bold markers (`**` and `__`) in place
-- `rumdl`: lint Markdown files with rumdl
 - `rumdl-fmt`: format Markdown files with rumdl
 - `shellcheck`: lint shell scripts with shellcheck
 - `shfmt`: format shell scripts with shfmt
@@ -12,7 +11,7 @@ Requirements:
 - `pre-commit`
 - Go toolchain
 - `oxfmt` on your `PATH` (for the `oxfmt` hook)
-- `rumdl` (for `rumdl` and `rumdl-fmt` hooks)
+- `rumdl` (for the `rumdl-fmt` hook)
 - `shellcheck` (for the `shellcheck` hook)
 - `shfmt` v3+ (for the `shfmt` hook)
 
@@ -29,7 +28,6 @@ repos:
 hooks:
   - id: oxfmt
   - id: unbold
-  - id: rumdl
   - id: rumdl-fmt
   - id: shellcheck
   - id: shfmt
@@ -39,7 +37,6 @@ Run:
 ```sh
 pre-commit run unbold -a
 pre-commit run oxfmt -a
-pre-commit run rumdl -a
 pre-commit run rumdl-fmt -a
 pre-commit run shellcheck -a
 pre-commit run shfmt -a
@@ -49,7 +46,6 @@ Local run:
 ```sh
 go run ./unbold --write README.md
 oxfmt --no-error-on-unmatched-pattern path/to/file.ts
-rumdl check README.md
 rumdl check --fix README.md
 ```
 

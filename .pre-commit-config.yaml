@@ -6,7 +6,6 @@ repos:
   - id: ruff-check
   - id: ruff-format
   - id: unbold
-  - id: rumdl
   - id: rumdl-fmt
   - id: shellcheck
   - id: shfmt
