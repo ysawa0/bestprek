@@ -22,7 +22,7 @@ brew install pre-commit ruff rumdl shellcheck shfmt
 ```yaml
 repos:
 - repo: https://github.com/ysawa0/precommit
-  rev: "1.4"
+  rev: "1.5"
   hooks:
   - id: oxfmt
   - id: ruff-check
@@ -91,12 +91,12 @@ Cut a release:
 1. Commit the changes you want to release on `main`.
 2. Run:
 ```sh
-make release VERSION=1.5
+make release VERSION=1.6
 ```
 3. Update `.pre-commit-config.yaml` and README example `rev:` pins to the new tag.
 4. Commit and push that follow-up version bump.
 
 This will:
 - push `main` to `origin`
-- create an annotated numeric tag such as `1.5`
+- create an annotated numeric tag such as `1.6`
 - push that tag to GitHub
