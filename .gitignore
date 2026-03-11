@@ -1,2 +1,4 @@
 tmp/
 tmp-pre-commit-hooks/
+build/
+*.egg-info/

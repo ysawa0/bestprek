@@ -1,6 +1,0 @@
-README.md
-pyproject.toml
-ysawa0_precommit_hooks.egg-info/PKG-INFO
-ysawa0_precommit_hooks.egg-info/SOURCES.txt
-ysawa0_precommit_hooks.egg-info/dependency_links.txt
-ysawa0_precommit_hooks.egg-info/top_level.txt
