@@ -2,6 +2,7 @@ repos:
 - repo: https://github.com/ysawa0/precommit
   rev: "1.2"
   hooks:
+  - id: oxfmt
   - id: ruff-check
   - id: ruff-format
   - id: unbold

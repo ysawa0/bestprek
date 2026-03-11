@@ -20,6 +20,14 @@
   additional_dependencies: []
   minimum_pre_commit_version: "2.9.2"
 
+- id: oxfmt
+  name: oxfmt
+  description: "Format JavaScript, JSX, TypeScript, TSX, and JSON files with oxfmt"
+  entry: oxfmt --no-error-on-unmatched-pattern
+  language: system
+  types_or: [javascript, jsx, ts, tsx, json]
+  pass_filenames: true
+
 - id: unbold
   name: unbold
   description: "Strip markdown bold markers (** and __) in place"
