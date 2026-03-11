@@ -1,11 +1,11 @@
 repos:
-- repo: https://github.com/ysawa0/precommit
-  rev: "1.2"
-  hooks:
-  - id: oxfmt
-  - id: ruff-check
-  - id: ruff-format
-  - id: unbold
-  - id: rumdl-fmt
-  - id: shellcheck
-  - id: shfmt
+  - repo: https://github.com/ysawa0/precommit
+    rev: "1.2"
+    hooks:
+      - id: oxfmt
+      - id: ruff-check
+      - id: ruff-format
+      - id: unbold
+      - id: rumdl-fmt
+      - id: shellcheck
+      - id: shfmt
