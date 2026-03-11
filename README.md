@@ -11,6 +11,7 @@ Requirements:
 - `pre-commit`
 - Go toolchain
 - `oxfmt` on your `PATH` (for the `oxfmt` hook)
+- `ruff` on your `PATH` (for the `ruff-check` and `ruff-format` hooks)
 - `rumdl` (for the `rumdl-fmt` hook)
 - `shellcheck` (for the `shellcheck` hook)
 - `shfmt` v3+ (for the `shfmt` hook)

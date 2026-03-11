@@ -1,5 +1,0 @@
-Metadata-Version: 2.4
-Name: ysawa0-precommit-hooks
-Version: 1.0.1
-Summary: Custom pre-commit hooks for ysawa0 projects
-Requires-Python: >=3.9
