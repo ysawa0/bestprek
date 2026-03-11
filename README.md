@@ -16,8 +16,9 @@ Requirements:
 - `shellcheck` (for the `shellcheck` hook)
 - `shfmt` v3+ (for the `shfmt` hook)
 
-Install rumdl:
+Install required CLI tools:
 ```sh
+brew install ruff
 brew install rumdl
 ```
 
