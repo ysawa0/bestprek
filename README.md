@@ -27,7 +27,7 @@ brew install pre-commit ruff rumdl shellcheck shfmt
 
 If `oxfmt` is not globally installed, install it in your repo with `pnpm`:
 ```sh
-pnpm add -D oxc
+pnpm add -D oxfmt
 ```
 
 Published config:
