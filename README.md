@@ -22,7 +22,7 @@ brew install pre-commit ruff rumdl shellcheck shfmt
 ```yaml
 repos:
 - repo: https://github.com/ysawa0/precommit
-  rev: "1.2"
+  rev: "1.3"
   hooks:
   - id: oxfmt
   - id: ruff-check
@@ -83,3 +83,17 @@ rumdl check --fix README.md
 shellcheck script.sh
 shfmt -w script.sh
 ```
+
+Cut a release:
+
+1. Commit the changes you want to release on `main`.
+2. Run:
+```sh
+make release VERSION=1.4
+```
+3. Update any example `rev:` pins in this repo if you want them to point at the new tag.
+
+This will:
+- push `main` to `origin`
+- create an annotated numeric tag such as `1.4`
+- push that tag to GitHub
