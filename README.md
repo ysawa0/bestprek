@@ -15,7 +15,7 @@ Quickstart:
 
 1. Install the required tools:
 ```sh
-brew install pre-commit ruff rumdl shellcheck shfmt
+brew install pre-commit ruff shellcheck shfmt
 pnpm add -g oxfmt
 ```
 
@@ -45,9 +45,13 @@ pre-commit run -a
 ```
 
 Notes:
-- The published hooks expect `ruff`, `rumdl`, `shellcheck`, and `shfmt` to already be on your `PATH`.
+- The default example hooks expect `ruff`, `shellcheck`, and `shfmt` to already be on your `PATH`.
 - `unbold` is built by pre-commit using Go, so you need a Go toolchain installed.
 - Install `oxfmt` globally with `pnpm add -g oxfmt` so the published `oxfmt` hook can find it on your `PATH`.
+- If you enable `rumdl-fmt`, install `rumdl` too:
+```sh
+brew install rumdl
+```
 
 If you want `oxfmt` installed per-repo instead of globally, use a local hook instead:
 
@@ -75,9 +79,13 @@ pre-commit run oxfmt -a
 pre-commit run ruff-check -a
 pre-commit run ruff-format -a
 pre-commit run unbold -a
-pre-commit run rumdl-fmt -a
 pre-commit run shellcheck -a
 pre-commit run shfmt -a
+```
+
+Optional Markdown formatter:
+```sh
+pre-commit run rumdl-fmt -a
 ```
 
 Direct CLI equivalents:
@@ -86,9 +94,13 @@ oxfmt --no-error-on-unmatched-pattern path/to/file.ts
 ruff check --force-exclude .
 ruff format --force-exclude .
 go run ./unbold --write README.md
-rumdl check --fix README.md
 shellcheck script.sh
 shfmt -w script.sh
+```
+
+Optional Markdown formatter:
+```sh
+rumdl check --fix README.md
 ```
 
 Cut a release:
