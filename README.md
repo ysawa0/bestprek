@@ -16,6 +16,7 @@ Quickstart:
 1. Install the required tools:
 ```sh
 brew install pre-commit ruff rumdl shellcheck shfmt
+pnpm add -g oxfmt
 ```
 
 2. Add this to `.pre-commit-config.yaml`:
@@ -28,9 +29,13 @@ repos:
   - id: ruff-check
   - id: ruff-format
   - id: unbold
-  - id: rumdl-fmt
   - id: shellcheck
   - id: shfmt
+```
+
+Add this optional hook if you also want Markdown formatting:
+```yaml
+  - id: rumdl-fmt
 ```
 
 3. Install and run:
@@ -42,9 +47,9 @@ pre-commit run -a
 Notes:
 - The published hooks expect `ruff`, `rumdl`, `shellcheck`, and `shfmt` to already be on your `PATH`.
 - `unbold` is built by pre-commit using Go, so you need a Go toolchain installed.
-- The published `oxfmt` hook also expects `oxfmt` on your `PATH`.
+- Install `oxfmt` globally with `pnpm add -g oxfmt` so the published `oxfmt` hook can find it on your `PATH`.
 
-If you want `oxfmt` installed per-repo instead of globally, install it with `pnpm` and use a local hook:
+If you want `oxfmt` installed per-repo instead of globally, use a local hook instead:
 
 `pnpm add -D oxfmt` by itself does not make the published `oxfmt` hook work. The published hook expects `oxfmt` on your `PATH`; the local hook below uses `pnpm exec oxfmt` instead.
 
