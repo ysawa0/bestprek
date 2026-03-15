@@ -40,14 +40,6 @@
   types: [markdown]
   require_serial: true
 
-- id: rumdl-fmt
-  name: rumdl format
-  description: "Format Markdown files and fail if unfixable violations remain."
-  entry: rumdl check --fix
-  language: system
-  types: [markdown]
-  require_serial: true
-
 - id: shellcheck
   name: shellcheck
   description: "Run shellcheck for shell script linting"

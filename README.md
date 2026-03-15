@@ -8,7 +8,6 @@ Published hooks:
 - `ruff-check`: lint Python files with `ruff check --force-exclude`
 - `ruff-format`: format Python files with `ruff format --force-exclude`
 - `unbold`: strip markdown bold markers (`**` and `__`) in place
-- `rumdl-fmt`: format Markdown files with `rumdl check --fix`
 - `shellcheck`: lint shell scripts with `shellcheck`
 - `shfmt`: format shell scripts with `shfmt -w`
 
@@ -35,11 +34,6 @@ repos:
   - id: shfmt
 ```
 
-Add this optional hook if you also want Markdown formatting:
-```yaml
-  - id: rumdl-fmt
-```
-
 3. Install and run:
 ```sh
 pre-commit install
@@ -51,10 +45,6 @@ Notes:
 - `unbold` is built by pre-commit using Go, so you need a Go toolchain installed.
 - Install `oxfmt` globally with `pnpm add -g oxfmt` so the published `oxfmt` hook can find it on your `PATH`.
 - Install `oxlint` globally with `pnpm add -g oxlint` so the published `oxlint` hook can find it on your `PATH`.
-- If you enable `rumdl-fmt`, install `rumdl` too:
-```sh
-brew install rumdl
-```
 
 If you want Oxc tools installed per-repo instead of globally, use local hooks instead:
 
@@ -93,11 +83,6 @@ pre-commit run shellcheck -a
 pre-commit run shfmt -a
 ```
 
-Optional Markdown formatter:
-```sh
-pre-commit run rumdl-fmt -a
-```
-
 Direct CLI equivalents:
 ```sh
 oxfmt --no-error-on-unmatched-pattern path/to/file.ts
@@ -109,22 +94,17 @@ shellcheck script.sh
 shfmt -w script.sh
 ```
 
-Optional Markdown formatter:
-```sh
-rumdl check --fix README.md
-```
-
 Cut a release:
 
 1. Commit the changes you want to release on `main`.
 2. Run:
 ```sh
-make release VERSION=1.6
+make release VERSION=<version>
 ```
 3. Update `.pre-commit-config.yaml` and README example `rev:` pins to the new tag.
 4. Commit and push that follow-up version bump.
 
 This will:
 - push `main` to `origin`
-- create an annotated numeric tag such as `1.6`
+- create an annotated numeric tag matching `VERSION`
 - push that tag to GitHub
