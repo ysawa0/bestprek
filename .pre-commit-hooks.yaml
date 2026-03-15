@@ -27,7 +27,7 @@
 - id: oxlint
   name: oxlint
   description: "Lint JavaScript, JSX, TypeScript, and TSX files with oxlint"
-  entry: oxlint
+  entry: oxlint --deny-warnings
   language: system
   types_or: [javascript, jsx, ts, tsx]
   pass_filenames: true
