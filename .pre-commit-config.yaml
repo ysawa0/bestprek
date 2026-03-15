@@ -3,6 +3,7 @@ repos:
     rev: "1.5"
     hooks:
       - id: oxfmt
+      - id: oxlint
       - id: ruff-check
       - id: ruff-format
       - id: unbold
