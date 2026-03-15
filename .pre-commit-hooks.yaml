@@ -24,6 +24,14 @@
   types_or: [javascript, jsx, ts, tsx, json]
   pass_filenames: true
 
+- id: oxlint
+  name: oxlint
+  description: "Lint JavaScript, JSX, TypeScript, and TSX files with oxlint"
+  entry: oxlint
+  language: system
+  types_or: [javascript, jsx, ts, tsx]
+  pass_filenames: true
+
 - id: unbold
   name: unbold
   description: "Strip markdown bold markers (** and __) in place"
