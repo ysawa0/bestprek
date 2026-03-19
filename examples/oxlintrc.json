@@ -1,0 +1,16 @@
+{
+  "plugins": ["unicorn", "typescript", "oxc"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "perf": "error"
+  },
+  "rules": {
+    "curly": "error",
+    "eslint/no-await-in-loop": "off",
+    "eslint/no-shadow": "off",
+    "typescript/no-explicit-any": "off",
+    "unicorn/consistent-function-scoping": "off"
+  },
+  "ignorePatterns": ["coverage/", "dist/", "node_modules/", "vendor/"]
+}

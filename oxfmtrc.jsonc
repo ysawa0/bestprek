@@ -1,7 +1,0 @@
-{
-  // oxfmt formatter configuration
-  // Reference config -- copy to your project root as .oxfmtrc.jsonc
-  "tabWidth": 2,
-  "useTabs": false,
-  "ignorePatterns": ["dist/", "node_modules/", ".next/"]
-}
