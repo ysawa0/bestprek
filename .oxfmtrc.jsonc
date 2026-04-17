@@ -1,5 +1,4 @@
 {
-  // Copy to your project root as .oxfmtrc.jsonc
   "useTabs": false,
   "tabWidth": 2,
   "printWidth": 100,
