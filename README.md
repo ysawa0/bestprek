@@ -8,6 +8,10 @@ Published hooks:
 - `ruff-check`: lint Python files with `ruff check --force-exclude`
 - `ruff-format`: format Python files with `ruff format --force-exclude`
 - `unbold`: strip markdown bold markers (`**` and `__`) in place
+- `gofumpt`: format Go files with `gofumpt -w`
+- `goimports`: format Go files and fix imports with `goimports -w`
+- `gopls-check`: run `gopls check` diagnostics on staged Go files
+- `go-vet`: run `go vet ./...` in the current Go module
 - `shellcheck`: lint shell scripts with `shellcheck`
 - `shfmt`: format shell scripts with `shfmt -w`
 
@@ -15,7 +19,8 @@ Quickstart:
 
 1. Install the required tools:
 ```sh
-brew install pre-commit ruff shellcheck shfmt
+brew install pre-commit ruff shellcheck shfmt gofumpt goimports
+go install golang.org/x/tools/gopls@latest
 pnpm add -g oxfmt oxlint
 ```
 
@@ -30,6 +35,10 @@ repos:
   - id: ruff-check
   - id: ruff-format
   - id: unbold
+  - id: gofumpt
+  - id: goimports
+  - id: gopls-check
+  - id: go-vet
   - id: shellcheck
   - id: shfmt
 ```
@@ -43,6 +52,8 @@ pre-commit run -a
 Notes:
 - The default example hooks expect `ruff`, `shellcheck`, and `shfmt` to already be on your `PATH`.
 - `unbold` is built by pre-commit using Go, so you need a Go toolchain installed.
+- `gofumpt`, `goimports`, and `gopls` also need to already be on your `PATH`.
+- `go-vet` runs `go vet ./...` from the repo root, so use it only in repos where the hook runs inside the intended Go module.
 - Install `oxfmt` globally with `pnpm add -g oxfmt` so the published `oxfmt` hook can find it on your `PATH`.
 - Install `oxlint` globally with `pnpm add -g oxlint` so the published `oxlint` hook can find it on your `PATH`.
 
@@ -79,6 +90,10 @@ pre-commit run oxlint -a
 pre-commit run ruff-check -a
 pre-commit run ruff-format -a
 pre-commit run unbold -a
+pre-commit run gofumpt -a
+pre-commit run goimports -a
+pre-commit run gopls-check -a
+pre-commit run go-vet -a
 pre-commit run shellcheck -a
 pre-commit run shfmt -a
 ```
@@ -90,6 +105,10 @@ oxlint path/to/file.ts
 ruff check --force-exclude .
 ruff format --force-exclude .
 go run ./unbold --write README.md
+gofumpt -w path/to/file.go
+goimports -w path/to/file.go
+gopls check path/to/file.go
+go vet ./...
 shellcheck script.sh
 shfmt -w script.sh
 ```
