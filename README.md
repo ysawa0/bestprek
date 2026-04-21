@@ -28,7 +28,7 @@ pnpm add -g oxfmt oxlint
 ```yaml
 repos:
 - repo: https://github.com/ysawa0/precommit
-  rev: "1.9"
+  rev: "1.10"
   hooks:
   - id: oxfmt
   - id: oxlint
