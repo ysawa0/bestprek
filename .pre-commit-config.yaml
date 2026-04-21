@@ -3,6 +3,7 @@ repos:
     rev: "1.10"
     hooks:
       - id: oxfmt
+        exclude: '(^|/)(dist|build|coverage|vendor|\.cache|cache|__pycache__|generated)/'
       - id: oxlint
       - id: ruff-format
       - id: ruff-check

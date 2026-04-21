@@ -31,6 +31,7 @@ repos:
   rev: "1.10"
   hooks:
   - id: oxfmt
+    exclude: '(^|/)(dist|build|coverage|vendor|\.cache|cache|__pycache__|generated)/'
   - id: oxlint
   - id: ruff-format
   - id: ruff-check
@@ -74,6 +75,7 @@ repos:
     entry: pnpm exec oxfmt --no-error-on-unmatched-pattern
     language: system
     types_or: [javascript, jsx, ts, tsx, json]
+    exclude: '(^|/)(dist|build|coverage|vendor|\.cache|cache|__pycache__|generated)/'
     pass_filenames: true
   - id: oxlint
     name: oxlint
