@@ -31,15 +31,15 @@ repos:
   rev: "1.9"
   hooks:
   - id: oxfmt
+  - id: oxlint
   - id: ruff-format
+  - id: ruff-check
   - id: unbold
   - id: goimports
   - id: gofumpt
-  - id: shfmt
-  - id: oxlint
-  - id: ruff-check
   - id: gopls-check
   - id: go-vet
+  - id: shfmt
   - id: shellcheck
 ```
 
