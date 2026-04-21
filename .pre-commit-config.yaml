@@ -7,5 +7,9 @@ repos:
       - id: ruff-check
       - id: ruff-format
       - id: unbold
+      - id: gofumpt
+      - id: goimports
+      - id: gopls-check
+      - id: go-vet
       - id: shellcheck
       - id: shfmt

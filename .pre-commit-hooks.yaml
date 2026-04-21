@@ -40,6 +40,40 @@
   types: [markdown]
   require_serial: true
 
+- id: gofumpt
+  name: gofumpt
+  description: "Format Go files with gofumpt"
+  entry: gofumpt -w
+  language: system
+  types: [go]
+  require_serial: true
+
+- id: goimports
+  name: goimports
+  description: "Format Go files and fix imports with goimports"
+  entry: goimports -w
+  language: system
+  types: [go]
+  require_serial: true
+
+- id: gopls-check
+  name: gopls check
+  description: "Run gopls diagnostics for Go files"
+  entry: gopls check
+  language: system
+  types: [go]
+  pass_filenames: true
+  require_serial: true
+
+- id: go-vet
+  name: go vet
+  description: "Run go vet on the current Go module"
+  entry: sh -c 'go vet ./...'
+  language: system
+  types: [go]
+  pass_filenames: false
+  require_serial: true
+
 - id: shellcheck
   name: shellcheck
   description: "Run shellcheck for shell script linting"
