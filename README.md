@@ -29,7 +29,7 @@ Add `prek.toml` to the consuming repository:
 ```toml
 [[repos]]
 repo = "https://github.com/ysawa0/precommit"
-rev = "1.10"
+rev = "1.11"
 
 [[repos.hooks]]
 id = "oxfmt"
