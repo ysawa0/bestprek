@@ -1,131 +1,101 @@
-# Pre-Commit Hooks
+# Prek Hooks
 
-Small pre-commit hook bundle for ysawa0 repos.
+A small, version-pinned hook bundle for ysawa0 repositories, designed for Prek.
 
-Published hooks:
-- `oxfmt`: format JavaScript, JSX, TypeScript, TSX, and JSON files with `oxfmt --no-error-on-unmatched-pattern`
-- `oxlint`: lint JavaScript, JSX, TypeScript, and TSX files with `oxlint`
-- `ruff-check`: lint Python files with `ruff check --force-exclude`
-- `ruff-format`: format Python files with `ruff format --force-exclude`
-- `unbold`: strip markdown bold markers (`**` and `__`) in place
-- `gofumpt`: format Go files with `gofumpt -w`
-- `goimports`: format Go files and fix imports with `goimports -w`
-- `gopls-check`: run `gopls check` diagnostics on staged Go files
+## Hooks
+
+- `oxfmt`: format JavaScript, JSX, TypeScript, TSX, and JSON
+- `oxlint`: lint JavaScript, JSX, TypeScript, and TSX
+- `ruff-check`: lint Python and Jupyter files
+- `ruff-format`: format Python and Jupyter files
+- `unbold`: strip Markdown bold markers in place
+- `gofumpt`: format Go
+- `goimports`: format Go and fix imports
+- `gopls-check`: run `gopls check` on Go files
 - `go-vet`: run `go vet ./...` in the current Go module
-- `shellcheck`: lint shell scripts with `shellcheck`
-- `shfmt`: format shell scripts with `shfmt -w`
+- `shellcheck`: lint shell scripts
+- `shfmt`: format shell scripts
 
-Quickstart:
+## Quickstart
 
-1. Install the required tools:
-```sh
-brew install pre-commit ruff shellcheck shfmt gofumpt goimports
-go install golang.org/x/tools/gopls@latest
-pnpm add -g oxfmt oxlint
-```
-
-2. Add this to `.pre-commit-config.yaml`:
-```yaml
-repos:
-- repo: https://github.com/ysawa0/precommit
-  rev: "1.10"
-  hooks:
-  - id: oxfmt
-    exclude: '(^|/)(dist|build|coverage|vendor|\.cache|cache|__pycache__|generated)/'
-  - id: oxlint
-  - id: ruff-format
-  - id: ruff-check
-  - id: unbold
-  - id: goimports
-  - id: gofumpt
-  - id: gopls-check
-  - id: go-vet
-  - id: shfmt
-  - id: shellcheck
-```
-
-3. Install and run:
-```sh
-pre-commit install
-pre-commit run -a
-```
-
-Notes:
-- The default example hooks expect `ruff`, `shellcheck`, and `shfmt` to already be on your `PATH`.
-- `unbold` is built by pre-commit using Go, so you need a Go toolchain installed.
-- `gofumpt`, `goimports`, and `gopls` also need to already be on your `PATH`.
-- `go-vet` runs `go vet ./...` from the repo root, so use it only in repos where the hook runs inside the intended Go module.
-- Install `oxfmt` globally with `pnpm add -g oxfmt` so the published `oxfmt` hook can find it on your `PATH`.
-- Install `oxlint` globally with `pnpm add -g oxlint` so the published `oxlint` hook can find it on your `PATH`.
-
-If you want Oxc tools installed per-repo instead of globally, use local hooks instead:
-
-`pnpm add -D oxfmt oxlint` by itself does not make the published hooks work. The published hooks expect those binaries on your `PATH`; the local hooks below use `pnpm exec` instead.
+Install Prek:
 
 ```sh
-pnpm add -D oxfmt oxlint
+brew install prek
 ```
 
-```yaml
-repos:
-- repo: local
-  hooks:
-  - id: oxfmt
-    name: oxfmt
-    entry: pnpm exec oxfmt --no-error-on-unmatched-pattern
-    language: system
-    types_or: [javascript, jsx, ts, tsx, json]
-    exclude: '(^|/)(dist|build|coverage|vendor|\.cache|cache|__pycache__|generated)/'
-    pass_filenames: true
-  - id: oxlint
-    name: oxlint
-    entry: pnpm exec oxlint
-    language: system
-    types_or: [javascript, jsx, ts, tsx]
-    pass_filenames: true
+Add `prek.toml` to the consuming repository:
+
+```toml
+[[repos]]
+repo = "https://github.com/ysawa0/precommit"
+rev = "1.10"
+
+[[repos.hooks]]
+id = "oxfmt"
+exclude = "(^|/)(dist|build|coverage|vendor|\\.cache|cache|generated)/"
+
+[[repos.hooks]]
+id = "oxlint"
+
+[[repos.hooks]]
+id = "ruff-format"
+
+[[repos.hooks]]
+id = "ruff-check"
+
+[[repos.hooks]]
+id = "unbold"
+
+[[repos.hooks]]
+id = "goimports"
+
+[[repos.hooks]]
+id = "gofumpt"
+
+[[repos.hooks]]
+id = "gopls-check"
+
+[[repos.hooks]]
+id = "go-vet"
+
+[[repos.hooks]]
+id = "shfmt"
+
+[[repos.hooks]]
+id = "shellcheck"
 ```
 
-Run individual hooks:
+Keep only the hooks relevant to the repository, then install and run them:
+
 ```sh
-pre-commit run oxfmt -a
-pre-commit run oxlint -a
-pre-commit run ruff-check -a
-pre-commit run ruff-format -a
-pre-commit run unbold -a
-pre-commit run gofumpt -a
-pre-commit run goimports -a
-pre-commit run gopls-check -a
-pre-commit run go-vet -a
-pre-commit run shellcheck -a
-pre-commit run shfmt -a
+prek install -f
+prek run --all-files
 ```
 
-Direct CLI equivalents:
+Run one hook with `prek run <hook-id> --all-files`.
+
+## Tool versions and configuration
+
+The release tag pins each hook implementation and its tool version. Prek creates isolated Python, Node, and Go environments and prepares the required tools on first use.
+
+Project-local files such as `.oxfmtrc.jsonc`, `.oxlintrc.json`, and `ruff.toml` control each tool's behavior. `go-vet` runs once from the repository root, so enable it only where that root is the intended Go module or workspace.
+
+## Development
+
+The repository's `prek.toml` uses local hooks so it checks the current worktree instead of a previous release. Run:
+
 ```sh
-oxfmt --no-error-on-unmatched-pattern path/to/file.ts
-oxlint path/to/file.ts
-ruff check --force-exclude .
-ruff format --force-exclude .
-go run ./unbold --write README.md
-gofumpt -w path/to/file.go
-goimports -w path/to/file.go
-gopls check path/to/file.go
-go vet ./...
-shellcheck script.sh
-shfmt -w script.sh
+prek run --all-files
+prek try-repo . --all-files
 ```
 
-Cut a release:
+The second command tests the published manifest and its pinned environments against the smoke fixtures.
 
-1. Commit the changes you want to release on `main`.
-2. Run:
-```sh
-make release VERSION=<version>
-```
-3. Update `.pre-commit-config.yaml` and README example `rev:` pins to the new tag.
-4. Commit and push that follow-up version bump.
+## Release
 
-This will:
-- push `main` to `origin`
-- create an annotated numeric tag matching `VERSION`
-- push that tag to GitHub
+1. Update the README example `rev` to the new version.
+2. Commit the release changes on `main`.
+3. Run `make release VERSION=<version>`.
+
+The release target validates the current configuration and manifest, runs the maintenance and published hooks, creates an annotated tag, and atomically pushes `main` and the tag.

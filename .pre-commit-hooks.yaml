@@ -1,8 +1,8 @@
 - id: ruff-check
   name: ruff check
   description: "Run 'ruff check' for extremely fast Python linting"
-  entry: ruff check --force-exclude
-  language: system
+  entry: hooks/ruff.py check --force-exclude
+  language: python
   types_or: [python, pyi, jupyter]
   args: []
   require_serial: true
@@ -10,8 +10,8 @@
 - id: ruff-format
   name: ruff format
   description: "Run 'ruff format' for extremely fast Python formatting"
-  entry: ruff format --force-exclude
-  language: system
+  entry: hooks/ruff.py format --force-exclude
+  language: python
   types_or: [python, pyi, jupyter]
   args: []
   require_serial: true
@@ -20,7 +20,9 @@
   name: oxfmt
   description: "Format JavaScript, JSX, TypeScript, TSX, and JSON files with oxfmt"
   entry: oxfmt --no-error-on-unmatched-pattern
-  language: system
+  language: node
+  language_version: "24.19.0"
+  additional_dependencies: ["oxfmt@0.62.0"]
   types_or: [javascript, jsx, ts, tsx, json]
   pass_filenames: true
 
@@ -28,7 +30,9 @@
   name: oxlint
   description: "Lint JavaScript, JSX, TypeScript, and TSX files with oxlint"
   entry: oxlint --deny-warnings
-  language: system
+  language: node
+  language_version: "24.19.0"
+  additional_dependencies: ["oxlint@1.77.0"]
   types_or: [javascript, jsx, ts, tsx]
   pass_filenames: true
 
@@ -37,6 +41,7 @@
   description: "Strip markdown bold markers (** and __) in place"
   entry: unbold --write
   language: golang
+  language_version: "1.26.5"
   types: [markdown]
   require_serial: true
 
@@ -44,7 +49,9 @@
   name: gofumpt
   description: "Format Go files with gofumpt"
   entry: gofumpt -w
-  language: system
+  language: golang
+  language_version: "1.26.5"
+  additional_dependencies: ["mvdan.cc/gofumpt@v0.11.0"]
   types: [go]
   require_serial: true
 
@@ -52,7 +59,9 @@
   name: goimports
   description: "Format Go files and fix imports with goimports"
   entry: goimports -w
-  language: system
+  language: golang
+  language_version: "1.26.5"
+  additional_dependencies: ["golang.org/x/tools/cmd/goimports@v0.48.0"]
   types: [go]
   require_serial: true
 
@@ -60,7 +69,9 @@
   name: gopls check
   description: "Run gopls diagnostics for Go files"
   entry: gopls check
-  language: system
+  language: golang
+  language_version: "1.26.5"
+  additional_dependencies: ["golang.org/x/tools/gopls@v0.23.0"]
   types: [go]
   pass_filenames: true
   require_serial: true
@@ -68,8 +79,9 @@
 - id: go-vet
   name: go vet
   description: "Run go vet on the current Go module"
-  entry: sh -c 'go vet ./...'
-  language: system
+  entry: go vet ./...
+  language: golang
+  language_version: "1.26.5"
   types: [go]
   pass_filenames: false
   require_serial: true
@@ -77,8 +89,8 @@
 - id: shellcheck
   name: shellcheck
   description: "Run shellcheck for shell script linting"
-  entry: shellcheck
-  language: system
+  entry: hooks/shellcheck.py
+  language: python
   types: [shell]
   args: [-e, SC1091]
   require_serial: true
@@ -87,6 +99,8 @@
   name: shfmt
   description: "Format shell scripts with shfmt"
   entry: shfmt -w
-  language: system
+  language: golang
+  language_version: "1.26.5"
+  additional_dependencies: ["mvdan.cc/sh/v3/cmd/shfmt@v3.13.1"]
   types: [shell]
   require_serial: true
