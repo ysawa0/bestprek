@@ -1,7 +1,7 @@
 - id: ruff-check
   name: ruff check
   description: "Run 'ruff check' for extremely fast Python linting"
-  entry: hooks/ruff.py check --force-exclude
+  entry: ys-ruff check --force-exclude
   language: python
   types_or: [python, pyi, jupyter]
   args: []
@@ -10,7 +10,7 @@
 - id: ruff-format
   name: ruff format
   description: "Run 'ruff format' for extremely fast Python formatting"
-  entry: hooks/ruff.py format --force-exclude
+  entry: ys-ruff format --force-exclude
   language: python
   types_or: [python, pyi, jupyter]
   args: []
@@ -89,7 +89,7 @@
 - id: shellcheck
   name: shellcheck
   description: "Run shellcheck for shell script linting"
-  entry: hooks/shellcheck.py
+  entry: ys-shellcheck
   language: python
   types: [shell]
   args: [-e, SC1091]

@@ -1,10 +1,7 @@
-#!/usr/bin/env python3
-# /// script
-# requires-python = ">=3.12"
-# dependencies = ["shellcheck-py==0.11.0.1"]
-# ///
-
 import os
 import sys
+from typing import NoReturn
 
-os.execvp("shellcheck", ["shellcheck", *sys.argv[1:]])
+
+def main() -> NoReturn:
+    os.execvp("shellcheck", ["shellcheck", *sys.argv[1:]])
