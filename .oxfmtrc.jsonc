@@ -10,5 +10,5 @@
   "arrowParens": "always",
   "bracketSameLine": false,
   "bracketSpacing": true,
-  "ignorePatterns": ["coverage/", "dist/", "node_modules/", "vendor/"]
+  "ignorePatterns": ["coverage/", "dist/", "node_modules/", "oxlint/anti-slop/**", "vendor/"],
 }
