@@ -5,7 +5,7 @@ A small, version-pinned hook bundle for ysawa0 repositories, designed for Prek.
 ## Hooks
 
 - `oxfmt`: format JavaScript, JSX, TypeScript, TSX, and JSON
-- `oxlint`: lint JavaScript, JSX, TypeScript, and TSX
+- `oxlint`: lint JavaScript, JSX, TypeScript, and TSX with the bundled anti-slop policy
 - `ruff-check`: lint Python and Jupyter files
 - `ruff-format`: format Python and Jupyter files
 - `unbold`: strip Markdown bold markers in place
@@ -79,7 +79,7 @@ Run one hook with `prek run <hook-id> --all-files`.
 
 The release tag pins each hook implementation and its tool version. Prek creates isolated Python, Node, and Go environments and prepares the required tools on first use.
 
-Project-local files such as `.oxfmtrc.jsonc`, `.oxlintrc.json`, and `ruff.toml` control each tool's behavior. `go-vet` runs once from the repository root, so enable it only where that root is the intended Go module or workspace.
+Project-local files such as `.oxfmtrc.jsonc` and `ruff.toml` control their respective tools. The `oxlint` hook always uses this repository's fixed `.oxlintrc.json`, which enables the vendored [anti-slop](https://github.com/dmmulroy/anti-slop) rules alongside the built-in policy; consuming repositories' Oxlint configuration and command-line options are ignored. `go-vet` runs once from the repository root, so enable it only where that root is the intended Go module or workspace.
 
 ## Development
 
