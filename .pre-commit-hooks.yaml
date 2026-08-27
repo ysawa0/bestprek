@@ -28,11 +28,11 @@
 
 - id: oxlint
   name: oxlint
-  description: "Lint JavaScript, JSX, TypeScript, and TSX files with oxlint"
-  entry: oxlint --deny-warnings
+  description: "Lint JavaScript, JSX, TypeScript, and TSX files with the bundled oxlint policy"
+  entry: ys-oxlint
   language: node
   language_version: "24.19.0"
-  additional_dependencies: ["oxlint@1.77.0"]
+  additional_dependencies: ["oxlint@1.80.0", "@oxlint/plugins@1.80.0"]
   types_or: [javascript, jsx, ts, tsx]
   pass_filenames: true
 
