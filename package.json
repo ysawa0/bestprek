@@ -2,8 +2,8 @@
   "name": "ysawa0-prek-hooks",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
   "bin": {
     "ys-oxlint": "oxlint/run.mjs"
-  }
+  },
+  "type": "module"
 }
