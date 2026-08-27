@@ -1,14 +1,9 @@
 import { defineRule } from "@oxlint/plugins";
 
-import type { ESTree, Scope, SourceCode, Variable } from "@oxlint/plugins";
-
 const moduleMockMethods = new Set(["doMock", "mock", "unstable_mockModule"]);
 
-function resolveVariable(
-  sourceCode: SourceCode,
-  identifier: ESTree.IdentifierReference,
-): Variable | null {
-  let scope: Scope | null = sourceCode.getScope(identifier);
+function resolveVariable(sourceCode, identifier) {
+  let scope = sourceCode.getScope(identifier);
   while (scope !== null) {
     const variable = scope.set.get(identifier.name);
     if (variable !== undefined) return variable;
@@ -17,15 +12,12 @@ function resolveVariable(
   return null;
 }
 
-function importedName(node: ESTree.Node): string | null {
+function importedName(node) {
   if (node.type !== "ImportSpecifier") return null;
   return node.imported.type === "Identifier" ? node.imported.name : node.imported.value;
 }
 
-function isTestFrameworkObject(
-  sourceCode: SourceCode,
-  expression: ESTree.Expression,
-): expression is ESTree.IdentifierReference {
+function isTestFrameworkObject(sourceCode, expression) {
   if (expression.type !== "Identifier") return false;
   if (
     (expression.name === "vi" || expression.name === "jest") &&
@@ -44,11 +36,13 @@ function isTestFrameworkObject(
     }
     const source = definition.parent.source.value;
     const name = importedName(definition.node);
-    return (source === "vitest" && name === "vi") || (source === "@jest/globals" && name === "jest");
+    return (
+      (source === "vitest" && name === "vi") || (source === "@jest/globals" && name === "jest")
+    );
   });
 }
 
-function moduleMockCall(sourceCode: SourceCode, callee: ESTree.Expression): boolean {
+function moduleMockCall(sourceCode, callee) {
   if (!("property" in callee) || !("object" in callee) || !("computed" in callee)) return false;
   if (!isTestFrameworkObject(sourceCode, callee.object)) return false;
   const property = callee.property;

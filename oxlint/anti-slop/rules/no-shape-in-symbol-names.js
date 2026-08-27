@@ -1,9 +1,8 @@
 import { defineRule } from "@oxlint/plugins";
-import type { ESTree } from "@oxlint/plugins";
 
 const FORBIDDEN_SYMBOL_NAME = "shape";
 
-function containsForbiddenSymbolName(name: string): boolean {
+function containsForbiddenSymbolName(name) {
   return name.toLowerCase().includes(FORBIDDEN_SYMBOL_NAME);
 }
 
@@ -21,7 +20,7 @@ export const noForbiddenTermInSymbolNamesRule = defineRule({
     },
   },
   createOnce(context) {
-    const reportForbiddenSymbolName = (node: ESTree.Node & { name: string }) => {
+    const reportForbiddenSymbolName = (node) => {
       if (!containsForbiddenSymbolName(node.name)) return;
       context.report({
         node,
