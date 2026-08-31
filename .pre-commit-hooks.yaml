@@ -4,7 +4,10 @@
   entry: ys-ruff check --force-exclude
   language: python
   types_or: [python, pyi, jupyter]
-  args: [--extend-select, SIM102]
+  args:
+    - --extend-select=SIM102,PLR1702
+    - --preview
+    - --config=lint.pylint.max-nested-blocks=1
   require_serial: true
 
 - id: ruff-format
