@@ -8,7 +8,7 @@
     - --extend-select=SIM102,PLR1702
     - --preview
     - --config=lint.explicit-preview-rules=true
-    - --config=lint.pylint.max-nested-blocks=1
+    - --config=lint.pylint.max-nested-blocks=2
   require_serial: true
 
 - id: ruff-format
