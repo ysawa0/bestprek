@@ -4,7 +4,7 @@
   entry: ys-ruff check --force-exclude
   language: python
   types_or: [python, pyi, jupyter]
-  args: []
+  args: [--extend-select, SIM102]
   require_serial: true
 
 - id: ruff-format
