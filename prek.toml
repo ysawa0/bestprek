@@ -25,6 +25,15 @@ types = ["markdown"]
 require_serial = true
 
 [[repos.hooks]]
+id = "anti-slop"
+name = "anti-slop prose"
+entry = "python3 -m hooks.anti_slop"
+language = "system"
+types = ["markdown"]
+exclude = "^examples/anti-slop/coffee-before\\.md$"
+require_serial = true
+
+[[repos.hooks]]
 id = "gofmt"
 name = "gofmt"
 entry = "gofmt -w"
