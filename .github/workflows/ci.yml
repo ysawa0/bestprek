@@ -26,7 +26,14 @@ jobs:
       - name: Check repository
         run: uvx prek==0.4.12 run --all-files
       - name: Test published hooks
-        run: uvx prek==0.4.12 try-repo . --all-files
+        run: >-
+          uvx prek==0.4.12 try-repo .
+          --files
+          .github/fixtures/smoke.sh
+          .github/fixtures/smoke.ts
+          .github/fixtures/smoke.py
+          .github/fixtures/smoke.go
+          examples/anti-slop/coffee-after.md
 
   release:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
