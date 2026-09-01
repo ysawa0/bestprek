@@ -1,0 +1,12 @@
+{
+  "preset": "recommended",
+  "fail_level": "warning",
+  "rules": {
+    "density.em-dash": {
+      "severity": "warning",
+      "max": 5,
+      "window_words": 500
+    },
+    "phrase.marketing-language": "off"
+  }
+}

@@ -49,6 +49,15 @@
   types: [markdown]
   require_serial: true
 
+- id: anti-slop
+  name: anti-slop prose
+  description: "Lint Markdown prose for canned, repetitive, bloated, or mechanically over-polished writing"
+  entry: ys-anti-slop
+  language: python
+  types: [markdown]
+  exclude: ^examples/anti-slop/coffee-before\.md$
+  require_serial: true
+
 - id: gofumpt
   name: gofumpt
   description: "Format Go files with gofumpt"
