@@ -96,14 +96,14 @@ The recommended preset contains 25 explainable rules for:
 
 Most subjective devices are density-based. One em dash or one `not X, but Y` contrast is normal; a cluster of the same move is what gets flagged.
 
-The linter preserves source positions while ignoring code fences, inline code, URLs, front matter, comments, blockquotes, tables, link destinations, and MDX tags. Repetition rules reset at headings so API reference sections can use a consistent template without being mistaken for monotonous prose.
+The linter preserves source positions while ignoring code fences, inline code, URLs, front matter, comments, blockquotes, tables, link destinations, and MDX tags. Repetition rules reset at headings so API reference sections can use a consistent template without being mistaken for monotonous prose. By default, any finding at `info` or higher fails the hook.
 
 Use `.unslop.json` for repository-specific tuning. An example lives at `.unslop.example.json`.
 
 ```json
 {
   "preset": "recommended",
-  "fail_level": "warning",
+  "fail_level": "info",
   "rules": {
     "density.em-dash": {
       "severity": "warning",
