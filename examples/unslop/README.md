@@ -7,8 +7,8 @@ The calibration exists for two reasons: a release should prove that the linter c
 Run the comparison with:
 
 ```sh
-ys-anti-slop --format json --fail-level none examples/anti-slop/coffee-before.md
-ys-anti-slop --format json --fail-level none examples/anti-slop/coffee-after.md
+unslop --format json --fail-level none examples/unslop/coffee-before.md
+unslop --format json --fail-level none examples/unslop/coffee-after.md
 ```
 
 The test suite also checks Markdown masking, heading-scoped repetition, local suppressions, configuration validation, density behavior, and CLI exit codes.

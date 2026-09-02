@@ -49,13 +49,13 @@
   types: [markdown]
   require_serial: true
 
-- id: anti-slop
+- id: unslop
   name: unslop
   description: "Lint Markdown prose for canned, repetitive, bloated, or mechanically over-polished writing"
-  entry: ys-anti-slop
+  entry: unslop
   language: python
   types: [markdown]
-  exclude: ^examples/anti-slop/coffee-before\.md$
+  exclude: ^examples/unslop/coffee-before\.md$
   require_serial: true
 
 - id: gofumpt

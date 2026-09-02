@@ -14,7 +14,7 @@ dependencies = [
 [project.scripts]
 ys-ruff = "hooks.ruff:main"
 ys-shellcheck = "hooks.shellcheck:main"
-ys-anti-slop = "hooks.anti_slop:main"
+unslop = "hooks.unslop:main"
 
 [tool.setuptools]
 packages = ["hooks"]
