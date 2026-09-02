@@ -9,7 +9,14 @@ import sys
 from collections.abc import Mapping, Sequence
 from typing import Any
 
-from .unslop_core import SEVERITY_ORDER, ConfigError, Diagnostic, Document, Rule
+from .unslop_core import (
+    SEVERITY_ORDER,
+    ConfigError,
+    Diagnostic,
+    Document,
+    Finding,
+    Rule,
+)
 from .unslop_rules import RULES, RULES_BY_ID
 
 VERSION = "1.17"
@@ -63,6 +70,21 @@ def load_config(path: str | None) -> dict[str, Any]:
     return data
 
 
+def validate_option(rule: Rule, name: str, value: Any) -> None:
+    if name == "maximum_cv":
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or value <= 0:
+            raise ConfigError(
+                f"Rule '{rule.id}' option '{name}' must be a positive number"
+            )
+        return
+    if name not in INTEGER_OPTIONS:
+        return
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise ConfigError(f"Rule '{rule.id}' option '{name}' must be an integer")
+    if value < (0 if name == "max" else 1):
+        raise ConfigError(f"Rule '{rule.id}' option '{name}' has an invalid range")
+
+
 def resolve_rule(
     rule: Rule, preset: str, config: Mapping[str, Any]
 ) -> tuple[str, dict[str, Any]]:
@@ -91,29 +113,45 @@ def resolve_rule(
     if severity not in SEVERITY_ORDER:
         raise ConfigError(f"Rule '{rule.id}' has invalid severity '{severity}'")
     for name, value in options.items():
-        if name == "maximum_cv":
-            if (
-                isinstance(value, bool)
-                or not isinstance(value, (int, float))
-                or value <= 0
-            ):
-                raise ConfigError(
-                    f"Rule '{rule.id}' option '{name}' must be a positive number"
-                )
-        elif name in INTEGER_OPTIONS:
-            if isinstance(value, bool) or not isinstance(value, int):
-                raise ConfigError(
-                    f"Rule '{rule.id}' option '{name}' must be an integer"
-                )
-            if value < (0 if name == "max" else 1):
-                raise ConfigError(
-                    f"Rule '{rule.id}' option '{name}' has an invalid range"
-                )
+        validate_option(rule, name, value)
     if options.get("minimum_clauses", 1) > options.get("maximum_clauses", sys.maxsize):
         raise ConfigError(
             f"Rule '{rule.id}' requires minimum_clauses <= maximum_clauses"
         )
     return severity, options
+
+
+def make_diagnostic(
+    document: Document, rule: Rule, severity: str, finding: Finding
+) -> Diagnostic:
+    line, column = document.location(finding.start)
+    end_line, end_column = document.location(max(finding.start, finding.end - 1))
+    return Diagnostic(
+        document.path,
+        rule.id,
+        severity,
+        finding.message,
+        finding.start,
+        finding.end,
+        line,
+        column,
+        end_line,
+        end_column + 1,
+        finding.suggestion,
+    )
+
+
+def apply_rule(
+    document: Document, rule: Rule, preset: str, config: Mapping[str, Any]
+) -> list[Diagnostic]:
+    severity, options = resolve_rule(rule, preset, config)
+    if severity == "off":
+        return []
+    return [
+        make_diagnostic(document, rule, severity, finding)
+        for finding in rule.checker(document, options)
+        if not document.is_suppressed(finding.start, rule.id)
+    ]
 
 
 def lint_document(
@@ -126,31 +164,7 @@ def lint_document(
     config = config or {}
     diagnostics: list[Diagnostic] = []
     for rule in RULES:
-        severity, options = resolve_rule(rule, preset, config)
-        if severity == "off":
-            continue
-        for finding in rule.checker(document, options):
-            if document.is_suppressed(finding.start, rule.id):
-                continue
-            line, column = document.location(finding.start)
-            end_line, end_column = document.location(
-                max(finding.start, finding.end - 1)
-            )
-            diagnostics.append(
-                Diagnostic(
-                    document.path,
-                    rule.id,
-                    severity,
-                    finding.message,
-                    finding.start,
-                    finding.end,
-                    line,
-                    column,
-                    end_line,
-                    end_column + 1,
-                    finding.suggestion,
-                )
-            )
+        diagnostics.extend(apply_rule(document, rule, preset, config))
     return sorted(
         diagnostics,
         key=lambda item: (
@@ -202,6 +216,107 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
+def read_document(path: str) -> Document:
+    try:
+        with open(path, encoding="utf-8") as handle:
+            return Document(path, handle.read())
+    except (OSError, UnicodeError) as exc:
+        raise ConfigError(f"cannot read {path}: {exc}") from exc
+
+
+def lint_paths(
+    paths: Sequence[str], preset: str, config: Mapping[str, Any]
+) -> tuple[dict[str, Document], list[Diagnostic]]:
+    documents: dict[str, Document] = {}
+    diagnostics: list[Diagnostic] = []
+    for path in paths:
+        document = read_document(path)
+        documents[path] = document
+        diagnostics.extend(lint_document(document, preset, config))
+    diagnostics.sort(
+        key=lambda item: (
+            item.path,
+            item.start,
+            -SEVERITY_ORDER[item.severity],
+            item.rule_id,
+        )
+    )
+    return documents, diagnostics
+
+
+def print_json(diagnostics: Sequence[Diagnostic]) -> None:
+    print(
+        json.dumps(
+            [diagnostic_dict(item) for item in diagnostics],
+            indent=2,
+            sort_keys=True,
+        )
+    )
+
+
+def github_level(severity: str) -> str:
+    if severity == "error":
+        return "error"
+    if severity == "warning":
+        return "warning"
+    return "notice"
+
+
+def print_github(diagnostics: Sequence[Diagnostic]) -> None:
+    for item in diagnostics:
+        message = item.message + (
+            (" Suggestion: " + item.suggestion) if item.suggestion else ""
+        )
+        print(
+            f"::{github_level(item.severity)} file={github_escape(item.path)},line={item.line},col={item.column},endLine={item.end_line},endColumn={item.end_column},title={github_escape('unslop/' + item.rule_id)}::{github_escape(message)}"
+        )
+
+
+def print_excerpt(document: Document, line: int) -> None:
+    excerpt = document.excerpt(line)
+    if excerpt:
+        print("  " + excerpt.rstrip())
+
+
+def print_text(
+    diagnostics: Sequence[Diagnostic],
+    documents: Mapping[str, Document],
+    no_excerpts: bool,
+) -> None:
+    for item in diagnostics:
+        print(
+            f"{item.path}:{item.line}:{item.column}: {item.severity} [{item.rule_id}] {item.message}"
+        )
+        if item.suggestion:
+            print(f"  suggestion: {item.suggestion}")
+        if not no_excerpts:
+            print_excerpt(documents[item.path], item.line)
+    if not diagnostics:
+        return
+    counts = {
+        severity: sum(item.severity == severity for item in diagnostics)
+        for severity in ("error", "warning", "info")
+    }
+    print(
+        f"\nunslop: {len(diagnostics)} diagnostics ({counts['error']} error, {counts['warning']} warning, {counts['info']} info)"
+    )
+
+
+def print_diagnostics(
+    output_format: str,
+    diagnostics: Sequence[Diagnostic],
+    documents: Mapping[str, Document],
+    no_excerpts: bool,
+) -> None:
+    if output_format == "json":
+        print_json(diagnostics)
+        return
+    if output_format == "github":
+        print_github(diagnostics)
+        return
+    print_text(diagnostics, documents, no_excerpts)
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     args = parse_args(argv)
     if args.list_rules:
@@ -222,72 +337,12 @@ def main(argv: Sequence[str] | None = None) -> int:
         config = load_config(args.config)
         preset = args.preset or config.get("preset", "recommended")
         fail_level = args.fail_level or config.get("fail_level", "info")
-        documents: dict[str, Document] = {}
-        diagnostics: list[Diagnostic] = []
-        for path in args.files:
-            try:
-                with open(path, encoding="utf-8") as handle:
-                    source = handle.read()
-            except (OSError, UnicodeError) as exc:
-                print(f"unslop: cannot read {path}: {exc}", file=sys.stderr)
-                return 2
-            document = Document(path, source)
-            documents[path] = document
-            diagnostics.extend(lint_document(document, preset, config))
-        diagnostics.sort(
-            key=lambda item: (
-                item.path,
-                item.start,
-                -SEVERITY_ORDER[item.severity],
-                item.rule_id,
-            )
-        )
+        documents, diagnostics = lint_paths(args.files, preset, config)
     except ConfigError as exc:
         print(f"unslop: {exc}", file=sys.stderr)
         return 2
 
-    if args.format == "json":
-        print(
-            json.dumps(
-                [diagnostic_dict(item) for item in diagnostics],
-                indent=2,
-                sort_keys=True,
-            )
-        )
-    elif args.format == "github":
-        for item in diagnostics:
-            level = (
-                "error"
-                if item.severity == "error"
-                else "warning"
-                if item.severity == "warning"
-                else "notice"
-            )
-            message = item.message + (
-                (" Suggestion: " + item.suggestion) if item.suggestion else ""
-            )
-            print(
-                f"::{level} file={github_escape(item.path)},line={item.line},col={item.column},endLine={item.end_line},endColumn={item.end_column},title={github_escape('unslop/' + item.rule_id)}::{github_escape(message)}"
-            )
-    else:
-        for item in diagnostics:
-            print(
-                f"{item.path}:{item.line}:{item.column}: {item.severity} [{item.rule_id}] {item.message}"
-            )
-            if item.suggestion:
-                print(f"  suggestion: {item.suggestion}")
-            if not args.no_excerpts:
-                excerpt = documents[item.path].excerpt(item.line)
-                if excerpt:
-                    print("  " + excerpt.rstrip())
-        if diagnostics:
-            counts = {
-                severity: sum(item.severity == severity for item in diagnostics)
-                for severity in ("error", "warning", "info")
-            }
-            print(
-                f"\nunslop: {len(diagnostics)} diagnostics ({counts['error']} error, {counts['warning']} warning, {counts['info']} info)"
-            )
+    print_diagnostics(args.format, diagnostics, documents, args.no_excerpts)
     if fail_level == "none":
         return 0
     threshold = SEVERITY_ORDER[fail_level]

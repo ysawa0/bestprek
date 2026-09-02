@@ -155,21 +155,33 @@ def split_sentences(text: str, base_offset: int) -> list[TextUnit]:
         chunk = text[start:end]
         leading = len(chunk) - len(chunk.lstrip())
         trailing = len(chunk.rstrip())
-        if trailing > leading:
-            clean = normalize_space(chunk[leading:trailing])
-            count = len(WORD_RE.findall(clean))
-            if count:
-                units.append(
-                    TextUnit(
-                        base_offset + start + leading,
-                        base_offset + start + trailing,
-                        clean,
-                        count,
-                    )
+        if trailing <= leading:
+            start = end
+            index = end
+            continue
+        clean = normalize_space(chunk[leading:trailing])
+        count = len(WORD_RE.findall(clean))
+        if count:
+            units.append(
+                TextUnit(
+                    base_offset + start + leading,
+                    base_offset + start + trailing,
+                    clean,
+                    count,
                 )
+            )
         start = end
         index = end
     return units
+
+
+def append_paragraph(
+    paragraphs: list[TextUnit], structural: str, start: int, end: int
+) -> None:
+    text = structural[start:end]
+    count = len(WORD_RE.findall(text))
+    if count >= 4:
+        paragraphs.append(TextUnit(start, end, text, count))
 
 
 def extract_paragraphs(structural: str) -> list[TextUnit]:
@@ -179,20 +191,15 @@ def extract_paragraphs(structural: str) -> list[TextUnit]:
     for start, end in line_spans(structural):
         line = structural[start:end]
         if line.strip():
-            if current_start is None:
-                current_start = start
+            current_start = start if current_start is None else current_start
             current_end = end
-        elif current_start is not None:
-            text = structural[current_start:current_end]
-            count = len(WORD_RE.findall(text))
-            if count >= 4:
-                paragraphs.append(TextUnit(current_start, current_end, text, count))
-            current_start = None
+            continue
+        if current_start is None:
+            continue
+        append_paragraph(paragraphs, structural, current_start, current_end)
+        current_start = None
     if current_start is not None:
-        text = structural[current_start:current_end]
-        count = len(WORD_RE.findall(text))
-        if count >= 4:
-            paragraphs.append(TextUnit(current_start, current_end, text, count))
+        append_paragraph(paragraphs, structural, current_start, current_end)
     return paragraphs
 
 
@@ -210,44 +217,61 @@ def selector_matches(selector: str, rule_id: str) -> bool:
     return selector == rule_id
 
 
+@dataclass
+class SuppressionState:
+    disabled_all: bool = False
+    disabled_rules: set[str] = field(default_factory=set)
+    pending_all: bool = False
+    pending_rules: set[str] = field(default_factory=set)
+
+    def begin_line(self) -> tuple[bool, set[str]]:
+        line_all = self.disabled_all or self.pending_all
+        line_rules = self.disabled_rules | self.pending_rules
+        self.pending_all = False
+        self.pending_rules.clear()
+        return line_all, line_rules
+
+    def apply(
+        self, action: str, selected: set[str], line_all: bool, line_rules: set[str]
+    ) -> tuple[bool, set[str]]:
+        selects_all = bool(selected & {"*", "all"})
+        if action == "ignore":
+            if selects_all:
+                line_all = True
+            else:
+                line_rules.update(selected)
+            return line_all, line_rules
+        if action == "disable-next-line":
+            if selects_all:
+                self.pending_all = True
+            else:
+                self.pending_rules.update(selected)
+            return line_all, line_rules
+        if action == "disable":
+            if selects_all:
+                self.disabled_all = True
+            else:
+                self.disabled_rules.update(selected)
+            return line_all, line_rules
+        if selects_all:
+            self.disabled_all = False
+            self.disabled_rules.clear()
+        else:
+            self.disabled_rules.difference_update(selected)
+        return line_all, line_rules
+
+
 def parse_suppressions(source: str) -> tuple[list[bool], list[set[str]]]:
     all_flags: list[bool] = []
     rule_flags: list[set[str]] = []
-    disabled_all = False
-    disabled_rules: set[str] = set()
-    pending_all = False
-    pending_rules: set[str] = set()
+    state = SuppressionState()
     for start, end in line_spans(source):
         line = source[start:end]
-        line_all = disabled_all or pending_all
-        line_rules = set(disabled_rules) | set(pending_rules)
-        pending_all = False
-        pending_rules.clear()
+        line_all, line_rules = state.begin_line()
         for match in DIRECTIVE_RE.finditer(line):
             action = match.group(1).lower()
             selected = selectors(match.group(2))
-            selects_all = bool(selected & {"*", "all"})
-            if action == "ignore":
-                if selects_all:
-                    line_all = True
-                else:
-                    line_rules.update(selected)
-            elif action == "disable-next-line":
-                if selects_all:
-                    pending_all = True
-                else:
-                    pending_rules.update(selected)
-            elif action == "disable":
-                if selects_all:
-                    disabled_all = True
-                else:
-                    disabled_rules.update(selected)
-            elif action == "enable":
-                if selects_all:
-                    disabled_all = False
-                    disabled_rules.clear()
-                else:
-                    disabled_rules.difference_update(selected)
+            line_all, line_rules = state.apply(action, selected, line_all, line_rules)
         all_flags.append(line_all)
         rule_flags.append(line_rules)
     return all_flags, rule_flags
@@ -275,9 +299,19 @@ class Projection:
         if structural:
             targets.append(self.structural)
         for target in targets:
-            for index in range(max(0, start), min(len(target), end)):
-                if target[index] not in "\r\n":
-                    target[index] = " "
+            self.mask_target(target, start, end)
+
+    @staticmethod
+    def mask_target(target: list[str], start: int, end: int) -> None:
+        for index in range(max(0, start), min(len(target), end)):
+            if target[index] not in "\r\n":
+                target[index] = " "
+
+    @staticmethod
+    def strip_markers(target: list[str]) -> None:
+        for index, char in enumerate(target):
+            if char in "*_`":
+                target[index] = " "
 
     def line_masked(self, start: int, end: int) -> bool:
         return bool(self.source[start:end].strip()) and not any(
@@ -303,9 +337,7 @@ class Projection:
             for m in re.finditer(r"\([^()\n]{2,120}\)", visible_text)
         ]
         for target in (self.visible, self.structural):
-            for index, char in enumerate(target):
-                if char in "*_`":
-                    target[index] = " "
+            self.strip_markers(target)
 
     def mask_front_matter(self) -> None:
         if not self.lines:
@@ -326,19 +358,21 @@ class Projection:
         for start, end in self.lines:
             line = self.source[start:end]
             marker_match = re.match(r"^ {0,3}(`{3,}|~{3,})", line)
-            if open_char is None:
-                if marker_match:
-                    marker = marker_match.group(1)
-                    open_char = marker[0]
-                    open_len = len(marker)
-                    block_start = start
-            elif re.match(
+            is_closing = open_char is not None and re.match(
                 r"^ {0,3}" + re.escape(open_char) + "{" + str(open_len) + r",}\s*$",
                 line,
-            ):
+            )
+            if is_closing:
                 self.mask(block_start, end)
                 open_char = None
                 open_len = 0
+                continue
+            if open_char is not None or marker_match is None:
+                continue
+            marker = marker_match.group(1)
+            open_char = marker[0]
+            open_len = len(marker)
+            block_start = start
         if open_char is not None:
             self.mask(block_start, len(self.source))
 
@@ -352,40 +386,45 @@ class Projection:
         ):
             self.mask(match.start(), match.end())
 
+    def table_block(self, index: int) -> set[int]:
+        start, end = self.lines[index]
+        if not TABLE_SEPARATOR_RE.match(self.source[start:end]):
+            return set()
+        table_lines = {index}
+        if (
+            index > 0
+            and "|" in self.source[self.lines[index - 1][0] : self.lines[index - 1][1]]
+        ):
+            table_lines.add(index - 1)
+        cursor = index + 1
+        while cursor < len(self.lines):
+            candidate = self.source[self.lines[cursor][0] : self.lines[cursor][1]]
+            if not candidate.strip() or "|" not in candidate:
+                break
+            table_lines.add(cursor)
+            cursor += 1
+        return table_lines
+
     def mask_line_constructs(self) -> None:
         table_lines: set[int] = set()
         list_lines: set[int] = set()
         for index, (start, end) in enumerate(self.lines):
-            line = self.source[start:end]
-            if TABLE_SEPARATOR_RE.match(line):
-                table_lines.add(index)
-                if (
-                    index > 0
-                    and "|"
-                    in self.source[self.lines[index - 1][0] : self.lines[index - 1][1]]
-                ):
-                    table_lines.add(index - 1)
-                cursor = index + 1
-                while cursor < len(self.lines):
-                    cstart, cend = self.lines[cursor]
-                    candidate = self.source[cstart:cend]
-                    if not candidate.strip() or "|" not in candidate:
-                        break
-                    table_lines.add(cursor)
-                    cursor += 1
-            if LIST_RE.match(line):
+            table_lines.update(self.table_block(index))
+            if LIST_RE.match(self.source[start:end]):
                 list_lines.add(index)
 
         setext_titles: set[int] = set()
         setext_underlines: set[int] = set()
         for index in range(1, len(self.lines)):
             start, end = self.lines[index]
-            if re.match(r"^ {0,3}(?:=+|-+)\s*$", self.source[start:end]):
-                previous_start, previous_end = self.lines[index - 1]
-                if self.source[previous_start:previous_end].strip():
-                    setext_titles.add(index - 1)
-                    setext_underlines.add(index)
-                    self.heading_spans.append(Span(previous_start, previous_end))
+            if not re.match(r"^ {0,3}(?:=+|-+)\s*$", self.source[start:end]):
+                continue
+            previous_start, previous_end = self.lines[index - 1]
+            if not self.source[previous_start:previous_end].strip():
+                continue
+            setext_titles.add(index - 1)
+            setext_underlines.add(index)
+            self.heading_spans.append(Span(previous_start, previous_end))
 
         for index, (start, end) in enumerate(self.lines):
             line = self.source[start:end]
@@ -414,13 +453,12 @@ class Projection:
                 self.mask(start, end, visible=False, structural=True)
                 self.mask(start, start + heading.end(), visible=True, structural=False)
                 continue
-            if index in list_lines:
-                self.mask(start, end, visible=False, structural=True)
-                marker = LIST_RE.match(line)
-                if marker:
-                    self.mask(
-                        start, start + marker.end(), visible=True, structural=False
-                    )
+            if index not in list_lines:
+                continue
+            self.mask(start, end, visible=False, structural=True)
+            marker = LIST_RE.match(line)
+            if marker:
+                self.mask(start, start + marker.end(), visible=True, structural=False)
 
     def mask_inline_constructs(self) -> None:
         index = 0

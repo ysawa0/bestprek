@@ -31,20 +31,30 @@ def cluster_offsets(
         while left < right and indices[right] - indices[left] > window_words:
             left += 1
         if right - left + 1 > max_occurrences:
-            cluster = ordered[left : right + 1]
-            cursor = right + 1
-            while (
-                cursor < len(ordered)
-                and indices[cursor] - indices[left] <= window_words
-            ):
-                cluster.append(ordered[cursor])
-                cursor += 1
+            cluster, cursor = finish_cluster(
+                ordered, indices, left, right, window_words
+            )
             clusters.append(cluster)
             right = cursor
             left = right
         else:
             right += 1
     return clusters
+
+
+def finish_cluster(
+    ordered: Sequence[int],
+    indices: Sequence[int],
+    left: int,
+    right: int,
+    window_words: int,
+) -> tuple[list[int], int]:
+    cluster = list(ordered[left : right + 1])
+    cursor = right + 1
+    while cursor < len(ordered) and indices[cursor] - indices[left] <= window_words:
+        cluster.append(ordered[cursor])
+        cursor += 1
+    return cluster, cursor
 
 
 def phrase_checker(
@@ -207,45 +217,67 @@ def question_density(document: Document, options: Mapping[str, Any]) -> list[Fin
     ]
 
 
+def echoed_clause_finding(
+    sentence: TextUnit, document: Document, minimum: int, maximum: int
+) -> Finding | None:
+    raw = document.structural[sentence.start : sentence.end]
+    pieces = [
+        normalize_space(piece)
+        for piece in re.split(r"\s*(?:,|;)\s*(?:(?:and|or)\s+)?", raw)
+    ]
+    pieces = [piece for piece in pieces if len(WORD_RE.findall(piece)) >= 3]
+    if not minimum <= len(pieces) <= maximum:
+        return None
+    prefixes: dict[str, int] = {}
+    suffixes: dict[str, int] = {}
+    for piece in pieces:
+        words = [match.group(0).lower() for match in WORD_RE.finditer(piece)]
+        if len(words) < 3:
+            continue
+        prefixes[" ".join(words[:2])] = prefixes.get(" ".join(words[:2]), 0) + 1
+        suffixes[" ".join(words[-2:])] = suffixes.get(" ".join(words[-2:]), 0) + 1
+    repeated_prefix = next(
+        (key for key, count in prefixes.items() if count >= minimum), None
+    )
+    repeated_suffix = next(
+        (key for key, count in suffixes.items() if count >= minimum), None
+    )
+    repeated = repeated_prefix or repeated_suffix
+    if not repeated or re.search(r"\d", repeated):
+        return None
+    position = "opening" if repeated_prefix else "ending"
+    return Finding(
+        sentence.start,
+        sentence.end,
+        f"{len(pieces)} parallel clauses repeat the {position} '{repeated}'.",
+        "Keep the parallelism only if the rhythm earns its space; otherwise combine the clauses or vary the syntax.",
+    )
+
+
 def echoed_clauses(document: Document, options: Mapping[str, Any]) -> list[Finding]:
     minimum = int(options.get("minimum_clauses", 3))
     maximum = int(options.get("maximum_clauses", 5))
-    findings: list[Finding] = []
-    for sentence in document.sentences:
-        raw = document.structural[sentence.start : sentence.end]
-        pieces = [
-            normalize_space(piece)
-            for piece in re.split(r"\s*(?:,|;)\s*(?:(?:and|or)\s+)?", raw)
-        ]
-        pieces = [piece for piece in pieces if len(WORD_RE.findall(piece)) >= 3]
-        if not minimum <= len(pieces) <= maximum:
-            continue
-        prefixes: dict[str, int] = {}
-        suffixes: dict[str, int] = {}
-        for piece in pieces:
-            words = [match.group(0).lower() for match in WORD_RE.finditer(piece)]
-            if len(words) < 3:
-                continue
-            prefixes[" ".join(words[:2])] = prefixes.get(" ".join(words[:2]), 0) + 1
-            suffixes[" ".join(words[-2:])] = suffixes.get(" ".join(words[-2:]), 0) + 1
-        repeated_prefix = next(
-            (key for key, count in prefixes.items() if count >= minimum), None
-        )
-        repeated_suffix = next(
-            (key for key, count in suffixes.items() if count >= minimum), None
-        )
-        repeated = repeated_prefix or repeated_suffix
-        if repeated and not re.search(r"\d", repeated):
-            position = "opening" if repeated_prefix else "ending"
-            findings.append(
-                Finding(
-                    sentence.start,
-                    sentence.end,
-                    f"{len(pieces)} parallel clauses repeat the {position} '{repeated}'.",
-                    "Keep the parallelism only if the rhythm earns its space; otherwise combine the clauses or vary the syntax.",
-                )
-            )
-    return findings
+    return [
+        finding
+        for sentence in document.sentences
+        if (finding := echoed_clause_finding(sentence, document, minimum, maximum))
+        is not None
+    ]
+
+
+def is_tricolon(raw: str) -> bool:
+    if raw.count(",") != 2:
+        return False
+    if not re.search(r",\s*(?:and|or)\s+", raw, re.IGNORECASE):
+        return False
+    parts = [
+        part
+        for part in re.split(r",\s*(?:and|or\s+)?|\s+(?:and|or)\s+", raw)
+        if normalize_space(part)
+    ]
+    return len(parts) == 3 and all(
+        1 <= len(WORD_RE.findall(part)) <= 8 for part in parts
+    )
 
 
 def tricolon_density(document: Document, options: Mapping[str, Any]) -> list[Finding]:
@@ -259,16 +291,8 @@ def tricolon_density(document: Document, options: Mapping[str, Any]) -> list[Fin
     )
     for sentence in document.sentences:
         raw = document.structural[sentence.start : sentence.end]
-        if raw.count(",") == 2 and re.search(r",\s*(?:and|or)\s+", raw, re.IGNORECASE):
-            parts = [
-                part
-                for part in re.split(r",\s*(?:and|or\s+)?|\s+(?:and|or)\s+", raw)
-                if normalize_space(part)
-            ]
-            if len(parts) == 3 and all(
-                1 <= len(WORD_RE.findall(part)) <= 8 for part in parts
-            ):
-                spans.append(Span(sentence.start, sentence.end))
+        if is_tricolon(raw):
+            spans.append(Span(sentence.start, sentence.end))
     spans.sort(key=lambda item: item.start)
     max_count = int(options.get("max", 3))
     window = int(options.get("window_words", 750))
@@ -292,6 +316,34 @@ def opener_key(text: str) -> str | None:
     return " ".join(words[:2]) if len(words) >= 2 else None
 
 
+def windowed_opener_group(
+    keys: Sequence[str | None],
+    units: Sequence[TextUnit],
+    consumed: set[int],
+    start: int,
+    end: int,
+    minimum: int,
+) -> tuple[str, list[tuple[int, TextUnit]]] | None:
+    pairs = [
+        (index, units[index])
+        for index in range(start, end)
+        if keys[index] is not None and index not in consumed
+    ]
+    groups: dict[str, list[tuple[int, TextUnit]]] = {}
+    for index, unit in pairs:
+        key = keys[index]
+        if key is not None:
+            groups.setdefault(key, []).append((index, unit))
+    return next(
+        (
+            (key, matches)
+            for key, matches in groups.items()
+            if len(matches) >= minimum and matches[0][0] == start
+        ),
+        None,
+    )
+
+
 def repeated_openers(
     units: Sequence[TextUnit], consecutive: int, window_units: int, window_count: int
 ) -> list[tuple[str, list[TextUnit]]]:
@@ -313,15 +365,12 @@ def repeated_openers(
         index = end
     for start in range(len(units)):
         end = min(len(units), start + window_units)
-        grouped: dict[str, list[tuple[int, TextUnit]]] = {}
-        for index in range(start, end):
-            key = keys[index]
-            if key is not None and index not in consumed:
-                grouped.setdefault(key, []).append((index, units[index]))
-        for key, pairs in grouped.items():
-            if len(pairs) >= window_count and min(index for index, _ in pairs) == start:
-                results.append((key, [unit for _, unit in pairs]))
-                consumed.update(index for index, _ in pairs)
+        group = windowed_opener_group(keys, units, consumed, start, end, window_count)
+        if group is None:
+            continue
+        key, pairs = group
+        results.append((key, [unit for _, unit in pairs]))
+        consumed.update(index for index, _ in pairs)
     return results
 
 
@@ -447,31 +496,41 @@ def loaded_word_repetition(
     return findings
 
 
+def short_runs(
+    section: Sequence[TextUnit], max_words: int, minimum_run: int
+) -> list[list[TextUnit]]:
+    runs: list[list[TextUnit]] = []
+    index = 0
+    while index < len(section):
+        if section[index].word_count > max_words:
+            index += 1
+            continue
+        end = index + 1
+        while end < len(section) and section[end].word_count <= max_words:
+            end += 1
+        if end - index >= minimum_run:
+            runs.append(list(section[index:end]))
+        index = end
+    return runs
+
+
 def short_sentence_run(document: Document, options: Mapping[str, Any]) -> list[Finding]:
     max_words = int(options.get("max_words", 5))
     minimum_run = int(options.get("minimum_run", 3))
-    findings: list[Finding] = []
-    for section in document.units_by_section(document.sentences):
-        index = 0
-        while index < len(section):
-            if section[index].word_count > max_words:
-                index += 1
-                continue
-            end = index + 1
-            while end < len(section) and section[end].word_count <= max_words:
-                end += 1
-            if end - index >= minimum_run:
-                units = section[index:end]
-                findings.append(
-                    Finding(
-                        units[1].start,
-                        units[-1].end,
-                        f"{len(units)} consecutive sentences contain at most {max_words} words each, creating a manufactured staccato rhythm.",
-                        "Combine related fragments and reserve the short sentence for emphasis.",
-                    )
-                )
-            index = end
-    return findings
+    runs = [
+        units
+        for section in document.units_by_section(document.sentences)
+        for units in short_runs(section, max_words, minimum_run)
+    ]
+    return [
+        Finding(
+            units[1].start,
+            units[-1].end,
+            f"{len(units)} consecutive sentences contain at most {max_words} words each, creating a manufactured staccato rhythm.",
+            "Combine related fragments and reserve the short sentence for emphasis.",
+        )
+        for units in runs
+    ]
 
 
 def uniform_sentence_length(
