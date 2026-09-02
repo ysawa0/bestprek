@@ -158,7 +158,7 @@ In order to brew, use water.
     def test_json_cli_and_exit_code(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "draft.md"
-            path.write_text("In order to brew, use water.\n", encoding="utf-8")
+            path.write_text("The transition is seamless.\n", encoding="utf-8")
             result = subprocess.run(
                 [sys.executable, "-m", "hooks.unslop", "--format", "json", str(path)],
                 cwd=ROOT,
@@ -167,7 +167,9 @@ In order to brew, use water.
                 check=False,
             )
             self.assertEqual(result.returncode, 1)
-            self.assertEqual(json.loads(result.stdout)[0]["rule"], "verbosity.filler")
+            self.assertEqual(
+                json.loads(result.stdout)[0]["rule"], "phrase.marketing-language"
+            )
 
 
 if __name__ == "__main__":

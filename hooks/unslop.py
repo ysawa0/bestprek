@@ -221,7 +221,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     try:
         config = load_config(args.config)
         preset = args.preset or config.get("preset", "recommended")
-        fail_level = args.fail_level or config.get("fail_level", "warning")
+        fail_level = args.fail_level or config.get("fail_level", "info")
         documents: dict[str, Document] = {}
         diagnostics: list[Diagnostic] = []
         for path in args.files:
