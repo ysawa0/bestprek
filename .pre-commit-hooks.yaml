@@ -50,7 +50,7 @@
   require_serial: true
 
 - id: anti-slop
-  name: anti-slop prose
+  name: unslop
   description: "Lint Markdown prose for canned, repetitive, bloated, or mechanically over-polished writing"
   entry: ys-anti-slop
   language: python
