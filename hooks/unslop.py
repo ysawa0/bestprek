@@ -12,7 +12,7 @@ from typing import Any
 from .unslop_core import SEVERITY_ORDER, ConfigError, Diagnostic, Document, Rule
 from .unslop_rules import RULES, RULES_BY_ID
 
-VERSION = "1.16"
+VERSION = "1.17"
 
 INTEGER_OPTIONS = {
     "max",
