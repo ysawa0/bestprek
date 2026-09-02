@@ -25,12 +25,12 @@ types = ["markdown"]
 require_serial = true
 
 [[repos.hooks]]
-id = "anti-slop"
+id = "unslop"
 name = "unslop"
-entry = "python3 -m hooks.anti_slop"
+entry = "python3 -m hooks.unslop"
 language = "system"
 types = ["markdown"]
-exclude = "^examples/anti-slop/coffee-before\\.md$"
+exclude = "^examples/unslop/coffee-before\\.md$"
 require_serial = true
 
 [[repos.hooks]]

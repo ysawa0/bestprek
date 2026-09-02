@@ -5,35 +5,39 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from hooks import anti_slop
+from hooks import unslop
 
 ROOT = Path(__file__).resolve().parent
-EXAMPLES = ROOT / "examples" / "anti-slop"
+EXAMPLES = ROOT / "examples" / "unslop"
 
 
-class AntiSlopTest(unittest.TestCase):
+class UnslopTest(unittest.TestCase):
     def lint(self, text, preset="recommended", config=None):
-        return anti_slop.lint_document(anti_slop.Document("test.md", text), preset, config or {})
+        return unslop.lint_document(
+            unslop.Document("test.md", text), preset, config or {}
+        )
 
     def test_rule_count(self):
-        self.assertEqual(len(anti_slop.RULES), 25)
+        self.assertEqual(len(unslop.RULES), 25)
 
     def test_bad_coffee_exercises_structural_rules(self):
         text = (EXAMPLES / "coffee-before.md").read_text(encoding="utf-8")
         diagnostics = self.lint(text)
         rules = {item.rule_id for item in diagnostics}
         self.assertGreaterEqual(len(diagnostics), 25)
-        self.assertTrue({
-            "rhetoric.negative-parallelism",
-            "rhetoric.no-chain",
-            "rhetoric.question-answer",
-            "rhetoric.question-density",
-            "repetition.sentence-opener",
-            "repetition.loaded-word",
-            "rhythm.short-sentence-run",
-            "density.em-dash",
-            "verbosity.filler",
-        }.issubset(rules))
+        self.assertTrue(
+            {
+                "rhetoric.negative-parallelism",
+                "rhetoric.no-chain",
+                "rhetoric.question-answer",
+                "rhetoric.question-density",
+                "repetition.sentence-opener",
+                "repetition.loaded-word",
+                "rhythm.short-sentence-run",
+                "density.em-dash",
+                "verbosity.filler",
+            }.issubset(rules)
+        )
 
     def test_revised_coffee_is_clean(self):
         text = (EXAMPLES / "coffee-after.md").read_text(encoding="utf-8")
@@ -62,22 +66,32 @@ A plain, direct sentence remains.
         self.assertEqual(self.lint(text), [])
 
     def test_mdx_tags_are_masked_but_text_is_linted(self):
-        diagnostics = self.lint("<Callout>In order to make coffee, weigh it.</Callout>\n")
+        diagnostics = self.lint(
+            "<Callout>In order to make coffee, weigh it.</Callout>\n"
+        )
         self.assertEqual([item.rule_id for item in diagnostics], ["verbosity.filler"])
 
     def test_chatbot_residue_is_error(self):
-        diagnostics = self.lint("The draft still contains turn4search12 in the paragraph.\n")
+        diagnostics = self.lint(
+            "The draft still contains turn4search12 in the paragraph.\n"
+        )
         self.assertEqual(len(diagnostics), 1)
         self.assertEqual(diagnostics[0].severity, "error")
 
     def test_single_contrast_is_allowed_but_repetition_warns(self):
         one = "This is not a speed problem. It is a coordination problem.\n"
-        self.assertNotIn("rhetoric.negative-parallelism", {d.rule_id for d in self.lint(one)})
+        self.assertNotIn(
+            "rhetoric.negative-parallelism", {d.rule_id for d in self.lint(one)}
+        )
         two = one + "The failure is not about throughput, but predictability.\n"
-        self.assertIn("rhetoric.negative-parallelism", {d.rule_id for d in self.lint(two)})
+        self.assertIn(
+            "rhetoric.negative-parallelism", {d.rule_id for d in self.lint(two)}
+        )
 
     def test_single_em_dash_is_allowed(self):
-        self.assertEqual(self.lint("A grinder matters—but it need not be expensive.\n"), [])
+        self.assertEqual(
+            self.lint("A grinder matters—but it need not be expensive.\n"), []
+        )
 
     def test_headings_reset_repetition(self):
         text = """# API
@@ -96,53 +110,60 @@ The event fires when the socket fails. Failed. Closed.
         self.assertNotIn("rhythm.short-sentence-run", rules)
 
     def test_disable_next_line(self):
-        text = """<!-- anti-slop-disable-next-line verbosity.filler -->
+        text = """<!-- unslop-disable-next-line verbosity.filler -->
 In order to weigh the coffee, use a scale.
 
 In order to heat the water, use a kettle.
 """
-        fillers = [item for item in self.lint(text) if item.rule_id == "verbosity.filler"]
+        fillers = [
+            item for item in self.lint(text) if item.rule_id == "verbosity.filler"
+        ]
         self.assertEqual(len(fillers), 1)
         self.assertEqual(fillers[0].line, 4)
 
     def test_category_suppression(self):
-        text = """<!-- anti-slop-disable verbosity.* -->
+        text = """<!-- unslop-disable verbosity.* -->
 In order to brew, use water.
-<!-- anti-slop-enable verbosity.* -->
+<!-- unslop-enable verbosity.* -->
 In order to brew, use water.
 """
-        fillers = [item for item in self.lint(text) if item.rule_id == "verbosity.filler"]
+        fillers = [
+            item for item in self.lint(text) if item.rule_id == "verbosity.filler"
+        ]
         self.assertEqual(len(fillers), 1)
 
     def test_inline_ignore(self):
-        text = "In order to brew, weigh the coffee. <!-- anti-slop-ignore verbosity.filler -->\n"
+        text = "In order to brew, weigh the coffee. <!-- unslop-ignore verbosity.filler -->\n"
         self.assertEqual(self.lint(text), [])
 
     def test_strict_promotes_subjective_rules(self):
-        diagnostics = self.lint("It is important to note that water matters.\n", preset="strict")
+        diagnostics = self.lint(
+            "It is important to note that water matters.\n", preset="strict"
+        )
         self.assertEqual(diagnostics[0].severity, "warning")
 
     def test_unknown_rule_is_config_error(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "config.json"
             path.write_text(json.dumps({"rules": {"made.up": "off"}}), encoding="utf-8")
-            with self.assertRaises(anti_slop.ConfigError):
-                anti_slop.load_config(str(path))
+            with self.assertRaises(unslop.ConfigError):
+                unslop.load_config(str(path))
 
     def test_unknown_option_is_config_error(self):
-        with self.assertRaises(anti_slop.ConfigError):
-            self.lint("Direct prose.\n", config={"rules": {"density.em-dash": {"maximum": 3}}})
+        with self.assertRaises(unslop.ConfigError):
+            self.lint(
+                "Direct prose.\n", config={"rules": {"density.em-dash": {"maximum": 3}}}
+            )
 
     def test_json_cli_and_exit_code(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "draft.md"
             path.write_text("In order to brew, use water.\n", encoding="utf-8")
             result = subprocess.run(
-                [sys.executable, "-m", "hooks.anti_slop", "--format", "json", str(path)],
+                [sys.executable, "-m", "hooks.unslop", "--format", "json", str(path)],
                 cwd=ROOT,
                 text=True,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
+                capture_output=True,
                 check=False,
             )
             self.assertEqual(result.returncode, 1)

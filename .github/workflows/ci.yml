@@ -17,8 +17,8 @@ jobs:
           go-version-file: go.mod
           cache: true
       - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
-      - name: Test anti-slop prose linter
-        run: python3 -m unittest -v test_anti_slop.py
+      - name: Test unslop
+        run: python3 -m unittest -v test_unslop.py
       - name: Validate hook files
         run: |
           uvx prek==0.4.12 validate-config prek.toml
@@ -33,7 +33,7 @@ jobs:
           .github/fixtures/smoke.ts
           .github/fixtures/smoke.py
           .github/fixtures/smoke.go
-          examples/anti-slop/coffee-after.md
+          examples/unslop/coffee-after.md
 
   release:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
