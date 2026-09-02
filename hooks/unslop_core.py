@@ -440,7 +440,7 @@ class Projection:
             index = close + len(marker)
         for match in re.finditer(r"!\[[^\]]*\]\([^\n)]*\)", self.source):
             self.mask(match.start(), match.end())
-        for match in re.finditer(r"(?<!!)\[[^\]\n]+\]\(([^\n)]*)\)", self.source):
+        for match in re.finditer(r"(?<!!)\[[^\]\n]+\](\([^\n)]*\))", self.source):
             self.mask(match.start(1), match.end(1))
         for match in re.finditer(
             r"<(?:(?:https?|mailto):[^>]+)>", self.source, re.IGNORECASE

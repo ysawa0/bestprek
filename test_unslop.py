@@ -65,6 +65,17 @@ A plain, direct sentence remains.
 """
         self.assertEqual(self.lint(text), [])
 
+    def test_markdown_links_do_not_count_as_parenthetical_asides(self):
+        links = " ".join(
+            f"[Source {index}](https://example.com/{index})" for index in range(6)
+        )
+        rules = {item.rule_id for item in self.lint(links, preset="strict")}
+        self.assertNotIn("density.parenthetical", rules)
+
+        asides = " ".join(f"(aside {index})" for index in range(6))
+        rules = {item.rule_id for item in self.lint(asides, preset="strict")}
+        self.assertIn("density.parenthetical", rules)
+
     def test_mdx_tags_are_masked_but_text_is_linted(self):
         diagnostics = self.lint(
             "<Callout>In order to make coffee, weigh it.</Callout>\n"
