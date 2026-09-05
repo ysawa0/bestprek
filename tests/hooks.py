@@ -69,6 +69,10 @@ def main() -> None:
             "ruff-format",
             "shellcheck",
             "shfmt",
+            "gofumpt",
+            "goimports",
+            "gopls-check",
+            "go-vet",
         ]
         config = (
             f"[[repos]]\nrepo = {json.dumps(args.repo)}\nrev = {json.dumps(revision)}\n"
@@ -150,6 +154,39 @@ def main() -> None:
             "#!/bin/sh\nif true;then\necho ok\nfi\n",
             after="#!/bin/sh\nif true; then\n\techo ok\nfi\n",
         )
+
+        (work / "go.mod").write_text("module hooktest\n\ngo 1.25\n")
+        check(
+            work,
+            "gofumpt",
+            "format.go",
+            "package hooktest\nfunc answer()int{return 42}\n",
+            after="package hooktest\n\nfunc answer() int { return 42 }\n",
+        )
+        check(
+            work,
+            "goimports",
+            "imports.go",
+            "package hooktest\n\nfunc greeting() string { return fmt.Sprint(42) }\n",
+            after='package hooktest\n\nimport "fmt"\n\nfunc greeting() string { return fmt.Sprint(42) }\n',
+        )
+        check(
+            work,
+            "gopls-check",
+            "broken.go",
+            "package hooktest\n\nvar broken = missingName\n",
+            diagnostic="undefined: missingName",
+        )
+        (work / "broken.go").unlink()
+        check(
+            work,
+            "go-vet",
+            "vet.go",
+            'package hooktest\n\nimport "fmt"\n\nfunc badPrint() { fmt.Printf("%d", "text") }\n',
+            diagnostic="wrong type",
+        )
+        (work / "vet.go").unlink()
+        check(work, "go-vet", "clean.go", "package hooktest\n")
 
 
 if __name__ == "__main__":

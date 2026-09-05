@@ -19,7 +19,7 @@ from .unslop_core import (
 )
 from .unslop_rules import RULES, RULES_BY_ID
 
-VERSION = "1.17"
+VERSION = "1.18"
 
 INTEGER_OPTIONS = {
     "max",
