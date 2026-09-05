@@ -170,6 +170,7 @@ def main() -> None:
             "package hooktest\n\nfunc greeting() string { return fmt.Sprint(42) }\n",
             after='package hooktest\n\nimport "fmt"\n\nfunc greeting() string { return fmt.Sprint(42) }\n',
         )
+        check(work, "gopls-check", "clean.go", "package hooktest\n")
         check(
             work,
             "gopls-check",
