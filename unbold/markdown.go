@@ -5,8 +5,10 @@ import (
 	"strings"
 )
 
-var rawCode = regexp.MustCompile(`(?is)^<(code|pre|script|style)\b[^>]*>`)
-var reference = regexp.MustCompile(`^ {0,3}\[[^\]]+\]:`)
+var (
+	rawCode   = regexp.MustCompile(`(?is)^<(code|pre|script|style)\b[^>]*>`)
+	reference = regexp.MustCompile(`^ {0,3}\[[^\]]+\]:`)
+)
 
 func runLength(text string, start int) int {
 	end := start
