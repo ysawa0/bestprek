@@ -81,7 +81,7 @@
 - id: gopls-check
   name: gopls check
   description: "Run gopls diagnostics for Go files"
-  entry: gopls check
+  entry: ys-gopls-check
   language: golang
   language_version: "1.26.5"
   additional_dependencies: ["golang.org/x/tools/gopls@v0.23.0"]
