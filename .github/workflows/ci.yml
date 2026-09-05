@@ -29,7 +29,7 @@ jobs:
         run: prek run --all-files
       - name: Test published hooks
         run: >-
-          prek try-repo .
+          prek try-repo "$GITHUB_WORKSPACE"
           --files
           .github/fixtures/smoke.sh
           .github/fixtures/smoke.ts
