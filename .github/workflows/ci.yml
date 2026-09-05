@@ -27,15 +27,10 @@ jobs:
           prek validate-manifest .pre-commit-hooks.yaml
       - name: Check repository
         run: prek run --all-files
-      - name: Test published hooks
-        run: >-
-          prek try-repo "$GITHUB_WORKSPACE"
-          --files
-          .github/fixtures/smoke.sh
-          .github/fixtures/smoke.ts
-          .github/fixtures/smoke.py
-          .github/fixtures/smoke.go
-          examples/unslop/coffee-after.md
+      - name: Check implementation with published hooks
+        run: prek try-repo "$GITHUB_WORKSPACE" --all-files
+      - name: Check Python types
+        run: uvx ty check
 
       - name: Test hook behavior
         run: |
