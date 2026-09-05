@@ -54,14 +54,15 @@ func stripBold(input string) string {
 		if input[i] == '`' {
 			n := runLength(input, i)
 			end := i + n
-			for end < len(input) {
-				if input[end] != '`' {
-					end++
+			for cursor := end; cursor < len(input); {
+				if input[cursor] != '`' {
+					cursor++
 					continue
 				}
-				closing := runLength(input, end)
-				end += closing
+				closing := runLength(input, cursor)
+				cursor += closing
 				if closing == n {
+					end = cursor
 					break
 				}
 			}
