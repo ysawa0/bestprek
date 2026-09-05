@@ -1,6 +1,12 @@
 package main
 
-import "strings"
+import (
+	"regexp"
+	"strings"
+)
+
+var rawCode = regexp.MustCompile(`(?is)^<(code|pre|script|style)\b[^>]*>`)
+var reference = regexp.MustCompile(`^ {0,3}\[[^\]]+\]:`)
 
 func runLength(text string, start int) int {
 	end := start
@@ -10,72 +16,144 @@ func runLength(text string, start int) int {
 	return end - start
 }
 
-// Keep code and escaped punctuation byte-for-byte while stripping prose markers.
-func stripBold(input string) string {
-	var out strings.Builder
+func thematicBreak(line string) bool {
+	compact := strings.Map(func(char rune) rune {
+		if char == ' ' || char == '\t' || char == '\r' || char == '\n' {
+			return -1
+		}
+		return char
+	}, line)
+	return len(compact) >= 3 && (compact[0] == '*' || compact[0] == '_') && runLength(compact, 0) == len(compact)
+}
+
+func inlineCodeEnd(text string, start int) int {
+	length := runLength(text, start)
+	for cursor := start + length; cursor < len(text); {
+		if text[cursor] != '`' {
+			cursor++
+			continue
+		}
+		closing := runLength(text, cursor)
+		cursor += closing
+		if closing == length {
+			return cursor
+		}
+	}
+	return start + length
+}
+
+func linkEnd(text string, start int) int {
+	depth := 1
+	var quote byte
+	for cursor := start + 1; cursor < len(text); cursor++ {
+		char := text[cursor]
+		if char == '\\' {
+			cursor++
+			continue
+		}
+		if quote != 0 {
+			if char == quote {
+				quote = 0
+			}
+			continue
+		}
+		if char == '"' || char == '\'' {
+			quote = char
+		} else if char == '(' {
+			depth++
+		} else if char == ')' {
+			depth--
+			if depth == 0 {
+				return cursor + 1
+			}
+		}
+	}
+	return start
+}
+
+func htmlEnd(text string, start int) int {
+	remaining := text[start:]
+	if strings.HasPrefix(remaining, "<!--") {
+		if end := strings.Index(remaining, "-->"); end >= 0 {
+			return start + end + 3
+		}
+		return len(text)
+	}
+	if match := rawCode.FindStringSubmatch(remaining); match != nil {
+		closing := "</" + strings.ToLower(match[1]) + ">"
+		if end := strings.Index(strings.ToLower(remaining), closing); end >= 0 {
+			return start + end + len(closing)
+		}
+		return len(text)
+	}
+	var quote byte
+	for cursor := start + 1; cursor < len(text); cursor++ {
+		char := text[cursor]
+		if quote != 0 {
+			if char == quote {
+				quote = 0
+			}
+		} else if char == '\'' || char == '"' {
+			quote = char
+		} else if char == '>' {
+			return cursor + 1
+		} else if char == '\n' {
+			return start
+		}
+	}
+	return start
+}
+
+// Mark syntax whose literal content must never be rewritten as emphasis.
+func protectedMarkdown(input string) []bool {
+	protected := make([]bool, len(input))
+	protect := func(start, end int) {
+		for i := start; i < end; i++ {
+			protected[i] = true
+		}
+	}
 	var fence byte
 	fenceLength := 0
 	for i := 0; i < len(input); {
 		if i == 0 || input[i-1] == '\n' {
-			end := strings.IndexByte(input[i:], '\n')
-			if end < 0 {
-				end = len(input)
-			} else {
-				end += i + 1
+			end := len(input)
+			if newline := strings.IndexByte(input[i:], '\n'); newline >= 0 {
+				end = i + newline + 1
 			}
 			line := input[i:end]
 			trimmed := strings.TrimLeft(line, " >\t")
+			wasFenced := fence != 0
 			if len(trimmed) > 0 && (trimmed[0] == '`' || trimmed[0] == '~') {
 				n := runLength(trimmed, 0)
 				if fence == 0 && n >= 3 {
 					fence, fenceLength = trimmed[0], n
-					out.WriteString(line)
-					i = end
-					continue
-				}
-				if fence == trimmed[0] && n >= fenceLength && strings.TrimSpace(trimmed[n:]) == "" {
+				} else if fence == trimmed[0] && n >= fenceLength && strings.TrimSpace(trimmed[n:]) == "" {
 					fence = 0
-					out.WriteString(line)
-					i = end
-					continue
 				}
 			}
-			if fence != 0 || strings.HasPrefix(line, "    ") || strings.HasPrefix(line, "\t") {
-				out.WriteString(line)
+			if wasFenced || fence != 0 || strings.HasPrefix(line, "    ") || strings.HasPrefix(line, "\t") || thematicBreak(trimmed) || reference.MatchString(line) {
+				protect(i, end)
 				i = end
 				continue
 			}
 		}
-		if input[i] == '\\' && i+1 < len(input) {
-			out.WriteString(input[i : i+2])
-			i += 2
-			continue
+		end := i
+		switch {
+		case input[i] == '\\' && i+1 < len(input):
+			end = i + 2
+		case input[i] == '`':
+			end = inlineCodeEnd(input, i)
+		case input[i] == '<':
+			end = htmlEnd(input, i)
+		case input[i] == '(' && i > 0 && input[i-1] == ']':
+			end = linkEnd(input, i)
 		}
-		if input[i] == '`' {
-			n := runLength(input, i)
-			end := i + n
-			for cursor := end; cursor < len(input); {
-				if input[cursor] != '`' {
-					cursor++
-					continue
-				}
-				closing := runLength(input, cursor)
-				cursor += closing
-				if closing == n {
-					end = cursor
-					break
-				}
-			}
-			out.WriteString(input[i:end])
+		if end > i {
+			protect(i, end)
 			i = end
-			continue
+		} else {
+			i++
 		}
-		if strings.HasPrefix(input[i:], "**") || strings.HasPrefix(input[i:], "__") {
-			i += 2
-			continue
-		}
-		out.WriteByte(input[i])
-		i++
 	}
-	return out.String()
+	return protected
 }

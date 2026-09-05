@@ -321,9 +321,11 @@ class Projection:
     def project(self) -> None:
         self.mask_front_matter()
         self.mask_fenced_code()
-        self.mask_comments_and_raw_code()
+        self.mask_raw_code()
         self.mask_line_constructs()
         self.mask_inline_constructs()
+        self.suppression_source = "".join(self.visible)
+        self.mask_comments()
         visible_text = "".join(self.visible)
         self.bold_spans = [
             Span(match.start(), match.end())
@@ -376,9 +378,11 @@ class Projection:
         if open_char is not None:
             self.mask(block_start, len(self.source))
 
-    def mask_comments_and_raw_code(self) -> None:
+    def mask_comments(self) -> None:
         for match in re.finditer(r"<!--[\s\S]*?-->", self.source):
             self.mask(match.start(), match.end())
+
+    def mask_raw_code(self) -> None:
         for match in re.finditer(
             r"<(pre|script|style|code)\b[^>]*>[\s\S]*?</\1\s*>",
             self.source,
@@ -463,6 +467,10 @@ class Projection:
     def mask_inline_constructs(self) -> None:
         index = 0
         while index < len(self.source):
+            if self.source.startswith("<!--", index):
+                end = self.source.find("-->", index + 4)
+                index = len(self.source) if end == -1 else end + 3
+                continue
             if self.source[index] != "`" or self.visible[index] == " ":
                 index += 1
                 continue
@@ -497,8 +505,10 @@ class Document:
         self.path = path
         self.source = source
         self.line_starts = compute_line_starts(source)
-        self.suppressed_all, self.suppressed_rules = parse_suppressions(source)
         projection = Projection(source)
+        self.suppressed_all, self.suppressed_rules = parse_suppressions(
+            projection.suppression_source
+        )
         self.visible = "".join(projection.visible)
         self.structural = "".join(projection.structural)
         self.heading_spans = sorted(

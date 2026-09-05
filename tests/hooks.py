@@ -103,6 +103,46 @@ def main() -> None:
             "A ` marker and **bold**.\n",
             after="A ` marker and bold.\n",
         )
+        literals = (
+            "<code>__init__</code>\n\n<pre>**literal**</pre>\n\n"
+            "[API](https://example.com/__init__)\n\n"
+            '[API](https://example.com/a_(b)__c__ "**title**")\n\n'
+            "[api]: https://example.com/**literal**\n\n"
+            '<span title="**attribute**">text</span>\n\n'
+            "<!-- **comment** -->\n\n***\n\n___\n\n* * *\n\n"
+            "name__with__underscores and **unmatched\n"
+        )
+        check(work, "unbold", "literals.md", literals)
+        check(
+            work,
+            "unbold",
+            "emphasis.md",
+            "***both*** and **bold *nested*** and *italic **bold***.\n\n[**label**](https://example.com/__init__) and **`__code__`**.\n",
+            after="*both* and bold *nested* and *italic bold*.\n\n[label](https://example.com/__init__) and `__code__`.\n",
+        )
+        for index, example in enumerate(
+            [
+                "```markdown\n<!-- unslop-disable -->\n```",
+                "~~~markdown\n<!-- unslop-disable -->\n~~~",
+                "    <!-- unslop-disable -->",
+                "`<!-- unslop-disable -->`",
+                "<code><!-- unslop-disable --></code>",
+                "<pre><!-- unslop-disable --></pre>",
+            ]
+        ):
+            check(
+                work,
+                "unslop",
+                f"example-{index}.md",
+                example + "\n\nThe transition is seamless.\n",
+                diagnostic="phrase.marketing-language",
+            )
+        check(
+            work,
+            "unslop",
+            "suppressed.md",
+            "<!-- unslop-disable phrase.marketing-language -->\nThe transition is seamless.\n",
+        )
         check(
             work,
             "unslop",
