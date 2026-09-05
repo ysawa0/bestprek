@@ -8,7 +8,7 @@ A small, version-pinned hook bundle for ysawa0 repositories, designed for Prek.
 - `oxlint`: lint JavaScript, JSX, TypeScript, and TSX with the bundled anti-slop policy
 - `ruff-check`: lint Python and Jupyter files
 - `ruff-format`: format Python and Jupyter files
-- `unbold`: strip Markdown bold markers in place
+- `unbold`: strip Markdown bold markers in place while preserving code and escaped punctuation
 - `unslop`: lint Markdown prose for canned, repetitive, bloated, or mechanically over-polished writing
 - `gofumpt`: format Go
 - `goimports`: format Go and fix imports
@@ -148,18 +148,19 @@ Project-local files such as `.oxfmtrc.jsonc` and `ruff.toml` control their respe
 The repository's `prek.toml` uses local hooks so it checks the current worktree instead of a previous release. Run:
 
 ```sh
-python3 -m unittest -v test_unslop.py
+uv run --no-sync python3 -m unittest -v test_unslop.py
 prek run --all-files
 prek try-repo . --all-files
+uv run --no-sync python3 tests/hooks.py
 ```
 
-The final command tests the published manifest and its pinned environments against the repository fixtures.
+The end-to-end suite installs hooks from the committed HEAD in a temporary consuming repository. It checks lint failures, formatter output, ignored files, code preservation, and clean second runs. Commit implementation changes before running it.
 
 ## Release
 
-1. Update the README example `rev` and `RELEASE` to the new version.
-2. Commit the release changes on `main`.
-3. CI validates the manifest, runs the unit tests and all local hooks, then tests the published hook environments.
-4. After those checks pass on `main`, CI creates the GitHub release and matching tag if they do not already exist.
+1. Write `.github/release-notes/<version>.md`.
+2. Run `make release VERSION=<version>` to update `RELEASE`, the README example, and the Unslop CLI version.
+3. Commit and push the changes to `main`.
+4. CI validates the manifest, runs the Python tests, local hooks, published-hook smoke checks, and end-to-end hook checks. After they pass, CI creates the GitHub release and matching tag.
 
-`make release VERSION=<version>` remains available for a manual local release when needed.
+The local release command only prepares metadata. CI is the sole publisher.
