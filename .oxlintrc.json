@@ -46,10 +46,10 @@
     ".pi/**",
     ".roo/**",
     ".windsurf/**",
-    "coverage/",
-    "dist/",
-    "node_modules/",
+    "coverage/**",
+    "dist/**",
+    "node_modules/**",
     "oxlint/anti-slop/**",
-    "vendor/"
+    "vendor/**"
   ]
 }

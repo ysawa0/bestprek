@@ -5,14 +5,7 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"strings"
 )
-
-func stripBold(input string) string {
-	out := strings.ReplaceAll(input, "**", "")
-	out = strings.ReplaceAll(out, "__", "")
-	return out
-}
 
 func processReader(reader io.Reader, writer io.Writer) error {
 	data, err := io.ReadAll(reader)
