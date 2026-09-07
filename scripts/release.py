@@ -23,14 +23,17 @@ def main() -> None:
         "Cargo.toml": (f'version = "{previous}.0"', f'version = "{version}.0"'),
         "Cargo.lock": (f'version = "{previous}.0"', f'version = "{version}.0"'),
     }
+    prepared = {}
     for filename, (old, new) in replacements.items():
         path = ROOT / filename
         text = path.read_text()
         if text.count(old) != 1:
             raise SystemExit(f"Expected one {old!r} in {filename}")
-        path.write_text(text.replace(old, new))
+        prepared[path] = text.replace(old, new)
     lines[0] = version
-    release.write_text("\n".join(lines) + "\n")
+    prepared[release] = "\n".join(lines) + "\n"
+    for path, text in prepared.items():
+        path.write_text(text)
     print(f"Prepared {version}. Commit and push to main; CI tests and publishes it.")
 
 
