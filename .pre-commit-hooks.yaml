@@ -104,7 +104,7 @@
   entry: ys-shellcheck
   language: python
   types: [shell]
-  args: [-e, SC1091]
+  args: [-e, "SC1091,SC2250"]
   require_serial: true
 
 - id: shfmt

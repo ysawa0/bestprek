@@ -54,7 +54,8 @@ def seed(work: Path) -> None:
         "sample.py": "example/sample.py.txt",
         "sample.ts": "oxlint/clean.input.txt",
         "sample.go": "gofumpt/format.expected.txt",
-        "sample.sh": "shfmt/format.expected.txt",
+        "sample.sh": "shellcheck/braces-excluded.input.txt",
+        "deployment.yaml": "example/multi-document.yaml.txt",
         "README.md": "unslop/clean.input.txt",
     }
     for target, source in sources.items():
