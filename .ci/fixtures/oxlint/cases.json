@@ -161,6 +161,37 @@
     "input": "unknown-aliases-accept.input.txt"
   },
   {
+    "name": "unknown-union-reject",
+    "path": "sample.ts",
+    "input": "unknown-union-reject.input.txt",
+    "diagnostics": ["Type alias `Hidden` hides `unknown`"],
+    "rules": ["no-unknown-type-aliases"]
+  },
+  {
+    "name": "unknown-union-aliases",
+    "path": "sample.ts",
+    "input": "unknown-union-aliases.input.txt",
+    "diagnostics": ["Type alias `Forwarded` hides `unknown`", "Type alias `Hidden` hides `unknown`", "Type alias `Source` hides `unknown`"],
+    "rules": ["no-unknown-type-aliases", "no-unknown-type-aliases", "no-unknown-type-aliases"]
+  },
+  {
+    "name": "unknown-union-accept",
+    "path": "sample.ts",
+    "input": "unknown-union-accept.input.txt"
+  },
+  {
+    "name": "unknown-union-cycle",
+    "path": "sample.ts",
+    "input": "unknown-union-cycle.input.txt"
+  },
+  {
+    "name": "unknown-union-cycle-reject",
+    "path": "sample.ts",
+    "input": "unknown-union-cycle-reject.input.txt",
+    "diagnostics": ["Type alias `First` hides `unknown`", "Type alias `Second` hides `unknown`"],
+    "rules": ["no-unknown-type-aliases", "no-unknown-type-aliases"]
+  },
+  {
     "name": "unsafe-dictionary-reject",
     "path": "sample.ts",
     "input": "unsafe-dictionary-reject.input.txt",
