@@ -1,0 +1,12 @@
+[
+  {
+    "line": 1,
+    "column": 42,
+    "end_line": 1,
+    "end_column": 50,
+    "severity": "warning",
+    "rule": "repetition.transition",
+    "message": "The transition 'moreover' appears 2 times within 500 words.",
+    "suggestion": "Delete a transition where paragraph order already makes the relationship clear."
+  }
+]

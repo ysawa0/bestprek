@@ -1,0 +1,12 @@
+[
+  {
+    "line": 1,
+    "column": 1,
+    "end_line": 1,
+    "end_column": 29,
+    "severity": "warning",
+    "rule": "phrase.note-to-reader",
+    "message": "The sentence tells the reader what to note instead of proving its importance.",
+    "suggestion": "Delete the lead-in and strengthen the claim."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "line": 1,
+    "column": 28,
+    "end_line": 1,
+    "end_column": 85,
+    "severity": "warning",
+    "rule": "rhythm.short-sentence-run",
+    "message": "3 consecutive sentences contain at most 6 words each, creating a manufactured staccato rhythm.",
+    "suggestion": "Combine related fragments and reserve the short sentence for emphasis."
+  },
+  {
+    "line": 1,
+    "column": 33,
+    "end_line": 1,
+    "end_column": 68,
+    "severity": "warning",
+    "rule": "repetition.loaded-word",
+    "message": "The loaded word 'delve' appears 3 times within 500 words.",
+    "suggestion": "Replace at least one use with the concrete property you mean."
+  }
+]

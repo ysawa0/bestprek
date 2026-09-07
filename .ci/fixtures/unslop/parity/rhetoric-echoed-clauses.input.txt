@@ -1,0 +1,1 @@
+We record room temperature, we record pipe temperature, and we record air temperature.

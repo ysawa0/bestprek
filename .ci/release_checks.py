@@ -15,7 +15,8 @@ def main() -> None:
         "RELEASE",
         "README.md",
         "scripts/release.py",
-        "hooks/unslop.py",
+        "Cargo.toml",
+        "Cargo.lock",
         "example_conf/prek.toml",
     ]
     with tempfile.TemporaryDirectory(prefix="release-", dir=ROOT / "tmp") as directory:
@@ -46,7 +47,13 @@ def main() -> None:
             raise AssertionError("Release preparation must update the copyable example")
         if 'rev = "99.99"' not in (work / "README.md").read_text():
             raise AssertionError("Release preparation must update the README")
-        if 'VERSION = "99.99"' not in (work / "hooks/unslop.py").read_text():
+        manifest = tomllib.loads((work / "Cargo.toml").read_text())
+        packages = tomllib.loads((work / "Cargo.lock").read_text())["package"]
+        binary = next(package for package in packages if package["name"] == "unslop")
+        if (
+            manifest["package"]["version"] != "99.99.0"
+            or binary["version"] != "99.99.0"
+        ):
             raise AssertionError("Release preparation must update the CLI version")
     print("PASS release preparation: versions updated and upkeep note preserved")
 

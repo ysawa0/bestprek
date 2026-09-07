@@ -1,0 +1,12 @@
+[
+  {
+    "line": 1,
+    "column": 19,
+    "end_line": 1,
+    "end_column": 27,
+    "severity": "warning",
+    "rule": "phrase.marketing-language",
+    "message": "'Seamless' makes a quality claim without naming the seam.",
+    "suggestion": "Name the transition, integration, or failure mode."
+  }
+]

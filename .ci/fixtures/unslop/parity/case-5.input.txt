@@ -1,0 +1,10 @@
+# API
+
+## Open
+The event fires when the socket opens. Ready. Connected.
+
+## Close
+The event fires when the socket closes. Done. Disconnected.
+
+## Error
+The event fires when the socket fails. Failed. Closed.

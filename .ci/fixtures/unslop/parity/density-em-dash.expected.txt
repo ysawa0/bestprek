@@ -1,0 +1,12 @@
+[
+  {
+    "line": 1,
+    "column": 19,
+    "end_line": 1,
+    "end_column": 20,
+    "severity": "warning",
+    "rule": "density.em-dash",
+    "message": "4 em dashes appear within 500 words.",
+    "suggestion": "Keep the strongest interruption and use commas, parentheses, or separate sentences elsewhere."
+  }
+]

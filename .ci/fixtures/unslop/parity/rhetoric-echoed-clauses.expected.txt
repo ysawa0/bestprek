@@ -1,0 +1,12 @@
+[
+  {
+    "line": 1,
+    "column": 1,
+    "end_line": 1,
+    "end_column": 87,
+    "severity": "warning",
+    "rule": "rhetoric.echoed-clauses",
+    "message": "3 parallel clauses repeat the opening 'we record'.",
+    "suggestion": "Keep the parallelism only if the rhythm earns its space; otherwise combine the clauses or vary the syntax."
+  }
+]

@@ -1,0 +1,12 @@
+[
+  {
+    "line": 1,
+    "column": 1,
+    "end_line": 1,
+    "end_column": 15,
+    "severity": "warning",
+    "rule": "verbosity.redundant-pair",
+    "message": "'Each and every' repeats the same idea.",
+    "suggestion": "Choose 'each' or 'every'."
+  }
+]

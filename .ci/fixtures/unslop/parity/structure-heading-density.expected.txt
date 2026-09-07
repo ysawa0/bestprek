@@ -1,0 +1,12 @@
+[
+  {
+    "line": 5,
+    "column": 1,
+    "end_line": 21,
+    "end_column": 13,
+    "severity": "info",
+    "rule": "structure.heading-density",
+    "message": "6 headings divide 36 words, or only 6 words per heading.",
+    "suggestion": "Merge sections whose headings promise more structure than the content delivers."
+  }
+]

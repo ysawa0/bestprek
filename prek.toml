@@ -29,7 +29,7 @@ require_serial = true
 [[repos.hooks]]
 id = "unslop"
 name = "unslop"
-entry = "python3 -m hooks.unslop"
+entry = "target/release/unslop"
 language = "system"
 types = ["markdown"]
 exclude = "^\\.ci/fixtures/unslop/coffee-before\\.md$"

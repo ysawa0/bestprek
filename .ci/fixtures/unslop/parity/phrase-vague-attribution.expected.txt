@@ -1,0 +1,12 @@
+[
+  {
+    "line": 1,
+    "column": 1,
+    "end_line": 1,
+    "end_column": 12,
+    "severity": "warning",
+    "rule": "phrase.vague-attribution",
+    "message": "'Experts' is too vague to support the claim.",
+    "suggestion": "Name the expert, institution, or source."
+  }
+]
