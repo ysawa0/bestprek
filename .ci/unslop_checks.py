@@ -3,6 +3,7 @@
 import json
 import subprocess
 import tempfile
+from itertools import product
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -81,42 +82,44 @@ def check_contrasts(work: Path) -> None:
     separated = first + "\n" + "granite " * 501 + ".\n" + second + "\n"
     config = work / ".unslop.json"
     path = work / "contrasts.md"
-    for preset in ("recommended", "strict"):
-        for name, source, overrides, count, line in [
-            ("singleton", singleton, {}, 0, 0),
-            ("pair", pair, {}, 2, 2),
-            ("separated", separated, {}, 0, 0),
-            ("max-zero", singleton, {"max": 0}, 1, 1),
-        ]:
-            config.write_text(json.dumps({"rules": {rule: overrides}}))
-            path.write_text(source)
-            result = invoke(
-                work,
-                "--config",
-                str(config),
-                "--preset",
-                preset,
-                "--format",
-                "json",
-                str(path),
-                expected=int(count > 0),
+    cases = [
+        ("singleton", singleton, {}, 0, 0),
+        ("pair", pair, {}, 2, 2),
+        ("separated", separated, {}, 0, 0),
+        ("max-zero", singleton, {"max": 0}, 1, 1),
+    ]
+    for preset, (name, source, overrides, count, line) in product(
+        ("recommended", "strict"), cases
+    ):
+        config.write_text(json.dumps({"rules": {rule: overrides}}))
+        path.write_text(source)
+        result = invoke(
+            work,
+            "--config",
+            str(config),
+            "--preset",
+            preset,
+            "--format",
+            "json",
+            str(path),
+            expected=int(count > 0),
+        )
+        actual = json.loads(result.stdout)
+        expected = [(rule, "warning", line, count)] if count else []
+        observed = [
+            (
+                item["rule"],
+                item["severity"],
+                item["line"],
+                int(item["message"].split()[0]),
             )
-            actual = json.loads(result.stdout)
-            expected = [(rule, "warning", line, count)] if count else []
-            observed = [
-                (
-                    item["rule"],
-                    item["severity"],
-                    item["line"],
-                    int(item["message"].split()[0]),
-                )
-                for item in actual
-            ]
-            if observed != expected or any(
-                "contrast reframes appear within 500 words;" not in item["message"]
-                for item in actual
-            ):
-                raise AssertionError(f"{preset}/{name}: {actual}")
+            for item in actual
+        ]
+        if observed != expected or any(
+            "contrast reframes appear within 500 words;" not in item["message"]
+            for item in actual
+        ):
+            raise AssertionError(f"{preset}/{name}: {actual}")
     print(
         "PASS unslop CLI: both presets allow isolated contrasts and honor max overrides"
     )

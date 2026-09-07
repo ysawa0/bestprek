@@ -44,9 +44,13 @@ def main() -> None:
         )
         if result.returncode == 0 or "in Cargo.toml" not in result.stderr:
             raise AssertionError("Release preparation must reject a mismatched version")
-        for path, original in inputs.items():
-            if path.read_bytes() != original:
-                raise AssertionError(f"Failed release preparation changed {path.name}")
+        changed = [
+            path.name
+            for path, original in inputs.items()
+            if path.read_bytes() != original
+        ]
+        if changed:
+            raise AssertionError(f"Failed release preparation changed {changed}")
         manifest_path.write_text(original_manifest)
         subprocess.run(
             [sys.executable, str(work / "scripts/release.py"), "99.99"],
