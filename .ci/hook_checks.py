@@ -64,7 +64,7 @@ def assert_result(
         if diagnostic not in output:
             raise AssertionError(f"missing diagnostic {diagnostic!r}\n{output}")
     if hook == "oxlint":
-        actual = re.findall(r"error anti-slop\(([^)]+)\):", output)
+        actual = re.findall(r"anti-slop\(([^)]+)\):", output)
         if sorted(actual) != sorted(case.get("rules", [])):
             raise AssertionError(
                 f"unexpected custom-rule diagnostics: {actual}\n{output}"
