@@ -1,55 +1,144 @@
-"""Exercise installed hooks in a disposable consuming repository."""
+"""Exercise installed hooks using the file-backed cases in .ci/fixtures."""
 
 import argparse
 import json
+import os
+import re
 import subprocess
 import tempfile
 from pathlib import Path
+from typing import NotRequired, TypedDict
 
 ROOT = Path(__file__).resolve().parents[1]
+FIXTURES = ROOT / ".ci" / "fixtures"
 
 
-def run(*args: str, cwd: Path) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(args, cwd=cwd, text=True, capture_output=True, check=False)
+class Case(TypedDict):
+    name: str
+    path: str
+    input: str
+    expected: NotRequired[str]
+    diagnostics: NotRequired[list[str]]
+    rules: NotRequired[list[str]]
+    args: NotRequired[list[str]]
+    setup: NotRequired[dict[str, str]]
+    exit: NotRequired[int]
 
 
-def check(
-    work: Path,
-    hook: str,
-    filename: str,
-    before: str,
-    *,
-    after: str | None = None,
-    diagnostic: str | None = None,
+def run(work: Path, hook: str, path: str) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        ["prek", "run", hook, "--files", path],
+        cwd=work,
+        env={**os.environ, "NO_COLOR": "1"},
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+
+
+def write_config(work: Path, repo: str, revision: str, hook: str, case: Case) -> None:
+    config = (
+        f"[[repos]]\nrepo = {json.dumps(repo)}\nrev = {json.dumps(revision)}\n"
+        f"\n[[repos.hooks]]\nid = {json.dumps(hook)}\n"
+    )
+    if "args" in case:
+        config += f"args = {json.dumps(case['args'])}\n"
+    (work / "prek.toml").write_text(config)
+
+
+def assert_result(
+    case: Case, hook: str, result: subprocess.CompletedProcess[str]
 ) -> None:
-    path = work / filename
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(before)
-    subprocess.run(["git", "add", filename], cwd=work, check=True)
-    result = run("prek", "run", hook, "--files", filename, cwd=work)
     output = result.stdout + result.stderr
-    expected = 1 if after is not None or diagnostic is not None else 0
-    if result.returncode != expected:
+    expected_exit = case.get("exit", int("expected" in case or "diagnostics" in case))
+    if result.returncode != expected_exit:
         raise AssertionError(
-            f"{hook}: expected exit {expected}, got {result.returncode}\n{output}"
+            f"expected exit {expected_exit}, got {result.returncode}\n{output}"
         )
-    if diagnostic is not None and diagnostic not in output:
-        raise AssertionError(f"{hook}: missing {diagnostic}\n{output}")
-    if after is not None:
-        if path.read_text() != after:
-            raise AssertionError(f"{hook}: unexpected rewrite {path.read_text()!r}")
-        second = run("prek", "run", hook, "--files", filename, cwd=work)
-        if second.returncode:
+    for diagnostic in case.get("diagnostics", []):
+        if diagnostic not in output:
+            raise AssertionError(f"missing diagnostic {diagnostic!r}\n{output}")
+    if hook == "oxlint":
+        actual = re.findall(r"error anti-slop\(([^)]+)\):", output)
+        if sorted(actual) != sorted(case.get("rules", [])):
             raise AssertionError(
-                f"{hook}: second run failed\n{second.stdout}{second.stderr}"
+                f"unexpected custom-rule diagnostics: {actual}\n{output}"
             )
-    print(f"PASS {hook}: {filename}", flush=True)
+
+
+def check(work: Path, folder: Path, case: Case) -> None:
+    hook = folder.name
+    path = work / case["path"]
+    path.parent.mkdir(parents=True, exist_ok=True)
+    before = (folder / case["input"]).read_bytes()
+    expected = (
+        (folder / case["expected"]).read_bytes() if "expected" in case else before
+    )
+    path.write_bytes(before)
+    subprocess.run(["git", "add", "--", case["path"]], cwd=work, check=True)
+    result = run(work, hook, case["path"])
+    assert_result(case, hook, result)
+    if path.read_bytes() != expected:
+        raise AssertionError(f"unexpected file contents: {path.read_bytes()!r}")
+    if "expected" in case:
+        second = run(work, hook, case["path"])
+        if second.returncode or path.read_bytes() != expected:
+            raise AssertionError(
+                f"formatter is not idempotent\n{second.stdout}{second.stderr}"
+            )
+    print(f"PASS {hook}: {case['name']}", flush=True)
+
+
+def run_case(work: Path, folder: Path, case: Case, repo: str, revision: str) -> None:
+    write_config(work, repo, revision, folder.name, case)
+    setup = case.get("setup", {})
+    for filename, content in setup.items():
+        path = work / filename
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content)
+    try:
+        check(work, folder, case)
+    except AssertionError as exc:
+        raise AssertionError(f"{folder.name}/{case['name']}: {exc}") from exc
+    finally:
+        for filename in [case["path"], *setup]:
+            (work / filename).unlink()
+
+
+def verify_coverage(manifests: list[Path]) -> None:
+    hooks = set(
+        re.findall(
+            r"^- id: (.+)$", (ROOT / ".pre-commit-hooks.yaml").read_text(), re.MULTILINE
+        )
+    )
+    if hooks != {manifest.parent.name for manifest in manifests}:
+        raise SystemExit("Every published hook must have a fixture group")
+    policy = json.loads((ROOT / ".oxlintrc.json").read_text())
+    enabled = {
+        name.removeprefix("anti-slop/")
+        for name, level in policy["rules"].items()
+        if name.startswith("anti-slop/") and level != "off"
+    }
+    cases: list[Case] = json.loads((FIXTURES / "oxlint" / "cases.json").read_text())
+    covered = {rule for case in cases for rule in case.get("rules", [])}
+    if missing := enabled - covered:
+        raise SystemExit(
+            "Missing Oxlint rejection fixtures: " + ", ".join(sorted(missing))
+        )
+
+
+def run_group(work: Path, manifest: Path, repo: str, revision: str) -> int:
+    cases: list[Case] = json.loads(manifest.read_text())
+    for case in cases:
+        run_case(work, manifest.parent, case, repo, revision)
+    return len(cases)
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo", default=str(ROOT))
     parser.add_argument("--rev")
+    parser.add_argument("--hook", help="Run one hook's fixture group")
     args = parser.parse_args()
     revision = (
         args.rev
@@ -57,177 +146,18 @@ def main() -> None:
             ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
         ).strip()
     )
+    manifests = sorted(FIXTURES.glob("*/cases.json"))
+    verify_coverage(manifests)
+    if args.hook:
+        manifests = [FIXTURES / args.hook / "cases.json"]
+    count = 0
+    (ROOT / "tmp").mkdir(exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="hooks-", dir=ROOT / "tmp") as directory:
         work = Path(directory)
         subprocess.run(["git", "init", "-q", str(work)], check=True)
-        hooks = [
-            "unbold",
-            "unslop",
-            "oxfmt",
-            "oxlint",
-            "ruff-check",
-            "ruff-format",
-            "shellcheck",
-            "shfmt",
-            "gofumpt",
-            "goimports",
-            "gopls-check",
-            "go-vet",
-        ]
-        config = (
-            f"[[repos]]\nrepo = {json.dumps(args.repo)}\nrev = {json.dumps(revision)}\n"
-        )
-        config += "".join(f'\n[[repos.hooks]]\nid = "{hook}"\n' for hook in hooks)
-        (work / "prek.toml").write_text(config)
-
-        code = (
-            "`__init__` and `a ** b` and `` `**literal**` ``\n\n"
-            "```python\ndef __init__():\n    return 2 ** 3\n```\n\n"
-            "~~~~text\n**literal** __literal__\n~~~~\n\n"
-            "    __indented__ **code**\n\n"
-            "> ```python\n> __init__\n> ```\n\n"
-            "`multiline\n__code__`\n\n"
-            "\\*\\*escaped\\*\\*\n"
-        )
-        check(
-            work,
-            "unbold",
-            "prose.md",
-            "**bold** and __strong__\n\n" + code,
-            after="bold and strong\n\n" + code,
-        )
-        check(
-            work,
-            "unbold",
-            "unmatched.md",
-            "A ` marker and **bold**.\n",
-            after="A ` marker and bold.\n",
-        )
-        literals = (
-            "<code>__init__</code>\n\n<pre>**literal**</pre>\n\n"
-            "[API](https://example.com/__init__)\n\n"
-            '[API](https://example.com/a_(b)__c__ "**title**")\n\n'
-            "[api]: https://example.com/**literal**\n\n"
-            '<span title="**attribute**">text</span>\n\n'
-            "<!-- **comment** -->\n\n***\n\n___\n\n* * *\n\n"
-            "name__with__underscores and **unmatched\n"
-        )
-        check(work, "unbold", "literals.md", literals)
-        check(
-            work,
-            "unbold",
-            "emphasis.md",
-            "***both*** and **bold *nested*** and *italic **bold***.\n\n[**label**](https://example.com/__init__) and **`__code__`**.\n",
-            after="*both* and bold *nested* and *italic bold*.\n\n[label](https://example.com/__init__) and `__code__`.\n",
-        )
-        for index, example in enumerate(
-            [
-                "```markdown\n<!-- unslop-disable -->\n```",
-                "~~~markdown\n<!-- unslop-disable -->\n~~~",
-                "    <!-- unslop-disable -->",
-                "`<!-- unslop-disable -->`",
-                "<code><!-- unslop-disable --></code>",
-                "<pre><!-- unslop-disable --></pre>",
-            ]
-        ):
-            check(
-                work,
-                "unslop",
-                f"example-{index}.md",
-                example + "\n\nThe transition is seamless.\n",
-                diagnostic="phrase.marketing-language",
-            )
-        check(
-            work,
-            "unslop",
-            "suppressed.md",
-            "<!-- unslop-disable phrase.marketing-language -->\nThe transition is seamless.\n",
-        )
-        check(
-            work,
-            "unslop",
-            "draft.md",
-            "The transition is seamless.\n",
-            diagnostic="phrase.marketing-language",
-        )
-        check(work, "unslop", "clean.md", "Weigh the beans before brewing.\n")
-        check(
-            work,
-            "oxfmt",
-            "format.ts",
-            "export const answer=42\n",
-            after="export const answer = 42;\n",
-        )
-        check(
-            work,
-            "oxlint",
-            "bad.ts",
-            "export function echo(value: unknown): string { return String(value); }\n",
-            diagnostic="leaves input unparsed",
-        )
-        check(work, "oxlint", "clean.ts", "export const answer = 42;\n")
-        check(
-            work,
-            "oxlint",
-            "dist/ignored.ts",
-            "export function echo(value: unknown): string { return String(value); }\n",
-        )
-        check(
-            work,
-            "ruff-check",
-            "bad.py",
-            "print(undefined_name)\n",
-            diagnostic="Undefined name",
-        )
-        check(work, "ruff-format", "format.py", "answer=42\n", after="answer = 42\n")
-        check(
-            work,
-            "shellcheck",
-            "bad.sh",
-            "#!/bin/sh\nprintf '%s\\n' $value\n",
-            diagnostic="SC2086",
-        )
-        check(
-            work,
-            "shfmt",
-            "format.sh",
-            "#!/bin/sh\nif true;then\necho ok\nfi\n",
-            after="#!/bin/sh\nif true; then\n\techo ok\nfi\n",
-        )
-
-        (work / "go.mod").write_text("module hooktest\n\ngo 1.25\n")
-        check(
-            work,
-            "gofumpt",
-            "format.go",
-            "package hooktest\nfunc answer()int{return 42}\n",
-            after="package hooktest\n\nfunc answer() int { return 42 }\n",
-        )
-        check(
-            work,
-            "goimports",
-            "imports.go",
-            "package hooktest\n\nfunc greeting() string { return fmt.Sprint(42) }\n",
-            after='package hooktest\n\nimport "fmt"\n\nfunc greeting() string { return fmt.Sprint(42) }\n',
-        )
-        check(work, "gopls-check", "clean.go", "package hooktest\n")
-        check(
-            work,
-            "gopls-check",
-            "broken.go",
-            "package hooktest\n\nvar broken = missingName\n",
-            diagnostic="undefined: missingName",
-        )
-        (work / "broken.go").unlink()
-        check(
-            work,
-            "go-vet",
-            "vet.go",
-            'package hooktest\n\nimport "fmt"\n\nfunc badPrint() { fmt.Printf("%d", "text") }\n',
-            diagnostic="wrong type",
-        )
-        (work / "vet.go").unlink()
-        check(work, "go-vet", "clean.go", "package hooktest\n")
+        for manifest in manifests:
+            count += run_group(work, manifest, args.repo, revision)
+    print(f"Passed {count} fixture cases across {len(manifests)} hooks.")
 
 
 if __name__ == "__main__":

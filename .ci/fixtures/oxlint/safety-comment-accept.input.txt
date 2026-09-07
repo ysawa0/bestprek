@@ -1,0 +1,4 @@
+export function read(cause: unknown) {
+// SAFETY: caller has checked that cause is a string.
+return cause as string;
+}

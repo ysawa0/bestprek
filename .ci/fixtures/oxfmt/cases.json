@@ -1,0 +1,29 @@
+[
+  {
+    "name": "format",
+    "path": "format.ts",
+    "input": "format.input.txt",
+    "expected": "format.expected.txt"
+  },
+  {
+    "name": "json-format",
+    "path": "data.json",
+    "input": "json-format.input.txt",
+    "expected": "json-format.expected.txt"
+  },
+  {
+    "name": "jsx-format",
+    "path": "view.tsx",
+    "input": "jsx-format.input.txt",
+    "expected": "jsx-format.expected.txt"
+  },
+  {
+    "name": "local-config",
+    "path": "local.ts",
+    "input": "local-config.input.txt",
+    "setup": {
+      ".oxfmtrc.json": "{\"singleQuote\":true,\"semi\":false}\n"
+    },
+    "expected": "local-config.expected.txt"
+  }
+]

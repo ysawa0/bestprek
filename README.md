@@ -135,7 +135,7 @@ unslop --format json README.md
 unslop --list-rules
 ```
 
-The calibration under `examples/unslop/` includes a deliberately bloated coffee article and a revised version. Tests require the noisy article to exercise structural rules and the revised article to produce no findings.
+The calibration under `.ci/fixtures/unslop/` includes a deliberately bloated coffee article and a revised version. Tests require the noisy article to exercise structural rules and the revised article to produce no findings.
 
 ## Tool versions and configuration
 
@@ -156,6 +156,8 @@ The GitHub workflow in `.github/workflows/ci.yml` prepares the tools and calls t
 ```sh
 uv run --no-sync python3 .ci/hook_checks.py
 ```
+
+The Go executables live under `tools/`. File-backed test inputs and expected output live under `.ci/fixtures/<hook>/`; each group has a `cases.json` manifest. Inputs use `.txt` so repository formatters do not rewrite deliberately invalid examples.
 
 The end-to-end suite installs hooks from the committed HEAD in a temporary consuming repository. It checks lint failures, formatter output, ignored files, code preservation, and clean second runs. Commit implementation changes before running it.
 

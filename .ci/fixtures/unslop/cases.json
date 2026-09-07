@@ -1,0 +1,161 @@
+[
+  {
+    "name": "example-0",
+    "path": "example-0.md",
+    "input": "example-0.input.txt",
+    "diagnostics": [
+      "phrase.marketing-language"
+    ]
+  },
+  {
+    "name": "example-1",
+    "path": "example-1.md",
+    "input": "example-1.input.txt",
+    "diagnostics": [
+      "phrase.marketing-language"
+    ]
+  },
+  {
+    "name": "example-2",
+    "path": "example-2.md",
+    "input": "example-2.input.txt",
+    "diagnostics": [
+      "phrase.marketing-language"
+    ]
+  },
+  {
+    "name": "example-3",
+    "path": "example-3.md",
+    "input": "example-3.input.txt",
+    "diagnostics": [
+      "phrase.marketing-language"
+    ]
+  },
+  {
+    "name": "example-4",
+    "path": "example-4.md",
+    "input": "example-4.input.txt",
+    "diagnostics": [
+      "phrase.marketing-language"
+    ]
+  },
+  {
+    "name": "example-5",
+    "path": "example-5.md",
+    "input": "example-5.input.txt",
+    "diagnostics": [
+      "phrase.marketing-language"
+    ]
+  },
+  {
+    "name": "suppressed",
+    "path": "suppressed.md",
+    "input": "suppressed.input.txt"
+  },
+  {
+    "name": "draft",
+    "path": "draft.md",
+    "input": "draft.input.txt",
+    "diagnostics": [
+      "phrase.marketing-language"
+    ]
+  },
+  {
+    "name": "clean",
+    "path": "clean.md",
+    "input": "clean.input.txt"
+  },
+  {
+    "name": "config-disabled",
+    "path": "draft.md",
+    "input": "config-disabled.input.txt",
+    "setup": {
+      ".unslop.json": "{\"rules\":{\"phrase.marketing-language\":\"off\"}}\n"
+    }
+  },
+  {
+    "name": "bad-config",
+    "path": "draft.md",
+    "input": "bad-config.input.txt",
+    "setup": {
+      ".unslop.json": "{\"rules\":{\"made.up\":\"off\"}}\n"
+    },
+    "diagnostics": [
+      "Unknown rules: made.up",
+      "exit code: 2"
+    ],
+    "exit": 1
+  },
+  {
+    "name": "malformed-config",
+    "path": "draft.md",
+    "input": "malformed-config.input.txt",
+    "setup": {
+      ".unslop.json": "{broken"
+    },
+    "diagnostics": [
+      "Cannot read config",
+      "exit code: 2"
+    ],
+    "exit": 1
+  },
+  {
+    "name": "fail-level",
+    "path": "draft.md",
+    "input": "fail-level.input.txt",
+    "args": [
+      "--fail-level",
+      "none"
+    ],
+    "exit": 0
+  },
+  {
+    "name": "next-line",
+    "path": "draft.md",
+    "input": "next-line.input.txt",
+    "diagnostics": [
+      "draft.md:4:"
+    ]
+  },
+  {
+    "name": "enable-again",
+    "path": "draft.md",
+    "input": "enable-again.input.txt",
+    "diagnostics": [
+      "draft.md:4:"
+    ]
+  },
+  {
+    "name": "inline-ignore",
+    "path": "draft.md",
+    "input": "inline-ignore.input.txt"
+  },
+  {
+    "name": "masked-prose",
+    "path": "draft.md",
+    "input": "masked-prose.input.txt"
+  },
+  {
+    "name": "residue",
+    "path": "draft.md",
+    "input": "residue.input.txt",
+    "diagnostics": [
+      "error [artifact.chatbot-residue]"
+    ]
+  },
+  {
+    "name": "coffee-clean",
+    "path": "coffee.md",
+    "input": "coffee-after.md"
+  },
+  {
+    "name": "coffee-noisy",
+    "path": "coffee.md",
+    "input": "coffee-before.md",
+    "diagnostics": [
+      "rhetoric.negative-parallelism",
+      "rhythm.short-sentence-run",
+      "verbosity.filler"
+    ]
+  }
+]

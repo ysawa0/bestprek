@@ -1,0 +1,3 @@
+package hooktest
+
+var broken = missingName

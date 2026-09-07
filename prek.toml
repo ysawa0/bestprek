@@ -3,9 +3,11 @@ repo = "builtin"
 
 [[repos.hooks]]
 id = "trailing-whitespace"
+exclude = "^\\.ci/fixtures/.*\\.txt$"
 
 [[repos.hooks]]
 id = "end-of-file-fixer"
+exclude = "^\\.ci/fixtures/.*\\.txt$"
 
 [[repos.hooks]]
 id = "check-yaml"
@@ -19,7 +21,7 @@ repo = "local"
 [[repos.hooks]]
 id = "unbold"
 name = "unbold"
-entry = "go run ./unbold --write"
+entry = "go run ./tools/unbold --write"
 language = "system"
 types = ["markdown"]
 require_serial = true
@@ -30,7 +32,7 @@ name = "unslop"
 entry = "python3 -m hooks.unslop"
 language = "system"
 types = ["markdown"]
-exclude = "^examples/unslop/coffee-before\\.md$"
+exclude = "^\\.ci/fixtures/unslop/coffee-before\\.md$"
 require_serial = true
 
 [[repos.hooks]]

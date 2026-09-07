@@ -1,0 +1,11 @@
+[
+  {
+    "name": "format",
+    "path": "format.go",
+    "input": "format.input.txt",
+    "expected": "format.expected.txt",
+    "setup": {
+      "go.mod": "module hooktest\n\ngo 1.25\n"
+    }
+  }
+]

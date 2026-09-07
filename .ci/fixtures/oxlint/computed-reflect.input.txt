@@ -1,0 +1,1 @@
+export function read(value: {id: string}) { return Reflect["get"](value, "id"); }

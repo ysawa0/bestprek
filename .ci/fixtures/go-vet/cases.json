@@ -1,0 +1,21 @@
+[
+  {
+    "name": "vet",
+    "path": "vet.go",
+    "input": "vet.input.txt",
+    "diagnostics": [
+      "wrong type"
+    ],
+    "setup": {
+      "go.mod": "module hooktest\n\ngo 1.25\n"
+    }
+  },
+  {
+    "name": "clean",
+    "path": "clean.go",
+    "input": "clean.input.txt",
+    "setup": {
+      "go.mod": "module hooktest\n\ngo 1.25\n"
+    }
+  }
+]

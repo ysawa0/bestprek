@@ -1,0 +1,9 @@
+---
+title: The transition is seamless.
+---
+
+> The transition is seamless.
+
+`The transition is seamless.`
+
+[Reference](https://example.com/seamless)

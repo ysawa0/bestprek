@@ -1,0 +1,3 @@
+***both*** and **bold *nested*** and *italic **bold***.
+
+[**label**](https://example.com/__init__) and **`__code__`**.

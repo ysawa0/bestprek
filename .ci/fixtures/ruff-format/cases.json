@@ -1,0 +1,8 @@
+[
+  {
+    "name": "format",
+    "path": "format.py",
+    "input": "format.input.txt",
+    "expected": "format.expected.txt"
+  }
+]

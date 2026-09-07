@@ -1,0 +1,3 @@
+<code><!-- unslop-disable --></code>
+
+The transition is seamless.

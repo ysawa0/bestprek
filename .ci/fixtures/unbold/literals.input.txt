@@ -1,0 +1,21 @@
+<code>__init__</code>
+
+<pre>**literal**</pre>
+
+[API](https://example.com/__init__)
+
+[API](https://example.com/a_(b)__c__ "**title**")
+
+[api]: https://example.com/**literal**
+
+<span title="**attribute**">text</span>
+
+<!-- **comment** -->
+
+***
+
+___
+
+* * *
+
+name__with__underscores and **unmatched

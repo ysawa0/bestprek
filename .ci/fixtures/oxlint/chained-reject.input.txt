@@ -1,0 +1,4 @@
+export function cast(cause: unknown) {
+// SAFETY: fixture deliberately exercises chained assertions.
+return (cause as string) as number;
+}

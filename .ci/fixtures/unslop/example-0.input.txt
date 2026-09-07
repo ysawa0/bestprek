@@ -1,0 +1,5 @@
+```markdown
+<!-- unslop-disable -->
+```
+
+The transition is seamless.

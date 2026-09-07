@@ -1,0 +1,3 @@
+#!/bin/sh
+value=ready
+printf "%s\n" "$value"

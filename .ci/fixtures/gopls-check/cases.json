@@ -1,0 +1,21 @@
+[
+  {
+    "name": "clean",
+    "path": "clean.go",
+    "input": "clean.input.txt",
+    "setup": {
+      "go.mod": "module hooktest\n\ngo 1.25\n"
+    }
+  },
+  {
+    "name": "broken",
+    "path": "broken.go",
+    "input": "broken.input.txt",
+    "diagnostics": [
+      "undefined: missingName"
+    ],
+    "setup": {
+      "go.mod": "module hooktest\n\ngo 1.25\n"
+    }
+  }
+]
