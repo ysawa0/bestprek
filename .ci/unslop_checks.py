@@ -94,7 +94,9 @@ def check_math(work: Path) -> None:
         actual = lint(path, config)
         if [item["rule"] for item in actual] != ["verbosity.filler"]:
             raise AssertionError(actual)
-    print("PASS unslop CLI: math is masked; prose, currency, and source locations survive")
+    print(
+        "PASS unslop CLI: math is masked; prose, currency, and source locations survive"
+    )
 
 
 def check_parity(work: Path) -> None:
