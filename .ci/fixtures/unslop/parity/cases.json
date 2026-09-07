@@ -219,7 +219,7 @@
     "config": {}
   },
   {
-    "name": "phrase-note-to-reader",
+    "name": "note-to-reader",
     "preset": "strict",
     "config": {}
   },
