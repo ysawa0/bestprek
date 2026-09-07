@@ -145,13 +145,16 @@ Project-local files such as `.oxfmtrc.jsonc` and `ruff.toml` control their respe
 
 ## Development
 
-The repository's `prek.toml` uses local hooks so it checks the current worktree instead of a previous release. Run:
+CI checks, test suites, and fixtures live in `.ci/`. Run the same checks as GitHub Actions with:
 
 ```sh
-uv run --no-sync python3 -m unittest -v test_unslop.py
-prek run --all-files
-prek try-repo . --all-files
-uv run --no-sync python3 tests/hooks.py
+.ci/check.sh
+```
+
+The GitHub workflow in `.github/workflows/ci.yml` prepares the tools and calls this script. The repository's `prek.toml` checks the current worktree with local hooks. To run only the end-to-end hook suite:
+
+```sh
+uv run --no-sync python3 .ci/hook_checks.py
 ```
 
 The end-to-end suite installs hooks from the committed HEAD in a temporary consuming repository. It checks lint failures, formatter output, ignored files, code preservation, and clean second runs. Commit implementation changes before running it.

@@ -19,23 +19,8 @@ jobs:
       - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
       - name: Install Prek
         run: uv tool install prek==0.4.12
-      - name: Test unslop
-        run: python3 -m unittest -v test_unslop.py
-      - name: Validate hook files
-        run: |
-          prek validate-config prek.toml
-          prek validate-manifest .pre-commit-hooks.yaml
-      - name: Check repository
-        run: prek run --all-files
-      - name: Check implementation with published hooks
-        run: prek try-repo "$GITHUB_WORKSPACE" --all-files
-      - name: Check Python types
-        run: uvx ty check
-
-      - name: Test hook behavior
-        run: |
-          mkdir -p tmp
-          python3 tests/hooks.py
+      - name: Run CI checks
+        run: .ci/check.sh
 
   release:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
