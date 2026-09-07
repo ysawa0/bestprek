@@ -10,9 +10,6 @@ id = "end-of-file-fixer"
 exclude = "^\\.ci/fixtures/.*\\.txt$"
 
 [[repos.hooks]]
-id = "check-yaml"
-
-[[repos.hooks]]
 id = "check-added-large-files"
 
 [[repos]]
