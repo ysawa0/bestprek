@@ -271,9 +271,7 @@
       "window_words": 500
     },
     "strict_severity": null,
-    "strict_defaults": {
-      "max": 0
-    },
+    "strict_defaults": {},
     "checker": "negative_parallelism",
     "phrases": []
   },

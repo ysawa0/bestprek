@@ -1,0 +1,4 @@
+type Scalar = string | number;
+type Generic<T> = T;
+export type Value = (Scalar | boolean);
+export type Wrapped = string | Generic<unknown>;

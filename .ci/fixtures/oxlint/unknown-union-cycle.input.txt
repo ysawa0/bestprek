@@ -1,0 +1,2 @@
+export type First = Second | string;
+export type Second = First | number;

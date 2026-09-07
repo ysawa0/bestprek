@@ -66,8 +66,60 @@ def main() -> None:
         print("PASS unslop CLI: 20,000 masked code lines finish within 10 seconds")
 
         check_parity(work)
+        check_contrasts(work)
         check_options(work)
         check_math(work)
+
+
+def check_contrasts(work: Path) -> None:
+    rule = "rhetoric.negative-parallelism"
+    singleton = (
+        FIXTURES / "parity" / "rhetoric-negative-parallelism.input.txt"
+    ).read_text()
+    pair = (FIXTURES / "contrast-pair.input.txt").read_text()
+    first, second = pair.splitlines()
+    separated = first + "\n" + "granite " * 501 + ".\n" + second + "\n"
+    config = work / ".unslop.json"
+    path = work / "contrasts.md"
+    for preset in ("recommended", "strict"):
+        for name, source, overrides, count, line in [
+            ("singleton", singleton, {}, 0, 0),
+            ("pair", pair, {}, 2, 2),
+            ("separated", separated, {}, 0, 0),
+            ("max-zero", singleton, {"max": 0}, 1, 1),
+        ]:
+            config.write_text(json.dumps({"rules": {rule: overrides}}))
+            path.write_text(source)
+            result = invoke(
+                work,
+                "--config",
+                str(config),
+                "--preset",
+                preset,
+                "--format",
+                "json",
+                str(path),
+                expected=int(count > 0),
+            )
+            actual = json.loads(result.stdout)
+            expected = [(rule, "warning", line, count)] if count else []
+            observed = [
+                (
+                    item["rule"],
+                    item["severity"],
+                    item["line"],
+                    int(item["message"].split()[0]),
+                )
+                for item in actual
+            ]
+            if observed != expected or any(
+                "contrast reframes appear within 500 words;" not in item["message"]
+                for item in actual
+            ):
+                raise AssertionError(f"{preset}/{name}: {actual}")
+    print(
+        "PASS unslop CLI: both presets allow isolated contrasts and honor max overrides"
+    )
 
 
 def check_math(work: Path) -> None:
