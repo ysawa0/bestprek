@@ -26,10 +26,15 @@ class Case(TypedDict):
 
 
 def run(work: Path, hook: str, path: str) -> subprocess.CompletedProcess[str]:
+    # Keep fixture diagnostics stable instead of emitting GitHub annotations.
+    environment = {
+        key: value for key, value in os.environ.items() if key != "GITHUB_ACTIONS"
+    }
+    environment["NO_COLOR"] = "1"
     return subprocess.run(
         ["prek", "run", hook, "--files", path],
         cwd=work,
-        env={**os.environ, "NO_COLOR": "1"},
+        env=environment,
         text=True,
         capture_output=True,
         check=False,
