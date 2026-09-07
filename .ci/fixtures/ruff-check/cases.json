@@ -3,25 +3,19 @@
     "name": "bad",
     "path": "bad.py",
     "input": "bad.input.txt",
-    "diagnostics": [
-      "Undefined name"
-    ]
+    "diagnostics": ["Undefined name"]
   },
   {
     "name": "nested-if",
     "path": "nested.py",
     "input": "nested-if.input.txt",
-    "diagnostics": [
-      "collapsible-if"
-    ]
+    "diagnostics": ["collapsible-if"]
   },
   {
     "name": "nesting-limit",
     "path": "nested.py",
     "input": "nesting-limit.input.txt",
-    "diagnostics": [
-      "too-many-nested-blocks"
-    ]
+    "diagnostics": ["too-many-nested-blocks"]
   },
   {
     "name": "excluded-file",
@@ -52,9 +46,7 @@
     "setup": {
       "ruff.toml": "[lint]\nselect = [\"ALL\"]\n"
     },
-    "diagnostics": [
-      "eval"
-    ]
+    "diagnostics": ["suspicious-eval-usage"]
   },
   {
     "name": "all-without-boilerplate",
