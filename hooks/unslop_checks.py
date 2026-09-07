@@ -442,12 +442,12 @@ def transition_offsets(text: str, phrase: str) -> list[int]:
             start -= 1
         # Preserve the original start-of-line/sentence anchor and source offset.
         # Searching for phrases first avoids rescanning masked code at every line.
-        if start > 0 and text[start - 1] not in ".!?":
-            newline = text.find("\n", start, match.start())
-            if newline == -1:
-                continue
-            start = newline + 1
-        offsets.append(start)
+        if start == 0 or text[start - 1] in ".!?":
+            offsets.append(start)
+            continue
+        newline = text.find("\n", start, match.start())
+        if newline != -1:
+            offsets.append(newline + 1)
     return offsets
 
 
