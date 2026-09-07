@@ -14,7 +14,7 @@
     "name": "braces-excluded",
     "path": "braces.sh",
     "input": "braces-excluded.input.txt",
-    "setup": {".shellcheckrc": "enable=all\n"}
+    "setup": { ".shellcheckrc": "enable=all\n" }
   },
   {
     "name": "source-excluded",
