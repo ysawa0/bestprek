@@ -3,9 +3,7 @@
     "name": "vet",
     "path": "vet.go",
     "input": "vet.input.txt",
-    "diagnostics": [
-      "wrong type"
-    ],
+    "diagnostics": ["wrong type"],
     "setup": {
       "go.mod": "module hooktest\n\ngo 1.25\n"
     }

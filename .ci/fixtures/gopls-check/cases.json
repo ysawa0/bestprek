@@ -11,9 +11,7 @@
     "name": "broken",
     "path": "broken.go",
     "input": "broken.input.txt",
-    "diagnostics": [
-      "undefined: missingName"
-    ],
+    "diagnostics": ["undefined: missingName"],
     "setup": {
       "go.mod": "module hooktest\n\ngo 1.25\n"
     }
