@@ -30,7 +30,7 @@ Add `prek.toml` to the consuming repository:
 ```toml
 [[repos]]
 repo = "https://github.com/ysawa0/prek"
-rev = "1.22"
+rev = "1.23"
 
 [[repos.hooks]]
 id = "oxfmt"
@@ -124,7 +124,7 @@ The recommended preset contains 25 explainable rules for:
 
 Most subjective devices are density-based. One em dash or one `not X, but Y` contrast is normal; a cluster of the same move is what gets flagged.
 
-The linter preserves source positions while ignoring code fences, inline code, URLs, front matter, comments, blockquotes, tables, link destinations, and MDX tags. Repetition rules reset at headings so API reference sections can use a consistent template without being mistaken for monotonous prose. By default, any finding at `info` or higher fails the hook.
+The linter preserves source positions while ignoring code fences, inline code, LaTeX math (`\(...\)`, `\[...\]`, `$...$`, and `$$...$$`), URLs, front matter, comments, blockquotes, tables, link destinations, and MDX tags. Equation references such as `(CW5)` do not count as parenthetical asides. Repetition rules reset at headings so API reference sections can use a consistent template without being mistaken for monotonous prose. By default, any finding at `info` or higher fails the hook.
 
 Use `.unslop.json` for repository-specific tuning. An example lives at `.unslop.example.json`.
 

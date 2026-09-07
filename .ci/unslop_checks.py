@@ -67,6 +67,34 @@ def main() -> None:
 
         check_parity(work)
         check_options(work)
+        check_math(work)
+
+
+def check_math(work: Path) -> None:
+    config = work / ".unslop.json"
+    config.write_text('{"preset":"strict","fail_level":"info"}\n')
+    path = work / "math.md"
+    source = (FIXTURES / "math.input.txt").read_text()
+    path.write_text(source)
+    actual = lint(path, config)
+    locations = [(item["rule"], item["line"], item["column"]) for item in actual]
+    if locations != [("verbosity.filler", 18, 3)]:
+        raise AssertionError(locations)
+    for sentence in [
+        "Prices run from $5 to $10. In order to buy one, pay at the counter.",
+        r"Escaped \$ signs are prose. In order to buy one, pay at the counter.",
+        r"An unclosed \( expression. In order to finish, add a delimiter.",
+        "An unclosed $expression. In order to finish, add a delimiter.",
+        r"`\(` is a delimiter. In order to finish, add the other delimiter.",
+        r"<!-- \( --> In order to finish, add the other delimiter. \)",
+        r"An unclosed \[ expression. In order to finish, add a delimiter.",
+        "An unclosed $$expression. In order to finish, add a delimiter.",
+    ]:
+        path.write_text(sentence + "\n")
+        actual = lint(path, config)
+        if [item["rule"] for item in actual] != ["verbosity.filler"]:
+            raise AssertionError(actual)
+    print("PASS unslop CLI: math is masked; prose, currency, and source locations survive")
 
 
 def check_parity(work: Path) -> None:
