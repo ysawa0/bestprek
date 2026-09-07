@@ -34,22 +34,5 @@
     "typescript/no-explicit-any": "off",
     "unicorn/consistent-function-scoping": "off"
   },
-  "ignorePatterns": [
-    ".agent/**",
-    ".agents/**",
-    ".claude/**",
-    ".codex/**",
-    ".continue/**",
-    ".cursor/**",
-    ".gemini/**",
-    ".opencode/**",
-    ".pi/**",
-    ".roo/**",
-    ".windsurf/**",
-    "coverage/**",
-    "dist/**",
-    "node_modules/**",
-    "oxlint/anti-slop/**",
-    "vendor/**"
-  ]
+  "ignorePatterns": [".agent/**", ".agents/**", ".claude/**", ".codex/**", ".continue/**", ".cursor/**", ".gemini/**", ".opencode/**", ".pi/**", ".roo/**", ".windsurf/**", "coverage/**", "dist/**", "node_modules/**", "oxlint/anti-slop/**", "vendor/**"]
 }
