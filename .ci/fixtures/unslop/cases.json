@@ -3,49 +3,37 @@
     "name": "example-0",
     "path": "example-0.md",
     "input": "example-0.input.txt",
-    "diagnostics": [
-      "phrase.marketing-language"
-    ]
+    "diagnostics": ["phrase.marketing-language"]
   },
   {
     "name": "example-1",
     "path": "example-1.md",
     "input": "example-1.input.txt",
-    "diagnostics": [
-      "phrase.marketing-language"
-    ]
+    "diagnostics": ["phrase.marketing-language"]
   },
   {
     "name": "example-2",
     "path": "example-2.md",
     "input": "example-2.input.txt",
-    "diagnostics": [
-      "phrase.marketing-language"
-    ]
+    "diagnostics": ["phrase.marketing-language"]
   },
   {
     "name": "example-3",
     "path": "example-3.md",
     "input": "example-3.input.txt",
-    "diagnostics": [
-      "phrase.marketing-language"
-    ]
+    "diagnostics": ["phrase.marketing-language"]
   },
   {
     "name": "example-4",
     "path": "example-4.md",
     "input": "example-4.input.txt",
-    "diagnostics": [
-      "phrase.marketing-language"
-    ]
+    "diagnostics": ["phrase.marketing-language"]
   },
   {
     "name": "example-5",
     "path": "example-5.md",
     "input": "example-5.input.txt",
-    "diagnostics": [
-      "phrase.marketing-language"
-    ]
+    "diagnostics": ["phrase.marketing-language"]
   },
   {
     "name": "suppressed",
@@ -56,9 +44,7 @@
     "name": "draft",
     "path": "draft.md",
     "input": "draft.input.txt",
-    "diagnostics": [
-      "phrase.marketing-language"
-    ]
+    "diagnostics": ["phrase.marketing-language"]
   },
   {
     "name": "clean",
@@ -80,10 +66,7 @@
     "setup": {
       ".unslop.json": "{\"rules\":{\"made.up\":\"off\"}}\n"
     },
-    "diagnostics": [
-      "Unknown rules: made.up",
-      "exit code: 2"
-    ],
+    "diagnostics": ["Unknown rules: made.up", "exit code: 2"],
     "exit": 1
   },
   {
@@ -93,37 +76,27 @@
     "setup": {
       ".unslop.json": "{broken"
     },
-    "diagnostics": [
-      "Cannot read config",
-      "exit code: 2"
-    ],
+    "diagnostics": ["Cannot read config", "exit code: 2"],
     "exit": 1
   },
   {
     "name": "fail-level",
     "path": "draft.md",
     "input": "fail-level.input.txt",
-    "args": [
-      "--fail-level",
-      "none"
-    ],
+    "args": ["--fail-level", "none"],
     "exit": 0
   },
   {
     "name": "next-line",
     "path": "draft.md",
     "input": "next-line.input.txt",
-    "diagnostics": [
-      "draft.md:4:"
-    ]
+    "diagnostics": ["draft.md:4:"]
   },
   {
     "name": "enable-again",
     "path": "draft.md",
     "input": "enable-again.input.txt",
-    "diagnostics": [
-      "draft.md:4:"
-    ]
+    "diagnostics": ["draft.md:4:"]
   },
   {
     "name": "inline-ignore",
@@ -139,9 +112,7 @@
     "name": "residue",
     "path": "draft.md",
     "input": "residue.input.txt",
-    "diagnostics": [
-      "error [artifact.chatbot-residue]"
-    ]
+    "diagnostics": ["error [artifact.chatbot-residue]"]
   },
   {
     "name": "coffee-clean",

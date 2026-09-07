@@ -3,9 +3,7 @@
     "name": "bad",
     "path": "bad.sh",
     "input": "bad.input.txt",
-    "diagnostics": [
-      "SC2086"
-    ]
+    "diagnostics": ["SC2086"]
   },
   {
     "name": "clean",

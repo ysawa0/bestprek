@@ -3,12 +3,8 @@
     "name": "bad",
     "path": "bad.ts",
     "input": "bad.input.txt",
-    "diagnostics": [
-      "leaves input unparsed"
-    ],
-    "rules": [
-      "no-unknown-parameters"
-    ]
+    "diagnostics": ["leaves input unparsed"],
+    "rules": ["no-unknown-parameters"]
   },
   {
     "name": "clean",
@@ -24,12 +20,8 @@
     "name": "chained-reject",
     "path": "sample.ts",
     "input": "chained-reject.input.txt",
-    "diagnostics": [
-      "no-chained-type-assertions"
-    ],
-    "rules": [
-      "no-chained-type-assertions"
-    ]
+    "diagnostics": ["no-chained-type-assertions"],
+    "rules": ["no-chained-type-assertions"]
   },
   {
     "name": "chained-accept",
@@ -40,12 +32,8 @@
     "name": "conditional-spread-reject",
     "path": "sample.ts",
     "input": "conditional-spread-reject.input.txt",
-    "diagnostics": [
-      "no-conditional-empty-object-spread"
-    ],
-    "rules": [
-      "no-conditional-empty-object-spread"
-    ]
+    "diagnostics": ["no-conditional-empty-object-spread"],
+    "rules": ["no-conditional-empty-object-spread"]
   },
   {
     "name": "conditional-spread-accept",
@@ -56,12 +44,8 @@
     "name": "known-widening-reject",
     "path": "sample.ts",
     "input": "known-widening-reject.input.txt",
-    "diagnostics": [
-      "no-known-value-widening"
-    ],
-    "rules": [
-      "no-known-value-widening"
-    ]
+    "diagnostics": ["no-known-value-widening"],
+    "rules": ["no-known-value-widening"]
   },
   {
     "name": "known-widening-accept",
@@ -72,12 +56,8 @@
     "name": "module-mocking-reject",
     "path": "sample.ts",
     "input": "module-mocking-reject.input.txt",
-    "diagnostics": [
-      "no-module-mocking"
-    ],
-    "rules": [
-      "no-module-mocking"
-    ]
+    "diagnostics": ["no-module-mocking"],
+    "rules": ["no-module-mocking"]
   },
   {
     "name": "module-mocking-accept",
@@ -88,12 +68,8 @@
     "name": "object-parameters-reject",
     "path": "sample.ts",
     "input": "object-parameters-reject.input.txt",
-    "diagnostics": [
-      "no-object-parameters"
-    ],
-    "rules": [
-      "no-object-parameters"
-    ]
+    "diagnostics": ["no-object-parameters"],
+    "rules": ["no-object-parameters"]
   },
   {
     "name": "object-parameters-accept",
@@ -104,12 +80,8 @@
     "name": "reflect-apply-reject",
     "path": "sample.ts",
     "input": "reflect-apply-reject.input.txt",
-    "diagnostics": [
-      "no-reflect-apply"
-    ],
-    "rules": [
-      "no-reflect-apply"
-    ]
+    "diagnostics": ["no-reflect-apply"],
+    "rules": ["no-reflect-apply"]
   },
   {
     "name": "reflect-apply-accept",
@@ -120,12 +92,8 @@
     "name": "reflect-get-reject",
     "path": "sample.ts",
     "input": "reflect-get-reject.input.txt",
-    "diagnostics": [
-      "no-reflect-get"
-    ],
-    "rules": [
-      "no-reflect-get"
-    ]
+    "diagnostics": ["no-reflect-get"],
+    "rules": ["no-reflect-get"]
   },
   {
     "name": "reflect-get-accept",
@@ -136,12 +104,8 @@
     "name": "runtime-typeof-reject",
     "path": "sample.ts",
     "input": "runtime-typeof-reject.input.txt",
-    "diagnostics": [
-      "no-runtime-typeof"
-    ],
-    "rules": [
-      "no-runtime-typeof"
-    ]
+    "diagnostics": ["no-runtime-typeof"],
+    "rules": ["no-runtime-typeof"]
   },
   {
     "name": "runtime-typeof-accept",
@@ -152,12 +116,8 @@
     "name": "symbol-names-reject",
     "path": "sample.ts",
     "input": "symbol-names-reject.input.txt",
-    "diagnostics": [
-      "no-shape-in-symbol-names"
-    ],
-    "rules": [
-      "no-shape-in-symbol-names"
-    ]
+    "diagnostics": ["no-shape-in-symbol-names"],
+    "rules": ["no-shape-in-symbol-names"]
   },
   {
     "name": "symbol-names-accept",
@@ -168,12 +128,8 @@
     "name": "unknown-parameters-reject",
     "path": "sample.ts",
     "input": "unknown-parameters-reject.input.txt",
-    "diagnostics": [
-      "no-unknown-parameters"
-    ],
-    "rules": [
-      "no-unknown-parameters"
-    ]
+    "diagnostics": ["no-unknown-parameters"],
+    "rules": ["no-unknown-parameters"]
   },
   {
     "name": "unknown-parameters-accept",
@@ -184,12 +140,8 @@
     "name": "unknown-returns-reject",
     "path": "sample.ts",
     "input": "unknown-returns-reject.input.txt",
-    "diagnostics": [
-      "no-unknown-returns"
-    ],
-    "rules": [
-      "no-unknown-returns"
-    ]
+    "diagnostics": ["no-unknown-returns"],
+    "rules": ["no-unknown-returns"]
   },
   {
     "name": "unknown-returns-accept",
@@ -200,12 +152,8 @@
     "name": "unknown-aliases-reject",
     "path": "sample.ts",
     "input": "unknown-aliases-reject.input.txt",
-    "diagnostics": [
-      "no-unknown-type-aliases"
-    ],
-    "rules": [
-      "no-unknown-type-aliases"
-    ]
+    "diagnostics": ["no-unknown-type-aliases"],
+    "rules": ["no-unknown-type-aliases"]
   },
   {
     "name": "unknown-aliases-accept",
@@ -216,12 +164,8 @@
     "name": "unsafe-dictionary-reject",
     "path": "sample.ts",
     "input": "unsafe-dictionary-reject.input.txt",
-    "diagnostics": [
-      "no-unsafe-dictionary-type"
-    ],
-    "rules": [
-      "no-unsafe-dictionary-type"
-    ]
+    "diagnostics": ["no-unsafe-dictionary-type"],
+    "rules": ["no-unsafe-dictionary-type"]
   },
   {
     "name": "unsafe-dictionary-accept",
@@ -232,13 +176,8 @@
     "name": "widen-assert-reject",
     "path": "sample.ts",
     "input": "widen-assert-reject.input.txt",
-    "diagnostics": [
-      "no-widen-then-assert"
-    ],
-    "rules": [
-      "no-widen-then-assert",
-      "no-known-value-widening"
-    ]
+    "diagnostics": ["no-widen-then-assert"],
+    "rules": ["no-widen-then-assert", "no-known-value-widening"]
   },
   {
     "name": "widen-assert-accept",
@@ -249,12 +188,8 @@
     "name": "safety-comment-reject",
     "path": "sample.ts",
     "input": "safety-comment-reject.input.txt",
-    "diagnostics": [
-      "require-safety-comment-for-type-assertion"
-    ],
-    "rules": [
-      "require-safety-comment-for-type-assertion"
-    ]
+    "diagnostics": ["require-safety-comment-for-type-assertion"],
+    "rules": ["require-safety-comment-for-type-assertion"]
   },
   {
     "name": "safety-comment-accept",
@@ -265,23 +200,15 @@
     "name": "computed-reflect",
     "path": "sample.ts",
     "input": "computed-reflect.input.txt",
-    "diagnostics": [
-      "no-reflect-get"
-    ],
-    "rules": [
-      "no-reflect-get"
-    ]
+    "diagnostics": ["no-reflect-get"],
+    "rules": ["no-reflect-get"]
   },
   {
     "name": "alias-parameters",
     "path": "sample.ts",
     "input": "alias-parameters.input.txt",
-    "diagnostics": [
-      "no-object-parameters"
-    ],
-    "rules": [
-      "no-object-parameters"
-    ]
+    "diagnostics": ["no-object-parameters"],
+    "rules": ["no-object-parameters"]
   },
   {
     "name": "generic-shadow",
@@ -295,19 +222,13 @@
     "setup": {
       ".oxlintrc.json": "{\"rules\":{\"anti-slop/no-unknown-parameters\":\"off\"}}\n"
     },
-    "diagnostics": [
-      "no-unknown-parameters"
-    ],
-    "rules": [
-      "no-unknown-parameters"
-    ]
+    "diagnostics": ["no-unknown-parameters"],
+    "rules": ["no-unknown-parameters"]
   },
   {
     "name": "syntax-error",
     "path": "sample.ts",
     "input": "syntax-error.input.txt",
-    "diagnostics": [
-      "Unexpected token"
-    ]
+    "diagnostics": ["Unexpected token"]
   }
 ]
