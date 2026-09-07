@@ -1,2 +1,3 @@
-# Enable all optional ShellCheck checks as well as its default checks.
+# Enable optional checks except the variable-brace style rule.
 enable=all
+disable=SC2250
