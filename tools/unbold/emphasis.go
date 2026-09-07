@@ -81,8 +81,11 @@ func stripBold(input string) string {
 	removed := make([]bool, len(input))
 	var stack []delimiter
 	for i := 0; i < len(input); {
-		if strings.HasPrefix(input[i:], "\n\n") {
-			stack = nil
+		if i == 0 || input[i-1] == '\n' {
+			line, _, _ := strings.Cut(input[i:], "\n")
+			if strings.Trim(line, " \t\r") == "" {
+				stack = nil
+			}
 		}
 		if protected[i] || (input[i] != '*' && input[i] != '_') {
 			i++

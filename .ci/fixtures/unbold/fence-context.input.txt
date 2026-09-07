@@ -1,0 +1,45 @@
+   ```
+**literal**
+   ```
+
+~~~
+__literal__
+~~~
+
+> ```
+> **literal**
+> ```
+
+> ~~~
+> __literal__
+> ~~~
+
+**bold**
+
+```
+    ```
+**literal code**
+```
+
+**normal prose**
+
+```
+ 	```
+**literal code**
+```
+
+**normal prose**
+
+~~~
+    ~~~
+**literal code**
+~~~
+
+**normal prose**
+
+~~~
+ 	~~~
+**literal code**
+~~~
+
+**normal prose**

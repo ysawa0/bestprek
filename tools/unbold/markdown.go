@@ -123,9 +123,11 @@ func protectedMarkdown(input string) []bool {
 				end = i + newline + 1
 			}
 			line := input[i:end]
+			leadingSpaces := len(line) - len(strings.TrimLeft(line, " "))
+			indented := leadingSpaces >= 4 || strings.HasPrefix(line[leadingSpaces:], "\t")
 			trimmed := strings.TrimLeft(line, " >\t")
 			wasFenced := fence != 0
-			if len(trimmed) > 0 && (trimmed[0] == '`' || trimmed[0] == '~') {
+			if !indented && len(trimmed) > 0 && (trimmed[0] == '`' || trimmed[0] == '~') {
 				n := runLength(trimmed, 0)
 				if fence == 0 && n >= 3 {
 					fence, fenceLength = trimmed[0], n
@@ -133,7 +135,7 @@ func protectedMarkdown(input string) []bool {
 					fence = 0
 				}
 			}
-			if wasFenced || fence != 0 || strings.HasPrefix(line, "    ") || strings.HasPrefix(line, "\t") || thematicBreak(trimmed) || reference.MatchString(line) {
+			if wasFenced || fence != 0 || indented || thematicBreak(trimmed) || reference.MatchString(line) {
 				protect(i, end)
 				i = end
 				continue

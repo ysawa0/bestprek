@@ -49,5 +49,35 @@
     "path": "fences.md",
     "input": "mixed-fences.input.txt",
     "expected": "mixed-fences.expected.txt"
+  },
+  {
+    "name": "blank-whitespace",
+    "path": "blank-whitespace.md",
+    "input": "blank-whitespace.input.txt",
+    "expected": "blank-whitespace.expected.txt"
+  },
+  {
+    "name": "blank-crlf",
+    "path": "blank-crlf.md",
+    "input": "blank-crlf.input.txt",
+    "expected": "blank-crlf.expected.txt"
+  },
+  {
+    "name": "indented-backticks",
+    "path": "indented-backticks.md",
+    "input": "indented-backticks.input.txt",
+    "expected": "indented-backticks.expected.txt"
+  },
+  {
+    "name": "indented-tildes",
+    "path": "indented-tildes.md",
+    "input": "indented-tildes.input.txt",
+    "expected": "indented-tildes.expected.txt"
+  },
+  {
+    "name": "fence-context",
+    "path": "fence-context.md",
+    "input": "fence-context.input.txt",
+    "expected": "fence-context.expected.txt"
   }
 ]
