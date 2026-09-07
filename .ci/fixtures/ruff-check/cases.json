@@ -3,19 +3,25 @@
     "name": "bad",
     "path": "bad.py",
     "input": "bad.input.txt",
-    "diagnostics": ["Undefined name"]
+    "diagnostics": [
+      "Undefined name"
+    ]
   },
   {
     "name": "nested-if",
     "path": "nested.py",
     "input": "nested-if.input.txt",
-    "diagnostics": ["collapsible-if"]
+    "diagnostics": [
+      "collapsible-if"
+    ]
   },
   {
     "name": "nesting-limit",
     "path": "nested.py",
     "input": "nesting-limit.input.txt",
-    "diagnostics": ["too-many-nested-blocks"]
+    "diagnostics": [
+      "too-many-nested-blocks"
+    ]
   },
   {
     "name": "excluded-file",
@@ -29,5 +35,33 @@
     "name": "clean",
     "path": "clean.py",
     "input": "clean.input.txt"
+  },
+  {
+    "name": "boilerplate-disabled",
+    "path": "package/sample.py",
+    "input": "boilerplate.input.txt",
+    "setup": {
+      "package/support.py": "VALUE = 1\n",
+      "ruff.toml": "[lint]\nselect = [\"D\", \"DOC\", \"CPY001\", \"T201\", \"EM\", \"TRY003\", \"TID252\", \"INP001\", \"PT009\", \"PT027\", \"F841\"]\nignore = [\"F841\"]\n"
+    }
+  },
+  {
+    "name": "security-retained",
+    "path": "sample.py",
+    "input": "security.input.txt",
+    "setup": {
+      "ruff.toml": "[lint]\nselect = [\"ALL\"]\n"
+    },
+    "diagnostics": [
+      "eval"
+    ]
+  },
+  {
+    "name": "all-without-boilerplate",
+    "path": "sample.py",
+    "input": "../example/sample.py.txt",
+    "setup": {
+      "ruff.toml": "[lint]\nselect = [\"ALL\"]\n"
+    }
   }
 ]

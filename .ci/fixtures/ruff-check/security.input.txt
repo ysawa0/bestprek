@@ -1,0 +1,2 @@
+def evaluate(source: str) -> object:
+    return eval(source)

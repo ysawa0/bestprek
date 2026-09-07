@@ -2,10 +2,12 @@ line-length = 300
 
 [lint]
 select = ["ALL"]
-# Formatting belongs to ruff-format. Use first-line docstrings (D212).
+# Skip boilerplate requirements and leave formatting to ruff-format.
 # https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules
 ignore = [
-  "COM812", "COM819", "D203", "D206", "D213", "D300",
+  "D", "DOC", "CPY001", "T201", "EM", "TRY003",
+  "TID252", "INP001", "PT009", "PT027",
+  "COM812", "COM819",
   "E111", "E114", "E117", "ISC002",
   "Q000", "Q001", "Q002", "Q003", "Q004", "W191",
 ]

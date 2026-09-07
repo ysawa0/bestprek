@@ -12,7 +12,7 @@ id = "check-added-large-files"
 
 [[repos]]
 repo = "https://github.com/ysawa0/bestprek"
-rev = "1.23"
+rev = "1.24"
 
 [[repos.hooks]]
 id = "oxfmt"

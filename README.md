@@ -30,7 +30,7 @@ Add `prek.toml` to the consuming repository:
 ```toml
 [[repos]]
 repo = "https://github.com/ysawa0/bestprek"
-rev = "1.23"
+rev = "1.24"
 
 [[repos.hooks]]
 id = "oxfmt"
@@ -93,7 +93,7 @@ prek run --all-files
 The directory contains:
 
 - `prek.toml`: all 12 bundled hooks plus whitespace and large-file checks;
-- `ruff.toml`: Ruff's `ALL` rule set, with formatter conflicts and the competing docstring layout excluded;
+- `ruff.toml`: Ruff's `ALL` rule set, with boilerplate requirements and formatter conflicts excluded;
 - `.unslop.json`: all 25 prose rules through the strict preset, failing on every finding;
 - `.oxfmtrc.jsonc`: JavaScript, TypeScript, and JSON formatting settings;
 - `.shellcheckrc`: optional ShellCheck checks except SC2250 (variable-brace style);
@@ -168,6 +168,8 @@ The calibration under `.ci/fixtures/unslop/` includes a deliberately bloated cof
 ## Tool versions and configuration
 
 The release tag pins each hook implementation and its tool version. Prek creates isolated Python, Node, and Go environments and prepares the required tools on first use.
+
+The shared Ruff policy disables docstring rules (`D`, `DOC`), copyright headers (`CPY001`), print bans (`T201`), exception-message formatting (`EM`, `TRY003`), forced absolute imports (`TID252`), required `__init__.py` files (`INP001`), and unittest-to-pytest conversion (`PT009`, `PT027`). These exclusions apply even when a consumer selects `ALL`; the hook preserves the consumer’s other ignored rules. Type annotations, correctness, security, and complexity checks remain available. The copied `ruff.toml` enables them and includes the same exclusions for direct Ruff runs.
 
 Project-local files such as `.oxfmtrc.jsonc` and `ruff.toml` control their respective tools. `ruff-check` always enables `SIM102` and preview rule `PLR1702`, allowing at most two nested blocks. The `oxlint` hook always uses this repository's fixed `.oxlintrc.json`, which enables the vendored [anti-slop](https://github.com/dmmulroy/anti-slop) code rules alongside the built-in policy; consuming repositories' Oxlint configuration and command-line options are ignored. The Markdown `unslop` hook is separate from that JavaScript policy. `go-vet` runs once from the repository root, so enable it only where that root is the intended Go module or workspace.
 
