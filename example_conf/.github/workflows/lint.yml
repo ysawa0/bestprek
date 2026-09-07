@@ -16,4 +16,8 @@ jobs:
       - name: Install Prek
         run: uv tool install prek==0.4.12
       - name: Run all hooks
-        run: prek run --all-files
+        env:
+          GH_TOKEN: ${{ secrets.PREK_HOOKS_TOKEN }}
+        run: |
+          gh auth setup-git
+          prek run --all-files
