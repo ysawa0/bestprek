@@ -1,0 +1,5 @@
+The sensor records room temperature.
+
+The sensor measures air pressure.
+
+The sensor counts water drops.

@@ -1,0 +1,12 @@
+[
+  {
+    "line": 1,
+    "column": 1,
+    "end_line": 1,
+    "end_column": 30,
+    "severity": "warning",
+    "rule": "phrase.landscape",
+    "message": "This landscape frame is generic.",
+    "suggestion": "Name the current condition and its consequence."
+  }
+]

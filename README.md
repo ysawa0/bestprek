@@ -109,7 +109,7 @@ Keep `example_conf/` current whenever the hooks or their configuration change. T
 
 ## Unslop
 
-The `unslop` hook is a deterministic prose linter. It evaluates the text in front of it rather than guessing whether a person or model wrote it.
+The `unslop` hook is a deterministic prose linter written in Rust. It evaluates the text in front of it rather than guessing whether a person or model wrote it. Prek builds the native executable with Cargo during hook installation and runs independent file batches in parallel.
 
 The recommended preset contains 25 explainable rules for:
 
@@ -185,7 +185,7 @@ The GitHub workflow in `.github/workflows/ci.yml` prepares the tools and calls t
 uv run --no-sync python3 .ci/hook_checks.py
 ```
 
-The Go executables live under `tools/`. File-backed test inputs and expected output live under `.ci/fixtures/<hook>/`; each group has a `cases.json` manifest. Inputs use `.txt` so repository formatters do not rewrite deliberately invalid examples.
+The Go executables and Rust Unslop implementation live under `tools/`. Build Unslop with `cargo +stable build --release --locked` before running the repository's local hooks. File-backed test inputs and expected output live under `.ci/fixtures/<hook>/`; each group has a `cases.json` manifest. Inputs use `.txt` so repository formatters do not rewrite deliberately invalid examples.
 
 The end-to-end suite installs hooks from the committed HEAD in a temporary consuming repository. It checks lint failures, formatter output, ignored files, code preservation, and clean second runs. Commit implementation changes before running it.
 
@@ -194,6 +194,6 @@ The end-to-end suite installs hooks from the committed HEAD in a temporary consu
 1. Write `.github/release-notes/<version>.md`.
 2. Run `make release VERSION=<version>` to update `RELEASE`, the README example, `example_conf/prek.toml`, and the Unslop CLI version.
 3. Commit and push the changes to `main`.
-4. CI validates the manifest, runs the Python tests, local hooks, published-hook smoke checks, and end-to-end hook checks. After they pass, CI creates the GitHub release and matching tag.
+4. CI builds and lints Rust, validates the manifest, and runs local hooks, CLI reference fixtures, published-hook smoke checks, and end-to-end hook checks. After they pass, CI creates the GitHub release and matching tag.
 
 The local release command only prepares metadata. CI is the sole publisher.

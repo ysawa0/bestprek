@@ -1,0 +1,22 @@
+[
+  {
+    "line": 1,
+    "column": 1,
+    "end_line": 1,
+    "end_column": 248,
+    "severity": "info",
+    "rule": "rhythm.uniform-sentence-length",
+    "message": "Sentence lengths are unusually uniform (coefficient of variation 0.00 across 10 sentences).",
+    "suggestion": "Mix short assertions with longer explanatory sentences where the content supports it."
+  },
+  {
+    "line": 1,
+    "column": 19,
+    "end_line": 1,
+    "end_column": 248,
+    "severity": "warning",
+    "rule": "rhythm.short-sentence-run",
+    "message": "10 consecutive sentences contain at most 6 words each, creating a manufactured staccato rhythm.",
+    "suggestion": "Combine related fragments and reserve the short sentence for emphasis."
+  }
+]

@@ -1,0 +1,5 @@
+draft %é,:.md:1:3: warning [verbosity.filler] 'In order to' is usually just 'to'.
+  suggestion: Replace it with 'to'.
+  🎯 In order to brew coffee, heat the water.
+
+unslop: 1 diagnostics (0 error, 1 warning, 0 info)

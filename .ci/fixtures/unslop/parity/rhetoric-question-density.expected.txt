@@ -1,0 +1,22 @@
+[
+  {
+    "line": 1,
+    "column": 27,
+    "end_line": 1,
+    "end_column": 79,
+    "severity": "warning",
+    "rule": "rhythm.short-sentence-run",
+    "message": "3 consecutive sentences contain at most 6 words each, creating a manufactured staccato rhythm.",
+    "suggestion": "Combine related fragments and reserve the short sentence for emphasis."
+  },
+  {
+    "line": 1,
+    "column": 54,
+    "end_line": 1,
+    "end_column": 55,
+    "severity": "warning",
+    "rule": "rhetoric.question-density",
+    "message": "3 questions appear within 500 words; the passage is interrogating the reader instead of explaining.",
+    "suggestion": "Keep the question that creates useful tension and state the others directly."
+  }
+]

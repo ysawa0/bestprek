@@ -1,0 +1,12 @@
+[
+  {
+    "line": 1,
+    "column": 1,
+    "end_line": 1,
+    "end_column": 41,
+    "severity": "warning",
+    "rule": "rhetoric.question-answer",
+    "message": "1 staged question-and-short-answer turns appear within 400 words.",
+    "suggestion": "Turn at least one question into a direct statement."
+  }
+]

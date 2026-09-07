@@ -1,0 +1,12 @@
+[
+  {
+    "line": 1,
+    "column": 1,
+    "end_line": 1,
+    "end_column": 21,
+    "severity": "warning",
+    "rule": "rhetoric.no-chain",
+    "message": "A 2-item 'no X, no Y' chain performs emphasis without adding evidence.",
+    "suggestion": "Replace the chain with the specific positive claim."
+  }
+]

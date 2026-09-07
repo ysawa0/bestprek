@@ -1,0 +1,12 @@
+[
+  {
+    "line": 1,
+    "column": 1,
+    "end_line": 1,
+    "end_column": 12,
+    "severity": "warning",
+    "rule": "verbosity.filler",
+    "message": "'In order to' is usually just 'to'.",
+    "suggestion": "Replace it with 'to'."
+  }
+]

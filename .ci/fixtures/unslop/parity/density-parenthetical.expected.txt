@@ -1,0 +1,12 @@
+[
+  {
+    "line": 1,
+    "column": 51,
+    "end_line": 1,
+    "end_column": 52,
+    "severity": "info",
+    "rule": "density.parenthetical",
+    "message": "6 parenthetical asides appear within 500 words.",
+    "suggestion": "Move necessary context into the sentence and delete dispensable asides."
+  }
+]

@@ -1,0 +1,12 @@
+[
+  {
+    "line": 1,
+    "column": 55,
+    "end_line": 1,
+    "end_column": 56,
+    "severity": "warning",
+    "rule": "density.bold",
+    "message": "7 bold spans appear within 500 words.",
+    "suggestion": "Use emphasis only where the reader genuinely needs a visual anchor."
+  }
+]

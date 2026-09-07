@@ -1,0 +1,2 @@
+This is not a speed problem. It is a coordination problem.
+The failure is not about throughput, but predictability.

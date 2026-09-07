@@ -1,0 +1,12 @@
+[
+  {
+    "line": 1,
+    "column": 26,
+    "end_line": 1,
+    "end_column": 39,
+    "severity": "error",
+    "rule": "artifact.chatbot-residue",
+    "message": "Chatbot or generated-citation residue remains in the prose.",
+    "suggestion": "Remove the artifact and verify the surrounding claim."
+  }
+]

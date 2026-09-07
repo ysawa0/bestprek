@@ -1,0 +1,501 @@
+[
+  {
+    "id": "artifact.chatbot-residue",
+    "summary": "Generated-chat or citation artifacts left in prose",
+    "recommended_severity": "error",
+    "defaults": {},
+    "strict_severity": null,
+    "strict_defaults": {},
+    "checker": "chatbot_residue",
+    "phrases": []
+  },
+  {
+    "id": "verbosity.throat-clearing",
+    "summary": "Generic opening clauses that delay the actual claim",
+    "recommended_severity": "warning",
+    "defaults": {},
+    "strict_severity": null,
+    "strict_defaults": {},
+    "checker": "check",
+    "phrases": [
+      {
+        "pattern": "\\bwhen it comes to\\b",
+        "message": "'When it comes to' delays the subject.",
+        "suggestion": "Start with the subject and verb."
+      },
+      {
+        "pattern": "\\bin (?:today's|the modern|an? ever-changing|an? ever-evolving) (?:world|era|landscape)\\b",
+        "message": "A generic era or landscape opener adds atmosphere instead of information.",
+        "suggestion": "Name the specific change, market, or constraint."
+      },
+      {
+        "pattern": "\\bin the (?:realm|world) of\\b",
+        "message": "This realm/world framing is vague throat-clearing.",
+        "suggestion": "Name the field directly."
+      },
+      {
+        "pattern": "\\bat its core\\b",
+        "message": "'At its core' often announces a simplification instead of making it.",
+        "suggestion": "State the simplified claim directly."
+      },
+      {
+        "pattern": "\\bthe fact of the matter is\\b",
+        "message": "This lead-in delays the claim.",
+        "suggestion": "Delete the lead-in."
+      }
+    ]
+  },
+  {
+    "id": "verbosity.filler",
+    "summary": "Wordy phrases with shorter direct equivalents",
+    "recommended_severity": "warning",
+    "defaults": {},
+    "strict_severity": null,
+    "strict_defaults": {},
+    "checker": "check",
+    "phrases": [
+      {
+        "pattern": "\\bin order to\\b",
+        "message": "'In order to' is usually just 'to'.",
+        "suggestion": "Replace it with 'to'."
+      },
+      {
+        "pattern": "\\bdue to the fact that\\b",
+        "message": "This phrase is wordier than 'because'.",
+        "suggestion": "Replace it with 'because'."
+      },
+      {
+        "pattern": "\\bat this point in time\\b",
+        "message": "This phrase is usually just 'now'.",
+        "suggestion": "Replace it with 'now'."
+      },
+      {
+        "pattern": "\\bhas the ability to\\b|\\bis able to\\b",
+        "message": "This ability phrase usually hides a direct verb.",
+        "suggestion": "Use 'can' or the direct verb."
+      },
+      {
+        "pattern": "\\ba wide variety of\\b",
+        "message": "This quantity phrase is vague unless the variety matters.",
+        "suggestion": "Use 'many', list examples, or quantify."
+      }
+    ]
+  },
+  {
+    "id": "verbosity.redundant-pair",
+    "summary": "Redundant or doubled expressions",
+    "recommended_severity": "warning",
+    "defaults": {},
+    "strict_severity": null,
+    "strict_defaults": {},
+    "checker": "check",
+    "phrases": [
+      {
+        "pattern": "\\beach and every\\b",
+        "message": "'Each and every' repeats the same idea.",
+        "suggestion": "Choose 'each' or 'every'."
+      },
+      {
+        "pattern": "\\bvarious different\\b",
+        "message": "'Various different' is redundant.",
+        "suggestion": "Choose 'various' or 'different'."
+      },
+      {
+        "pattern": "\\bpast history\\b",
+        "message": "History is already in the past.",
+        "suggestion": "Use 'history'."
+      },
+      {
+        "pattern": "\\bfuture plans\\b",
+        "message": "Plans normally concern the future.",
+        "suggestion": "Use 'plans' unless contrasting with past plans."
+      },
+      {
+        "pattern": "\\bcompletely eliminate\\b",
+        "message": "'Eliminate' already means remove completely.",
+        "suggestion": "Use 'eliminate'."
+      }
+    ]
+  },
+  {
+    "id": "phrase.note-to-reader",
+    "summary": "Meta-language that tells the reader what to notice",
+    "recommended_severity": "info",
+    "defaults": {},
+    "strict_severity": "warning",
+    "strict_defaults": {},
+    "checker": "check",
+    "phrases": [
+      {
+        "pattern": "\\bit (?:is|'s) important to note that\\b",
+        "message": "The sentence tells the reader what to note instead of proving its importance.",
+        "suggestion": "Delete the lead-in and strengthen the claim."
+      },
+      {
+        "pattern": "\\bit (?:is|'s) worth noting that\\b|\\bit should be noted that\\b",
+        "message": "The note-to-reader phrase adds editorial scaffolding.",
+        "suggestion": "State the point directly."
+      },
+      {
+        "pattern": "\\bthe key takeaway is\\b",
+        "message": "This phrase often repeats a point the paragraph should already establish.",
+        "suggestion": "State the takeaway once, in the strongest location."
+      }
+    ]
+  },
+  {
+    "id": "phrase.marketing-language",
+    "summary": "Generic promotional wording without a concrete property",
+    "recommended_severity": "info",
+    "defaults": {},
+    "strict_severity": "warning",
+    "strict_defaults": {},
+    "checker": "check",
+    "phrases": [
+      {
+        "pattern": "\\bunlock(?:s|ed|ing)? (?:the )?(?:power|potential|possibilities)\\b",
+        "message": "'Unlocking potential' is promotional unless the mechanism is named.",
+        "suggestion": "Describe the capability or measured result."
+      },
+      {
+        "pattern": "\\bseamless(?:ly)?\\b",
+        "message": "'Seamless' makes a quality claim without naming the seam.",
+        "suggestion": "Name the transition, integration, or failure mode."
+      },
+      {
+        "pattern": "\\bgame[- ]changer\\b",
+        "message": "'Game-changer' substitutes enthusiasm for evidence.",
+        "suggestion": "Describe what changed and by how much."
+      },
+      {
+        "pattern": "\\belevat(?:e|es|ed|ing) (?:your|the)\\b",
+        "message": "'Elevate' is generic promotional language here.",
+        "suggestion": "Use the concrete improvement."
+      },
+      {
+        "pattern": "\\btransformative\\b",
+        "message": "'Transformative' needs a specific before-and-after claim.",
+        "suggestion": "Describe the transformation."
+      },
+      {
+        "pattern": "\\bultimate guide\\b",
+        "message": "'Ultimate guide' makes a completeness claim the article is unlikely to prove.",
+        "suggestion": "Use a descriptive title that states the scope."
+      }
+    ]
+  },
+  {
+    "id": "phrase.abstract-role",
+    "summary": "Abstract role language that can usually be replaced by a direct verb",
+    "recommended_severity": "info",
+    "defaults": {},
+    "strict_severity": "warning",
+    "strict_defaults": {},
+    "checker": "check",
+    "phrases": [
+      {
+        "pattern": "\\bserves as (?:a|an|the)\\b",
+        "message": "'Serves as' often hides a simpler verb.",
+        "suggestion": "Use 'is', 'provides', or the specific action."
+      },
+      {
+        "pattern": "\\bplays? (?:a )?(?:pivotal|crucial|vital|important) role\\b",
+        "message": "The sentence announces importance without demonstrating it.",
+        "suggestion": "Name the consequence or dependency."
+      },
+      {
+        "pattern": "\\bstands as (?:a|an|the)\\b",
+        "message": "'Stands as' adds ceremony to a direct claim.",
+        "suggestion": "Use 'is' or a more specific verb."
+      }
+    ]
+  },
+  {
+    "id": "phrase.landscape",
+    "summary": "Vague landscape or tapestry metaphors",
+    "recommended_severity": "warning",
+    "defaults": {},
+    "strict_severity": null,
+    "strict_defaults": {},
+    "checker": "check",
+    "phrases": [
+      {
+        "pattern": "\\bever[- ]evolving(?:\\s+[A-Za-z-]+){0,2}\\s+landscape\\b",
+        "message": "'Ever-evolving landscape' is vague and overworked.",
+        "suggestion": "Name what changed and when."
+      },
+      {
+        "pattern": "\\bin today['’]s(?:\\s+[A-Za-z-]+){0,2}\\s+landscape\\b",
+        "message": "This landscape frame is generic.",
+        "suggestion": "Name the current condition and its consequence."
+      },
+      {
+        "pattern": "\\b(?:rich|complex|intricate) tapestry\\b",
+        "message": "The tapestry metaphor decorates the claim without clarifying it.",
+        "suggestion": "Describe the actual components or relationship."
+      }
+    ]
+  },
+  {
+    "id": "phrase.vague-attribution",
+    "summary": "Claims attributed to unnamed authorities",
+    "recommended_severity": "warning",
+    "defaults": {},
+    "strict_severity": null,
+    "strict_defaults": {},
+    "checker": "check",
+    "phrases": [
+      {
+        "pattern": "\\bexperts (?:say|argue|believe|agree)\\b",
+        "message": "'Experts' is too vague to support the claim.",
+        "suggestion": "Name the expert, institution, or source."
+      },
+      {
+        "pattern": "\\bstudies (?:show|suggest|indicate|have shown)\\b",
+        "message": "'Studies' needs a citation or identifying detail.",
+        "suggestion": "Cite the study or state what evidence you reviewed."
+      },
+      {
+        "pattern": "\\bit is widely (?:believed|known|accepted)\\b",
+        "message": "A claim of broad agreement needs evidence.",
+        "suggestion": "Name the source of the consensus or remove the appeal to consensus."
+      }
+    ]
+  },
+  {
+    "id": "rhetoric.negative-parallelism",
+    "summary": "Repeated contrast reframes",
+    "recommended_severity": "warning",
+    "defaults": {
+      "max": 1,
+      "window_words": 500
+    },
+    "strict_severity": null,
+    "strict_defaults": {
+      "max": 0
+    },
+    "checker": "negative_parallelism",
+    "phrases": []
+  },
+  {
+    "id": "rhetoric.no-chain",
+    "summary": "Three or more 'no X, no Y' items",
+    "recommended_severity": "warning",
+    "defaults": {
+      "minimum_items": 3
+    },
+    "strict_severity": null,
+    "strict_defaults": {
+      "minimum_items": 2
+    },
+    "checker": "no_chain",
+    "phrases": []
+  },
+  {
+    "id": "rhetoric.question-answer",
+    "summary": "Repeated staged questions followed by short answers",
+    "recommended_severity": "warning",
+    "defaults": {
+      "max": 1,
+      "window_words": 400,
+      "answer_max_words": 5
+    },
+    "strict_severity": null,
+    "strict_defaults": {
+      "max": 0
+    },
+    "checker": "question_answer",
+    "phrases": []
+  },
+  {
+    "id": "rhetoric.question-density",
+    "summary": "Too many questions in a short passage",
+    "recommended_severity": "warning",
+    "defaults": {
+      "max": 3,
+      "window_words": 500
+    },
+    "strict_severity": null,
+    "strict_defaults": {
+      "max": 2
+    },
+    "checker": "question_density",
+    "phrases": []
+  },
+  {
+    "id": "rhetoric.echoed-clauses",
+    "summary": "Parallel clauses repeat the same opening or ending",
+    "recommended_severity": "warning",
+    "defaults": {
+      "minimum_clauses": 3,
+      "maximum_clauses": 5
+    },
+    "strict_severity": null,
+    "strict_defaults": {},
+    "checker": "echoed_clauses",
+    "phrases": []
+  },
+  {
+    "id": "rhetoric.tricolon-density",
+    "summary": "Repeated three-part rhetorical lists",
+    "recommended_severity": "info",
+    "defaults": {
+      "max": 3,
+      "window_words": 750
+    },
+    "strict_severity": "warning",
+    "strict_defaults": {
+      "max": 2
+    },
+    "checker": "tricolon_density",
+    "phrases": []
+  },
+  {
+    "id": "repetition.sentence-opener",
+    "summary": "Repeated sentence openings",
+    "recommended_severity": "warning",
+    "defaults": {
+      "consecutive": 3,
+      "window_sentences": 8,
+      "window_count": 5
+    },
+    "strict_severity": null,
+    "strict_defaults": {
+      "window_count": 4
+    },
+    "checker": "sentence_openers",
+    "phrases": []
+  },
+  {
+    "id": "repetition.paragraph-opener",
+    "summary": "Repeated paragraph openings",
+    "recommended_severity": "warning",
+    "defaults": {
+      "consecutive": 3,
+      "window_paragraphs": 6,
+      "window_count": 4
+    },
+    "strict_severity": null,
+    "strict_defaults": {
+      "window_count": 3
+    },
+    "checker": "paragraph_openers",
+    "phrases": []
+  },
+  {
+    "id": "repetition.transition",
+    "summary": "Repeated stock transitions",
+    "recommended_severity": "warning",
+    "defaults": {
+      "max": 2,
+      "window_words": 500
+    },
+    "strict_severity": null,
+    "strict_defaults": {
+      "max": 1
+    },
+    "checker": "transition_repetition",
+    "phrases": []
+  },
+  {
+    "id": "repetition.loaded-word",
+    "summary": "Repeated abstract or promotional vocabulary",
+    "recommended_severity": "warning",
+    "defaults": {
+      "max": 2,
+      "window_words": 500
+    },
+    "strict_severity": null,
+    "strict_defaults": {
+      "max": 1
+    },
+    "checker": "loaded_word_repetition",
+    "phrases": []
+  },
+  {
+    "id": "rhythm.short-sentence-run",
+    "summary": "Run of very short sentences",
+    "recommended_severity": "warning",
+    "defaults": {
+      "max_words": 5,
+      "minimum_run": 3
+    },
+    "strict_severity": null,
+    "strict_defaults": {
+      "max_words": 6
+    },
+    "checker": "short_sentence_run",
+    "phrases": []
+  },
+  {
+    "id": "rhythm.uniform-sentence-length",
+    "summary": "Unusually uniform sentence lengths",
+    "recommended_severity": "off",
+    "defaults": {
+      "minimum_sentences": 10,
+      "maximum_cv": 0.18
+    },
+    "strict_severity": "info",
+    "strict_defaults": {},
+    "checker": "uniform_sentence_length",
+    "phrases": []
+  },
+  {
+    "id": "density.em-dash",
+    "summary": "High em-dash density",
+    "recommended_severity": "warning",
+    "defaults": {
+      "max": 4,
+      "window_words": 500
+    },
+    "strict_severity": null,
+    "strict_defaults": {
+      "max": 3
+    },
+    "checker": "em_dash_density",
+    "phrases": []
+  },
+  {
+    "id": "density.bold",
+    "summary": "High bold-emphasis density",
+    "recommended_severity": "warning",
+    "defaults": {
+      "max": 10,
+      "window_words": 500
+    },
+    "strict_severity": null,
+    "strict_defaults": {
+      "max": 6
+    },
+    "checker": "bold_density",
+    "phrases": []
+  },
+  {
+    "id": "density.parenthetical",
+    "summary": "High parenthetical-aside density",
+    "recommended_severity": "off",
+    "defaults": {
+      "max": 6,
+      "window_words": 500
+    },
+    "strict_severity": "info",
+    "strict_defaults": {
+      "max": 5
+    },
+    "checker": "parenthetical_density",
+    "phrases": []
+  },
+  {
+    "id": "structure.heading-density",
+    "summary": "Many headings relative to prose",
+    "recommended_severity": "off",
+    "defaults": {
+      "minimum_headings": 6,
+      "min_words_per_heading": 70
+    },
+    "strict_severity": "info",
+    "strict_defaults": {},
+    "checker": "heading_density",
+    "phrases": []
+  }
+]

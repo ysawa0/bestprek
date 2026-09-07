@@ -1,0 +1,19 @@
+[package]
+name = "unslop"
+version = "1.20.0"
+edition = "2021"
+rust-version = "1.73"
+description = "Deterministic Markdown prose linter"
+
+[[bin]]
+name = "unslop"
+path = "tools/unslop/main.rs"
+
+[dependencies]
+regex = "=1.10.2"
+serde = { version = "=1.0.192", features = ["derive"] }
+serde_json = "=1.0.108"
+
+[profile.release]
+lto = "thin"
+strip = true

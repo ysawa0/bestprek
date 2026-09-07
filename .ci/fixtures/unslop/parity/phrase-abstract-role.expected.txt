@@ -1,0 +1,12 @@
+[
+  {
+    "line": 1,
+    "column": 12,
+    "end_line": 1,
+    "end_column": 23,
+    "severity": "warning",
+    "rule": "phrase.abstract-role",
+    "message": "'Serves as' often hides a simpler verb.",
+    "suggestion": "Use 'is', 'provides', or the specific action."
+  }
+]

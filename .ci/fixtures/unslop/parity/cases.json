@@ -1,0 +1,326 @@
+[
+  {
+    "name": "case-1",
+    "preset": "recommended",
+    "config": {}
+  },
+  {
+    "name": "case-2",
+    "preset": "recommended",
+    "config": {}
+  },
+  {
+    "name": "case-3",
+    "preset": "recommended",
+    "config": {}
+  },
+  {
+    "name": "case-4",
+    "preset": "recommended",
+    "config": {}
+  },
+  {
+    "name": "case-5",
+    "preset": "recommended",
+    "config": {}
+  },
+  {
+    "name": "case-6",
+    "preset": "recommended",
+    "config": {}
+  },
+  {
+    "name": "case-7",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "case-8",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "case-9",
+    "preset": "recommended",
+    "config": {}
+  },
+  {
+    "name": "case-10",
+    "preset": "recommended",
+    "config": {}
+  },
+  {
+    "name": "case-11",
+    "preset": "recommended",
+    "config": {}
+  },
+  {
+    "name": "case-12",
+    "preset": "recommended",
+    "config": {}
+  },
+  {
+    "name": "case-13",
+    "preset": "recommended",
+    "config": {}
+  },
+  {
+    "name": "case-14",
+    "preset": "recommended",
+    "config": {}
+  },
+  {
+    "name": "case-15",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "case-16",
+    "preset": "recommended",
+    "config": {
+      "rules": {
+        "density.em-dash": {
+          "maximum": 3
+        }
+      }
+    },
+    "error": "Rule 'density.em-dash' has unknown options: maximum"
+  },
+  {
+    "name": "hook-example-0",
+    "preset": "recommended",
+    "config": {},
+    "input": "../example-0.input.txt"
+  },
+  {
+    "name": "hook-example-1",
+    "preset": "recommended",
+    "config": {},
+    "input": "../example-1.input.txt"
+  },
+  {
+    "name": "hook-example-2",
+    "preset": "recommended",
+    "config": {},
+    "input": "../example-2.input.txt"
+  },
+  {
+    "name": "hook-example-3",
+    "preset": "recommended",
+    "config": {},
+    "input": "../example-3.input.txt"
+  },
+  {
+    "name": "hook-example-4",
+    "preset": "recommended",
+    "config": {},
+    "input": "../example-4.input.txt"
+  },
+  {
+    "name": "hook-example-5",
+    "preset": "recommended",
+    "config": {},
+    "input": "../example-5.input.txt"
+  },
+  {
+    "name": "hook-suppressed",
+    "preset": "recommended",
+    "config": {},
+    "input": "../suppressed.input.txt"
+  },
+  {
+    "name": "hook-draft",
+    "preset": "recommended",
+    "config": {},
+    "input": "../draft.input.txt"
+  },
+  {
+    "name": "hook-clean",
+    "preset": "recommended",
+    "config": {},
+    "input": "../clean.input.txt"
+  },
+  {
+    "name": "hook-config-disabled",
+    "preset": "recommended",
+    "config": {
+      "rules": {
+        "phrase.marketing-language": "off"
+      }
+    },
+    "input": "../config-disabled.input.txt"
+  },
+  {
+    "name": "hook-fail-level",
+    "preset": "recommended",
+    "config": {},
+    "input": "../fail-level.input.txt"
+  },
+  {
+    "name": "hook-next-line",
+    "preset": "recommended",
+    "config": {},
+    "input": "../next-line.input.txt"
+  },
+  {
+    "name": "hook-enable-again",
+    "preset": "recommended",
+    "config": {},
+    "input": "../enable-again.input.txt"
+  },
+  {
+    "name": "hook-inline-ignore",
+    "preset": "recommended",
+    "config": {},
+    "input": "../inline-ignore.input.txt"
+  },
+  {
+    "name": "hook-masked-prose",
+    "preset": "recommended",
+    "config": {},
+    "input": "../masked-prose.input.txt"
+  },
+  {
+    "name": "hook-residue",
+    "preset": "recommended",
+    "config": {},
+    "input": "../residue.input.txt"
+  },
+  {
+    "name": "hook-coffee-clean",
+    "preset": "recommended",
+    "config": {},
+    "input": "../coffee-after.md"
+  },
+  {
+    "name": "hook-coffee-noisy",
+    "preset": "recommended",
+    "config": {},
+    "input": "../coffee-before.md"
+  },
+  {
+    "name": "artifact-chatbot-residue",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "verbosity-throat-clearing",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "verbosity-filler",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "verbosity-redundant-pair",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "phrase-note-to-reader",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "phrase-marketing-language",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "phrase-abstract-role",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "phrase-landscape",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "phrase-vague-attribution",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "rhetoric-negative-parallelism",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "rhetoric-no-chain",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "rhetoric-question-answer",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "rhetoric-question-density",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "rhetoric-echoed-clauses",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "rhetoric-tricolon-density",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "repetition-sentence-opener",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "repetition-paragraph-opener",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "repetition-transition",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "repetition-loaded-word",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "short-run",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "uniform-length",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "density-em-dash",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "density-bold",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "density-parenthetical",
+    "preset": "strict",
+    "config": {}
+  },
+  {
+    "name": "structure-heading-density",
+    "preset": "strict",
+    "config": {}
+  }
+]

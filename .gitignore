@@ -2,3 +2,4 @@ tmp/
 tmp-prek-hooks/
 build/
 *.egg-info/
+target/

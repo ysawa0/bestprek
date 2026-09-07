@@ -20,7 +20,8 @@ def main() -> None:
     replacements = {
         "README.md": (f'rev = "{previous}"', f'rev = "{version}"'),
         "example_conf/prek.toml": (f'rev = "{previous}"', f'rev = "{version}"'),
-        "hooks/unslop.py": (f'VERSION = "{previous}"', f'VERSION = "{version}"'),
+        "Cargo.toml": (f'version = "{previous}.0"', f'version = "{version}.0"'),
+        "Cargo.lock": (f'version = "{previous}.0"', f'version = "{version}.0"'),
     }
     for filename, (old, new) in replacements.items():
         path = ROOT / filename

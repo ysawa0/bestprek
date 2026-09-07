@@ -1,0 +1,22 @@
+[
+  {
+    "line": 1,
+    "column": 38,
+    "end_line": 1,
+    "end_column": 102,
+    "severity": "warning",
+    "rule": "repetition.sentence-opener",
+    "message": "3 sentences repeatedly open with 'the sensor'.",
+    "suggestion": "Merge a sentence or vary the grammatical opening unless the repetition is deliberate anaphora."
+  },
+  {
+    "line": 1,
+    "column": 38,
+    "end_line": 1,
+    "end_column": 102,
+    "severity": "warning",
+    "rule": "rhythm.short-sentence-run",
+    "message": "3 consecutive sentences contain at most 6 words each, creating a manufactured staccato rhythm.",
+    "suggestion": "Combine related fragments and reserve the short sentence for emphasis."
+  }
+]

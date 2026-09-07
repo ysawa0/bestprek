@@ -1,0 +1,22 @@
+[
+  {
+    "line": 1,
+    "column": 30,
+    "end_line": 1,
+    "end_column": 70,
+    "severity": "warning",
+    "rule": "rhetoric.tricolon-density",
+    "message": "6 three-part rhetorical lists appear within 750 words.",
+    "suggestion": "Vary the list length or convert one list into a concrete example."
+  },
+  {
+    "line": 1,
+    "column": 30,
+    "end_line": 1,
+    "end_column": 96,
+    "severity": "warning",
+    "rule": "rhythm.short-sentence-run",
+    "message": "3 consecutive sentences contain at most 6 words each, creating a manufactured staccato rhythm.",
+    "suggestion": "Combine related fragments and reserve the short sentence for emphasis."
+  }
+]

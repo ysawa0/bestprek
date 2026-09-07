@@ -1,0 +1,12 @@
+[
+  {
+    "line": 2,
+    "column": 16,
+    "end_line": 2,
+    "end_column": 56,
+    "severity": "warning",
+    "rule": "rhetoric.negative-parallelism",
+    "message": "2 contrast reframes appear within 500 words; repeated 'not X, but Y' structure starts to sound manufactured.",
+    "suggestion": "State at least one positive claim directly, or keep only the strongest contrast."
+  }
+]

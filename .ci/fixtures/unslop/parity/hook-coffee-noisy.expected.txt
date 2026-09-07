@@ -1,0 +1,442 @@
+[
+  {
+    "line": 1,
+    "column": 7,
+    "end_line": 1,
+    "end_column": 21,
+    "severity": "info",
+    "rule": "phrase.marketing-language",
+    "message": "'Ultimate guide' makes a completeness claim the article is unlikely to prove.",
+    "suggestion": "Use a descriptive title that states the scope."
+  },
+  {
+    "line": 3,
+    "column": 1,
+    "end_line": 3,
+    "end_column": 42,
+    "severity": "warning",
+    "rule": "phrase.landscape",
+    "message": "This landscape frame is generic.",
+    "suggestion": "Name the current condition and its consequence."
+  },
+  {
+    "line": 3,
+    "column": 95,
+    "end_line": 3,
+    "end_column": 108,
+    "severity": "warning",
+    "rule": "phrase.landscape",
+    "message": "The tapestry metaphor decorates the claim without clarifying it.",
+    "suggestion": "Describe the actual components or relationship."
+  },
+  {
+    "line": 3,
+    "column": 231,
+    "end_line": 15,
+    "end_column": 216,
+    "severity": "warning",
+    "rule": "rhetoric.negative-parallelism",
+    "message": "3 contrast reframes appear within 500 words; repeated 'not X, but Y' structure starts to sound manufactured.",
+    "suggestion": "State at least one positive claim directly, or keep only the strongest contrast."
+  },
+  {
+    "line": 3,
+    "column": 278,
+    "end_line": 3,
+    "end_column": 327,
+    "severity": "warning",
+    "rule": "rhetoric.no-chain",
+    "message": "A 3-item 'no X, no Y' chain performs emphasis without adding evidence.",
+    "suggestion": "Replace the chain with the specific positive claim."
+  },
+  {
+    "line": 7,
+    "column": 49,
+    "end_line": 19,
+    "end_column": 129,
+    "severity": "warning",
+    "rule": "rhetoric.question-answer",
+    "message": "6 staged question-and-short-answer turns appear within 400 words.",
+    "suggestion": "Turn at least one question into a direct statement."
+  },
+  {
+    "line": 9,
+    "column": 1,
+    "end_line": 9,
+    "end_column": 29,
+    "severity": "info",
+    "rule": "phrase.note-to-reader",
+    "message": "The sentence tells the reader what to note instead of proving its importance.",
+    "suggestion": "Delete the lead-in and strengthen the claim."
+  },
+  {
+    "line": 9,
+    "column": 90,
+    "end_line": 9,
+    "end_column": 109,
+    "severity": "info",
+    "rule": "phrase.abstract-role",
+    "message": "The sentence announces importance without demonstrating it.",
+    "suggestion": "Name the consequence or dependency."
+  },
+  {
+    "line": 9,
+    "column": 203,
+    "end_line": 9,
+    "end_column": 277,
+    "severity": "warning",
+    "rule": "rhetoric.echoed-clauses",
+    "message": "3 parallel clauses repeat the ending 'is crucial'.",
+    "suggestion": "Keep the parallelism only if the rhythm earns its space; otherwise combine the clauses or vary the syntax."
+  },
+  {
+    "line": 9,
+    "column": 278,
+    "end_line": 9,
+    "end_column": 292,
+    "severity": "warning",
+    "rule": "verbosity.redundant-pair",
+    "message": "'Each and every' repeats the same idea.",
+    "suggestion": "Choose 'each' or 'every'."
+  },
+  {
+    "line": 9,
+    "column": 302,
+    "end_line": 9,
+    "end_column": 320,
+    "severity": "warning",
+    "rule": "verbosity.filler",
+    "message": "This ability phrase usually hides a direct verb.",
+    "suggestion": "Use 'can' or the direct verb."
+  },
+  {
+    "line": 9,
+    "column": 371,
+    "end_line": 9,
+    "end_column": 385,
+    "severity": "info",
+    "rule": "phrase.marketing-language",
+    "message": "'Transformative' needs a specific before-and-after claim.",
+    "suggestion": "Describe the transformation."
+  },
+  {
+    "line": 11,
+    "column": 37,
+    "end_line": 11,
+    "end_column": 167,
+    "severity": "warning",
+    "rule": "repetition.sentence-opener",
+    "message": "4 sentences repeatedly open with 'the best'.",
+    "suggestion": "Merge a sentence or vary the grammatical opening unless the repetition is deliberate anaphora."
+  },
+  {
+    "line": 15,
+    "column": 1,
+    "end_line": 15,
+    "end_column": 17,
+    "severity": "warning",
+    "rule": "verbosity.throat-clearing",
+    "message": "'When it comes to' delays the subject.",
+    "suggestion": "Start with the subject and verb."
+  },
+  {
+    "line": 15,
+    "column": 58,
+    "end_line": 15,
+    "end_column": 70,
+    "severity": "info",
+    "rule": "phrase.abstract-role",
+    "message": "'Serves as' often hides a simpler verb.",
+    "suggestion": "Use 'is', 'provides', or the specific action."
+  },
+  {
+    "line": 15,
+    "column": 250,
+    "end_line": 15,
+    "end_column": 271,
+    "severity": "info",
+    "rule": "phrase.marketing-language",
+    "message": "'Unlocking potential' is promotional unless the mechanism is named.",
+    "suggestion": "Describe the capability or measured result."
+  },
+  {
+    "line": 17,
+    "column": 77,
+    "end_line": 17,
+    "end_column": 97,
+    "severity": "info",
+    "rule": "phrase.abstract-role",
+    "message": "The sentence announces importance without demonstrating it.",
+    "suggestion": "Name the consequence or dependency."
+  },
+  {
+    "line": 17,
+    "column": 99,
+    "end_line": 17,
+    "end_column": 239,
+    "severity": "warning",
+    "rule": "repetition.sentence-opener",
+    "message": "3 sentences repeatedly open with 'look for'.",
+    "suggestion": "Merge a sentence or vary the grammatical opening unless the repetition is deliberate anaphora."
+  },
+  {
+    "line": 17,
+    "column": 278,
+    "end_line": 17,
+    "end_column": 288,
+    "severity": "info",
+    "rule": "phrase.marketing-language",
+    "message": "'Seamless' makes a quality claim without naming the seam.",
+    "suggestion": "Name the transition, integration, or failure mode."
+  },
+  {
+    "line": 19,
+    "column": 1,
+    "end_line": 31,
+    "end_column": 175,
+    "severity": "warning",
+    "rule": "rhetoric.question-density",
+    "message": "9 questions appear within 500 words; the passage is interrogating the reader instead of explaining.",
+    "suggestion": "Keep the question that creates useful tension and state the others directly."
+  },
+  {
+    "line": 19,
+    "column": 25,
+    "end_line": 19,
+    "end_column": 68,
+    "severity": "warning",
+    "rule": "rhythm.short-sentence-run",
+    "message": "4 consecutive sentences contain at most 5 words each, creating a manufactured staccato rhythm.",
+    "suggestion": "Combine related fragments and reserve the short sentence for emphasis."
+  },
+  {
+    "line": 21,
+    "column": 1,
+    "end_line": 21,
+    "end_column": 18,
+    "severity": "warning",
+    "rule": "verbosity.filler",
+    "message": "This quantity phrase is vague unless the variety matters.",
+    "suggestion": "Use 'many', list examples, or quantify."
+  },
+  {
+    "line": 21,
+    "column": 275,
+    "end_line": 21,
+    "end_column": 287,
+    "severity": "info",
+    "rule": "phrase.marketing-language",
+    "message": "'Elevate' is generic promotional language here.",
+    "suggestion": "Use the concrete improvement."
+  },
+  {
+    "line": 25,
+    "column": 1,
+    "end_line": 25,
+    "end_column": 12,
+    "severity": "warning",
+    "rule": "verbosity.throat-clearing",
+    "message": "'At its core' often announces a simplification instead of making it.",
+    "suggestion": "State the simplified claim directly."
+  },
+  {
+    "line": 25,
+    "column": 76,
+    "end_line": 25,
+    "end_column": 182,
+    "severity": "warning",
+    "rule": "rhetoric.echoed-clauses",
+    "message": "3 parallel clauses repeat the opening 'the right'.",
+    "suggestion": "Keep the parallelism only if the rhythm earns its space; otherwise combine the clauses or vary the syntax."
+  },
+  {
+    "line": 25,
+    "column": 76,
+    "end_line": 51,
+    "end_column": 28,
+    "severity": "info",
+    "rule": "rhetoric.tricolon-density",
+    "message": "11 three-part rhetorical lists appear within 750 words.",
+    "suggestion": "Vary the list length or convert one list into a concrete example."
+  },
+  {
+    "line": 25,
+    "column": 183,
+    "end_line": 25,
+    "end_column": 242,
+    "severity": "warning",
+    "rule": "rhetoric.no-chain",
+    "message": "A 3-item 'no X, no Y' chain performs emphasis without adding evidence.",
+    "suggestion": "Replace the chain with the specific positive claim."
+  },
+  {
+    "line": 27,
+    "column": 20,
+    "end_line": 27,
+    "end_column": 31,
+    "severity": "warning",
+    "rule": "verbosity.filler",
+    "message": "'In order to' is usually just 'to'.",
+    "suggestion": "Replace it with 'to'."
+  },
+  {
+    "line": 27,
+    "column": 223,
+    "end_line": 27,
+    "end_column": 237,
+    "severity": "info",
+    "rule": "phrase.marketing-language",
+    "message": "'Transformative' needs a specific before-and-after claim.",
+    "suggestion": "Describe the transformation."
+  },
+  {
+    "line": 31,
+    "column": 143,
+    "end_line": 31,
+    "end_column": 217,
+    "severity": "warning",
+    "rule": "rhetoric.question-answer",
+    "message": "3 staged question-and-short-answer turns appear within 400 words.",
+    "suggestion": "Turn at least one question into a direct statement."
+  },
+  {
+    "line": 31,
+    "column": 162,
+    "end_line": 31,
+    "end_column": 217,
+    "severity": "warning",
+    "rule": "rhythm.short-sentence-run",
+    "message": "4 consecutive sentences contain at most 5 words each, creating a manufactured staccato rhythm.",
+    "suggestion": "Combine related fragments and reserve the short sentence for emphasis."
+  },
+  {
+    "line": 35,
+    "column": 3,
+    "end_line": 35,
+    "end_column": 11,
+    "severity": "info",
+    "rule": "phrase.marketing-language",
+    "message": "'Seamless' makes a quality claim without naming the seam.",
+    "suggestion": "Name the transition, integration, or failure mode."
+  },
+  {
+    "line": 42,
+    "column": 27,
+    "end_line": 51,
+    "end_column": 113,
+    "severity": "warning",
+    "rule": "density.em-dash",
+    "message": "7 em dashes appear within 500 words.",
+    "suggestion": "Keep the strongest interruption and use commas, parentheses, or separate sentences elsewhere."
+  },
+  {
+    "line": 45,
+    "column": 13,
+    "end_line": 45,
+    "end_column": 24,
+    "severity": "info",
+    "rule": "phrase.abstract-role",
+    "message": "'Serves as' often hides a simpler verb.",
+    "suggestion": "Use 'is', 'provides', or the specific action."
+  },
+  {
+    "line": 45,
+    "column": 75,
+    "end_line": 45,
+    "end_column": 165,
+    "severity": "warning",
+    "rule": "repetition.sentence-opener",
+    "message": "3 sentences repeatedly open with 'it is'.",
+    "suggestion": "Merge a sentence or vary the grammatical opening unless the repetition is deliberate anaphora."
+  },
+  {
+    "line": 45,
+    "column": 100,
+    "end_line": 49,
+    "end_column": 152,
+    "severity": "warning",
+    "rule": "rhetoric.negative-parallelism",
+    "message": "3 contrast reframes appear within 500 words; repeated 'not X, but Y' structure starts to sound manufactured.",
+    "suggestion": "State at least one positive claim directly, or keep only the strongest contrast."
+  },
+  {
+    "line": 49,
+    "column": 154,
+    "end_line": 49,
+    "end_column": 177,
+    "severity": "info",
+    "rule": "phrase.note-to-reader",
+    "message": "The note-to-reader phrase adds editorial scaffolding.",
+    "suggestion": "State the point directly."
+  },
+  {
+    "line": 49,
+    "column": 205,
+    "end_line": 49,
+    "end_column": 225,
+    "severity": "warning",
+    "rule": "verbosity.redundant-pair",
+    "message": "'Eliminate' already means remove completely.",
+    "suggestion": "Use 'eliminate'."
+  },
+  {
+    "line": 51,
+    "column": 1,
+    "end_line": 51,
+    "end_column": 20,
+    "severity": "info",
+    "rule": "phrase.note-to-reader",
+    "message": "This phrase often repeats a point the paragraph should already establish.",
+    "suggestion": "State the takeaway once, in the strongest location."
+  },
+  {
+    "line": 51,
+    "column": 78,
+    "end_line": 51,
+    "end_column": 128,
+    "severity": "warning",
+    "rule": "rhetoric.no-chain",
+    "message": "A 3-item 'no X, no Y' chain performs emphasis without adding evidence.",
+    "suggestion": "Replace the chain with the specific positive claim."
+  },
+  {
+    "line": 51,
+    "column": 120,
+    "end_line": 51,
+    "end_column": 128,
+    "severity": "warning",
+    "rule": "repetition.loaded-word",
+    "message": "The loaded word 'seamless' appears 3 times within 500 words.",
+    "suggestion": "Replace at least one use with the concrete property you mean."
+  },
+  {
+    "line": 51,
+    "column": 120,
+    "end_line": 51,
+    "end_column": 128,
+    "severity": "info",
+    "rule": "phrase.marketing-language",
+    "message": "'Seamless' makes a quality claim without naming the seam.",
+    "suggestion": "Name the transition, integration, or failure mode."
+  },
+  {
+    "line": 51,
+    "column": 130,
+    "end_line": 51,
+    "end_column": 137,
+    "severity": "warning",
+    "rule": "repetition.loaded-word",
+    "message": "The loaded word 'elevate' appears 3 times within 500 words.",
+    "suggestion": "Replace at least one use with the concrete property you mean."
+  },
+  {
+    "line": 51,
+    "column": 140,
+    "end_line": 51,
+    "end_column": 154,
+    "severity": "info",
+    "rule": "phrase.marketing-language",
+    "message": "'Transformative' needs a specific before-and-after claim.",
+    "suggestion": "Describe the transformation."
+  }
+]
