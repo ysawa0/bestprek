@@ -1,4 +1,4 @@
-1.21
+1.22
 
 # Keep example_conf/ complete and current whenever hooks or configuration change.
 # Every release must update example_conf/prek.toml to the version on line 1.

@@ -30,7 +30,7 @@ Add `prek.toml` to the consuming repository:
 ```toml
 [[repos]]
 repo = "https://github.com/ysawa0/prek"
-rev = "1.21"
+rev = "1.22"
 
 [[repos.hooks]]
 id = "oxfmt"
@@ -92,14 +92,14 @@ prek run --all-files
 
 The directory contains:
 
-- `prek.toml`: all 12 bundled hooks plus whitespace, YAML, and large-file checks;
+- `prek.toml`: all 12 bundled hooks plus whitespace and large-file checks;
 - `ruff.toml`: Ruff's `ALL` rule set, with formatter conflicts and the competing docstring layout excluded;
 - `.unslop.json`: all 25 prose rules through the strict preset, failing on every finding;
 - `.oxfmtrc.jsonc`: JavaScript, TypeScript, and JSON formatting settings;
-- `.shellcheckrc`: all optional ShellCheck checks;
+- `.shellcheckrc`: optional ShellCheck checks except SC2250 (variable-brace style);
 - `.github/workflows/lint.yml`: the same hooks on pushes and pull requests.
 
-The Oxlint hook loads its bundled policy automatically, including all 15 custom rules. The hook's existing rule exclusions remain in force, as does ShellCheck's SC1091 exclusion. Ruff retains the hook's explicit preview-rule policy and nesting limit. See [Ruff's formatter compatibility guidance](https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules) for the formatting exclusions.
+The Oxlint hook loads its bundled policy automatically, including all 15 custom rules. The hook's existing rule exclusions remain in force, as do ShellCheck's SC1091 and SC2250 exclusions. Ruff retains the hook's explicit preview-rule policy and nesting limit. See [Ruff's formatter compatibility guidance](https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules) for the formatting exclusions.
 
 Install Prek before running these commands. This hook repository is private: local Git must have read access (for GitHub CLI, run `gh auth login` and `gh auth setup-git`). Add a `PREK_HOOKS_TOKEN` Actions secret to the consuming repository with read access to `ysawa0/prek`; the supplied workflow uses it to fetch the hooks.
 

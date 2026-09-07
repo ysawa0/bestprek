@@ -126,7 +126,7 @@ checksum = "3354b9ac3fae1ff6755cb6db53683adb661634f67557942dea4facebec0fee4b"
 
 [[package]]
 name = "unslop"
-version = "1.21.0"
+version = "1.22.0"
 dependencies = [
  "regex",
  "serde",

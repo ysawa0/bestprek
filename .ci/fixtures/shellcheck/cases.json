@@ -11,6 +11,12 @@
     "input": "clean.input.txt"
   },
   {
+    "name": "braces-excluded",
+    "path": "braces.sh",
+    "input": "braces-excluded.input.txt",
+    "setup": { ".shellcheckrc": "enable=all\n" }
+  },
+  {
     "name": "source-excluded",
     "path": "source.sh",
     "input": "source-excluded.input.txt"
