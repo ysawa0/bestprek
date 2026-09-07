@@ -101,7 +101,9 @@ The directory contains:
 
 The Oxlint hook loads its bundled policy automatically, including all 15 custom rules. The hook's existing rule exclusions remain in force, as does ShellCheck's SC1091 exclusion. Ruff retains the hook's explicit preview-rule policy and nesting limit. See [Ruff's formatter compatibility guidance](https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules) for the formatting exclusions.
 
-Install Prek before running these commands. Merge files where the destination already has configuration you want to retain. Hooks skip languages without matching files; repositories with Go files need a root `go.mod` or `go.work` appropriate for `go vet ./...`.
+Install Prek before running these commands. This hook repository is private: local Git must have read access (for GitHub CLI, run `gh auth login` and `gh auth setup-git`). Add a `PREK_HOOKS_TOKEN` Actions secret to the consuming repository with read access to `ysawa0/prek`; the supplied workflow uses it to fetch the hooks.
+
+Merge files where the destination already has configuration you want to retain. Hooks skip languages without matching files; repositories with Go files need a root `go.mod` or `go.work` appropriate for `go vet ./...`.
 
 Keep `example_conf/` current whenever the hooks or their configuration change. The release command updates its revision, and CI tests the copied setup.
 
