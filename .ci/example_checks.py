@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLE = ROOT / "example_conf"
 FIXTURES = ROOT / ".ci" / "fixtures"
-REPOSITORY = "https://github.com/ysawa0/prek"
+REPOSITORY = "https://github.com/ysawa0/bestprek"
 
 
 def run(work: Path, *arguments: str, expected: int = 0, diagnostic: str = "") -> None:
