@@ -28,6 +28,26 @@ def main() -> None:
         notes = work / ".github" / "release-notes"
         notes.mkdir(parents=True)
         (notes / "99.99.md").write_text("Release preparation fixture.\n")
+        manifest_path = work / "Cargo.toml"
+        original_manifest = manifest_path.read_text()
+        previous = (work / "RELEASE").read_text().splitlines()[0]
+        manifest_path.write_text(
+            original_manifest.replace(f'version = "{previous}.0"', 'version = "1.23.0"')
+        )
+        inputs = {path: path.read_bytes() for path in work.rglob("*") if path.is_file()}
+        result = subprocess.run(
+            [sys.executable, str(work / "scripts/release.py"), "99.99"],
+            cwd=work,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if result.returncode == 0 or "in Cargo.toml" not in result.stderr:
+            raise AssertionError("Release preparation must reject a mismatched version")
+        for path, original in inputs.items():
+            if path.read_bytes() != original:
+                raise AssertionError(f"Failed release preparation changed {path.name}")
+        manifest_path.write_text(original_manifest)
         subprocess.run(
             [sys.executable, str(work / "scripts/release.py"), "99.99"],
             cwd=work,
@@ -55,7 +75,10 @@ def main() -> None:
             or binary["version"] != "99.99.0"
         ):
             raise AssertionError("Release preparation must update the CLI version")
-    print("PASS release preparation: versions updated and upkeep note preserved")
+    print(
+        "PASS release preparation: failed validation preserves inputs; "
+        "versions updated and upkeep note preserved"
+    )
 
 
 if __name__ == "__main__":
