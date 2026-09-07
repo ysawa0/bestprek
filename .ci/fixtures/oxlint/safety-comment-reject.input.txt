@@ -1,0 +1,1 @@
+export function read(cause: unknown) { return cause as string; }

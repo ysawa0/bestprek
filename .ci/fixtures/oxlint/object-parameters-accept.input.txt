@@ -1,0 +1,2 @@
+type Account = {id: string};
+export function read(value: Account) { return value.id; }

@@ -1,0 +1,1 @@
+export function kind(value: string) { return typeof value; }

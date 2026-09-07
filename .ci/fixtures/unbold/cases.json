@@ -1,0 +1,53 @@
+[
+  {
+    "name": "prose",
+    "path": "prose.md",
+    "input": "prose.input.txt",
+    "expected": "prose.expected.txt"
+  },
+  {
+    "name": "unmatched",
+    "path": "unmatched.md",
+    "input": "unmatched.input.txt",
+    "expected": "unmatched.expected.txt"
+  },
+  {
+    "name": "literals",
+    "path": "literals.md",
+    "input": "literals.input.txt"
+  },
+  {
+    "name": "emphasis",
+    "path": "emphasis.md",
+    "input": "emphasis.input.txt",
+    "expected": "emphasis.expected.txt"
+  },
+  {
+    "name": "unicode",
+    "path": "unicode.md",
+    "input": "unicode.input.txt",
+    "expected": "unicode.expected.txt"
+  },
+  {
+    "name": "spaces-path",
+    "path": "docs/a file.md",
+    "input": "spaces-path.input.txt",
+    "expected": "spaces-path.expected.txt"
+  },
+  {
+    "name": "paragraph-boundary",
+    "path": "paragraph.md",
+    "input": "paragraph-boundary.input.txt"
+  },
+  {
+    "name": "unclosed-fence",
+    "path": "fence.md",
+    "input": "unclosed-fence.input.txt"
+  },
+  {
+    "name": "mixed-fences",
+    "path": "fences.md",
+    "input": "mixed-fences.input.txt",
+    "expected": "mixed-fences.expected.txt"
+  }
+]

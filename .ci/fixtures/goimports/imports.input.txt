@@ -1,0 +1,3 @@
+package hooktest
+
+func greeting() string { return fmt.Sprint(42) }

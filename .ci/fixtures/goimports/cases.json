@@ -1,0 +1,11 @@
+[
+  {
+    "name": "imports",
+    "path": "imports.go",
+    "input": "imports.input.txt",
+    "expected": "imports.expected.txt",
+    "setup": {
+      "go.mod": "module hooktest\n\ngo 1.25\n"
+    }
+  }
+]

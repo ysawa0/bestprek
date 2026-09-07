@@ -8,7 +8,7 @@ from pathlib import Path
 from hooks import unslop
 
 ROOT = Path(__file__).resolve().parents[1]
-EXAMPLES = ROOT / "examples" / "unslop"
+EXAMPLES = ROOT / ".ci" / "fixtures" / "unslop"
 
 
 class UnslopTest(unittest.TestCase):

@@ -1,0 +1,20 @@
+[
+  {
+    "name": "bad",
+    "path": "bad.sh",
+    "input": "bad.input.txt",
+    "diagnostics": [
+      "SC2086"
+    ]
+  },
+  {
+    "name": "clean",
+    "path": "clean.sh",
+    "input": "clean.input.txt"
+  },
+  {
+    "name": "source-excluded",
+    "path": "source.sh",
+    "input": "source-excluded.input.txt"
+  }
+]

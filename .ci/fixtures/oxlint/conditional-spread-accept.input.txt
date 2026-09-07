@@ -1,0 +1,1 @@
+export function build(enabled: boolean) { return enabled ? {id: 1} : {}; }

@@ -1,0 +1,5 @@
+package hooktest
+
+import "fmt"
+
+func greeting() string { return fmt.Sprint(42) }

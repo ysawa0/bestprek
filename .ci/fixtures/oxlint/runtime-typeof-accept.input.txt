@@ -1,0 +1,2 @@
+const value = "ready";
+export type Status = typeof value;

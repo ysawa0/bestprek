@@ -1,0 +1,2 @@
+package hooktest
+func answer()int{return 42}

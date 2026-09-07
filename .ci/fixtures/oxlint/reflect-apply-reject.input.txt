@@ -1,0 +1,1 @@
+export function call(fn: () => string) { return Reflect.apply(fn, null, []); }

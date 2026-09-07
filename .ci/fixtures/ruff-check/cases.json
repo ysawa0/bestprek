@@ -1,0 +1,39 @@
+[
+  {
+    "name": "bad",
+    "path": "bad.py",
+    "input": "bad.input.txt",
+    "diagnostics": [
+      "Undefined name"
+    ]
+  },
+  {
+    "name": "nested-if",
+    "path": "nested.py",
+    "input": "nested-if.input.txt",
+    "diagnostics": [
+      "collapsible-if"
+    ]
+  },
+  {
+    "name": "nesting-limit",
+    "path": "nested.py",
+    "input": "nesting-limit.input.txt",
+    "diagnostics": [
+      "too-many-nested-blocks"
+    ]
+  },
+  {
+    "name": "excluded-file",
+    "path": "generated.py",
+    "input": "excluded-file.input.txt",
+    "setup": {
+      "ruff.toml": "extend-exclude = [\"generated.py\"]\n"
+    }
+  },
+  {
+    "name": "clean",
+    "path": "clean.py",
+    "input": "clean.input.txt"
+  }
+]

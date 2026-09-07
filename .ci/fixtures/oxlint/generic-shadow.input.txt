@@ -1,0 +1,2 @@
+export type Value = object;
+export function read<Value>(value: Value) { return value; }

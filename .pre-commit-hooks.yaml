@@ -55,7 +55,7 @@
   entry: unslop
   language: python
   types: [markdown]
-  exclude: ^examples/unslop/coffee-before\.md$
+  exclude: ^\.ci/fixtures/unslop/coffee-before\.md$
   require_serial: true
 
 - id: gofumpt

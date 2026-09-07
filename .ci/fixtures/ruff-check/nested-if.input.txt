@@ -1,0 +1,4 @@
+def enabled(first, second):
+    if first:
+        if second:
+            print("yes")
