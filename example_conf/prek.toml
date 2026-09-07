@@ -11,7 +11,7 @@ id = "end-of-file-fixer"
 id = "check-added-large-files"
 
 [[repos]]
-repo = "https://github.com/ysawa0/prek"
+repo = "https://github.com/ysawa0/bestprek"
 rev = "1.23"
 
 [[repos.hooks]]
