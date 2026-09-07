@@ -1,0 +1,7 @@
+# Copyright (c) 2026 Example Authors
+"""Example module."""
+
+
+def greet(name):
+    """Return the supplied name."""
+    return name

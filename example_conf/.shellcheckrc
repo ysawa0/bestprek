@@ -1,0 +1,2 @@
+# Enable all optional ShellCheck checks as well as its default checks.
+enable=all
