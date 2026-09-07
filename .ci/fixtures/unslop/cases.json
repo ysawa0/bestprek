@@ -123,10 +123,6 @@
     "name": "coffee-noisy",
     "path": "coffee.md",
     "input": "coffee-before.md",
-    "diagnostics": [
-      "rhetoric.negative-parallelism",
-      "rhythm.short-sentence-run",
-      "verbosity.filler"
-    ]
+    "diagnostics": ["rhetoric.negative-parallelism", "rhythm.short-sentence-run", "verbosity.filler"]
   }
 ]
