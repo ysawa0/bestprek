@@ -1,0 +1,18 @@
+The word moreover appears inside this sentence.
+  Moreover, the sensor records a reading every minute.
+The battery lasts nine months. Moreover, it weighs twelve grams.
+The display shows a graph
+    
+Moreover, the cable measures two metres.
+
+MOREOVER, the enclosure contains three screws.
+
+ın addition, the case fits inside the drawer.
+
+```text
+Moreover, this code sample should be ignored.
+```
+
+<!-- Moreover, this comment should be ignored. -->
+
+The log contains `Moreover, this inline example is hidden.` and two timestamps.

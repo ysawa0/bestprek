@@ -418,35 +418,47 @@ def paragraph_openers(document: Document, options: Mapping[str, Any]) -> list[Fi
     ]
 
 
+TRANSITIONS = (
+    "moreover",
+    "furthermore",
+    "additionally",
+    "in addition",
+    "ultimately",
+    "in essence",
+    "at its core",
+    "that said",
+    "on the other hand",
+    "the key takeaway",
+    "here's the thing",
+    "here is the thing",
+)
+
+
+def transition_offsets(text: str, phrase: str) -> list[int]:
+    offsets: list[int] = []
+    for match in re.finditer(r"\b" + re.escape(phrase) + r"\b", text, re.IGNORECASE):
+        start = match.start()
+        while start > 0 and text[start - 1].isspace():
+            start -= 1
+        # Preserve the original start-of-line/sentence anchor and source offset.
+        # Searching for phrases first avoids rescanning masked code at every line.
+        if start > 0 and text[start - 1] not in ".!?":
+            newline = text.find("\n", start, match.start())
+            if newline == -1:
+                continue
+            start = newline + 1
+        offsets.append(start)
+    return offsets
+
+
 def transition_repetition(
     document: Document, options: Mapping[str, Any]
 ) -> list[Finding]:
-    phrases = [
-        "moreover",
-        "furthermore",
-        "additionally",
-        "in addition",
-        "ultimately",
-        "in essence",
-        "at its core",
-        "that said",
-        "on the other hand",
-        "the key takeaway",
-        "here's the thing",
-        "here is the thing",
-    ]
     max_count = int(options.get("max", 2))
     window = int(options.get("window_words", 500))
     findings: list[Finding] = []
-    for phrase in phrases:
-        offsets = [
-            m.start()
-            for m in re.finditer(
-                r"(?:(?<=^)|(?<=[.!?]))\s*" + re.escape(phrase) + r"\b",
-                document.visible,
-                re.IGNORECASE | re.MULTILINE,
-            )
-        ]
+    for phrase in TRANSITIONS:
+        offsets = transition_offsets(document.visible, phrase)
         for cluster in cluster_offsets(document, offsets, max_count, window):
             findings.append(
                 Finding(
