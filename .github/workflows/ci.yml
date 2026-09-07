@@ -36,7 +36,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          version="$(tr -d '[:space:]' < RELEASE)"
+          read -r version < RELEASE
           if [[ ! "$version" =~ ^[0-9]+\.[0-9]+$ ]]; then
             echo "RELEASE must contain a version such as 1.15" >&2
             exit 1

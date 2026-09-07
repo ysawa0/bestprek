@@ -1,0 +1,54 @@
+[[repos]]
+repo = "builtin"
+
+[[repos.hooks]]
+id = "trailing-whitespace"
+
+[[repos.hooks]]
+id = "end-of-file-fixer"
+
+[[repos.hooks]]
+id = "check-yaml"
+
+[[repos.hooks]]
+id = "check-added-large-files"
+
+[[repos]]
+repo = "https://github.com/ysawa0/prek"
+rev = "1.19"
+
+[[repos.hooks]]
+id = "oxfmt"
+
+[[repos.hooks]]
+id = "oxlint"
+
+[[repos.hooks]]
+id = "ruff-format"
+
+[[repos.hooks]]
+id = "ruff-check"
+
+[[repos.hooks]]
+id = "unbold"
+
+[[repos.hooks]]
+id = "unslop"
+
+[[repos.hooks]]
+id = "goimports"
+
+[[repos.hooks]]
+id = "gofumpt"
+
+[[repos.hooks]]
+id = "gopls-check"
+
+[[repos.hooks]]
+id = "go-vet"
+
+[[repos.hooks]]
+id = "shfmt"
+
+[[repos.hooks]]
+id = "shellcheck"

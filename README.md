@@ -79,6 +79,32 @@ prek run --all-files
 
 Run one hook with `prek run <hook-id> --all-files`.
 
+## Full copyable setup
+
+`example_conf/` is the complete configuration for consuming repositories. Copy its contents, including hidden files, into the destination repository root:
+
+```sh
+cp -R /path/to/prek/example_conf/. /path/to/your-repo/
+cd /path/to/your-repo
+prek install --prepare-hooks
+prek run --all-files
+```
+
+The directory contains:
+
+- `prek.toml`: all 12 bundled hooks plus whitespace, YAML, and large-file checks;
+- `ruff.toml`: Ruff's `ALL` rule set, with formatter conflicts and the competing docstring layout excluded;
+- `.unslop.json`: all 25 prose rules through the strict preset, failing on every finding;
+- `.oxfmtrc.jsonc`: JavaScript, TypeScript, and JSON formatting settings;
+- `.shellcheckrc`: all optional ShellCheck checks;
+- `.github/workflows/lint.yml`: the same hooks on pushes and pull requests.
+
+The Oxlint hook loads its bundled policy automatically, including all 15 custom rules. The hook's existing rule exclusions remain in force, as does ShellCheck's SC1091 exclusion. Ruff retains the hook's explicit preview-rule policy and nesting limit. See [Ruff's formatter compatibility guidance](https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules) for the formatting exclusions.
+
+Install Prek before running these commands. Merge files where the destination already has configuration you want to retain. Hooks skip languages without matching files; repositories with Go files need a root `go.mod` or `go.work` appropriate for `go vet ./...`.
+
+Keep `example_conf/` current whenever the hooks or their configuration change. The release command updates its revision, and CI tests the copied setup.
+
 ## Unslop
 
 The `unslop` hook is a deterministic prose linter. It evaluates the text in front of it rather than guessing whether a person or model wrote it.
@@ -164,7 +190,7 @@ The end-to-end suite installs hooks from the committed HEAD in a temporary consu
 ## Release
 
 1. Write `.github/release-notes/<version>.md`.
-2. Run `make release VERSION=<version>` to update `RELEASE`, the README example, and the Unslop CLI version.
+2. Run `make release VERSION=<version>` to update `RELEASE`, the README example, `example_conf/prek.toml`, and the Unslop CLI version.
 3. Commit and push the changes to `main`.
 4. CI validates the manifest, runs the Python tests, local hooks, published-hook smoke checks, and end-to-end hook checks. After they pass, CI creates the GitHub release and matching tag.
 

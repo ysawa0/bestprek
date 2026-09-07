@@ -1,1 +1,5 @@
 1.19
+
+# Keep example_conf/ complete and current whenever hooks or configuration change.
+# Every release must update example_conf/prek.toml to the version on line 1.
+# Run make release VERSION=<version>; CI verifies the copied setup.

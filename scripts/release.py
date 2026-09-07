@@ -14,9 +14,12 @@ def main() -> None:
     notes = ROOT / ".github" / "release-notes" / f"{version}.md"
     if not notes.is_file():
         raise SystemExit(f"Write release notes in {notes} first")
-    previous = (ROOT / "RELEASE").read_text().strip()
+    release = ROOT / "RELEASE"
+    lines = release.read_text().splitlines()
+    previous = lines[0]
     replacements = {
         "README.md": (f'rev = "{previous}"', f'rev = "{version}"'),
+        "example_conf/prek.toml": (f'rev = "{previous}"', f'rev = "{version}"'),
         "hooks/unslop.py": (f'VERSION = "{previous}"', f'VERSION = "{version}"'),
     }
     for filename, (old, new) in replacements.items():
@@ -25,7 +28,8 @@ def main() -> None:
         if text.count(old) != 1:
             raise SystemExit(f"Expected one {old!r} in {filename}")
         path.write_text(text.replace(old, new))
-    (ROOT / "RELEASE").write_text(version + "\n")
+    lines[0] = version
+    release.write_text("\n".join(lines) + "\n")
     print(f"Prepared {version}. Commit and push to main; CI tests and publishes it.")
 
 
