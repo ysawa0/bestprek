@@ -56,7 +56,6 @@
   language: python
   types: [markdown]
   exclude: ^\.ci/fixtures/unslop/coffee-before\.md$
-  require_serial: true
 
 - id: gofumpt
   name: gofumpt

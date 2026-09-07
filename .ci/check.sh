@@ -5,6 +5,7 @@ cd "$(dirname "$0")/.."
 mkdir -p tmp
 
 uv run --no-sync python3 -m unittest discover -s .ci -p test_unslop.py -v
+uv run --no-sync python3 .ci/unslop_checks.py
 prek validate-config prek.toml
 prek validate-manifest .pre-commit-hooks.yaml
 prek run --all-files
