@@ -2,6 +2,7 @@ mod cli;
 mod config;
 mod document;
 mod markdown;
+mod math;
 mod repetition;
 mod rhetoric;
 mod rules;

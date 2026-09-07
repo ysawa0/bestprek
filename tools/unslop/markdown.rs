@@ -26,11 +26,15 @@ impl Projection {
         out.raw_code(source);
         out.line_constructs(source, &lines);
         out.inline(source);
+        for span in crate::math::spans(&out.visible) {
+            out.mask(span, true, true);
+            out.headings.retain(|heading| heading.start < span.start || heading.start >= span.end);
+        }
         out.suppression = out.visible.iter().collect();
         out.mask_matches(source, r"(?s)<!--.*?-->");
         let visible = Mapped::new(out.visible.iter().collect());
         out.bold = bold_spans(&visible);
-        out.parenthetical = rx(r"\([^()\n]{2,120}\)").find_iter(&visible.text).map(|m| visible.span(m)).collect();
+        out.parenthetical = rx(r"\([^()\n]{2,120}\)").find_iter(&visible.text).filter(|m| !rx(r"^\([A-Za-z]*[0-9]+[A-Za-z]?\)$").is_match(m.as_str())).map(|m| visible.span(m)).collect();
         for target in [&mut out.visible, &mut out.structural] {
             for ch in target {
                 if matches!(*ch, '*' | '_' | '`') {

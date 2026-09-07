@@ -1,0 +1,20 @@
+# Mathematical notation
+
+The bound uses \(f(alpha)+g(beta)+h(gamma)+j(delta)+k(theta)+m(sigma)\).
+
+\[
+W(t)=\cos(2\pi t)+\cos(4\pi t)+\cos(6\pi t)
++\cos(8\pi t)+\cos(10\pi t)+\cos(12\pi t).
+\text{In order to evaluate this term, substitute the endpoint.}
+\]
+
+The other form is $f(alpha)+g(beta)+h(gamma)+j(delta)+k(theta)+m(sigma)$.
+
+$$
+f(alpha)+g(beta)+h(gamma)+j(delta)+k(theta)+m(sigma).
+\text{In order to evaluate this term, substitute the endpoint.}
+$$
+
+🎯 In order to evaluate the bound, run the certificate.
+
+Apply (CW5), (CW6), (CW7), (CW8), (CW9), and (CW10) to the coefficients.
