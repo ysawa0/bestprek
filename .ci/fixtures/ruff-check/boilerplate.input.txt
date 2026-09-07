@@ -1,0 +1,21 @@
+import unittest
+
+from .support import VALUE
+
+
+def show(value: str) -> None:
+    unused = value
+    print(value)
+    if not value:
+        raise ValueError("value cannot be empty")
+    if value == "bad":
+        raise ValueError(f"invalid value: {value}")
+    if value == "worse":
+        raise ValueError("invalid value: {}".format(value))
+
+
+class Checks(unittest.TestCase):
+    def test_value(self) -> None:
+        self.assertEqual(VALUE, 1)
+        with self.assertRaises(ValueError):
+            show("")

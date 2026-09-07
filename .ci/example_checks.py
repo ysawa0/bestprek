@@ -60,9 +60,6 @@ def seed(work: Path) -> None:
     }
     for target, source in sources.items():
         shutil.copyfile(FIXTURES / source, work / target)
-    (work / "__init__.py").write_text(
-        '# Copyright (c) 2026 Example Authors\n"""Example package."""\n'
-    )
     (work / "go.mod").write_text("module hooktest\n\ngo 1.25\n")
     subprocess.run(["git", "add", "-A"], cwd=work, check=True)
 
