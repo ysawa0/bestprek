@@ -1,6 +1,6 @@
 # bestprek
 
-A small, version-pinned hook bundle for ysawa0 repositories, designed for Prek.
+Pre-commit hooks
 
 ## Hooks
 
