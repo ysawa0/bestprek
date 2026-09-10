@@ -195,7 +195,7 @@ The end-to-end suite installs hooks from the committed HEAD in a temporary consu
 
 1. Write `.github/release-notes/<version>.md`.
 2. Run `make release VERSION=<version>` to update `RELEASE`, the README example, `example_conf/prek.toml`, and the Unslop CLI version.
-3. Commit and push the changes to a branch, then open a pull request into `main`. Merge it after the required `check` job passes; reviewer approval is not required.
+3. Commit and push the changes to `main`.
 4. CI builds and lints Rust, validates the manifest, and runs local hooks, CLI reference fixtures, published-hook smoke checks, and end-to-end hook checks. After they pass, CI creates the GitHub release and matching tag.
 
 The local release command only prepares metadata. CI is the sole publisher.
