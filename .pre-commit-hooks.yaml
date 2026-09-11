@@ -99,6 +99,16 @@
   pass_filenames: false
   require_serial: true
 
+- id: gocyclo
+  name: gocyclo
+  description: "Reject Go functions with cyclomatic complexity above 15"
+  entry: gocyclo -over 15
+  language: golang
+  language_version: "1.26.5"
+  additional_dependencies: ["github.com/fzipp/gocyclo/cmd/gocyclo@v0.6.0"]
+  types: [go]
+  pass_filenames: true
+
 - id: shellcheck
   name: shellcheck
   description: "Run shellcheck for shell script linting"

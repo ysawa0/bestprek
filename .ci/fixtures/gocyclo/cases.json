@@ -1,0 +1,13 @@
+[
+  {
+    "name": "at threshold",
+    "path": "threshold.go",
+    "input": "threshold.input.txt"
+  },
+  {
+    "name": "over threshold",
+    "path": "complex.go",
+    "input": "complex.input.txt",
+    "diagnostics": ["16 main tooComplex"]
+  }
+]

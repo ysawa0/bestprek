@@ -28,6 +28,6 @@ Without `expected`, file contents must remain byte-for-byte unchanged. The defau
 
 Payloads use `.txt` to keep repository hooks from formatting deliberate errors. Coffee calibration documents remain Markdown under `unslop/`; the noisy article is excluded from routine prose linting and exercised by the tests.
 
-The suite checks all 12 published hooks and has accepted and rejected examples for all 15 vendored Oxlint rules. Coverage checks require a fixture group for each published hook and a rejection fixture for each enabled custom Oxlint rule.
+The suite checks all 13 published hooks and has accepted and rejected examples for all 15 vendored Oxlint rules. Coverage checks require a fixture group for each published hook and a rejection fixture for each enabled custom Oxlint rule.
 
 The Unslop CLI check compares the Rust executable with saved Python diagnostics in `unslop/parity/`, including a positive fixture for each of its 25 rules. It checks text and GitHub output, Unicode source locations, configuration errors, suppressions, and Markdown masking. It also repeats the transition check after a 20,000-line code block, with a 10-second timeout to catch repeated whitespace scans.

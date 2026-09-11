@@ -14,6 +14,7 @@ Pre-commit hooks
 - `goimports`: format Go and fix imports
 - `gopls-check`: run `gopls check` on Go files
 - `go-vet`: run `go vet ./...` in the current Go module
+- `gocyclo`: reject Go functions with cyclomatic complexity above 15
 - `shellcheck`: lint shell scripts
 - `shfmt`: format shell scripts
 
@@ -64,6 +65,9 @@ id = "gopls-check"
 id = "go-vet"
 
 [[repos.hooks]]
+id = "gocyclo"
+
+[[repos.hooks]]
 id = "shfmt"
 
 [[repos.hooks]]
@@ -92,7 +96,7 @@ prek run --all-files
 
 The directory contains:
 
-- `prek.toml`: all 12 bundled hooks plus whitespace and large-file checks;
+- `prek.toml`: all 13 bundled hooks plus whitespace and large-file checks;
 - `ruff.toml`: Ruff's `ALL` rule set, with boilerplate requirements and formatter conflicts excluded;
 - `.unslop.json`: all 25 prose rules through the strict preset, failing on every finding;
 - `.oxfmtrc.jsonc`: JavaScript, TypeScript, and JSON formatting settings;

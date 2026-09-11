@@ -45,6 +45,9 @@ id = "gopls-check"
 id = "go-vet"
 
 [[repos.hooks]]
+id = "gocyclo"
+
+[[repos.hooks]]
 id = "shfmt"
 
 [[repos.hooks]]
