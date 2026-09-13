@@ -1,0 +1,30 @@
+# Interview question bank
+
+## Motivation
+
+Why this company? Why this team? What worries you about AI?
+What excites you? Where do you disagree with the company?
+
+## System design
+
+Session 1 — system design screen.
+Session 2 — inference API.
+Session 3 — batch service.
+Session 4 — prompt playground.
+Session 5 — hiring manager.
+Session 6 — culture.
+
+## Evaluation
+
+Company quality, role quality, and compensation matter.
+Lead, application, and interview counts are supporting measures.
+Consider values, ethics, and priorities.
+
+## Sources
+
+The screen (thread 1136327) includes streaming (SSE), fairness (per tenant),
+capacity (peak QPS), batching (occupancy), and latency (p99).
+
+## Practice
+
+Run it. Check it. Try again.

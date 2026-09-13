@@ -2,7 +2,15 @@
   {
     "name": "case-1",
     "preset": "recommended",
-    "config": {}
+    "config": {
+      "rules": {
+        "rhetoric.question-answer": "warning",
+        "rhetoric.question-density": "warning",
+        "rhythm.short-sentence-run": "warning",
+        "rhetoric.tricolon-density": "info",
+        "density.em-dash": "warning"
+      }
+    }
   },
   {
     "name": "case-2",
@@ -195,7 +203,15 @@
   {
     "name": "hook-coffee-noisy",
     "preset": "recommended",
-    "config": {},
+    "config": {
+      "rules": {
+        "rhetoric.question-answer": "warning",
+        "rhetoric.question-density": "warning",
+        "rhythm.short-sentence-run": "warning",
+        "rhetoric.tricolon-density": "info",
+        "density.em-dash": "warning"
+      }
+    },
     "input": "../coffee-before.md"
   },
   {
@@ -256,12 +272,21 @@
   {
     "name": "rhetoric-question-answer",
     "preset": "strict",
-    "config": {}
+    "config": {
+      "rules": {
+        "rhetoric.question-answer": "warning"
+      }
+    }
   },
   {
     "name": "rhetoric-question-density",
     "preset": "strict",
-    "config": {}
+    "config": {
+      "rules": {
+        "rhythm.short-sentence-run": "warning",
+        "rhetoric.question-density": "warning"
+      }
+    }
   },
   {
     "name": "rhetoric-echoed-clauses",
@@ -271,17 +296,30 @@
   {
     "name": "rhetoric-tricolon-density",
     "preset": "strict",
-    "config": {}
+    "config": {
+      "rules": {
+        "rhetoric.tricolon-density": "warning",
+        "rhythm.short-sentence-run": "warning"
+      }
+    }
   },
   {
     "name": "repetition-sentence-opener",
     "preset": "strict",
-    "config": {}
+    "config": {
+      "rules": {
+        "rhythm.short-sentence-run": "warning"
+      }
+    }
   },
   {
     "name": "repetition-paragraph-opener",
     "preset": "strict",
-    "config": {}
+    "config": {
+      "rules": {
+        "rhythm.short-sentence-run": "warning"
+      }
+    }
   },
   {
     "name": "repetition-transition",
@@ -291,22 +329,38 @@
   {
     "name": "repetition-loaded-word",
     "preset": "strict",
-    "config": {}
+    "config": {
+      "rules": {
+        "rhythm.short-sentence-run": "warning"
+      }
+    }
   },
   {
     "name": "short-run",
     "preset": "strict",
-    "config": {}
+    "config": {
+      "rules": {
+        "rhythm.short-sentence-run": "warning"
+      }
+    }
   },
   {
     "name": "uniform-length",
     "preset": "strict",
-    "config": {}
+    "config": {
+      "rules": {
+        "rhythm.short-sentence-run": "warning"
+      }
+    }
   },
   {
     "name": "density-em-dash",
     "preset": "strict",
-    "config": {}
+    "config": {
+      "rules": {
+        "density.em-dash": "warning"
+      }
+    }
   },
   {
     "name": "density-bold",

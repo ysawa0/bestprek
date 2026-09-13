@@ -292,13 +292,13 @@
   {
     "id": "rhetoric.question-answer",
     "summary": "Repeated staged questions followed by short answers",
-    "recommended_severity": "warning",
+    "recommended_severity": "off",
     "defaults": {
       "max": 1,
       "window_words": 400,
       "answer_max_words": 5
     },
-    "strict_severity": null,
+    "strict_severity": "info",
     "strict_defaults": {
       "max": 0
     },
@@ -308,12 +308,12 @@
   {
     "id": "rhetoric.question-density",
     "summary": "Too many questions in a short passage",
-    "recommended_severity": "warning",
+    "recommended_severity": "off",
     "defaults": {
       "max": 3,
       "window_words": 500
     },
-    "strict_severity": null,
+    "strict_severity": "info",
     "strict_defaults": {
       "max": 2
     },
@@ -336,12 +336,12 @@
   {
     "id": "rhetoric.tricolon-density",
     "summary": "Repeated three-part rhetorical lists",
-    "recommended_severity": "info",
+    "recommended_severity": "off",
     "defaults": {
       "max": 3,
       "window_words": 750
     },
-    "strict_severity": "warning",
+    "strict_severity": "info",
     "strict_defaults": {
       "max": 2
     },
@@ -413,12 +413,12 @@
   {
     "id": "rhythm.short-sentence-run",
     "summary": "Run of very short sentences",
-    "recommended_severity": "warning",
+    "recommended_severity": "off",
     "defaults": {
       "max_words": 5,
       "minimum_run": 3
     },
-    "strict_severity": null,
+    "strict_severity": "info",
     "strict_defaults": {
       "max_words": 6
     },
@@ -441,12 +441,12 @@
   {
     "id": "density.em-dash",
     "summary": "High em-dash density",
-    "recommended_severity": "warning",
+    "recommended_severity": "off",
     "defaults": {
       "max": 4,
       "window_words": 500
     },
-    "strict_severity": null,
+    "strict_severity": "info",
     "strict_defaults": {
       "max": 3
     },

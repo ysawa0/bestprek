@@ -70,6 +70,7 @@ def main() -> None:
         check_contrasts(work)
         check_options(work)
         check_math(work)
+        check_presets(work)
 
 
 def check_contrasts(work: Path) -> None:
@@ -191,7 +192,10 @@ def check_case(work: Path, folder: Path, case: dict) -> None:
             raise AssertionError(f"{name}: {result.stdout}{result.stderr}")
         return
     expected = json.loads((folder / f"{name}.expected.txt").read_text())
-    if result.returncode != int(bool(expected)):
+    fail_level = case["config"].get("fail_level", "warning")
+    levels = {"info": 0, "warning": 1, "error": 2, "none": 3}
+    failed = any(levels[item["severity"]] >= levels[fail_level] for item in expected)
+    if result.returncode != int(failed):
         raise AssertionError(f"{name}: {result.stdout}{result.stderr}")
     actual = json.loads(result.stdout)
     for diagnostic in actual:
@@ -214,6 +218,48 @@ def invoke(
     if result.returncode != expected:
         raise AssertionError(result.stdout + result.stderr)
     return result
+
+
+def check_presets(work: Path) -> None:
+    config = work / ".unslop.json"
+    config.write_text("{}\n")
+    path = work / "reference.md"
+    path.write_text((FIXTURES / "reference-notes.input.txt").read_text())
+    result = invoke(work, "--format", "json", str(path), expected=0)
+    if json.loads(result.stdout):
+        raise AssertionError(result.stdout)
+    source = "\n\n".join(
+        (FIXTURES / "parity" / f"{name}.input.txt").read_text()
+        for name in [
+            "density-em-dash", "rhetoric-tricolon-density",
+            "rhetoric-question-answer", "rhetoric-question-density",
+            "short-run", "density-parenthetical", "structure-heading-density",
+        ]
+    )
+    path.write_text(source)
+    advisory = {
+        "density.em-dash", "rhetoric.tricolon-density",
+        "rhetoric.question-answer", "rhetoric.question-density",
+        "rhythm.short-sentence-run", "density.parenthetical",
+        "structure.heading-density",
+    }
+    for preset in ("recommended", "strict"):
+        result = invoke(work, "--preset", preset, "--format", "json",
+                        "--fail-level", "none", str(path), expected=0)
+        findings = json.loads(result.stdout)
+        selected = [item for item in findings if item["rule"] in advisory]
+        if preset == "recommended" and selected:
+            raise AssertionError(selected)
+        if preset == "strict" and (
+            not selected or any(item["severity"] != "info" for item in selected)
+        ):
+            raise AssertionError(selected)
+    path.write_text((FIXTURES / "parity" / "density-em-dash.input.txt").read_text())
+    invoke(work, "--preset", "strict", str(path), expected=0)
+    invoke(work, "--preset", "strict", "--fail-level", "info", str(path), expected=1)
+    path.write_text("In order to finish, save the document.\n")
+    invoke(work, str(path), expected=1)
+    print("PASS unslop CLI: subjective devices are opt-in and advisory by default")
 
 
 def check_options(work: Path) -> None:

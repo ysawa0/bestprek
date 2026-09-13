@@ -1,4 +1,4 @@
 {
-  "preset": "strict",
-  "fail_level": "info"
+  "preset": "recommended",
+  "fail_level": "warning"
 }

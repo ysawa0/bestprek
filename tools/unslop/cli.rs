@@ -78,7 +78,7 @@ struct Diagnostic {
 fn lint(args: &Args) -> Result<(Vec<Diagnostic>, String), String> {
     let config = read_config(args.config.as_deref())?;
     let preset = args.preset.as_deref().or_else(|| config.get("preset").and_then(|v| v.as_str())).unwrap_or("recommended");
-    let fail_level = args.fail_level.as_deref().or_else(|| config.get("fail_level").and_then(|v| v.as_str())).unwrap_or("info").to_owned();
+    let fail_level = args.fail_level.as_deref().or_else(|| config.get("fail_level").and_then(|v| v.as_str())).unwrap_or("warning").to_owned();
     let rules = resolve(preset, &config)?;
     let mut diagnostics = Vec::new();
     for path in &args.files {

@@ -1,9 +1,9 @@
 {
   "preset": "recommended",
-  "fail_level": "info",
+  "fail_level": "warning",
   "rules": {
     "density.em-dash": {
-      "severity": "warning",
+      "severity": "info",
       "max": 5,
       "window_words": 500
     },

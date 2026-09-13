@@ -98,7 +98,7 @@ The directory contains:
 
 - `prek.toml`: all 13 bundled hooks plus whitespace and large-file checks;
 - `ruff.toml`: Ruff's `ALL` rule set, with boilerplate requirements and formatter conflicts excluded;
-- `.unslop.json`: all 25 prose rules through the strict preset, failing on every finding;
+- `.unslop.json`: recommended prose rules, failing on warnings and errors;
 - `.oxfmtrc.jsonc`: JavaScript, TypeScript, and JSON formatting settings;
 - `.shellcheckrc`: optional ShellCheck checks except SC2250 (variable-brace style);
 - `.github/workflows/lint.yml`: the same hooks on pushes and pull requests.
@@ -115,7 +115,7 @@ Keep `example_conf/` current whenever the hooks or their configuration change. T
 
 The `unslop` hook is a deterministic prose linter written in Rust. It evaluates the text in front of it rather than guessing whether a person or model wrote it. Prek builds the native executable with Cargo during hook installation and runs independent file batches in parallel.
 
-The recommended preset contains 25 explainable rules for:
+The catalogue contains 25 rules across the recommended and strict presets for:
 
 - removable filler and redundant phrases;
 - vague attribution and promotional wording;
@@ -126,19 +126,19 @@ The recommended preset contains 25 explainable rules for:
 - em-dash, bold, parenthetical, and heading density;
 - pasted chatbot citation or UI residue.
 
-Most subjective devices are density-based. One em dash or one `not X, but Y` contrast is normal; a cluster of the same move is what gets flagged.
+The recommended preset disables em-dash density, three-item-list density, question density, question-answer turns, short-sentence runs, parenthetical density, heading density, and uniform sentence lengths. These checks often flag legitimate reference documents and interview question banks. Strict enables them as informational review suggestions, not required edits. Do not mechanically replace punctuation, remove useful headings, or paraphrase source quotations to satisfy them.
 
-The linter preserves source positions while ignoring code fences, inline code, LaTeX math (`\(...\)`, `\[...\]`, `$...$`, and `$$...$$`), URLs, front matter, comments, blockquotes, tables, link destinations, and MDX tags. Equation references such as `(CW5)` do not count as parenthetical asides. Repetition rules reset at headings so API reference sections can use a consistent template without being mistaken for monotonous prose. By default, any finding at `info` or higher fails the hook.
+The linter preserves source positions while ignoring code fences, inline code, LaTeX math (`\(...\)`, `\[...\]`, `$...$`, and `$$...$$`), URLs, front matter, comments, blockquotes, tables, link destinations, and MDX tags. Equation references such as `(CW5)` do not count as parenthetical asides. Repetition rules reset at headings so API reference sections can use a consistent template without being mistaken for monotonous prose. By default, warnings and errors fail the hook; informational findings do not. `--fail-level info` explicitly makes advisory findings blocking. Use `--fail-level none` for an editorial review that never fails on findings.
 
 Use `.unslop.json` for repository-specific tuning. An example lives at `.unslop.example.json`.
 
 ```json
 {
   "preset": "recommended",
-  "fail_level": "info",
+  "fail_level": "warning",
   "rules": {
     "density.em-dash": {
-      "severity": "warning",
+      "severity": "info",
       "max": 5,
       "window_words": 500
     },
