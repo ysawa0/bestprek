@@ -3,36 +3,42 @@
     "name": "example-0",
     "path": "example-0.md",
     "input": "example-0.input.txt",
+    "args": ["--fail-level", "info"],
     "diagnostics": ["phrase.marketing-language"]
   },
   {
     "name": "example-1",
     "path": "example-1.md",
     "input": "example-1.input.txt",
+    "args": ["--fail-level", "info"],
     "diagnostics": ["phrase.marketing-language"]
   },
   {
     "name": "example-2",
     "path": "example-2.md",
     "input": "example-2.input.txt",
+    "args": ["--fail-level", "info"],
     "diagnostics": ["phrase.marketing-language"]
   },
   {
     "name": "example-3",
     "path": "example-3.md",
     "input": "example-3.input.txt",
+    "args": ["--fail-level", "info"],
     "diagnostics": ["phrase.marketing-language"]
   },
   {
     "name": "example-4",
     "path": "example-4.md",
     "input": "example-4.input.txt",
+    "args": ["--fail-level", "info"],
     "diagnostics": ["phrase.marketing-language"]
   },
   {
     "name": "example-5",
     "path": "example-5.md",
     "input": "example-5.input.txt",
+    "args": ["--fail-level", "info"],
     "diagnostics": ["phrase.marketing-language"]
   },
   {
@@ -44,6 +50,7 @@
     "name": "draft",
     "path": "draft.md",
     "input": "draft.input.txt",
+    "args": ["--fail-level", "info"],
     "diagnostics": ["phrase.marketing-language"]
   },
   {
@@ -90,12 +97,14 @@
     "name": "next-line",
     "path": "draft.md",
     "input": "next-line.input.txt",
+    "args": ["--fail-level", "info"],
     "diagnostics": ["draft.md:4:"]
   },
   {
     "name": "enable-again",
     "path": "draft.md",
     "input": "enable-again.input.txt",
+    "args": ["--fail-level", "info"],
     "diagnostics": ["draft.md:4:"]
   },
   {
@@ -123,6 +132,7 @@
     "name": "coffee-noisy",
     "path": "coffee.md",
     "input": "coffee-before.md",
+    "args": ["--preset", "strict", "--fail-level", "info"],
     "diagnostics": ["rhetoric.negative-parallelism", "rhythm.short-sentence-run", "verbosity.filler"]
   }
 ]
