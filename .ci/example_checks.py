@@ -73,7 +73,7 @@ def check_rejections(work: Path) -> None:
             "Missing type annotation",
         ),
         ("oxlint", "sample.ts", "oxlint/bad.input.txt", "leaves input unparsed"),
-        ("unslop", "README.md", "example/strict.md.txt", "density.parenthetical"),
+        ("unslop", "README.md", "unslop/residue.input.txt", "artifact.chatbot-residue"),
         ("shellcheck", "sample.sh", "example/optional.sh.txt", "SC2230"),
     ]
     for hook, target, source, diagnostic in cases:
@@ -114,6 +114,9 @@ def main() -> None:
         run(work, "install", "--prepare-hooks")
         run(work, "run", "--all-files")
         check_rejections(work)
+        shutil.copyfile(FIXTURES / "example/strict.md.txt", work / "README.md")
+        run(work, "run", "unslop", "--files", "README.md")
+        print("PASS copied example: recommended preset accepts strict-only prose")
         run(work, "run", "--all-files")
         print("PASS copied example: all hooks pass on clean files", flush=True)
 
