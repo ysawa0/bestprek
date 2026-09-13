@@ -106,58 +106,97 @@ func htmlEnd(text string, start int) int {
 	return start
 }
 
+type markdownProtector struct {
+	input       string
+	protected   []bool
+	fence       byte
+	fenceLength int
+}
+
+func (p *markdownProtector) protect(start, end int) {
+	for i := start; i < end; i++ {
+		p.protected[i] = true
+	}
+}
+
+func lineEnd(input string, start int) int {
+	if newline := strings.IndexByte(input[start:], '\n'); newline >= 0 {
+		return start + newline + 1
+	}
+	return len(input)
+}
+
+func (p *markdownProtector) updateFence(trimmed string, indented bool) {
+	if indented || len(trimmed) == 0 {
+		return
+	}
+	marker := trimmed[0]
+	if marker != '`' && marker != '~' {
+		return
+	}
+	length := runLength(trimmed, 0)
+	if p.fence == 0 {
+		if length >= 3 {
+			p.fence, p.fenceLength = marker, length
+		}
+		return
+	}
+	if p.fence != marker || length < p.fenceLength {
+		return
+	}
+	if strings.TrimSpace(trimmed[length:]) == "" {
+		p.fence, p.fenceLength = 0, 0
+	}
+}
+
+func (p *markdownProtector) protectLine(start int) (int, bool) {
+	end := lineEnd(p.input, start)
+	line := p.input[start:end]
+	leadingSpaces := len(line) - len(strings.TrimLeft(line, " "))
+	indented := leadingSpaces >= 4 || strings.HasPrefix(line[leadingSpaces:], "\t")
+	trimmed := strings.TrimLeft(line, " >\t")
+	wasFenced := p.fence != 0
+	p.updateFence(trimmed, indented)
+	if wasFenced || p.fence != 0 || indented {
+		return end, true
+	}
+	return end, thematicBreak(trimmed) || reference.MatchString(line)
+}
+
+func inlineProtectionEnd(input string, start int) int {
+	if input[start] == '\\' && start+1 < len(input) {
+		return start + 2
+	}
+	if input[start] == '`' {
+		return inlineCodeEnd(input, start)
+	}
+	if input[start] == '<' {
+		return htmlEnd(input, start)
+	}
+	if input[start] == '(' && start > 0 && input[start-1] == ']' {
+		return linkEnd(input, start)
+	}
+	return start
+}
+
 // Mark syntax whose literal content must never be rewritten as emphasis.
 func protectedMarkdown(input string) []bool {
-	protected := make([]bool, len(input))
-	protect := func(start, end int) {
-		for i := start; i < end; i++ {
-			protected[i] = true
-		}
-	}
-	var fence byte
-	fenceLength := 0
+	protector := markdownProtector{input: input, protected: make([]bool, len(input))}
 	for i := 0; i < len(input); {
 		if i == 0 || input[i-1] == '\n' {
-			end := len(input)
-			if newline := strings.IndexByte(input[i:], '\n'); newline >= 0 {
-				end = i + newline + 1
-			}
-			line := input[i:end]
-			leadingSpaces := len(line) - len(strings.TrimLeft(line, " "))
-			indented := leadingSpaces >= 4 || strings.HasPrefix(line[leadingSpaces:], "\t")
-			trimmed := strings.TrimLeft(line, " >\t")
-			wasFenced := fence != 0
-			if !indented && len(trimmed) > 0 && (trimmed[0] == '`' || trimmed[0] == '~') {
-				n := runLength(trimmed, 0)
-				if fence == 0 && n >= 3 {
-					fence, fenceLength = trimmed[0], n
-				} else if fence == trimmed[0] && n >= fenceLength && strings.TrimSpace(trimmed[n:]) == "" {
-					fence = 0
-				}
-			}
-			if wasFenced || fence != 0 || indented || thematicBreak(trimmed) || reference.MatchString(line) {
-				protect(i, end)
+			if end, protect := protector.protectLine(i); protect {
+				protector.protect(i, end)
 				i = end
 				continue
 			}
 		}
-		end := i
-		switch {
-		case input[i] == '\\' && i+1 < len(input):
-			end = i + 2
-		case input[i] == '`':
-			end = inlineCodeEnd(input, i)
-		case input[i] == '<':
-			end = htmlEnd(input, i)
-		case input[i] == '(' && i > 0 && input[i-1] == ']':
-			end = linkEnd(input, i)
-		}
+		end := inlineProtectionEnd(input, i)
 		if end > i {
-			protect(i, end)
+			protector.protect(i, end)
 			i = end
 		} else {
 			i++
 		}
 	}
-	return protected
+	return protector.protected
 }
