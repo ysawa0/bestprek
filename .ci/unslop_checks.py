@@ -231,21 +231,37 @@ def check_presets(work: Path) -> None:
     source = "\n\n".join(
         (FIXTURES / "parity" / f"{name}.input.txt").read_text()
         for name in [
-            "density-em-dash", "rhetoric-tricolon-density",
-            "rhetoric-question-answer", "rhetoric-question-density",
-            "short-run", "density-parenthetical", "structure-heading-density",
+            "density-em-dash",
+            "rhetoric-tricolon-density",
+            "rhetoric-question-answer",
+            "rhetoric-question-density",
+            "short-run",
+            "density-parenthetical",
+            "structure-heading-density",
         ]
     )
     path.write_text(source)
     advisory = {
-        "density.em-dash", "rhetoric.tricolon-density",
-        "rhetoric.question-answer", "rhetoric.question-density",
-        "rhythm.short-sentence-run", "density.parenthetical",
+        "density.em-dash",
+        "rhetoric.tricolon-density",
+        "rhetoric.question-answer",
+        "rhetoric.question-density",
+        "rhythm.short-sentence-run",
+        "density.parenthetical",
         "structure.heading-density",
     }
     for preset in ("recommended", "strict"):
-        result = invoke(work, "--preset", preset, "--format", "json",
-                        "--fail-level", "none", str(path), expected=0)
+        result = invoke(
+            work,
+            "--preset",
+            preset,
+            "--format",
+            "json",
+            "--fail-level",
+            "none",
+            str(path),
+            expected=0,
+        )
         findings = json.loads(result.stdout)
         selected = [item for item in findings if item["rule"] in advisory]
         if preset == "recommended" and selected:
