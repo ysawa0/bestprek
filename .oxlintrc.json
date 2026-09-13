@@ -28,7 +28,7 @@
     "anti-slop/no-widen-then-assert": "error",
     "anti-slop/require-safety-comment-for-type-assertion": "error",
     "complexity": ["error", { "max": 25 }],
-    "curly": "error",
+    "curly": "off",
     "eslint/no-await-in-loop": "off",
     "eslint/no-shadow": "off",
     "typescript/no-explicit-any": "off",
