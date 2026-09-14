@@ -20,6 +20,8 @@ Pre-commit hooks
 
 ## Quickstart
 
+Agents installing or upgrading a consuming repository should follow [INSTALL.md](INSTALL.md) to update both the release pin and example configs.
+
 Install Prek:
 
 ```sh
