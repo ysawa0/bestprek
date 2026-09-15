@@ -1,5 +1,6 @@
 def visit(values):
-    for group in values:
-        for row in group:
-            for item in row:
-                print(item)
+    for section in values:
+        for group in section:
+            for row in group:
+                for item in row:
+                    print(item)

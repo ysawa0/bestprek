@@ -12,6 +12,11 @@
     "diagnostics": ["collapsible-if"]
   },
   {
+    "name": "nesting-allowed",
+    "path": "nested.py",
+    "input": "nesting-allowed.input.txt"
+  },
+  {
     "name": "nesting-limit",
     "path": "nested.py",
     "input": "nesting-limit.input.txt",

@@ -13,7 +13,7 @@ ignore = [
 ]
 
 [lint.pylint]
-max-nested-blocks = 2
+max-nested-blocks = 3
 
 [format]
 quote-style = "double"
