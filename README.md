@@ -33,7 +33,7 @@ Add `prek.toml` to the consuming repository:
 ```toml
 [[repos]]
 repo = "https://github.com/ysawa0/bestprek"
-rev = "1.27"
+rev = "1.28"
 
 [[repos.hooks]]
 id = "oxfmt"
