@@ -1,0 +1,4 @@
+package sample
+
+type counter struct { n int }
+func (c counter) bad() { c.n++ }

@@ -1,0 +1,4 @@
+package sample
+
+import "fmt"
+func bad() string { return fmt.Sprintf("hello") }

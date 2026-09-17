@@ -1,0 +1,3 @@
+package sample
+
+func bad(n int) { switch n { case 1: println("same"); case 2: println("same") } }

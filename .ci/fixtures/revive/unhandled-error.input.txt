@@ -1,0 +1,4 @@
+package sample
+
+import "os"
+func bad() { os.Chdir("/") }

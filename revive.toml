@@ -1,2 +1,33 @@
 [rule.max-control-nesting]
 arguments = [3]
+
+[rule.early-return]
+
+[rule.indent-error-flow]
+
+[rule.superfluous-else]
+
+[rule.if-return]
+
+[rule.unnecessary-if]
+
+[rule.identical-branches]
+
+[rule.identical-ifelseif-conditions]
+
+[rule.identical-switch-branches]
+
+[rule.constant-logical-expr]
+
+[rule.unnecessary-format]
+
+[rule.unnecessary-stmt]
+
+[rule.defer]
+
+[rule.modifies-value-receiver]
+
+[rule.unhandled-error]
+
+[rule.cognitive-complexity]
+arguments = [15]

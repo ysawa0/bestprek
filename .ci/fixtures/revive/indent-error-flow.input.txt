@@ -1,0 +1,3 @@
+package sample
+
+func bad(ok bool) { if ok { return } else { println("no") } }

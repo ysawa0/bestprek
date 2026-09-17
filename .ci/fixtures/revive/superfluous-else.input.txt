@@ -1,0 +1,3 @@
+package sample
+
+func bad(ok bool) { for { if ok { break } else { println("no") }; break } }

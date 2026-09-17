@@ -1,0 +1,3 @@
+package sample
+
+func bad(n int) { if n == 1 { println("one") } else if n == 1 { println("two") } }

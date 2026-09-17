@@ -1,0 +1,3 @@
+package sample
+
+func bad() { for i := 0; i < 3; i++ { defer println(i) } }

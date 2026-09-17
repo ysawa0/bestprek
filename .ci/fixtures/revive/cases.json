@@ -18,5 +18,155 @@
     "input": "syntax.input.txt",
     "diagnostics": ["expected"],
     "setup": { "revive.toml": "[rule.max-control-nesting]\narguments = [3]\n" }
+  },
+  {
+    "name": "early-return",
+    "path": "sample.go",
+    "input": "early-return.input.txt",
+    "args": ["-formatter", "json"],
+    "diagnostics": ["\"RuleName\":\"early-return\""],
+    "setup": {
+      "revive.toml": "[rule.early-return]\n"
+    }
+  },
+  {
+    "name": "indent-error-flow",
+    "path": "sample.go",
+    "input": "indent-error-flow.input.txt",
+    "args": ["-formatter", "json"],
+    "diagnostics": ["\"RuleName\":\"indent-error-flow\""],
+    "setup": {
+      "revive.toml": "[rule.indent-error-flow]\n"
+    }
+  },
+  {
+    "name": "superfluous-else",
+    "path": "sample.go",
+    "input": "superfluous-else.input.txt",
+    "args": ["-formatter", "json"],
+    "diagnostics": ["\"RuleName\":\"superfluous-else\""],
+    "setup": {
+      "revive.toml": "[rule.superfluous-else]\n"
+    }
+  },
+  {
+    "name": "if-return",
+    "path": "sample.go",
+    "input": "if-return.input.txt",
+    "args": ["-formatter", "json"],
+    "diagnostics": ["\"RuleName\":\"if-return\""],
+    "setup": {
+      "revive.toml": "[rule.if-return]\n"
+    }
+  },
+  {
+    "name": "unnecessary-if",
+    "path": "sample.go",
+    "input": "unnecessary-if.input.txt",
+    "args": ["-formatter", "json"],
+    "diagnostics": ["\"RuleName\":\"unnecessary-if\""],
+    "setup": {
+      "revive.toml": "[rule.unnecessary-if]\n"
+    }
+  },
+  {
+    "name": "identical-branches",
+    "path": "sample.go",
+    "input": "identical-branches.input.txt",
+    "args": ["-formatter", "json"],
+    "diagnostics": ["\"RuleName\":\"identical-branches\""],
+    "setup": {
+      "revive.toml": "[rule.identical-branches]\n"
+    }
+  },
+  {
+    "name": "identical-ifelseif-conditions",
+    "path": "sample.go",
+    "input": "identical-ifelseif-conditions.input.txt",
+    "args": ["-formatter", "json"],
+    "diagnostics": ["\"RuleName\":\"identical-ifelseif-conditions\""],
+    "setup": {
+      "revive.toml": "[rule.identical-ifelseif-conditions]\n"
+    }
+  },
+  {
+    "name": "identical-switch-branches",
+    "path": "sample.go",
+    "input": "identical-switch-branches.input.txt",
+    "args": ["-formatter", "json"],
+    "diagnostics": ["\"RuleName\":\"identical-switch-branches\""],
+    "setup": {
+      "revive.toml": "[rule.identical-switch-branches]\n"
+    }
+  },
+  {
+    "name": "constant-logical-expr",
+    "path": "sample.go",
+    "input": "constant-logical-expr.input.txt",
+    "args": ["-formatter", "json"],
+    "diagnostics": ["\"RuleName\":\"constant-logical-expr\""],
+    "setup": {
+      "revive.toml": "[rule.constant-logical-expr]\n"
+    }
+  },
+  {
+    "name": "unnecessary-format",
+    "path": "sample.go",
+    "input": "unnecessary-format.input.txt",
+    "args": ["-formatter", "json"],
+    "diagnostics": ["\"RuleName\":\"unnecessary-format\""],
+    "setup": {
+      "revive.toml": "[rule.unnecessary-format]\n"
+    }
+  },
+  {
+    "name": "unnecessary-stmt",
+    "path": "sample.go",
+    "input": "unnecessary-stmt.input.txt",
+    "args": ["-formatter", "json"],
+    "diagnostics": ["\"RuleName\":\"unnecessary-stmt\""],
+    "setup": {
+      "revive.toml": "[rule.unnecessary-stmt]\n"
+    }
+  },
+  {
+    "name": "defer",
+    "path": "sample.go",
+    "input": "defer.input.txt",
+    "args": ["-formatter", "json"],
+    "diagnostics": ["\"RuleName\":\"defer\""],
+    "setup": {
+      "revive.toml": "[rule.defer]\n"
+    }
+  },
+  {
+    "name": "modifies-value-receiver",
+    "path": "sample.go",
+    "input": "modifies-value-receiver.input.txt",
+    "args": ["-formatter", "json"],
+    "diagnostics": ["\"RuleName\":\"modifies-value-receiver\""],
+    "setup": {
+      "revive.toml": "[rule.modifies-value-receiver]\n"
+    }
+  },
+  {
+    "name": "unhandled-error",
+    "path": "sample.go",
+    "input": "unhandled-error.input.txt",
+    "args": ["-formatter", "json"],
+    "diagnostics": ["\"RuleName\":\"unhandled-error\""],
+    "setup": {
+      "revive.toml": "[rule.unhandled-error]\n"
+    }
+  },
+  {
+    "name": "cognitive-complexity",
+    "path": "sample.go",
+    "input": "cognitive-complexity.input.txt",
+    "args": ["-formatter", "json"],
+    "diagnostics": ["\"RuleName\":\"cognitive-complexity\""],
+    "setup": {
+      "revive.toml": "[rule.cognitive-complexity]\narguments = [15]\n"
+    }
   }
 ]

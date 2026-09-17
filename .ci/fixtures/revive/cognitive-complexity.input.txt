@@ -1,0 +1,20 @@
+package sample
+
+func bad(n int) {
+if n == 0 { println(n) }
+if n == 1 { println(n) }
+if n == 2 { println(n) }
+if n == 3 { println(n) }
+if n == 4 { println(n) }
+if n == 5 { println(n) }
+if n == 6 { println(n) }
+if n == 7 { println(n) }
+if n == 8 { println(n) }
+if n == 9 { println(n) }
+if n == 10 { println(n) }
+if n == 11 { println(n) }
+if n == 12 { println(n) }
+if n == 13 { println(n) }
+if n == 14 { println(n) }
+if n == 15 { println(n) }
+}
