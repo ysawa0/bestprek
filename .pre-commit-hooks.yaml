@@ -151,7 +151,7 @@
   name: cargo clippy
   description: "Lint all workspace packages and targets with Clippy; reject warnings"
   entry: cargo clippy --workspace --all-targets
-  args: ["--", "-D", "warnings", "-W", "clippy::cognitive_complexity", "-W", "clippy::excessive_nesting"]
+  args: ["--", "-D", "warnings", "-W", "clippy::cognitive_complexity", "-W", "clippy::excessive_nesting", "-W", "clippy::dbg_macro", "-W", "clippy::todo", "-W", "clippy::unimplemented"]
   language: system
   files: '(^|/)(.*\.rs|Cargo\.(toml|lock)|\.?clippy\.toml|rust-toolchain(\.toml)?)$'
   pass_filenames: false

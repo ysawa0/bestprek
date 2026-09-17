@@ -1,0 +1,1 @@
+pub fn debug(value: i32) -> i32 { dbg!(value) }

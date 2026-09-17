@@ -18,7 +18,7 @@ Pre-commit hooks
 - `revive`: lint Go using `revive.toml`; the supplied config limits control-flow nesting to three levels using `max-control-nesting`. Revive counts `else if` nesting but does not count `range` loops.
   It also checks redundant branches and statements, constant conditions, defer mistakes, value-receiver mutations, and unhandled errors, with cognitive complexity capped at 15.
 - `cargo-fmt`: format every Rust package in the current Cargo workspace
-- `cargo-clippy`: lint all workspace packages and targets, including tests and examples; reject compiler and Clippy warnings. Enable cognitive-complexity and nesting checks, configured through `clippy.toml`.
+- `cargo-clippy`: lint all workspace packages and targets, including tests and examples; reject compiler and Clippy warnings. Reject debug macros and unfinished `todo!` / `unimplemented!` code. Enable cognitive-complexity and nesting checks, configured through `clippy.toml`.
 - `shellcheck`: lint shell scripts
 - `shfmt`: format shell scripts
 

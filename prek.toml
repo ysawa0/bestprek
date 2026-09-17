@@ -70,7 +70,7 @@ require_serial = true
 [[repos.hooks]]
 id = "cargo-clippy"
 name = "cargo clippy"
-entry = "cargo +stable clippy --workspace --all-targets --locked -- -D warnings -W clippy::cognitive_complexity -W clippy::excessive_nesting"
+entry = "cargo +stable clippy --workspace --all-targets --locked -- -D warnings -W clippy::cognitive_complexity -W clippy::excessive_nesting -W clippy::dbg_macro -W clippy::todo -W clippy::unimplemented"
 language = "system"
 files = '(^|/)(.*\.rs|Cargo\.(toml|lock)|\.?clippy\.toml|rust-toolchain(\.toml)?)$'
 pass_filenames = false

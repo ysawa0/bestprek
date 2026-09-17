@@ -48,5 +48,47 @@
       "clippy.toml": "cognitive-complexity-threshold = 15\nexcessive-nesting-threshold = 3\n",
       "tests/redundant.rs": "#[test]\nfn redundant() { let value = std::env::var(\"HOOK_TEST\").is_ok(); assert!(if value { true } else { false }); }\n"
     }
+  },
+  {
+    "name": "debug",
+    "path": "sample.rs",
+    "input": "debug.input.txt",
+    "diagnostics": ["dbg_macro"],
+    "setup": {
+      "Cargo.toml": "[package]\nname = \"hooktest\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\npath = \"sample.rs\"\n",
+      "clippy.toml": "cognitive-complexity-threshold = 15\nexcessive-nesting-threshold = 3\n"
+    }
+  },
+  {
+    "name": "todo",
+    "path": "sample.rs",
+    "input": "todo.input.txt",
+    "diagnostics": ["todo"],
+    "setup": {
+      "Cargo.toml": "[package]\nname = \"hooktest\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\npath = \"sample.rs\"\n",
+      "clippy.toml": "cognitive-complexity-threshold = 15\nexcessive-nesting-threshold = 3\n"
+    }
+  },
+  {
+    "name": "unimplemented",
+    "path": "sample.rs",
+    "input": "unimplemented.input.txt",
+    "diagnostics": ["unimplemented"],
+    "setup": {
+      "Cargo.toml": "[package]\nname = \"hooktest\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\npath = \"sample.rs\"\n",
+      "clippy.toml": "cognitive-complexity-threshold = 15\nexcessive-nesting-threshold = 3\n"
+    }
+  },
+  {
+    "name": "workspace-member",
+    "path": "sample.rs",
+    "input": "clean.input.txt",
+    "diagnostics": ["needless_bool"],
+    "setup": {
+      "Cargo.toml": "[package]\nname = \"hooktest\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\npath = \"sample.rs\"\n\n[workspace]\nmembers = [\"member\"]\n",
+      "clippy.toml": "cognitive-complexity-threshold = 15\nexcessive-nesting-threshold = 3\n",
+      "member/Cargo.toml": "[package]\nname = \"member\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+      "member/src/lib.rs": "pub fn ready(value: bool) -> bool { if value { true } else { false } }\n"
+    }
   }
 ]
