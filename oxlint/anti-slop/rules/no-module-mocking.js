@@ -1,16 +1,8 @@
 import { defineRule } from "@oxlint/plugins";
 
-const moduleMockMethods = new Set(["doMock", "mock", "unstable_mockModule"]);
+import { resolveVariable } from "../shared/scope.js";
 
-function resolveVariable(sourceCode, identifier) {
-  let scope = sourceCode.getScope(identifier);
-  while (scope !== null) {
-    const variable = scope.set.get(identifier.name);
-    if (variable !== undefined) return variable;
-    scope = scope.upper;
-  }
-  return null;
-}
+const moduleMockMethods = new Set(["doMock", "mock", "unstable_mockModule"]);
 
 function importedName(node) {
   if (node.type !== "ImportSpecifier") return null;

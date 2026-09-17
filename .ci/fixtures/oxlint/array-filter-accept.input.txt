@@ -1,0 +1,1 @@
+export const values = [1, 2].flatMap(value => value > 1 ? [value * 2] : []);

@@ -1,2 +1,3 @@
 const vi = { mock(name: string) { return name; } };
+
 export const result = vi.mock("./service");

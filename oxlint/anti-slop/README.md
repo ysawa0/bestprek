@@ -1,7 +1,7 @@
 # anti-slop
 
 Vendored from https://github.com/dmmulroy/anti-slop at commit
-`6d538555cb151d4121ed51a27db81890eacf8ae9`.
+`c44ef22ca116d0ba62a3ff663a0bd13a3f3fa40b`.
 
 This directory contains the generic production plugin transpiled to JavaScript
 for Node package installation. The optional Effect plugin and upstream tests

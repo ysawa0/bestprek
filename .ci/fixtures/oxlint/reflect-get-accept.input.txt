@@ -1,2 +1,3 @@
 type Reader = {get: (key: string) => string};
+
 export function read(Reflect: Reader) { return Reflect.get("id"); }

@@ -175,9 +175,11 @@
     "rules": ["no-unknown-type-aliases", "no-unknown-type-aliases", "no-unknown-type-aliases"]
   },
   {
-    "name": "unknown-union-accept",
+    "name": "unknown-generic-union-reject",
     "path": "sample.ts",
-    "input": "unknown-union-accept.input.txt"
+    "input": "unknown-generic-union-reject.input.txt",
+    "diagnostics": ["Type alias `Wrapped` hides `unknown`"],
+    "rules": ["no-unknown-type-aliases"]
   },
   {
     "name": "unknown-union-cycle",
@@ -261,5 +263,41 @@
     "path": "sample.ts",
     "input": "syntax-error.input.txt",
     "diagnostics": ["Unexpected token"]
+  },
+  {
+    "name": "array-filter-reject",
+    "path": "sample.ts",
+    "input": "array-filter-reject.input.txt",
+    "diagnostics": ["no-array-filter-map"],
+    "rules": ["no-array-filter-map"]
+  },
+  {
+    "name": "array-filter-accept",
+    "path": "sample.ts",
+    "input": "array-filter-accept.input.txt"
+  },
+  {
+    "name": "reduce-copy-reject",
+    "path": "sample.ts",
+    "input": "reduce-copy-reject.input.txt",
+    "diagnostics": ["no-reduce-accumulator-copy"],
+    "rules": ["no-reduce-accumulator-copy"]
+  },
+  {
+    "name": "reduce-copy-accept",
+    "path": "sample.ts",
+    "input": "reduce-copy-accept.input.txt"
+  },
+  {
+    "name": "spacing-reject",
+    "path": "sample.ts",
+    "input": "spacing-reject.input.txt",
+    "diagnostics": ["require-readable-spacing"],
+    "rules": ["require-readable-spacing"]
+  },
+  {
+    "name": "spacing-accept",
+    "path": "sample.ts",
+    "input": "spacing-accept.input.txt"
   }
 ]

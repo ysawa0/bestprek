@@ -1,3 +1,5 @@
 export type Forwarded = (Hidden);
+
 export type Hidden = string | (Source | number);
+
 type Source = unknown;

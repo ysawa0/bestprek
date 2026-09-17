@@ -5,6 +5,7 @@ import {
   classifyUnsafeDictionaryValue,
   createTypeEnvironment,
 } from "../shared/dictionary-types.js";
+import { visibleTypeAlias } from "../shared/type-alias-resolution.js";
 
 const typeNodeKinds = new Set([
   "JSDocNonNullableType",
@@ -66,10 +67,26 @@ function isInsideTypeAliasDeclaration(node) {
 function isPlainAliasConsumerUse(node, environment) {
   if (node.type !== "TSTypeReference" || node.typeArguments?.params.length) return false;
   const name = typeReferenceName(node);
-  return name !== null && environment.aliases.has(name) && !isInsideTypeAliasDeclaration(node);
+  return (
+    name !== null &&
+    visibleTypeAlias(name, node, environment.typeAliases) !== null &&
+    !isInsideTypeAliasDeclaration(node)
+  );
+}
+
+function isInsideTypeParameterConstraint(node) {
+  let child = node;
+  let parent = child.parent;
+  while (parent !== null && parent.type !== "Program") {
+    if (parent.type === "TSTypeParameter" && parent.constraint === child) return true;
+    child = parent;
+    parent = child.parent;
+  }
+  return false;
 }
 
 function shouldReportType(node, environment) {
+  if (isInsideTypeParameterConstraint(node)) return false;
   if (isPlainAliasConsumerUse(node, environment)) return false;
   if (classifyUnsafeDictionary(node, environment) === null) return false;
   let current = node.parent;
@@ -108,7 +125,7 @@ export const noUnsafeDictionaryTypeRule = defineRule({
 
     return {
       Program(node) {
-        environment = createTypeEnvironment(node);
+        environment = createTypeEnvironment(node, context.sourceCode.visitorKeys);
       },
       TSTypeReference: reportIfUnsafe,
       TSTypeLiteral: reportIfUnsafe,
