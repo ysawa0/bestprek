@@ -3,20 +3,20 @@
     "name": "three-levels",
     "path": "sample.go",
     "input": "allowed.input.txt",
-    "setup": {"revive.toml": "[rule.max-control-nesting]\narguments = [3]\n"}
+    "setup": { "revive.toml": "[rule.max-control-nesting]\narguments = [3]\n" }
   },
   {
     "name": "four-levels",
     "path": "sample.go",
     "input": "rejected.input.txt",
     "diagnostics": ["control flow nesting exceeds 3"],
-    "setup": {"revive.toml": "[rule.max-control-nesting]\narguments = [3]\n"}
+    "setup": { "revive.toml": "[rule.max-control-nesting]\narguments = [3]\n" }
   },
   {
     "name": "syntax-error",
     "path": "sample.go",
     "input": "syntax.input.txt",
     "diagnostics": ["expected"],
-    "setup": {"revive.toml": "[rule.max-control-nesting]\narguments = [3]\n"}
+    "setup": { "revive.toml": "[rule.max-control-nesting]\narguments = [3]\n" }
   }
 ]

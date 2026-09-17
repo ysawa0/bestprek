@@ -59,11 +59,12 @@ func linkEnd(text string, start int) int {
 			}
 			continue
 		}
-		if char == '"' || char == '\'' {
+		switch char {
+		case '"', '\'':
 			quote = char
-		} else if char == '(' {
+		case '(':
 			depth++
-		} else if char == ')' {
+		case ')':
 			depth--
 			if depth == 0 {
 				return cursor + 1
@@ -95,11 +96,14 @@ func htmlEnd(text string, start int) int {
 			if char == quote {
 				quote = 0
 			}
-		} else if char == '\'' || char == '"' {
+			continue
+		}
+		switch char {
+		case '\'', '"':
 			quote = char
-		} else if char == '>' {
+		case '>':
 			return cursor + 1
-		} else if char == '\n' {
+		case '\n':
 			return start
 		}
 	}
