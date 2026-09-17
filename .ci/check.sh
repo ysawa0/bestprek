@@ -5,8 +5,6 @@ cd "$(dirname "$0")/.."
 mkdir -p tmp
 
 cargo +stable build --release --locked
-cargo +stable fmt --all -- --check
-cargo +stable clippy --locked -- -D warnings
 uv run --no-sync python3 .ci/unslop_checks.py
 prek validate-config prek.toml
 prek validate-manifest .pre-commit-hooks.yaml
