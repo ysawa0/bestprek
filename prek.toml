@@ -57,3 +57,21 @@ language = "system"
 types = ["go"]
 pass_filenames = false
 require_serial = true
+
+[[repos.hooks]]
+id = "cargo-fmt"
+name = "cargo fmt"
+entry = "cargo +stable fmt --all"
+language = "system"
+types = ["rust"]
+pass_filenames = false
+require_serial = true
+
+[[repos.hooks]]
+id = "cargo-clippy"
+name = "cargo clippy"
+entry = "cargo +stable clippy --workspace --all-targets --locked -- -D warnings -W clippy::cognitive_complexity -W clippy::excessive_nesting"
+language = "system"
+files = '(^|/)(.*\.rs|Cargo\.(toml|lock)|\.?clippy\.toml|rust-toolchain(\.toml)?)$'
+pass_filenames = false
+require_serial = true

@@ -1,0 +1,9 @@
+pub fn nested(values: &[Vec<i32>]) {
+    for row in values {
+        for value in row {
+            if *value > 0 {
+                println!("{value}");
+            }
+        }
+    }
+}

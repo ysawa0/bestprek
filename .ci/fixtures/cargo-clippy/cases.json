@@ -1,0 +1,52 @@
+[
+  {
+    "name": "clean",
+    "path": "sample.rs",
+    "input": "clean.input.txt",
+    "setup": {
+      "Cargo.toml": "[package]\nname = \"hooktest\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\npath = \"sample.rs\"\n",
+      "clippy.toml": "cognitive-complexity-threshold = 15\nexcessive-nesting-threshold = 3\n"
+    }
+  },
+  {
+    "name": "redundant",
+    "path": "sample.rs",
+    "input": "redundant.input.txt",
+    "diagnostics": ["needless_bool"],
+    "setup": {
+      "Cargo.toml": "[package]\nname = \"hooktest\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\npath = \"sample.rs\"\n",
+      "clippy.toml": "cognitive-complexity-threshold = 15\nexcessive-nesting-threshold = 3\n"
+    }
+  },
+  {
+    "name": "nested",
+    "path": "sample.rs",
+    "input": "nested.input.txt",
+    "diagnostics": ["too nested"],
+    "setup": {
+      "Cargo.toml": "[package]\nname = \"hooktest\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\npath = \"sample.rs\"\n",
+      "clippy.toml": "cognitive-complexity-threshold = 15\nexcessive-nesting-threshold = 3\n"
+    }
+  },
+  {
+    "name": "complexity",
+    "path": "sample.rs",
+    "input": "complexity.input.txt",
+    "diagnostics": ["cognitive complexity"],
+    "setup": {
+      "Cargo.toml": "[package]\nname = \"hooktest\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\npath = \"sample.rs\"\n",
+      "clippy.toml": "cognitive-complexity-threshold = 15\nexcessive-nesting-threshold = 3\n"
+    }
+  },
+  {
+    "name": "test-target",
+    "path": "sample.rs",
+    "input": "test-target.input.txt",
+    "diagnostics": ["needless_bool"],
+    "setup": {
+      "Cargo.toml": "[package]\nname = \"hooktest\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\npath = \"sample.rs\"\n",
+      "clippy.toml": "cognitive-complexity-threshold = 15\nexcessive-nesting-threshold = 3\n",
+      "tests/redundant.rs": "#[test]\nfn redundant() { let value = std::env::var(\"HOOK_TEST\").is_ok(); assert!(if value { true } else { false }); }\n"
+    }
+  }
+]

@@ -1,0 +1,3 @@
+pub fn ready(value: bool) -> bool {
+    if value { true } else { false }
+}

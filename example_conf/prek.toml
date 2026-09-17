@@ -12,7 +12,7 @@ id = "check-added-large-files"
 
 [[repos]]
 repo = "https://github.com/ysawa0/bestprek"
-rev = "1.31"
+rev = "1.32"
 
 [[repos.hooks]]
 id = "oxfmt"
@@ -55,3 +55,9 @@ id = "shfmt"
 
 [[repos.hooks]]
 id = "shellcheck"
+
+[[repos.hooks]]
+id = "cargo-fmt"
+
+[[repos.hooks]]
+id = "cargo-clippy"

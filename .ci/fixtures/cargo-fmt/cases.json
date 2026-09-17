@@ -1,0 +1,11 @@
+[
+  {
+    "name": "format",
+    "path": "sample.rs",
+    "input": "format.input.txt",
+    "expected": "format.expected.txt",
+    "setup": {
+      "Cargo.toml": "[package]\nname = \"hooktest\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\npath = \"sample.rs\"\n"
+    }
+  }
+]

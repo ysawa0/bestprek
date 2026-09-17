@@ -52,6 +52,7 @@ def verify_config() -> str:
 def seed(work: Path) -> None:
     sources = {
         "sample.py": "example/sample.py.txt",
+        "sample.rs": "cargo-clippy/clean.input.txt",
         "sample.ts": "oxlint/clean.input.txt",
         "sample.go": "gofumpt/format.expected.txt",
         "sample.sh": "shellcheck/braces-excluded.input.txt",
@@ -61,6 +62,10 @@ def seed(work: Path) -> None:
     for target, source in sources.items():
         shutil.copyfile(FIXTURES / source, work / target)
     (work / "go.mod").write_text("module hooktest\n\ngo 1.25\n")
+    (work / "Cargo.toml").write_text(
+        '[package]\nname = "hooktest"\nversion = "0.1.0"\nedition = "2021"\n'
+        '\n[lib]\npath = "sample.rs"\n'
+    )
     subprocess.run(["git", "add", "-A"], cwd=work, check=True)
 
 
@@ -72,6 +77,7 @@ def check_rejections(work: Path) -> None:
             "example/annotations.py.txt",
             "Missing type annotation",
         ),
+        ("cargo-clippy", "sample.rs", "cargo-clippy/nested.input.txt", "too nested"),
         ("oxlint", "sample.ts", "oxlint/bad.input.txt", "leaves input unparsed"),
         ("unslop", "README.md", "unslop/residue.input.txt", "artifact.chatbot-residue"),
         ("shellcheck", "sample.sh", "example/optional.sh.txt", "SC2230"),

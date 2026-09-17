@@ -137,3 +137,22 @@
   additional_dependencies: ["mvdan.cc/sh/v3/cmd/shfmt@v3.13.1"]
   types: [shell]
   require_serial: true
+
+- id: cargo-fmt
+  name: cargo fmt
+  description: "Format every Rust package in the current Cargo workspace"
+  entry: cargo fmt --all
+  language: system
+  types: [rust]
+  pass_filenames: false
+  require_serial: true
+
+- id: cargo-clippy
+  name: cargo clippy
+  description: "Lint all workspace packages and targets with Clippy; reject warnings"
+  entry: cargo clippy --workspace --all-targets
+  args: ["--", "-D", "warnings", "-W", "clippy::cognitive_complexity", "-W", "clippy::excessive_nesting"]
+  language: system
+  files: '(^|/)(.*\.rs|Cargo\.(toml|lock)|\.?clippy\.toml|rust-toolchain(\.toml)?)$'
+  pass_filenames: false
+  require_serial: true

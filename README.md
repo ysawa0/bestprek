@@ -17,6 +17,8 @@ Pre-commit hooks
 - `gocyclo`: reject Go functions with cyclomatic complexity above 15
 - `revive`: lint Go using `revive.toml`; the supplied config limits control-flow nesting to three levels using `max-control-nesting`. Revive counts `else if` nesting but does not count `range` loops.
   It also checks redundant branches and statements, constant conditions, defer mistakes, value-receiver mutations, and unhandled errors, with cognitive complexity capped at 15.
+- `cargo-fmt`: format every Rust package in the current Cargo workspace
+- `cargo-clippy`: lint all workspace packages and targets, including tests and examples; reject compiler and Clippy warnings. Enable cognitive-complexity and nesting checks, configured through `clippy.toml`.
 - `shellcheck`: lint shell scripts
 - `shfmt`: format shell scripts
 
@@ -35,7 +37,7 @@ Add `prek.toml` to the consuming repository:
 ```toml
 [[repos]]
 repo = "https://github.com/ysawa0/bestprek"
-rev = "1.31"
+rev = "1.32"
 
 [[repos.hooks]]
 id = "oxfmt"
@@ -79,11 +81,17 @@ id = "shfmt"
 
 [[repos.hooks]]
 id = "shellcheck"
+
+[[repos.hooks]]
+id = "cargo-fmt"
+
+[[repos.hooks]]
+id = "cargo-clippy"
 ```
 
 Keep only the hooks relevant to the repository, then install and run them:
 
-For `revive`, copy `example_conf/revive.toml` to the repository root.
+For `revive`, copy `example_conf/revive.toml` to the repository root. For `cargo-clippy`, copy `example_conf/clippy.toml`; it caps cognitive complexity at 15 and nesting at 3. Clippy counts Rust block nesting, so its nesting score differs from Ruff and Revive.
 
 ```sh
 prek install -f
@@ -105,18 +113,21 @@ prek run --all-files
 
 The directory contains:
 
-- `prek.toml`: all 13 bundled hooks plus whitespace and large-file checks;
+- `prek.toml`: all bundled hooks plus whitespace and large-file checks;
 - `ruff.toml`: Ruff's `ALL` rule set, with boilerplate requirements and formatter conflicts excluded;
+- `clippy.toml`: Rust cognitive-complexity and nesting limits;
 - `.unslop.json`: recommended prose rules, failing on warnings and errors;
 - `.oxfmtrc.jsonc`: JavaScript, TypeScript, and JSON formatting settings;
 - `.shellcheckrc`: optional ShellCheck checks except SC2250 (variable-brace style);
 - `.github/workflows/lint.yml`: the same hooks on pushes and pull requests.
 
-The Oxlint hook loads its bundled policy automatically, including all 15 custom rules. The hook's existing rule exclusions remain in force, as do ShellCheck's SC1091 and SC2250 exclusions. Ruff retains the hook's explicit preview-rule policy and nesting limit. See [Ruff's formatter compatibility guidance](https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules) for the formatting exclusions.
+The Oxlint hook loads its bundled policy automatically, including all 18 custom rules. The hook's existing rule exclusions remain in force, as do ShellCheck's SC1091 and SC2250 exclusions. Ruff retains the hook's explicit preview-rule policy and nesting limit. See [Ruff's formatter compatibility guidance](https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules) for the formatting exclusions.
 
 Install Prek before running these commands. Because this hook repository is public, local and CI runs do not need GitHub credentials or repository secrets to fetch it.
 
 Merge files where the destination already has configuration you want to retain. Hooks skip languages without matching files; repositories with Go files need a root `go.mod` or `go.work` appropriate for `go vet ./...`.
+
+Rust hooks require a root `Cargo.toml` and an installed Rust toolchain with Clippy and rustfmt (`rustup component add clippy rustfmt`). They use the consuming repository’s selected toolchain and do not install one. Cargo checks the workspace’s default feature set; mutually exclusive features are not enabled together. Standard Clippy checks cover correctness, suspicious code, complexity, style, and performance. See [Clippy usage](https://doc.rust-lang.org/clippy/usage.html) and [threshold configuration](https://doc.rust-lang.org/clippy/lint_configuration.html).
 
 Keep `example_conf/` current whenever the hooks or their configuration change. The release command updates its revision, and CI tests the copied setup.
 
