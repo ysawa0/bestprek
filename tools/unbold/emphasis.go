@@ -99,10 +99,15 @@ func stripBold(input string) string {
 		}
 		i += length
 	}
+	return withoutRemoved(input, removed)
+}
+
+func withoutRemoved(input string, removed []bool) string {
 	var out strings.Builder
 	for i := range len(input) {
 		if !removed[i] {
-			out.WriteByte(input[i])
+			// strings.Builder.WriteByte always returns nil.
+			_ = out.WriteByte(input[i])
 		}
 	}
 	return out.String()

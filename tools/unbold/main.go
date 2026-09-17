@@ -2,8 +2,8 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"io"
+	"log"
 	"os"
 )
 
@@ -17,43 +17,41 @@ func processReader(reader io.Reader, writer io.Writer) error {
 }
 
 func main() {
+	log.SetFlags(0)
 	writeInPlace := flag.Bool("write", false, "rewrite files in place")
 	flag.Parse()
 	paths := flag.Args()
 
 	if len(paths) == 0 {
 		if err := processReader(os.Stdin, os.Stdout); err != nil {
-			fmt.Fprintln(os.Stderr, err)
-			os.Exit(1)
+			log.Fatal(err)
 		}
 		return
 	}
 
 	for i, path := range paths {
-		data, err := os.ReadFile(path)
-		if err != nil {
-			fmt.Fprintln(os.Stderr, err)
-			os.Exit(1)
-		}
-		out := stripBold(string(data))
-		if *writeInPlace {
-			info, err := os.Stat(path)
-			if err != nil {
-				fmt.Fprintln(os.Stderr, err)
-				os.Exit(1)
-			}
-			if err := os.WriteFile(path, []byte(out), info.Mode().Perm()); err != nil {
-				fmt.Fprintln(os.Stderr, err)
-				os.Exit(1)
-			}
-			continue
-		}
-		if i > 0 {
-			fmt.Fprintln(os.Stdout)
-		}
-		if _, err := io.WriteString(os.Stdout, out); err != nil {
-			fmt.Fprintln(os.Stderr, err)
-			os.Exit(1)
+		if err := processFile(path, *writeInPlace, i > 0); err != nil {
+			log.Fatal(err)
 		}
 	}
+}
+
+func processFile(path string, writeInPlace, separator bool) error {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return err
+	}
+	out := stripBold(string(data))
+	if writeInPlace {
+		info, err := os.Stat(path)
+		if err != nil {
+			return err
+		}
+		return os.WriteFile(path, []byte(out), info.Mode().Perm())
+	}
+	if separator {
+		out = "\n" + out
+	}
+	_, err = io.WriteString(os.Stdout, out)
+	return err
 }
