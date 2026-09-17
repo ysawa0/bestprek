@@ -1,0 +1,2 @@
+[rule.max-control-nesting]
+arguments = [3]

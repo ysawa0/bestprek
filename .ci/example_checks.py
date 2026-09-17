@@ -75,6 +75,12 @@ def check_rejections(work: Path) -> None:
         ("oxlint", "sample.ts", "oxlint/bad.input.txt", "leaves input unparsed"),
         ("unslop", "README.md", "unslop/residue.input.txt", "artifact.chatbot-residue"),
         ("shellcheck", "sample.sh", "example/optional.sh.txt", "SC2230"),
+        (
+            "revive",
+            "sample.go",
+            "revive/rejected.input.txt",
+            "control flow nesting exceeds 3",
+        ),
     ]
     for hook, target, source, diagnostic in cases:
         path = work / target

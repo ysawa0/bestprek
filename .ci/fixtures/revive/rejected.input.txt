@@ -1,0 +1,15 @@
+package sample
+
+func rejected(xs []int) {
+	for x := 0; x < len(xs); x++ {
+		if x > 0 {
+			switch x {
+			case 1:
+				select {
+				default:
+					println(x)
+				}
+			}
+		}
+	}
+}

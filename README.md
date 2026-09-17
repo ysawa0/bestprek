@@ -15,6 +15,7 @@ Pre-commit hooks
 - `gopls-check`: run `gopls check` on Go files
 - `go-vet`: run `go vet ./...` in the current Go module
 - `gocyclo`: reject Go functions with cyclomatic complexity above 15
+- `revive`: lint Go using `revive.toml`; the supplied config limits control-flow nesting to three levels using `max-control-nesting`. Revive counts `else if` nesting but does not count `range` loops.
 - `shellcheck`: lint shell scripts
 - `shfmt`: format shell scripts
 
@@ -33,7 +34,7 @@ Add `prek.toml` to the consuming repository:
 ```toml
 [[repos]]
 repo = "https://github.com/ysawa0/bestprek"
-rev = "1.28"
+rev = "1.29"
 
 [[repos.hooks]]
 id = "oxfmt"
@@ -70,6 +71,9 @@ id = "go-vet"
 id = "gocyclo"
 
 [[repos.hooks]]
+id = "revive"
+
+[[repos.hooks]]
 id = "shfmt"
 
 [[repos.hooks]]
@@ -77,6 +81,8 @@ id = "shellcheck"
 ```
 
 Keep only the hooks relevant to the repository, then install and run them:
+
+For `revive`, copy `example_conf/revive.toml` to the repository root.
 
 ```sh
 prek install -f

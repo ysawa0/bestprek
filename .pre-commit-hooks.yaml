@@ -109,6 +109,16 @@
   types: [go]
   pass_filenames: true
 
+- id: revive
+  name: revive
+  description: "Lint Go with Revive and the project's revive.toml"
+  entry: revive -set_exit_status -config revive.toml
+  language: golang
+  language_version: "1.26.5"
+  additional_dependencies: ["github.com/mgechev/revive@v1.16.0"]
+  types: [go]
+  pass_filenames: true
+
 - id: shellcheck
   name: shellcheck
   description: "Run shellcheck for shell script linting"

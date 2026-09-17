@@ -1,0 +1,12 @@
+package sample
+
+func allowed(xs []int) {
+	for x := 0; x < len(xs); x++ {
+		if x > 0 {
+			switch x {
+			case 1:
+				println(x)
+			}
+		}
+	}
+}
