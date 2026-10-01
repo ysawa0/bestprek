@@ -22,43 +22,27 @@ Pre-commit hooks
 - `shellcheck`: lint shell scripts
 - `shfmt`: format shell scripts
 
-## Quickstart
+## Setup
 
 Agents installing or upgrading a consuming repository should follow [INSTALL.md](INSTALL.md) to update both the release pin and example configs.
 
-Install Prek:
+Install Prek with `brew install prek`. `example_conf/` is the complete configuration for consuming repositories. Copy its contents, including hidden files, into the destination repository root, then install and run the hooks:
 
 ```sh
-brew install prek
-```
-
-Copy [`example_conf/prek.toml`](example_conf/prek.toml) to the consuming repository and keep only the hooks relevant to it. For `revive`, copy `example_conf/revive.toml` to the repository root. For `cargo-clippy`, copy `example_conf/clippy.toml`; it caps cognitive complexity at 15 and nesting at 3. Clippy counts Rust block nesting, so its nesting score differs from Ruff and Revive.
-
-Install and run the hooks:
-
-```sh
-prek install -f
-prek run --all-files
-```
-
-Run one hook with `prek run <hook-id> --all-files`.
-
-## Full copyable setup
-
-`example_conf/` is the complete configuration for consuming repositories. Copy its contents, including hidden files, into the destination repository root:
-
-```sh
-cp -R /path/to/prek/example_conf/. /path/to/your-repo/
+cp -R /path/to/bestprek/example_conf/. /path/to/your-repo/
 cd /path/to/your-repo
 prek install --prepare-hooks
 prek run --all-files
 ```
 
+Keep only the hooks relevant to the repository, and merge files where the destination already has configuration you want to retain. Run one hook with `prek run <hook-id> --all-files`.
+
 The directory contains:
 
 - `prek.toml`: all bundled hooks plus whitespace and large-file checks;
 - `ruff.toml`: Ruff's `ALL` rule set, with boilerplate requirements and formatter conflicts excluded;
-- `clippy.toml`: Rust cognitive-complexity and nesting limits;
+- `revive.toml`: Revive rules, required by the `revive` hook;
+- `clippy.toml`: Rust cognitive-complexity and nesting limits of 15 and 3; Clippy counts Rust block nesting, so its nesting score differs from Ruff and Revive;
 - `.unslop.json`: recommended prose rules, failing on warnings and errors;
 - `.oxfmtrc.jsonc`: JavaScript, TypeScript, and JSON formatting settings;
 - `.shellcheckrc`: optional ShellCheck checks except SC2250 (variable-brace style);
@@ -66,11 +50,9 @@ The directory contains:
 
 The Oxlint hook loads its bundled policy automatically, including all 18 custom rules. The hook's existing rule exclusions remain in force, as do ShellCheck's SC1091 and SC2250 exclusions. Ruff retains the hook's explicit preview-rule policy and nesting limit. See [Ruff's formatter compatibility guidance](https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules) for the formatting exclusions.
 
-Install Prek before running these commands. Because this hook repository is public, local and CI runs do not need GitHub credentials or repository secrets to fetch it.
+Because this hook repository is public, local and CI runs do not need GitHub credentials or repository secrets to fetch it. Hooks skip languages without matching files; repositories with Go files need a root `go.mod` or `go.work` appropriate for `go vet ./...`.
 
-Merge files where the destination already has configuration you want to retain. Hooks skip languages without matching files; repositories with Go files need a root `go.mod` or `go.work` appropriate for `go vet ./...`.
-
-Rust hooks require a root `Cargo.toml` and an installed Rust toolchain with Clippy and rustfmt (`rustup component add clippy rustfmt`). They use the consuming repository’s selected toolchain and do not install one. Cargo checks the workspace’s default feature set; mutually exclusive features are not enabled together. Standard Clippy checks cover correctness, suspicious code, complexity, style, and performance. See [Clippy usage](https://doc.rust-lang.org/clippy/usage.html) and [threshold configuration](https://doc.rust-lang.org/clippy/lint_configuration.html).
+The Markdown hooks `unbold` and `unslop` build with Cargo during hook installation, so they need a Rust toolchain. The `cargo-fmt` and `cargo-clippy` hooks also require a root `Cargo.toml` and the Clippy and rustfmt components (`rustup component add clippy rustfmt`). They use the consuming repository’s selected toolchain and do not install one. Cargo checks the workspace’s default feature set; mutually exclusive features are not enabled together. Standard Clippy checks cover correctness, suspicious code, complexity, style, and performance. See [Clippy usage](https://doc.rust-lang.org/clippy/usage.html) and [threshold configuration](https://doc.rust-lang.org/clippy/lint_configuration.html).
 
 Keep `example_conf/` current whenever the hooks or their configuration change. The release command updates its revision, and CI tests the copied setup.
 
@@ -121,7 +103,7 @@ This section deliberately uses anaphora.
 <!-- unslop-enable repetition.* -->
 ```
 
-Direct CLI usage after the Python hook environment is installed:
+Direct CLI usage after the hook environment is installed:
 
 ```sh
 unslop README.md docs/*.md
