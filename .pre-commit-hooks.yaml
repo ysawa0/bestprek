@@ -44,8 +44,8 @@
   name: unbold
   description: "Strip markdown bold markers (** and __) in place"
   entry: unbold --write
-  language: golang
-  language_version: "1.26.5"
+  language: rust
+  language_version: stable
   types: [markdown]
   require_serial: true
 

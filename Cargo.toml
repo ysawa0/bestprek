@@ -2,11 +2,15 @@
 name = "unslop"
 version = "0.0.0"
 edition = "2021"
-description = "Deterministic Markdown prose linter"
+description = "Deterministic Markdown prose tools"
 
 [[bin]]
 name = "unslop"
 path = "tools/unslop/main.rs"
+
+[[bin]]
+name = "unbold"
+path = "tools/unbold/main.rs"
 
 [dependencies]
 regex = "=1.10.2"

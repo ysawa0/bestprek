@@ -134,7 +134,7 @@ The calibration under `.ci/fixtures/unslop/` includes a deliberately bloated cof
 
 ## Tool versions and configuration
 
-The release tag pins each hook implementation and its tool version. Prek creates isolated Python, Node, and Go environments and prepares the required tools on first use.
+The release tag pins each hook implementation and its tool version. Prek creates isolated Python, Node, Go, and Rust environments and prepares the required tools on first use.
 
 The shared Ruff policy disables docstring rules (`D`, `DOC`), copyright headers (`CPY001`), print bans (`T201`), exception-message formatting (`EM`, `TRY003`), forced absolute imports (`TID252`), required `__init__.py` files (`INP001`), and unittest-to-pytest conversion (`PT009`, `PT027`). These exclusions apply even when a consumer selects `ALL`; the hook preserves the consumer’s other ignored rules. Type annotations, correctness, security, and complexity checks remain available. The copied `ruff.toml` enables them and includes the same exclusions for direct Ruff runs.
 
@@ -154,7 +154,7 @@ The GitHub workflow in `.github/workflows/ci.yml` prepares the tools and calls t
 uv run --no-sync python3 .ci/hook_checks.py
 ```
 
-The Go executables and Rust Unslop implementation live under `tools/`. File-backed test inputs and expected output live under `.ci/fixtures/<hook>/`; each group has a `cases.json` manifest. Inputs use `.txt` so repository formatters do not rewrite deliberately invalid examples.
+The Rust `unbold` and `unslop` tools and the Go `ys-gopls-check` wrapper live under `tools/`. File-backed test inputs and expected output live under `.ci/fixtures/<hook>/`; each group has a `cases.json` manifest. Inputs use `.txt` so repository formatters do not rewrite deliberately invalid examples.
 
 The end-to-end suite installs hooks from the committed HEAD in a temporary consuming repository. It checks lint failures, formatter output, ignored files, code preservation, and clean second runs. Commit implementation changes before running it.
 
