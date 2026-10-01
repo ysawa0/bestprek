@@ -205,13 +205,13 @@ CI checks, test suites, and fixtures live in `.ci/`. Run the same checks as GitH
 .ci/check.sh
 ```
 
-The GitHub workflow in `.github/workflows/ci.yml` prepares the tools and calls this script. The repository's `prek.toml` checks the current worktree with local hooks. To run only the end-to-end hook suite:
+The GitHub workflow in `.github/workflows/ci.yml` prepares the tools and calls this script. The repository's `prek.toml` runs this worktree's published hooks through `prek try-repo`, including uncommitted changes. To run only the end-to-end hook suite:
 
 ```sh
 uv run --no-sync python3 .ci/hook_checks.py
 ```
 
-The Go executables and Rust Unslop implementation live under `tools/`. Build Unslop with `cargo +stable build --release --locked` before running the repository's local hooks. File-backed test inputs and expected output live under `.ci/fixtures/<hook>/`; each group has a `cases.json` manifest. Inputs use `.txt` so repository formatters do not rewrite deliberately invalid examples.
+The Go executables and Rust Unslop implementation live under `tools/`. File-backed test inputs and expected output live under `.ci/fixtures/<hook>/`; each group has a `cases.json` manifest. Inputs use `.txt` so repository formatters do not rewrite deliberately invalid examples.
 
 The end-to-end suite installs hooks from the committed HEAD in a temporary consuming repository. It checks lint failures, formatter output, ignored files, code preservation, and clean second runs. Commit implementation changes before running it.
 

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Build or check verbatim Markdown packs; standard library only, no runtime use."""
+
 from __future__ import annotations
 
 import argparse
@@ -16,7 +17,9 @@ def load_rules(root: Path) -> dict[int, str]:
     """Read each numbered canonical rule exactly once and validate its contract."""
     files = sorted((root / "references").glob("*.md"))
     if len(files) != 5:
-        raise ValueError("references/ must contain exactly five numbered Markdown files")
+        raise ValueError(
+            "references/ must contain exactly five numbered Markdown files"
+        )
     rules: dict[int, str] = {}
     starts = []
     for path in files:
@@ -36,7 +39,7 @@ def load_rules(root: Path) -> dict[int, str]:
             if number in rules:
                 raise ValueError(f"Duplicate canonical rule: {number}")
             end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
-            block = text[match.start():end].strip()
+            block = text[match.start() : end].strip()
             if block.count("**Requirement:**") != 1 or block.count("**Pass:**") != 1:
                 raise ValueError(f"Rule {number} needs one Requirement and one Pass")
             rules[number] = block
@@ -83,10 +86,14 @@ def load_packs(root: Path, rules: dict[int, str]) -> list[tuple[str, dict, set[i
             raise ValueError(f"Pack {name} must use level {level} and file {filename}")
         ids = resolve(name)
         for number in ids:
-            dependencies = {int(n) for n in re.findall(r"\bRule (\d+)\b", rules[number])}
+            dependencies = {
+                int(n) for n in re.findall(r"\bRule (\d+)\b", rules[number])
+            }
             missing = dependencies - ids
             if missing:
-                raise ValueError(f"Pack {name}, rule {number}: missing dependencies {sorted(missing)}")
+                raise ValueError(
+                    f"Pack {name}, rule {number}: missing dependencies {sorted(missing)}"
+                )
         result.append((name, spec, ids))
     if not resolved["core"] < resolved["polish"] < resolved["full"] == set(rules):
         raise ValueError("Expected strictly cumulative Core < Polish < Full = 1–55")
@@ -108,7 +115,9 @@ def expected_packs(root: Path) -> dict[str, str]:
             "This file contains the complete selected rule blocks. No additional reference "
             "reads are required.\n\n"
         )
-        outputs[spec["file"]] = header + "\n\n".join(rules[n] for n in sorted(ids)) + "\n"
+        outputs[spec["file"]] = (
+            header + "\n\n".join(rules[n] for n in sorted(ids)) + "\n"
+        )
     return outputs
 
 
@@ -118,11 +127,16 @@ def build(root: Path, check: bool = False) -> dict[str, str]:
     extras = {p.name for p in directory.glob("*.md")} - outputs.keys()
     if extras:
         raise ValueError(f"Stale pack files must be removed: {sorted(extras)}")
-    stale = [name for name, text in outputs.items()
-             if not (directory / name).exists()
-             or (directory / name).read_text(encoding="utf-8") != text]
+    stale = [
+        name
+        for name, text in outputs.items()
+        if not (directory / name).exists()
+        or (directory / name).read_text(encoding="utf-8") != text
+    ]
     if check and stale:
-        raise ValueError(f"Regenerate packs with scripts/build_packs.py: {', '.join(stale)}")
+        raise ValueError(
+            f"Regenerate packs with scripts/build_packs.py: {', '.join(stale)}"
+        )
     if not check:
         directory.mkdir(exist_ok=True)
         for name, text in outputs.items():
@@ -132,14 +146,18 @@ def build(root: Path, check: bool = False) -> dict[str, str]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--check", action="store_true", help="check freshness without writing")
+    parser.add_argument(
+        "--check", action="store_true", help="check freshness without writing"
+    )
     args = parser.parse_args()
     try:
         outputs = build(ROOT, check=args.check)
     except (OSError, ValueError, KeyError, TypeError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
-    print(f"{'Checked' if args.check else 'Built'} {len(outputs)} packs from 55 canonical rules.")
+    print(
+        f"{'Checked' if args.check else 'Built'} {len(outputs)} packs from 55 canonical rules."
+    )
     return 0
 
 

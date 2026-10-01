@@ -13,4 +13,3 @@ uvx ty check hooks scripts .ci
 uv run --no-sync python3 .ci/hook_checks.py
 uv run --no-sync python3 .ci/example_checks.py
 uv run --no-sync python3 .ci/release_checks.py
-uv run --no-sync python3 .ci/repo_checks.py

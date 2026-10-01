@@ -15,63 +15,10 @@ id = "check-added-large-files"
 [[repos]]
 repo = "local"
 
+# Run the published hooks from this worktree, including uncommitted changes.
 [[repos.hooks]]
-id = "unbold"
-name = "unbold"
-entry = "go run ./tools/unbold --write"
+id = "bestprek"
+name = "bestprek"
+entry = "sh -c 'prek try-repo \"$PWD\" --files \"$@\"' --"
 language = "system"
-types = ["markdown"]
-require_serial = true
-
-[[repos.hooks]]
-id = "unslop"
-name = "unslop"
-entry = "target/release/unslop"
-language = "system"
-types = ["markdown"]
-exclude = "^\\.ci/fixtures/unslop/coffee-before\\.md$"
-require_serial = true
-
-[[repos.hooks]]
-id = "gofmt"
-name = "gofmt"
-entry = "gofmt -w"
-language = "system"
-types = ["go"]
-require_serial = true
-
-[[repos.hooks]]
-id = "go-vet"
-name = "go vet"
-entry = "go vet ./..."
-language = "system"
-types = ["go"]
-pass_filenames = false
-require_serial = true
-
-[[repos.hooks]]
-id = "go-test"
-name = "go test"
-entry = "go test ./..."
-language = "system"
-types = ["go"]
-pass_filenames = false
-require_serial = true
-
-[[repos.hooks]]
-id = "cargo-fmt"
-name = "cargo fmt"
-entry = "cargo +stable fmt --all"
-language = "system"
-types = ["rust"]
-pass_filenames = false
-require_serial = true
-
-[[repos.hooks]]
-id = "cargo-clippy"
-name = "cargo clippy"
-entry = "cargo +stable clippy --workspace --all-targets --locked -- -D warnings -W clippy::cognitive_complexity -W clippy::excessive_nesting -W clippy::dbg_macro -W clippy::todo -W clippy::unimplemented"
-language = "system"
-files = '(^|/)(.*\.rs|Cargo\.(toml|lock)|\.?clippy\.toml|rust-toolchain(\.toml)?)$'
-pass_filenames = false
 require_serial = true
