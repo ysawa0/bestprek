@@ -32,66 +32,9 @@ Install Prek:
 brew install prek
 ```
 
-Add `prek.toml` to the consuming repository:
+Copy [`example_conf/prek.toml`](example_conf/prek.toml) to the consuming repository and keep only the hooks relevant to it. For `revive`, copy `example_conf/revive.toml` to the repository root. For `cargo-clippy`, copy `example_conf/clippy.toml`; it caps cognitive complexity at 15 and nesting at 3. Clippy counts Rust block nesting, so its nesting score differs from Ruff and Revive.
 
-```toml
-[[repos]]
-repo = "https://github.com/ysawa0/bestprek"
-rev = "1.32"
-
-[[repos.hooks]]
-id = "oxfmt"
-exclude = "(^|/)(dist|build|coverage|vendor|\\.cache|cache|generated)/"
-
-[[repos.hooks]]
-id = "oxlint"
-
-[[repos.hooks]]
-id = "ruff-format"
-
-[[repos.hooks]]
-id = "ruff-check"
-
-[[repos.hooks]]
-id = "unbold"
-
-[[repos.hooks]]
-id = "unslop"
-
-[[repos.hooks]]
-id = "goimports"
-
-[[repos.hooks]]
-id = "gofumpt"
-
-[[repos.hooks]]
-id = "gopls-check"
-
-[[repos.hooks]]
-id = "go-vet"
-
-[[repos.hooks]]
-id = "gocyclo"
-
-[[repos.hooks]]
-id = "revive"
-
-[[repos.hooks]]
-id = "shfmt"
-
-[[repos.hooks]]
-id = "shellcheck"
-
-[[repos.hooks]]
-id = "cargo-fmt"
-
-[[repos.hooks]]
-id = "cargo-clippy"
-```
-
-Keep only the hooks relevant to the repository, then install and run them:
-
-For `revive`, copy `example_conf/revive.toml` to the repository root. For `cargo-clippy`, copy `example_conf/clippy.toml`; it caps cognitive complexity at 15 and nesting at 3. Clippy counts Rust block nesting, so its nesting score differs from Ruff and Revive.
+Install and run the hooks:
 
 ```sh
 prek install -f
@@ -220,7 +163,7 @@ The end-to-end suite installs hooks from the committed HEAD in a temporary consu
 1. Update the local repository to the latest `main` before preparing a release.
 2. Update the repository's configs and `example_conf/` for the latest hook and tool versions, keeping their settings and version references current.
 3. Write `.github/release-notes/<version>.md`.
-4. Run `make release VERSION=<version>` to update `RELEASE`, the README example, `example_conf/prek.toml`, and the Unslop CLI version. Verify that the repository's configs and example configs reference the new release wherever applicable.
+4. Run `make release VERSION=<version>` to update `RELEASE` and `example_conf/prek.toml`. Verify that the repository's configs and example configs reference the new release wherever applicable.
 5. Commit and push the changes to `main`.
 6. CI builds and lints Rust, validates the manifest, and runs local hooks, CLI reference fixtures, published-hook smoke checks, and end-to-end hook checks. After they pass, CI creates the GitHub release and matching tag.
 

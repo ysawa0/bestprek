@@ -11,29 +11,20 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def main() -> None:
-    files = [
-        "RELEASE",
-        "README.md",
-        "scripts/release.py",
-        "Cargo.toml",
-        "Cargo.lock",
-        "example_conf/prek.toml",
-    ]
+    files = ["RELEASE", "scripts/release.py", "example_conf/prek.toml"]
     with tempfile.TemporaryDirectory(prefix="release-", dir=ROOT / "tmp") as directory:
         work = Path(directory)
         for filename in files:
             target = work / filename
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(ROOT / filename, target)
+        example = work / "example_conf/prek.toml"
+        original = example.read_text()
+        previous = (work / "RELEASE").read_text().splitlines()[0]
+        example.write_text(original.replace(f'rev = "{previous}"', 'rev = "1.23"'))
         notes = work / ".github" / "release-notes"
         notes.mkdir(parents=True)
         (notes / "99.99.md").write_text("Release preparation fixture.\n")
-        manifest_path = work / "Cargo.toml"
-        original_manifest = manifest_path.read_text()
-        previous = (work / "RELEASE").read_text().splitlines()[0]
-        manifest_path.write_text(
-            original_manifest.replace(f'version = "{previous}.0"', 'version = "1.23.0"')
-        )
         inputs = {path: path.read_bytes() for path in work.rglob("*") if path.is_file()}
         result = subprocess.run(
             [sys.executable, str(work / "scripts/release.py"), "99.99"],
@@ -42,8 +33,8 @@ def main() -> None:
             text=True,
             check=False,
         )
-        if result.returncode == 0 or "in Cargo.toml" not in result.stderr:
-            raise AssertionError("Release preparation must reject a mismatched version")
+        if result.returncode == 0 or "prek.toml" not in result.stderr:
+            raise AssertionError("Release preparation must reject a mismatched example")
         changed = [
             path.name
             for path, original in inputs.items()
@@ -51,7 +42,7 @@ def main() -> None:
         ]
         if changed:
             raise AssertionError(f"Failed release preparation changed {changed}")
-        manifest_path.write_text(original_manifest)
+        example.write_text(original)
         subprocess.run(
             [sys.executable, str(work / "scripts/release.py"), "99.99"],
             cwd=work,
@@ -65,23 +56,13 @@ def main() -> None:
             raise AssertionError(
                 "Release preparation must preserve the upkeep instructions"
             )
-        config = tomllib.loads((work / "example_conf/prek.toml").read_text())
+        config = tomllib.loads(example.read_text())
         bundle = next(repo for repo in config["repos"] if repo["repo"] != "builtin")
         if bundle["rev"] != "99.99":
             raise AssertionError("Release preparation must update the copyable example")
-        if 'rev = "99.99"' not in (work / "README.md").read_text():
-            raise AssertionError("Release preparation must update the README")
-        manifest = tomllib.loads((work / "Cargo.toml").read_text())
-        packages = tomllib.loads((work / "Cargo.lock").read_text())["package"]
-        binary = next(package for package in packages if package["name"] == "unslop")
-        if (
-            manifest["package"]["version"] != "99.99.0"
-            or binary["version"] != "99.99.0"
-        ):
-            raise AssertionError("Release preparation must update the CLI version")
     print(
         "PASS release preparation: failed validation preserves inputs; "
-        "versions updated and upkeep note preserved"
+        "example updated and upkeep note preserved"
     )
 
 

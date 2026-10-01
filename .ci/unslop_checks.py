@@ -302,9 +302,6 @@ def check_options(work: Path) -> None:
     (work / "invalid.md").write_bytes(b"\xff")
     invoke(work, "invalid.md", expected=2)
     invoke(work, "--help", expected=0)
-    version = (ROOT / "RELEASE").read_text().splitlines()[0]
-    if invoke(work, "--version", expected=0).stdout != f"unslop {version}\n":
-        raise AssertionError("CLI version must match RELEASE")
     rules = invoke(work, "--list-rules", expected=0).stdout.splitlines()
     covered = {
         diagnostic["rule"]
@@ -342,7 +339,7 @@ def check_options(work: Path) -> None:
     config.write_text("{broken")
     if "Cannot read config" not in invoke(work, name, expected=2).stderr:
         raise AssertionError("Malformed configuration must report a config error")
-    print("PASS unslop CLI: output formats, rule coverage, versions, and config errors")
+    print("PASS unslop CLI: output formats, rule coverage, and config errors")
 
 
 if __name__ == "__main__":

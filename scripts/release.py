@@ -16,24 +16,14 @@ def main() -> None:
         raise SystemExit(f"Write release notes in {notes} first")
     release = ROOT / "RELEASE"
     lines = release.read_text().splitlines()
-    previous = lines[0]
-    replacements = {
-        "README.md": (f'rev = "{previous}"', f'rev = "{version}"'),
-        "example_conf/prek.toml": (f'rev = "{previous}"', f'rev = "{version}"'),
-        "Cargo.toml": (f'version = "{previous}.0"', f'version = "{version}.0"'),
-        "Cargo.lock": (f'version = "{previous}.0"', f'version = "{version}.0"'),
-    }
-    prepared = {}
-    for filename, (old, new) in replacements.items():
-        path = ROOT / filename
-        text = path.read_text()
-        if text.count(old) != 1:
-            raise SystemExit(f"Expected one {old!r} in {filename}")
-        prepared[path] = text.replace(old, new)
+    example = ROOT / "example_conf" / "prek.toml"
+    old, new = f'rev = "{lines[0]}"', f'rev = "{version}"'
+    text = example.read_text()
+    if text.count(old) != 1:
+        raise SystemExit(f"Expected one {old!r} in {example}")
+    example.write_text(text.replace(old, new))
     lines[0] = version
-    prepared[release] = "\n".join(lines) + "\n"
-    for path, text in prepared.items():
-        path.write_text(text)
+    release.write_text("\n".join(lines) + "\n")
     print(f"Prepared {version}. Commit and push to main; CI tests and publishes it.")
 
 

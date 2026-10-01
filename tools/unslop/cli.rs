@@ -12,7 +12,6 @@ struct Args {
     fail_level: Option<String>,
     no_excerpts: bool,
     list_rules: bool,
-    version: bool,
     help: bool,
 }
 
@@ -32,7 +31,6 @@ fn parse() -> Result<Args, String> {
         match name {
             "--no-excerpts" => out.no_excerpts = true,
             "--list-rules" => out.list_rules = true,
-            "--version" => out.version = true,
             "--help" | "-h" => out.help = true,
             "--config" | "--preset" | "--format" | "--fail-level" => {
                 let value = inline.or_else(|| args.next()).ok_or_else(|| format!("argument {name}: expected one argument"))?;
@@ -164,12 +162,12 @@ fn print(output: &mut impl Write, args: &Args, diagnostics: &[Diagnostic]) -> io
 
 fn run(output: &mut impl Write) -> Result<i32, String> {
     let args = parse()?;
-    if args.version {
-        writeln!(output, "unslop {}", env!("CARGO_PKG_VERSION").strip_suffix(".0").unwrap_or(env!("CARGO_PKG_VERSION"))).map_err(|e| e.to_string())?;
-        return Ok(0);
-    }
     if args.help {
-        writeln!(output, "Usage: unslop [OPTIONS] [FILE ...]\n\nDeterministically lint Markdown for canned, repetitive, or bloated prose.\n\n  --config PATH\n  --preset recommended|strict\n  --format text|json|github\n  --fail-level info|warning|error|none\n  --no-excerpts\n  --list-rules\n  --version\n  -h, --help").map_err(|e| e.to_string())?;
+        writeln!(
+            output,
+            "Usage: unslop [OPTIONS] [FILE ...]\n\nDeterministically lint Markdown for canned, repetitive, or bloated prose.\n\n  --config PATH\n  --preset recommended|strict\n  --format text|json|github\n  --fail-level info|warning|error|none\n  --no-excerpts\n  --list-rules\n  -h, --help"
+        )
+        .map_err(|e| e.to_string())?;
         return Ok(0);
     }
     if args.list_rules {
