@@ -122,7 +122,7 @@
 - id: shellcheck
   name: shellcheck
   description: "Run shellcheck for shell script linting"
-  entry: ys-shellcheck
+  entry: shellcheck
   language: python
   types: [shell]
   args: [-e, "SC1091,SC2250"]
