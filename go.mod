@@ -1,3 +1,3 @@
 module github.com/ysawa0/bestprek
 
-go 1.25
+go 1.26.5

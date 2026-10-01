@@ -118,6 +118,17 @@ def verify_coverage(manifests: list[Path]) -> None:
     )
     if hooks != {manifest.parent.name for manifest in manifests}:
         raise SystemExit("Every published hook must have a fixture group")
+    # CI installs Go from go.mod, so it must match the hooks' pinned Go.
+    go = re.search(r"^go (.+)$", (ROOT / "go.mod").read_text(), re.MULTILINE)
+    pinned = set(
+        re.findall(
+            r'^  language: golang\n  language_version: "(.+)"$',
+            (ROOT / ".pre-commit-hooks.yaml").read_text(),
+            re.MULTILINE,
+        )
+    )
+    if go is None or pinned != {go[1]}:
+        raise SystemExit(f"Go hooks pin {sorted(pinned)}; go.mod must match")
     policy = json.loads((ROOT / ".oxlintrc.json").read_text())
     enabled = {
         name.removeprefix("anti-slop/")
