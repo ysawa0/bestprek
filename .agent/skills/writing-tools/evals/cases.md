@@ -62,7 +62,7 @@ Pass: Meets length and preserves team ownership, estimated/conditional status, a
 
 Prompt: Run a full 55-tool audit of “The test passed. We will deploy tomorrow.” Treat these as supplied facts; this is an internal status update. Return the audit, not a rewrite.
 
-Pass: Selects Full and reads its generated pack; accounts for every number 1–55 once; uses PASS, FAIL, NO TARGET with an absent object, or USER OVERRIDE with an explicit instruction. Reports violations as FAIL rather than relabeling them as inapplicable. Checks 2–3–1 and the shortest-insight rule even though the input is brief. Keeps narrative requirements scoped to actual story passages. Since the user requested an audit rather than a rewrite, reports required fixes without silently rewriting.
+Pass: Selects Full and reads its pack; accounts for every number 1–55 once; uses PASS, FAIL, NO TARGET with an absent object, USER OVERRIDE with an explicit instruction, or UNVERIFIED for unobservable preparation. Reports violations as FAIL rather than relabeling them as inapplicable. Checks 2–3–1 and the shortest-insight rule even though the input is brief. Keeps narrative requirements scoped to actual story passages. Since the user requested an audit rather than a rewrite, reports required fixes without silently rewriting.
 
 ## 11. Narrow scope beats stylistic ambition
 
@@ -116,7 +116,7 @@ Pass: Opens with the current healthy status; preserves log inspection; ends with
 
 Prompt: Tighten this everyday message: “I just wanted to ask whether you could possibly send the draft by Friday.”
 
-Pass: Selects Core; reads only its generated pack; revises the message while preserving the request and Friday deadline. Does not read all five reference files, generate 55 audit entries, or explain pack routing in the answer.
+Pass: Selects Core; reads only its pack; revises the message while preserving the request and Friday deadline. Does not read all five reference files, generate 55 audit entries, or explain pack routing in the answer.
 
 ## 20. Automatic Polish for substantive documents
 
@@ -128,7 +128,7 @@ Make the gateway own the retry budget.
 ## Risk
 We have not measured the production effect.”
 
-Pass: Selects Polish; reads its generated pack once; preserves the proposal-versus-result distinction and unknown production effect. Does not silently promote a working design draft to Full.
+Pass: Selects Polish; reads its pack once; preserves the proposal-versus-result distinction and unknown production effect. Does not silently promote a working design draft to Full.
 
 ## 21. Automatic Full for a final consequential submission
 
@@ -166,6 +166,54 @@ Prompt: Use writing-tools pack 1 to revise one sentence. Put “Checkout latency
 
 Pass: Keeps 2–3–1 and staging scope, such as “Checkout latency fell in staging by 40%.” Core does not downgrade the Rule 2 requirement to a suggestion.
 
+## 27. Review is not automatically exhaustive or a rewrite
+
+Prompt: Use writing-tools to review this message for clarity. Give feedback only: “I just wanted to ask whether you could possibly send the draft by Friday.”
+
+Pass: Selects Core without asking for a pack. Gives passage-specific feedback, preserves Friday, and does not return an unsolicited replacement message or all-55 audit.
+
+## 28. Review goal can require Polish on short text
+
+Prompt: Use writing-tools to check numerical scope in this one-sentence internal draft: “Conversion rose from 20% to 25%, a 5% increase.” Give feedback only.
+
+Pass: Selects Polish for Rule 51. Identifies a 5-percentage-point or 25% relative increase and missing measurement context. Does not invent a timeframe or rewrite the draft as the deliverable.
+
+## 29. Narrative craft routes to its actual rules
+
+Prompt: Use writing-tools to review dialogue and character in this fictional sketch: “Mira said, 'I refuse.' Then Mira agreed. Mira was brave.” Give feedback only.
+
+Pass: Selects Full, reads only Full, and applies dialogue and character requirements. Identifies the unsupported transition and trait label. Does not invent an intervening scene or claim unseen preparation passed.
+
+## 30. Story genre alone stays bounded
+
+Prompt: Use writing-tools to lightly tighten this rough fictional sketch: “Mira just opened the door. The robot was waiting there.”
+
+Pass: Selects Core. Preserves the fictional sequence without a Full detour or added dialogue, characters, or suspense.
+
+## 31. Multiple packs do not duplicate work
+
+Prompt: Use writing-tools core and polish to review: “The draft repeats the same claim in three sections.” Give feedback only.
+
+Pass: Reads Polish once, not Core as well. Reports only observable findings or evidence gaps rather than inventing the missing sections.
+
+## 32. Explicit scope wins over specialized routing
+
+Prompt: Use writing-tools core only to check Rule 52 in “The rollout is paused. The team is investigating checkout errors.”
+
+Pass: Keeps Core. Discloses that Rule 52 is outside the selected pack instead of silently promoting to Full or claiming Rule 52 passed.
+
+## 33. A numbered rule selects its containing pack
+
+Prompt: Use writing-tools to audit Rule 52 in “The rollout is paused. The team is investigating checkout errors.” Do not rewrite.
+
+Pass: Consults packs.json and selects Full without asking the user to choose. Checks the standalone takeaway against sentence lengths. Does not read lower packs or silently rewrite.
+
+## 34. Separate deliverables retain their own scope
+
+Prompt: Use writing-tools to review these two pieces. First, a casual chat message: “Can you send the draft Friday?” Second, the final board submission: “The pilot is complete. Expansion requires board approval.” Give feedback only.
+
+Pass: Selects Core for the chat and Full for the board submission; reads each selected file once. Does not apply Full to the chat just because it shares a request with the submission. Preserves the approval requirement.
+
 ## Structural contract
 
-Run `python3 scripts/build_packs.py --check` and `python3 -m unittest discover -s tests -v`. Canonical references contain numbers 1–55 exactly once; generated packs reproduce only their selected blocks. Check exact frontmatter, numbered paths, cumulative coverage, dependencies, links, and no stale all-55-every-time instruction in the main workflow. Full still requires a complete audit. Test results for the package are not results for these 26 live-agent cases.
+Follow the Maintenance checklist in [SKILL.md](../SKILL.md). Canonical references contain numbers 1–55 exactly once; packs reproduce only their selected blocks. Check exact frontmatter, numbered paths, cumulative coverage, dependencies, links, and no stale all-55-every-time instruction in the main workflow. Full still requires a complete audit. Structural verification does not replace running these 34 live-agent cases.
