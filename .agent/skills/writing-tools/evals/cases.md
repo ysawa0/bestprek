@@ -2,7 +2,7 @@
 
 Read when evaluating or changing the skill, not during routine writing. These are test fixtures, not independently verified claims about real projects or people.
 
-Run each prompt in a fresh session with the skill available. In addition to each case's specific assertions, evaluate every triggered requirement in the selected pack. Record the pack. Case assertions supplement that pack's audit; they never waive an active requirement. Record agent/model, skill version, prompt, output, references read when observable, and pass/fail against every criterion. Compare with a no-skill baseline when measuring improvement. All applicable criteria must pass; distinguish writing failures from invocation failures. Do not claim a run occurred without an actual recorded run.
+Run each prompt in a fresh session with the skill available. In addition to each case's specific assertions, evaluate every rule the skill's index applies. Record the playbook. Case assertions supplement that check; they never waive an applied rule. Record agent/model, skill version, prompt, output, references read when observable, and pass/fail against every criterion. Compare with a no-skill baseline when measuring improvement. All applicable criteria must pass; distinguish writing failures from invocation failures. Do not claim a run occurred without an actual recorded run.
 
 ## 1. Preserve quantitative scope
 
@@ -62,7 +62,7 @@ Pass: Meets length and preserves team ownership, estimated/conditional status, a
 
 Prompt: Run a full 55-tool audit of “The test passed. We will deploy tomorrow.” Treat these as supplied facts; this is an internal status update. Return the audit, not a rewrite.
 
-Pass: Selects Full and reads its generated pack; accounts for every number 1–55 once; uses PASS, FAIL, NO TARGET with an absent object, or USER OVERRIDE with an explicit instruction. Reports violations as FAIL rather than relabeling them as inapplicable. Checks 2–3–1 and the shortest-insight rule even though the input is brief. Keeps narrative requirements scoped to actual story passages. Since the user requested an audit rather than a rewrite, reports required fixes without silently rewriting.
+Pass: Follows the Audit playbook with all 55 in scope; accounts for every number 1–55 once; uses PASS, FAIL, NO TARGET with an absent object, or USER OVERRIDE with an explicit instruction. Reports violations as FAIL rather than relabeling them as inapplicable. Checks 2–3–1 and the shortest-insight rule even though the input is brief. Keeps narrative requirements scoped to actual story passages. Since the user requested an audit rather than a rewrite, reports required fixes without silently rewriting.
 
 ## 11. Narrow scope beats stylistic ambition
 
@@ -74,7 +74,7 @@ Pass: Returns “We definitely need to check the cache before launch.” with no
 
 Prompt: Lightly edit this without making it corporate: “Honestly, the old setup was a pain. I fixed the noisy alerts first, then tackled the deployment mess.”
 
-Pass: Retains the conversational voice, first-person ownership, order, and meaning. Adds no invented impact, heroic framing, or generic executive language. Minimal or no edits are acceptable only when the active pack already passes.
+Pass: Retains the conversational voice, first-person ownership, order, and meaning. Adds no invented impact, heroic framing, or generic executive language. Minimal or no edits are acceptable only when every applied rule already passes.
 
 ## 13. Mandatory 2–3–1 ordering
 
@@ -102,7 +102,7 @@ Pass: Returns “The team completed the review.” or another faithful one-sente
 
 ## 17. The best thought is the shortest sentence
 
-Prompt: Use writing-tools pack 3 to rewrite this two-sentence update. Keep its two sentences and facts, and make “The rollout is paused” the standalone central takeaway: “The rollout is paused while the team investigates errors. Errors affected checkout.”
+Prompt: Use writing-tools to rewrite this two-sentence update. Keep its two sentences and facts, and make “The rollout is paused” the standalone central takeaway: “The rollout is paused while the team investigates errors. Errors affected checkout.”
 
 Pass: The takeaway is a standalone sentence and is shorter than the other authored sentence. The other sentence retains the team's investigation and checkout errors. Neither sentence adds a root cause or resolved status.
 
@@ -112,60 +112,26 @@ Prompt: Rewrite this internal update with the answer first and a concrete action
 
 Pass: Opens with the current healthy status; preserves log inspection; ends with the requested monitoring action and 17:00 deadline. The result follows the report rules rather than introducing narrative suspense.
 
-## 19. Default Core without an all-55 detour
+## 19. Triggered rules only
 
 Prompt: Tighten this everyday message: “I just wanted to ask whether you could possibly send the draft by Friday.”
 
-Pass: Selects Core; reads only its generated pack; revises the message while preserving the request and Friday deadline. Does not read all five reference files, generate 55 audit entries, or explain pack routing in the answer.
+Pass: Follows Revise; reads only the references for the Always rules and rules the message triggers; preserves the request and Friday deadline. Does not generate 55 audit entries or explain the rules in the answer.
 
-## 20. Automatic Polish for substantive documents
+## 20. Breadth never changes genre
 
-Prompt: Revise this multi-section internal design proposal for clarity. Preserve its claims and headings: “# Retry ownership
-## Problem
-Client and server retries overlap.
-## Proposal
-Make the gateway own the retry budget.
-## Risk
-We have not measured the production effect.”
+Prompt: Use writing-tools to run an all-55 check while revising a factual incident update: “The rollback finished at 09:18. Error rates are back to baseline. The cause remains unknown.”
 
-Pass: Selects Polish; reads its generated pack once; preserves the proposal-versus-result distinction and unknown production effect. Does not silently promote a working design draft to Full.
+Pass: Produces a report. Does not invent scenes, character traits, quotations, dramatic stakes, or internal cliffhangers. Distinguishes a rule's absent target from a failed present target.
 
-## 21. Automatic Full for a final consequential submission
+## 21. A scoped audit stays within scope
 
-Prompt: Prepare this final board submission for publication. Preserve the facts: “The pilot is complete. The team recommends a second pilot. Expansion still requires board approval.”
+Prompt: Use writing-tools to audit rules 1–5 only, without rewriting: “The team completed the review.”
 
-Pass: Selects Full and checks all 55 with explicit absent targets where necessary. Keeps recommendation, completed pilot, and unapproved expansion distinct. A final board submission triggers Full even when the draft is short.
+Pass: Reports rules 1–5 only. Does not append the other 50 as “not reviewed” entries or assert compliance with all 55.
 
-## 22. Explicit pack beats automatic escalation
+## 22. Routing remains quiet
 
-Prompt: Use writing-tools pack 1 for this rough draft to our CEO. Keep it under 30 words: “The pilot ended yesterday. We need approval for a second pilot. Can you review the proposal Friday?”
+Prompt: Use writing-tools. Return only the revised email: “Hi Alex, we need your feedback on the draft by Thursday. Thanks.”
 
-Pass: Uses Core only. Preserves the rough-draft status, facts, request, and deadline. Recipient seniority does not override the explicit pack or create a final submission.
-
-## 23. Full changes breadth, not genre
-
-Prompt: Use writing-tools pack 3 to revise a factual incident update: “The rollback finished at 09:18. Error rates are back to baseline. The cause remains unknown.”
-
-Pass: Audits Full internally while producing a report. Does not invent scenes, character traits, quotations, dramatic stakes, or internal cliffhangers. Distinguishes a rule's absent target from a failed present target.
-
-## 24. Smaller-pack audit stays within scope
-
-Prompt: Use writing-tools pack 1. Audit, without rewriting: “The team completed the review.”
-
-Pass: Returns Core's selected rule IDs only, including Rule 2. Does not append the remaining 43 rules as “not reviewed” entries. Does not assert full compliance with all 55.
-
-## 25. Routing remains quiet
-
-Prompt: Use writing-tools pack 2. Return only the revised email: “Hi Alex, we need your feedback on the draft by Thursday. Thanks.”
-
-Pass: Reads Polish without rereading Core; returns only the email. Pack choice, rule numbers, and audit labels remain out of the requested artifact.
-
-## 26. A selected requirement remains mandatory
-
-Prompt: Use writing-tools pack 1 to revise one sentence. Put “Checkout latency” first and “40%” last: “Checkout latency fell by 40% in staging.”
-
-Pass: Keeps 2–3–1 and staging scope, such as “Checkout latency fell in staging by 40%.” Core does not downgrade the Rule 2 requirement to a suggestion.
-
-## Structural contract
-
-Run `python3 scripts/build_packs.py --check` and `python3 -m unittest discover -s tests -v`. Canonical references contain numbers 1–55 exactly once; generated packs reproduce only their selected blocks. Check exact frontmatter, numbered paths, cumulative coverage, dependencies, links, and no stale all-55-every-time instruction in the main workflow. Full still requires a complete audit. Test results for the package are not results for these 26 live-agent cases.
+Pass: Returns only the email. Playbook choice, rule numbers, and audit labels stay out of the requested artifact.

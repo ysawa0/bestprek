@@ -62,6 +62,6 @@ Pass: Every criticism is addressed by a correction or a stated reason; none is i
 
 ## 50. Own the tools of your craft.
 
-Requirement: Treat every rule in the active pack as the writing standard. Identify violations by rule number, repair them, and recheck the result. Keep authored rule wording in the numbered reference files; regenerate pack excerpts after edits. Select the pack through the skill's routing procedure, never by dropping a rule that is difficult to satisfy.
+Requirement: Treat every applied rule as the writing standard. Identify violations by rule number, repair them, and recheck the result. Keep authored rule wording in the numbered reference files. Select rules through the skill's rule index, never by dropping a rule that is difficult to satisfy.
 
-Pass: The final audit accounts for the active pack: all 55 rules in Full. Every departure within that scope cites an explicit user override rather than editorial preference.
+Pass: The final check accounts for every applied rule, and for all 55 in an exhaustive audit. Every departure within that scope cites an explicit user override rather than editorial preference.
