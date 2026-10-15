@@ -2,7 +2,7 @@
 
 Read when evaluating or changing the skill, not during routine writing. These are test fixtures, not independently verified claims about real projects or people.
 
-Run each prompt in a fresh session with the skill available. In addition to each case's specific assertions, evaluate every rule the skill's index applies. Record the playbook. Case assertions supplement that check; they never waive an applied rule. Record agent/model, skill version, prompt, output, references read when observable, and pass/fail against every criterion. Compare with a no-skill baseline when measuring improvement. All applicable criteria must pass; distinguish writing failures from invocation failures. Do not claim a run occurred without an actual recorded run.
+Run each prompt in a fresh session with the skill available. In addition to each case's specific assertions, evaluate every rule the skill's layers apply. Record the playbook. Case assertions supplement that check; they never waive an applied rule. Record agent/model, skill version, prompt, output, references read when observable, and pass/fail against every criterion. Compare with a no-skill baseline when measuring improvement. All applicable criteria must pass; distinguish writing failures from invocation failures. Do not claim a run occurred without an actual recorded run.
 
 ## 1. Preserve quantitative scope
 
@@ -116,7 +116,7 @@ Pass: Opens with the current healthy status; preserves log inspection; ends with
 
 Prompt: Tighten this everyday message: “I just wanted to ask whether you could possibly send the draft by Friday.”
 
-Pass: Follows Revise; reads only the reference files for triggered rules whose targets appear; preserves the request and Friday deadline. Does not generate 55 audit entries or explain the rules in the answer.
+Pass: Follows Revise; runs the layers with short report tags and applies no story rules; preserves the request and Friday deadline. Does not generate 55 audit entries or explain the rules in the answer.
 
 ## 20. Breadth never changes genre
 
