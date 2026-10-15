@@ -1,6 +1,7 @@
 ---
 name: writing-tools
 description: "Writing Tools for prose writing. Use for /writing-tools, drafting prose, revising a draft, or auditing prose against the 55 writing rules."
+disable-model-invocation: true
 ---
 
 # Writing Tools
