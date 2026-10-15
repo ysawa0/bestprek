@@ -1,10 +1,6 @@
-# Special effects · Requirements 11–23
+# Special effects
 
-## 11. Prefer the simple over the technical.
-
-Requirement: Use the simplest word that preserves the exact meaning. Replace jargon with its plain equivalent. Retain a specialist term when it names a distinction the plain replacement loses; define it on first use for a nonexpert audience. Keep code identifiers exact.
-
-Pass: Each specialist term is necessary for precision or is an exact identifier; unfamiliar necessary terms are defined for the reader.
+Always rules 11, 18, 23 live in SKILL.md.
 
 ## 12. Give key words their space.
 
@@ -42,12 +38,6 @@ Requirement: When borrowing language, distinguish quotation, paraphrase, and all
 
 Pass: Borrowed language has a clear source and form; new language does new work rather than masquerading as an original quotation.
 
-## 18. Set the pace with sentence length.
-
-Requirement: Mark changes of direction with short independent sentences. Carry a continuous sequence in connected clauses. Change sentence length at an argumentative or narrative turn instead of repeating one sentence shape throughout.
-
-Pass: The cadence changes at each turn; continuous action and decisive stops have different sentence shapes.
-
 ## 19. Vary the lengths of paragraphs.
 
 Requirement: Give each paragraph one topic or narrative beat. Start a new paragraph when that job changes. Put a pivotal takeaway in a one-sentence paragraph and develop its evidence in surrounding paragraphs. In a one-paragraph format, preserve the format and mark the turn within it.
@@ -71,9 +61,3 @@ Pass: High-stakes passages let the facts carry the weight; every flourish elsewh
 Requirement: Pair each central abstract claim with a concrete example, observation, or measurement. Explain what the example establishes and where that inference stops. Connect concrete detail back to the general point instead of leaving either level unsupported.
 
 Pass: The reader can move from claim to example and back; the inference does not exceed the evidence.
-
-## 23. Tune your voice.
-
-Requirement: Set person, register, attitude, and distance from the brief or supplied draft. Keep them consistent throughout. Preserve the author's deliberate conversational expressions while correcting the prose around them. Read the finished text for shifts into an unrequested register.
-
-Pass: The voice matches the brief from opening to ending; edits have not replaced the author's voice with generic formal prose.

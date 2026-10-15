@@ -1,16 +1,12 @@
-# Blueprints · Requirements 24–39
+# Blueprints
+
+Always rules 25, 39 live in SKILL.md.
 
 ## 24. Work from a plan.
 
 Requirement: Before drafting, write a working outline that states the opening, the job of each section, and the ending. For a short message, use one line. For revision, map the existing structure before moving material. Make the final sequence match the plan or update the plan to match the corrected sequence.
 
 Pass: Every section has a defined job and position; the whole has an opening-to-ending route.
-
-## 25. Learn the difference between reports and stories.
-
-Requirement: Classify the piece before drafting. Report: give the answer or current status first, then evidence and action. Story: show a disruption, consequential action, and change. Hybrid: give the report's answer first, then a clearly bounded narrative. Apply narrative rules within story passages only.
-
-Pass: The opening and sequence follow the declared form; operational answers are not withheld to manufacture suspense.
 
 ## 26. Use dialogue as a form of action.
 
@@ -89,9 +85,3 @@ Pass: The text meets its length limit, preserves the required meaning, and conta
 Requirement: Ground a recognizable role in the individual's actions, circumstances, and contradictions. Replace stock trait bundles with the person's specific behavior. Use demographic facts only as facts; establish personality and motive from separate evidence.
 
 Pass: The individual is distinguishable from the role; no trait or motive rests solely on demographic membership.
-
-## 39. Write toward an ending.
-
-Requirement: Choose the final answer, decision, action, resolution, or image before polishing. Make the preceding material prepare it. End immediately after delivering it. Place essential qualifications before the final emphasis and preserve their scope.
-
-Pass: The ending completes the opening promise, introduces no unsupported claim, and has no trailing generic recap.

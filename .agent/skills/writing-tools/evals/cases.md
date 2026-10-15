@@ -116,7 +116,7 @@ Pass: Opens with the current healthy status; preserves log inspection; ends with
 
 Prompt: Tighten this everyday message: “I just wanted to ask whether you could possibly send the draft by Friday.”
 
-Pass: Follows Revise; reads only the references for the Always rules and rules the message triggers; preserves the request and Friday deadline. Does not generate 55 audit entries or explain the rules in the answer.
+Pass: Follows Revise; reads only the reference files for triggered rules whose targets appear; preserves the request and Friday deadline. Does not generate 55 audit entries or explain the rules in the answer.
 
 ## 20. Breadth never changes genre
 

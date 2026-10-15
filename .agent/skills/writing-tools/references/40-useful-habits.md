@@ -1,4 +1,4 @@
-# Useful habits · Requirements 40–50
+# Useful habits
 
 ## 40. Draft a mission statement for your work.
 

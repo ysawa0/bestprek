@@ -1,4 +1,6 @@
-# Bonus tools · Requirements 51–55
+# Bonus tools
+
+Always rule 53 lives in SKILL.md.
 
 ## 51. Take advantage of narrative numbers.
 
@@ -11,12 +13,6 @@ Pass: Every number has interpretable scope; comparisons and arithmetic are corre
 Requirement: State the central insight in a standalone sentence. Make it the shortest complete authored sentence in the piece; exact source quotations are outside that comparison. Move supporting explanation around it while preserving any qualification that determines its truth. Apply Rule 2 to its word order.
 
 Pass: The central insight occupies the shortest complete authored sentence and remains accurate on its own.
-
-## 53. Match your diction to your writing purpose.
-
-Requirement: Set the register from the brief, then use words from that register throughout. Use conversational words for conversation, precise domain terms for experts, and formal wording for formal deliverables. Translate imported jargon and remove corporate filler unless it is an exact name or required quotation.
-
-Pass: Vocabulary matches the purpose and audience; every register change follows an explicit change in speaker or form.
 
 ## 54. Create a mosaic of detail to reveal character.
 
