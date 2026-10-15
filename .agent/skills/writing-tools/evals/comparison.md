@@ -1,5 +1,7 @@
 # Writing skill comparison
 
+The current result is the [direct-read rerun](direct/comparison.md), where agents can read their own skill directories. The report below records the earlier parent-supplied-file trial and is retained as history.
+
 Three GPT-6 Sol agents at medium effort tested the layer, branch, and both variants on October 14, 2026. Layer and branch tied at 17/20 on the chosen rubric; both scored 15/20. The combined structure did not improve adherence in this trial.
 
 | Variant | Primary brief | Regression probes | Total | Primary reference rounds |
