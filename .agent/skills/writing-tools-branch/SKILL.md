@@ -10,10 +10,10 @@ The 55 rules live in branch files. Before writing anything, record the piece's b
 
 ## Branch tags
 
-Record two tags in working notes.
+Record the form and every matching size tag in working notes.
 
 - Form, per Rule 25: report, story, or hybrid. A piece with any narrative passage is story or hybrid.
-- Size: short or length-capped (a message, a reply, or any length limit), standard, or multi-section (headings or several distinct parts).
+- Size: short or length-capped (a message, a reply, or any length limit); multi-section (headings or several distinct parts); standard if neither applies. Short and multi-section can both apply.
 
 | Tag | Read |
 | --- | --- |
@@ -32,7 +32,7 @@ Record two tags in working notes.
 
 ## Playbooks
 
-Open a todo list whose first items are the matched playbook's steps, copied verbatim.
+Keep a todo list in working notes whose first items are the matched playbook's steps, copied verbatim. A todo tool is optional; the steps and their completion criteria still apply.
 
 - [Draft](playbooks/draft.md). New prose from a brief, notes, or facts.
 - [Revise](playbooks/revise.md). Edit, tighten, shorten, or restyle supplied prose.

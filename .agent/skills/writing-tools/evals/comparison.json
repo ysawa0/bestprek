@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-14",
+  "model": "gpt-6-sol",
+  "reasoning_effort": "medium",
+  "agents": ["trial_layer", "trial_both", "trial_branch"],
+  "protocol": "Three fresh agents, one per variant. No agent tool calls. Parent supplies exact reference files only when requested. Primary task runs first; regression probes reuse the same agent context. No feedback or grades are supplied between tasks.",
+  "primary_prompt": "Draft an internal update for engineering leads. Use exactly three sections headed Status, Evidence, and Next action. Stay within 150 words including headings. Give the decision first and finish on the concrete action. Use only these supplied facts: We are keeping the production rollout paused pending production validation. Our team built a new cache; I led its staging test. In that 30-minute staging test, median latency fell from 90 ms to 60 ms. The team estimates the change could save $22 million annually if current usage continues. This is an extrapolation, not realized savings. The cache has not been deployed to production; production benefits remain unmeasured. Dana must run a production shadow test by October 20, 2026 at 17:00. Return only the update, with no process notes.",
+  "primary_criteria": [
+    "Exactly the three requested headings; no more than 150 whitespace-delimited words including headings.",
+    "Opens on the paused rollout decision and preserves the dependency on production validation.",
+    "Preserves team ownership of the cache and individual ownership of the staging test.",
+    "Retains staging, 30 minutes, median, 90 ms and 60 ms; any derived arithmetic is correct.",
+    "Retains team estimate, could/conditional status, $22 million annually and continued-usage condition.",
+    "Labels the savings as extrapolated and unrealized; does not imply production measurements.",
+    "Preserves no production deployment and unmeasured production benefits.",
+    "Ends on Dana's production shadow test with the full October 20, 2026, 17:00 deadline.",
+    "Uses a standalone central takeaway that is the shortest complete authored sentence (Rule 52).",
+    "Adds no unsupported facts or process commentary; remains a factual report."
+  ],
+  "regression_cases": [1, 2, 5, 8, 9, 10, 11, 13, 17, 21],
+  "grading": "Primary task: one point per criterion, out of 10. Regression probes: one point only if every case-specific assertion in cases.md passes, out of 10. Report these scores separately. Also report observed rule violations and reference routing separately; neither a score nor unseen working notes proves full 55-rule compliance.",
+  "limitations": "One agent and primary sample per variant; no no-skill baseline, repeats or blinded independent grader. Regression probes share prior context and are not fresh-session regression-suite runs. Reference delivery adds human-equivalent handoffs. Results are exploratory and cannot establish a causal improvement."
+}

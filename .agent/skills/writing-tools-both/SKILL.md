@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Writing Tools
 
-The 55 rules come in five layers, read one at a time as the work reaches them. Read each layer file only when its step starts, never ahead. Within a layer, the branch tags from Layer 1 decide which sections apply, and a rule with a Target line applies once its target appears. Every applied rule ends on its Pass line.
+The 55 rules arrive in five layers. Read a layer only when its playbook step starts. Each layer introduces shared rules and links to conditional branch files: read only the files matching the tags recorded in Layer 1, at that layer's step. A rule with a Target line applies once its target appears. Every applied rule ends on its Pass line.
 
 ## Ground rules
 
@@ -18,7 +18,7 @@ The 55 rules come in five layers, read one at a time as the work reaches them. R
 
 ## Playbooks
 
-Open a todo list whose first items are the matched playbook's steps, copied verbatim.
+Keep a todo list in working notes whose first items are the matched playbook's steps, copied verbatim. A todo tool is optional; the steps and their completion criteria still apply.
 
 - [Draft](playbooks/draft.md). New prose from a brief, notes, or facts.
 - [Revise](playbooks/revise.md). Edit, tighten, shorten, or restyle supplied prose.
@@ -36,4 +36,4 @@ Open a todo list whose first items are the matched playbook's steps, copied verb
 
 ## Maintenance
 
-Each rule has one home, its layer file. Measure behavior changes with the [regression cases](evals/cases.md).
+Each rule has one home, in a layer or its branch file. Measure behavior changes with the [regression cases](evals/cases.md).

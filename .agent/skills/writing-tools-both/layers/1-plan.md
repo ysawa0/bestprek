@@ -4,12 +4,12 @@ Run before any writing.
 
 ## Branch tags
 
-Record two tags in working notes. Every later layer reads them.
+Record the form and every matching size tag in working notes. Every later layer reads them.
 
 - Form, per Rule 25: report, story, or hybrid. A hybrid takes both report and story sections, with story rules confined to its narrative part.
-- Size: short or length-capped (a message, a reply, or any length limit), standard, or multi-section (headings or several distinct parts).
+- Size: short or length-capped (a message, a reply, or any length limit); multi-section (headings or several distinct parts); standard if neither applies. Short and multi-section can both apply.
 
-Done when both tags are recorded. A piece with any narrative passage is tagged story or hybrid.
+Done when the form and all matching size tags are recorded. A piece with any narrative passage is tagged story or hybrid.
 
 Apply the Always section, each section matching the piece's branch tags, and each rule whose target appears.
 Done when every applied rule here passes its Pass line.
@@ -36,25 +36,11 @@ Pass: Every section has a defined job and position; the whole has an opening-to-
 
 ## Multi-section piece
 
-### 31. Build your work around a key question.
-
-Requirement: Write the central question in a working note before drafting. Make each section answer it, supply necessary evidence, or resolve a supporting question. Remove material with none of those jobs. For a reference document, use the reader's common lookup need as the question.
-
-Pass: Every section has a direct relationship to the central question; the ending answers it or states the evidence gap.
-
-### 45. Break long projects into parts.
-
-Requirement: Divide a multi-section project into units with a defined job, inputs, and completion condition. Draft each against the shared brief and terminology. Reassemble the units and remove duplicate claims, missing links, and inconsistent terminology.
-
-Pass: Every unit has a completion condition; the assembled piece is connected and internally consistent.
+Read [Multi-section piece](../branches/1-multi-section.md) now when this branch applies. Return here after every applicable Pass line in that file passes.
 
 ## Story or hybrid
 
-### 55. Look for the “inciting incident” to kick-start your story.
-
-Requirement: Start a story with the event that disrupts the prior situation and triggers the central action. Put necessary backstory after that event. In a hybrid, place the story's trigger immediately after the report lead. Preserve the actual event, stakes, and sequence in nonfiction.
-
-Pass: The narrative opens on a specific disruption with a consequence; backstory does not delay the trigger.
+Read [Story or hybrid](../branches/1-story.md) now when this branch applies. Return here after every applicable Pass line in that file passes.
 
 ## When the target appears
 

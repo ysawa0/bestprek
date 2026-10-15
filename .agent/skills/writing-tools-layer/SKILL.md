@@ -18,7 +18,7 @@ The 55 rules come in five layers, read one at a time as the work reaches them. R
 
 ## Playbooks
 
-Open a todo list whose first items are the matched playbook's steps, copied verbatim.
+Keep a todo list in working notes whose first items are the matched playbook's steps, copied verbatim. A todo tool is optional; the steps and their completion criteria still apply.
 
 - [Draft](playbooks/draft.md). New prose from a brief, notes, or facts.
 - [Revise](playbooks/revise.md). Edit, tighten, shorten, or restyle supplied prose.
