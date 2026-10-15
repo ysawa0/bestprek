@@ -1,0 +1,118 @@
+{
+  "primary_order": "The ten criteria in manifest.json; 1 = pass, 0 = fail.",
+  "probe_order": [1, 2, 5, 8, 9, 10, 11, 13, 17, 21],
+  "round_1_source": "../direct/comparison.md; scores retained unchanged.",
+  "selection": "Maximum paired primary-plus-probe total from one complete round.",
+  "grading_notes": [
+    "Only case-specific probe assertions earn points. Broader rule violations are reported separately.",
+    "Round 3 branch criterion 9 accepts a joint-shortest takeaway: the criterion does not require a unique minimum.",
+    "Round 2 layer case 10 receives the accounting point: every rule is listed once with permitted labels, absent-target explanations and checks of rules 2 and 52. Unsupported PASS claims for private planning and mission work remain audit defects outside that accounting point.",
+    "The one-point best-score lead disappears if the unsupported process PASS claims are treated as a failure of case 10.",
+    "Round 3 layer case 9 preserves the usage-level qualification as 'at current usage'.",
+    "Round 3 branch case 8 meets the listed length, triggering-event and earned-ending assertions, but does not explicitly identify Rivet as a robot; record this brief-fidelity concern separately."
+  ],
+  "variants": {
+    "layer": {
+      "rounds": [
+        {
+          "round": 1,
+          "source": "../direct/layer.md",
+          "primary_pass": [1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+          "primary": 9,
+          "probe_pass": [1, 0, 0, 1, 1, 0, 1, 1, 1, 1],
+          "probes": 7,
+          "total": 16
+        },
+        {
+          "round": 2,
+          "source": "layer.md",
+          "primary_pass": [1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+          "primary": 9,
+          "probe_pass": [1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+          "probes": 9,
+          "total": 18
+        },
+        {
+          "round": 3,
+          "source": "layer.md",
+          "primary_pass": [1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+          "primary": 9,
+          "probe_pass": [1, 1, 0, 1, 1, 0, 1, 1, 1, 1],
+          "probes": 8,
+          "total": 17
+        }
+      ],
+      "best": 18,
+      "best_rounds": [2],
+      "mean": 17
+    },
+    "branch": {
+      "rounds": [
+        {
+          "round": 1,
+          "source": "../direct/branch.md",
+          "primary_pass": [1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+          "primary": 9,
+          "probe_pass": [1, 1, 0, 1, 1, 0, 1, 1, 1, 1],
+          "probes": 8,
+          "total": 17
+        },
+        {
+          "round": 2,
+          "source": "branch.md",
+          "primary_pass": [1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+          "primary": 9,
+          "probe_pass": [1, 1, 0, 1, 1, 0, 1, 1, 1, 1],
+          "probes": 8,
+          "total": 17
+        },
+        {
+          "round": 3,
+          "source": "branch.md",
+          "primary_pass": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+          "primary": 10,
+          "probe_pass": [1, 0, 0, 1, 0, 0, 1, 1, 1, 1],
+          "probes": 6,
+          "total": 16
+        }
+      ],
+      "best": 17,
+      "best_rounds": [1, 2],
+      "mean": 16.666666666666668
+    },
+    "both": {
+      "rounds": [
+        {
+          "round": 1,
+          "source": "../direct/both.md",
+          "primary_pass": [1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+          "primary": 8,
+          "probe_pass": [0, 0, 0, 1, 0, 0, 1, 1, 1, 1],
+          "probes": 5,
+          "total": 13
+        },
+        {
+          "round": 2,
+          "source": "both.md",
+          "primary_pass": [1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+          "primary": 9,
+          "probe_pass": [1, 1, 0, 1, 1, 0, 1, 1, 1, 1],
+          "probes": 8,
+          "total": 17
+        },
+        {
+          "round": 3,
+          "source": "both.md",
+          "primary_pass": [1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+          "primary": 9,
+          "probe_pass": [1, 0, 0, 1, 1, 0, 1, 1, 1, 1],
+          "probes": 7,
+          "total": 16
+        }
+      ],
+      "best": 17,
+      "best_rounds": [2],
+      "mean": 15.333333333333334
+    }
+  }
+}

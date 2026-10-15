@@ -1,5 +1,7 @@
 # Writing skill comparison with directory reads
 
+This is round 1. The [best-of-three comparison](../best-three/comparison.md) adds two fresh rounds per variant and reports all scores.
+
 The three agents independently read files in their own skill directories, using GPT-6 Sol at medium effort. Branch scored 17/20, layer 16/20, and both 13/20. This rerun uses the user's clarified tool permission and supersedes the earlier parent-supplied-file comparison.
 
 | Variant | Primary brief | Regression probes | Total |

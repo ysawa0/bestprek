@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-14",
+  "model": "gpt-6-sol",
+  "reasoning_effort": "medium",
+  "skill_commit": "18f7925426d65c5ad240f188059cb44174deddcb",
+  "round_1": "../direct/manifest.json",
+  "round_1_scores": {
+    "branch": {
+      "primary": 9,
+      "probes": 8,
+      "total": 17
+    },
+    "layer": {
+      "primary": 9,
+      "probes": 7,
+      "total": 16
+    },
+    "both": {
+      "primary": 8,
+      "probes": 5,
+      "total": 13
+    }
+  },
+  "additional_rounds": [2, 3],
+  "agents": {
+    "2": ["r2_layer", "r2_both", "r2_branch"],
+    "3": ["r3_layer", "r3_both", "r3_branch"]
+  },
+  "protocol": "Three fresh agents, one per variant. Each independently reads its own SKILL.md and references using read-only tools inside its assigned skill directory. No parent-supplied reference text or pauses to request files. Primary task runs first; ten regression probes reuse the same agent context. No feedback, grades, prior results or expected answers are supplied between tasks.",
+  "tool_scope": "Read file contents or list directories only within the assigned variant directory. No writes, program execution other than file reads/listings, network, sibling/parent inspection, other skills, delegation or agent messaging. Agents are instructed to use cat for file reads and to keep todo lists privately. Routine writing does not read evals.",
+  "artifact_wrapper": "Each response contains writing artifacts followed by a separate <read-log> block listing files read in order and the read tool-call count. The block is recorded verbatim and excluded from writing word counts and clean-output grades. Read counts are agent-reported; tool scope is an instruction, not a separately configured filesystem sandbox.",
+  "primary_prompt": "Draft an internal update for engineering leads. Use exactly three sections headed Status, Evidence, and Next action. Stay within 150 words including headings. Give the decision first and finish on the concrete action. Use only these supplied facts: We are keeping the production rollout paused pending production validation. Our team built a new cache; I led its staging test. In that 30-minute staging test, median latency fell from 90 ms to 60 ms. The team estimates the change could save $22 million annually if current usage continues. This is an extrapolation, not realized savings. The cache has not been deployed to production; production benefits remain unmeasured. Dana must run a production shadow test by October 20, 2026 at 17:00. Return only the update, with no process notes.",
+  "primary_criteria": [
+    "Exactly the three requested headings; no more than 150 whitespace-delimited words including headings.",
+    "Opens on the paused rollout decision and preserves the dependency on production validation.",
+    "Preserves team ownership of the cache and individual ownership of the staging test.",
+    "Retains staging, 30 minutes, median, 90 ms and 60 ms; any derived arithmetic is correct.",
+    "Retains team estimate, could/conditional status, $22 million annually and continued-usage condition.",
+    "Labels the savings as extrapolated and unrealized; does not imply production measurements.",
+    "Preserves no production deployment and unmeasured production benefits.",
+    "Ends on Dana's production shadow test with the full October 20, 2026, 17:00 deadline.",
+    "Uses a standalone central takeaway that is the shortest complete authored sentence (Rule 52).",
+    "Adds no unsupported facts or process commentary; remains a factual report."
+  ],
+  "regression_cases": [1, 2, 5, 8, 9, 10, 11, 13, 17, 21],
+  "grading": "Primary task: one point per criterion, out of 10. Regression probes: one point only if every case-specific assertion in cases.md passes, out of 10. Report these scores separately. Also report observed rule violations and reference routing separately; neither a score nor unseen working notes proves full 55-rule compliance.",
+  "selection": "Best of three means the maximum complete-round total out of 20 for each variant. Keep the primary and probe scores paired within a round; do not combine a primary from one round with probes from another. Record all rounds and means alongside each maximum.",
+  "limits": "Three independent agents per variant including the existing direct-read round. The primary and probe batch within each agent share context. No no-skill baseline or blinded grader. Read logs are self-reported. The earlier parent-supplied-file experiment is excluded."
+}
