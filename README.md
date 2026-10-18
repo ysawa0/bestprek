@@ -8,7 +8,6 @@ Pre-commit hooks
 - `oxlint`: lint JavaScript, JSX, TypeScript, and TSX with the bundled anti-slop policy
 - `ruff-check`: lint Python and Jupyter files
 - `ruff-format`: format Python and Jupyter files
-- `token-limit`: reject staged files over 5,000 tokens (bytes / 4), skipping lockfiles, vendored and generated files, and explain how to split them
 - `unbold`: strip Markdown bold markers in place while preserving code and escaped punctuation
 - `unslop`: lint Markdown prose for canned, repetitive, bloated, or mechanically over-polished writing
 - `gofumpt`: format Go

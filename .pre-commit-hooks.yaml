@@ -40,15 +40,6 @@
   types_or: [javascript, jsx, ts, tsx]
   pass_filenames: true
 
-- id: token-limit
-  name: token limit
-  description: "Reject staged agent-authored files above 5,000 tokens, estimated as bytes / 4"
-  entry: ys-token-limit
-  language: python
-  types: [text]
-  stages: [pre-commit]
-  require_serial: true
-
 - id: unbold
   name: unbold
   description: "Strip markdown bold markers (** and __) in place"

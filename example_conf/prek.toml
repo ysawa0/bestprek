@@ -27,9 +27,6 @@ id = "ruff-format"
 id = "ruff-check"
 
 [[repos.hooks]]
-id = "token-limit"
-
-[[repos.hooks]]
 id = "unbold"
 
 [[repos.hooks]]

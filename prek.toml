@@ -19,6 +19,6 @@ repo = "local"
 [[repos.hooks]]
 id = "bestprek"
 name = "bestprek"
-entry = "sh -c 'prek try-repo \"$PWD\" --skip token-limit --files \"$@\"' --"
+entry = "sh -c 'prek try-repo \"$PWD\" --files \"$@\"' --"
 language = "system"
 require_serial = true
