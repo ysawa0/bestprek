@@ -13,6 +13,7 @@ dependencies = [
 
 [project.scripts]
 ys-ruff = "hooks.ruff:main"
+ys-token-limit = "hooks.tokens:main"
 
 [tool.setuptools]
 packages = ["hooks"]

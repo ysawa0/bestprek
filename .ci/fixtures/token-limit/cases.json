@@ -1,0 +1,34 @@
+[
+  {
+    "name": "under limit",
+    "path": "small.py",
+    "input": "small.input.txt",
+    "args": ["--max-tokens", "10"]
+  },
+  {
+    "name": "over limit",
+    "path": "src/large.py",
+    "input": "large.input.txt",
+    "args": ["--max-tokens", "10"],
+    "diagnostics": ["src/large.py: ~15 tokens (61 bytes / 4), limit 10", "Split each file listed above"]
+  },
+  {
+    "name": "lockfile",
+    "path": "uv.lock",
+    "input": "large.input.txt",
+    "args": ["--max-tokens", "10"]
+  },
+  {
+    "name": "generated header",
+    "path": "api.go",
+    "input": "generated.input.txt",
+    "args": ["--max-tokens", "10"]
+  },
+  {
+    "name": "linguist-generated",
+    "path": "schema.py",
+    "input": "large.input.txt",
+    "args": ["--max-tokens", "10"],
+    "setup": { ".gitattributes": "schema.py linguist-generated\n" }
+  }
+]
