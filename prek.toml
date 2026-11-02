@@ -23,6 +23,15 @@ repo = "local"
 [[repos.hooks]]
 id = "bestprek"
 name = "bestprek"
-entry = "sh -c 'prek try-repo \"$PWD\" --files \"$@\"' --"
+entry = "sh -c 'prek try-repo \"$PWD\" --skip directory-file-count --files \"$@\"' --"
 language = "system"
+require_serial = true
+
+[[repos.hooks]]
+id = "directory-file-count"
+name = "directory file count"
+entry = "python3 -m hooks.directory_count"
+language = "system"
+types = ["file"]
+exclude = "^(\\.ci/fixtures/|\\.github/release-notes/|oxlint/anti-slop/rules/)"
 require_serial = true

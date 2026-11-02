@@ -24,6 +24,8 @@ class Case(TypedDict):
     setup: NotRequired[dict[str, str]]
     exit: NotRequired[int]
     repeat: NotRequired[int]
+    siblings: NotRequired[int]
+    exclude: NotRequired[str]
 
 
 def run(work: Path, hook: str, path: str) -> subprocess.CompletedProcess[str]:
@@ -49,6 +51,8 @@ def write_config(work: Path, repo: str, revision: str, hook: str, case: Case) ->
     )
     if "args" in case:
         config += f"args = {json.dumps(case['args'])}\n"
+    if "exclude" in case:
+        config += f"exclude = {json.dumps(case['exclude'])}\n"
     (work / "prek.toml").write_text(config)
 
 
@@ -97,16 +101,35 @@ def check(work: Path, folder: Path, case: Case) -> None:
 
 def run_case(work: Path, folder: Path, case: Case, repo: str, revision: str) -> None:
     write_config(work, repo, revision, folder.name, case)
-    setup = case.get("setup", {})
+    setup = dict(case.get("setup", {}))
+    for index in range(case.get("siblings", 0)):
+        setup[str(Path(case["path"]).parent / f"sibling-{index}.txt")] = "fixture\n"
     for filename, content in setup.items():
         path = work / filename
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(content)
+    if "siblings" in case and setup:
+        subprocess.run(["git", "add", "--", *setup], cwd=work, check=True)
     try:
         check(work, folder, case)
     except AssertionError as exc:
         raise AssertionError(f"{folder.name}/{case['name']}: {exc}") from exc
     finally:
+        if "siblings" in case:
+            subprocess.run(
+                [
+                    "git",
+                    "rm",
+                    "--cached",
+                    "-q",
+                    "--ignore-unmatch",
+                    "--",
+                    case["path"],
+                    *setup,
+                ],
+                cwd=work,
+                check=True,
+            )
         for filename in [case["path"], *setup]:
             (work / filename).unlink()
 

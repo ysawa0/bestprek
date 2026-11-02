@@ -43,6 +43,11 @@ id = "markdown-length"
 id = "markdown-links"
 
 [[repos.hooks]]
+id = "directory-file-count"
+exclude = "(^|/)(archive|fixtures|profiles|check-evidence)/"
+# args = ["--max-files", "15"]
+
+[[repos.hooks]]
 id = "goimports"
 
 [[repos.hooks]]

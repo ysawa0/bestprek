@@ -72,6 +72,14 @@
   language: python
   types: [markdown]
 
+- id: directory-file-count
+  name: directory file count
+  description: "Reject subdirectories with more than 15 tracked files; configure with --max-files"
+  entry: ys-directory-file-count
+  language: python
+  types: [file]
+  require_serial: true
+
 - id: gofumpt
   name: gofumpt
   description: "Format Go files with gofumpt"

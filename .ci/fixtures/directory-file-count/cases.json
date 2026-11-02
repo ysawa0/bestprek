@@ -1,0 +1,33 @@
+[
+  {
+    "name": "at-default-limit",
+    "path": "at-limit/item.txt",
+    "input": "file.input.txt",
+    "siblings": 14,
+    "setup": { "at-limit/nested/extra.txt": "nested\n" }
+  },
+  {
+    "name": "over-default-limit",
+    "path": "over-limit/item.txt",
+    "input": "file.input.txt",
+    "siblings": 15,
+    "diagnostics": ["over-limit: 16 tracked files exceeds the limit of 15"]
+  },
+  {
+    "name": "custom-limit",
+    "path": "custom/item.txt",
+    "input": "file.input.txt",
+    "siblings": 1,
+    "args": ["--max-files", "1"],
+    "diagnostics": ["custom: 2 tracked files exceeds the limit of 1"]
+  },
+  {
+    "name": "excluded-directory",
+    "path": "archive/item.txt",
+    "input": "file.input.txt",
+    "siblings": 15,
+    "exclude": "^archive/",
+    "diagnostics": ["Skipped"],
+    "exit": 0
+  }
+]
