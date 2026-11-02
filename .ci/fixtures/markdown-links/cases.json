@@ -3,7 +3,7 @@
     "name": "existing-links",
     "path": "docs/example.md",
     "input": "existing.input.txt",
-    "setup": {"docs/target file.md": "target\n", "docs/image.png": "image\n", "root.md": "root\n"}
+    "setup": { "docs/target file.md": "target\n", "docs/image.png": "image\n", "root.md": "root\n" }
   },
   {
     "name": "missing-links",
