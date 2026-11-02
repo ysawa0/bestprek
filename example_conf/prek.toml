@@ -33,6 +33,9 @@ id = "unbold"
 id = "unslop"
 
 [[repos.hooks]]
+id = "markdown-length"
+
+[[repos.hooks]]
 id = "goimports"
 
 [[repos.hooks]]

@@ -23,6 +23,7 @@ class Case(TypedDict):
     args: NotRequired[list[str]]
     setup: NotRequired[dict[str, str]]
     exit: NotRequired[int]
+    repeat: NotRequired[int]
 
 
 def run(work: Path, hook: str, path: str) -> subprocess.CompletedProcess[str]:
@@ -75,7 +76,7 @@ def check(work: Path, folder: Path, case: Case) -> None:
     hook = folder.name
     path = work / case["path"]
     path.parent.mkdir(parents=True, exist_ok=True)
-    before = (folder / case["input"]).read_bytes()
+    before = (folder / case["input"]).read_bytes() * case.get("repeat", 1)
     expected = (
         (folder / case["expected"]).read_bytes() if "expected" in case else before
     )

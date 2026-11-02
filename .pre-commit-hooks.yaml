@@ -58,6 +58,13 @@
   types: [markdown]
   exclude: ^\.ci/fixtures/unslop/coffee-before\.md$
 
+- id: markdown-length
+  name: markdown length
+  description: "Reject Markdown files over 1,000 lines"
+  entry: ys-markdown-length
+  language: python
+  types: [markdown]
+
 - id: gofumpt
   name: gofumpt
   description: "Format Go files with gofumpt"

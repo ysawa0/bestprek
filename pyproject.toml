@@ -13,6 +13,7 @@ dependencies = [
 
 [project.scripts]
 ys-ruff = "hooks.ruff:main"
+ys-markdown-length = "hooks.markdown_length:main"
 
 [tool.setuptools]
 packages = ["hooks"]
