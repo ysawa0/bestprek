@@ -7,6 +7,7 @@ name = "ysawa0-bestprek-hooks"
 version = "0.0.0"
 requires-python = ">=3.12"
 dependencies = [
+  "markdown-it-py==4.2.0",
   "ruff==0.16.1",
   "shellcheck-py==0.11.0.1",
 ]
@@ -14,6 +15,7 @@ dependencies = [
 [project.scripts]
 ys-ruff = "hooks.ruff:main"
 ys-markdown-length = "hooks.markdown_length:main"
+ys-markdown-links = "hooks.markdown_links:main"
 
 [tool.setuptools]
 packages = ["hooks"]

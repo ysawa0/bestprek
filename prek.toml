@@ -12,6 +12,10 @@ exclude = "^\\.ci/fixtures/.*\\.txt$"
 [[repos.hooks]]
 id = "check-added-large-files"
 
+[[repos.hooks]]
+id = "check-yaml"
+args = ["--allow-multiple-documents"]
+
 [[repos]]
 repo = "local"
 

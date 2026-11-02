@@ -65,6 +65,13 @@
   language: python
   types: [markdown]
 
+- id: markdown-links
+  name: markdown links
+  description: "Check local Markdown link and image targets"
+  entry: ys-markdown-links
+  language: python
+  types: [markdown]
+
 - id: gofumpt
   name: gofumpt
   description: "Format Go files with gofumpt"

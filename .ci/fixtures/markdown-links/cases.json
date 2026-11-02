@@ -1,0 +1,14 @@
+[
+  {
+    "name": "existing-links",
+    "path": "docs/example.md",
+    "input": "existing.input.txt",
+    "setup": {"docs/target file.md": "target\n", "docs/image.png": "image\n", "root.md": "root\n"}
+  },
+  {
+    "name": "missing-links",
+    "path": "docs/example.md",
+    "input": "missing.input.txt",
+    "diagnostics": ["local link target not found: missing.md", "local link target not found: missing.png"]
+  }
+]

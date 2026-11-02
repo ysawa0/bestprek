@@ -10,6 +10,10 @@ id = "end-of-file-fixer"
 [[repos.hooks]]
 id = "check-added-large-files"
 
+[[repos.hooks]]
+id = "check-yaml"
+args = ["--allow-multiple-documents"]
+
 [[repos]]
 repo = "https://github.com/ysawa0/bestprek"
 rev = "1.33"
@@ -34,6 +38,9 @@ id = "unslop"
 
 [[repos.hooks]]
 id = "markdown-length"
+
+[[repos.hooks]]
+id = "markdown-links"
 
 [[repos.hooks]]
 id = "goimports"

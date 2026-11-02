@@ -80,6 +80,12 @@ def check_rejections(work: Path) -> None:
         ("cargo-clippy", "sample.rs", "cargo-clippy/nested.input.txt", "too nested"),
         ("oxlint", "sample.ts", "oxlint/bad.input.txt", "leaves input unparsed"),
         ("unslop", "README.md", "unslop/residue.input.txt", "artifact.chatbot-residue"),
+        (
+            "check-yaml",
+            "deployment.yaml",
+            "example/invalid.yaml.txt",
+            "deployment.yaml",
+        ),
         ("shellcheck", "sample.sh", "example/optional.sh.txt", "SC2230"),
         (
             "revive",

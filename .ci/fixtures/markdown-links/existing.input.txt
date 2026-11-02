@@ -1,0 +1,12 @@
+[Target](target%20file.md#section)
+![Image](image.png)
+[Reference][target]
+[target]: target%20file.md
+[External](https://example.com/missing)
+[Fragment](#section)
+[Root](/root.md)
+`[Code](missing.md)`
+
+```markdown
+[Example](missing.md)
+```
