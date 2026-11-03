@@ -23,7 +23,7 @@ repo = "local"
 [[repos.hooks]]
 id = "bestprek"
 name = "bestprek"
-entry = "sh -c 'prek try-repo \"$PWD\" --skip directory-file-count --files \"$@\"' --"
+entry = "sh -c 'prek try-repo \"$PWD\" --skip directory-file-count --skip unbold --files \"$@\"' --"
 language = "system"
 require_serial = true
 

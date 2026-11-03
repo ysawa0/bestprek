@@ -19,7 +19,7 @@ Follow these steps when installing bestprek in a consuming repository, upgrading
 
    Adopt the release's current shared settings while retaining intentional repository-specific settings. Review conflicting local overrides so they do not silently retain superseded defaults. Record any deliberate differences from the examples. Merge existing workflows and hook configurations so each check runs once.
 
-   Keep the hooks relevant to the repository's languages. Oxlint loads the policy bundled with the hook; a separate copy of bestprek's root Oxlint config is unnecessary. Go hooks require an appropriate root `go.mod` or `go.work`.
+   Keep the hooks relevant to the repository's languages. Oxlint loads the bundled policy; a consumer's root `.oxlintrc.json` or `.oxlintrc.jsonc` can override it. Go hooks require an appropriate root `go.mod` or `go.work`.
 
 4. Set the consuming repository's bestprek `rev` to the resolved `bestprek_version`. Update any other bestprek version references in its setup instructions or CI configuration. Confirm that the example files and the pinned hook revision come from that same tag.
 

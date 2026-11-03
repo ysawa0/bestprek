@@ -9,7 +9,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         description="Limit tracked files in each subdirectory"
     )
-    parser.add_argument("--max-files", type=int, default=15)
+    parser.add_argument("--max-files", type=int, default=20)
     parser.add_argument("files", nargs="+")
     args = parser.parse_args()
     directories = {Path(filename).parent for filename in args.files} - {Path(".")}

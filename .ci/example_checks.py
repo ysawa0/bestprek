@@ -41,8 +41,8 @@ def verify_config() -> str:
         )
     )
     enabled = [hook["id"] for hook in bundle["hooks"]]
-    if set(enabled) != published or len(enabled) != len(published):
-        raise AssertionError("Example must enable every published hook exactly once")
+    if set(enabled) != published - {"unbold"} or len(enabled) != len(published) - 1:
+        raise AssertionError("Example must enable each default hook exactly once")
     version = (ROOT / "RELEASE").read_text().splitlines()[0]
     if bundle["rev"] != version:
         raise AssertionError("Example revision must match RELEASE")

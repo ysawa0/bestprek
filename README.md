@@ -39,7 +39,7 @@ Keep only the hooks relevant to the repository, and merge files where the destin
 
 The directory contains:
 
-- `prek.toml`: all bundled hooks plus whitespace and large-file checks;
+- `prek.toml`: default hooks plus whitespace and large-file checks; add `unbold` explicitly to use it;
 - `ruff.toml`: Ruff's `ALL` rule set, with boilerplate requirements and formatter conflicts excluded;
 - `revive.toml`: Revive rules, required by the `revive` hook;
 - `clippy.toml`: Rust cognitive-complexity and nesting limits of 15 and 3; Clippy counts Rust block nesting, so its nesting score differs from Ruff and Revive;
@@ -48,7 +48,7 @@ The directory contains:
 - `.shellcheckrc`: optional ShellCheck checks except SC2250 (variable-brace style);
 - `.github/workflows/lint.yml`: the same hooks on pushes and pull requests.
 
-The Oxlint hook loads its bundled policy automatically, including all 18 custom rules. The hook's existing rule exclusions remain in force, as do ShellCheck's SC1091 and SC2250 exclusions. Ruff retains the hook's explicit preview-rule policy and nesting limit. See [Ruff's formatter compatibility guidance](https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules) for the formatting exclusions.
+The Oxlint hook loads its bundled policy automatically, including all 18 custom rules. A consumer's root `.oxlintrc.json` or `.oxlintrc.jsonc` can override it. ShellCheck's SC1091 and SC2250 exclusions remain in force. Ruff retains the hook's explicit preview-rule policy and nesting limit. See [Ruff's formatter compatibility guidance](https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules) for the formatting exclusions.
 
 Because this hook repository is public, local and CI runs do not need GitHub credentials or repository secrets to fetch it. Hooks skip languages without matching files; repositories with Go files need a root `go.mod` or `go.work` appropriate for `go vet ./...`.
 
@@ -120,7 +120,7 @@ The release tag pins each hook implementation and its tool version. Prek creates
 
 The shared Ruff policy disables docstring rules (`D`, `DOC`), copyright headers (`CPY001`), print bans (`T201`), exception-message formatting (`EM`, `TRY003`), forced absolute imports (`TID252`), required `__init__.py` files (`INP001`), and unittest-to-pytest conversion (`PT009`, `PT027`). These exclusions apply even when a consumer selects `ALL`; the hook preserves the consumer’s other ignored rules. Type annotations, correctness, security, and complexity checks remain available. The copied `ruff.toml` enables them and includes the same exclusions for direct Ruff runs.
 
-Project-local files such as `.oxfmtrc.jsonc` and `ruff.toml` control their respective tools. `ruff-check` always enables `SIM102` and preview rule `PLR1702`, allowing at most three nested blocks. The `oxlint` hook always uses this repository's fixed `.oxlintrc.json`, which enables the vendored [anti-slop](https://github.com/dmmulroy/anti-slop) code rules alongside the built-in policy; consuming repositories' Oxlint configuration and command-line options are ignored. The Markdown `unslop` hook is separate from that JavaScript policy. `go-vet` runs once from the repository root, so enable it only where that root is the intended Go module or workspace.
+Project-local files such as `.oxfmtrc.jsonc` and `ruff.toml` control their respective tools. `ruff-check` always enables `SIM102` and preview rule `PLR1702`, allowing at most three nested blocks. The `oxlint` hook extends this repository's `.oxlintrc.json` with the consumer's root Oxlint config, allowing local overrides of the vendored [anti-slop](https://github.com/dmmulroy/anti-slop) and built-in rules. Hook arguments are passed to Oxlint. The Markdown `unslop` hook is separate from that JavaScript policy. `go-vet` runs once from the repository root, so enable it only where that root is the intended Go module or workspace.
 
 ## Development
 

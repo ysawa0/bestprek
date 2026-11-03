@@ -31,9 +31,6 @@ id = "ruff-format"
 id = "ruff-check"
 
 [[repos.hooks]]
-id = "unbold"
-
-[[repos.hooks]]
 id = "unslop"
 
 [[repos.hooks]]
@@ -45,7 +42,7 @@ id = "markdown-links"
 [[repos.hooks]]
 id = "directory-file-count"
 exclude = "(^|/)(archive|fixtures|profiles|check-evidence)/"
-# args = ["--max-files", "15"]
+# args = ["--max-files", "20"]
 
 [[repos.hooks]]
 id = "goimports"

@@ -249,14 +249,12 @@
     "input": "generic-shadow.input.txt"
   },
   {
-    "name": "config-enforced",
+    "name": "config-override",
     "path": "sample.ts",
     "input": "config-enforced.input.txt",
     "setup": {
       ".oxlintrc.json": "{\"rules\":{\"anti-slop/no-unknown-parameters\":\"off\"}}\n"
-    },
-    "diagnostics": ["no-unknown-parameters"],
-    "rules": ["no-unknown-parameters"]
+    }
   },
   {
     "name": "syntax-error",
