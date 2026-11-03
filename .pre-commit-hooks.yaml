@@ -72,6 +72,13 @@
   language: python
   types: [markdown]
 
+- id: markdown-width
+  name: markdown width
+  description: "Reject Markdown lines over 300 characters; configure with --max-chars"
+  entry: ys-markdown-width
+  language: python
+  types: [markdown]
+
 - id: directory-file-count
   name: directory file count
   description: "Reject subdirectories with more than 20 tracked files; configure with --max-files"

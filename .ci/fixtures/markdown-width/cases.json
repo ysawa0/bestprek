@@ -1,0 +1,28 @@
+[
+  {
+    "name": "at-limit-unicode",
+    "path": "sample.md",
+    "input": "at-limit.input.txt"
+  },
+  {
+    "name": "over-limit-unicode",
+    "path": "sample.md",
+    "input": "over-limit.input.txt",
+    "diagnostics": [
+      "sample.md:2: 301 characters exceeds the limit of 300",
+      "Create new lines or new sub-bullet points."
+    ]
+  },
+  {
+    "name": "custom-limit",
+    "path": "sample.md",
+    "input": "custom.input.txt",
+    "args": [
+      "--max-chars",
+      "5"
+    ],
+    "diagnostics": [
+      "sample.md:1: 6 characters exceeds the limit of 5"
+    ]
+  }
+]

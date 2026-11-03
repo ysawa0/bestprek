@@ -37,6 +37,10 @@ id = "unslop"
 id = "markdown-length"
 
 [[repos.hooks]]
+id = "markdown-width"
+# args = ["--max-chars", "300"]
+
+[[repos.hooks]]
 id = "markdown-links"
 
 [[repos.hooks]]

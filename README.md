@@ -10,6 +10,7 @@ Pre-commit hooks
 - `ruff-format`: format Python and Jupyter files
 - `unbold`: strip Markdown bold markers in place while preserving code and escaped punctuation
 - `unslop`: lint Markdown prose for canned, repetitive, bloated, or mechanically over-polished writing
+- `markdown-width`: reject Markdown lines over 300 characters; configure with `--max-chars`
 - `gofumpt`: format Go
 - `goimports`: format Go and fix imports
 - `gopls-check`: run `gopls check` on Go files
@@ -48,11 +49,14 @@ The directory contains:
 - `.shellcheckrc`: optional ShellCheck checks except SC2250 (variable-brace style);
 - `.github/workflows/lint.yml`: the same hooks on pushes and pull requests.
 
-The Oxlint hook loads its bundled policy automatically, including all 18 custom rules. A consumer's root `.oxlintrc.json` or `.oxlintrc.jsonc` can override it. ShellCheck's SC1091 and SC2250 exclusions remain in force. Ruff retains the hook's explicit preview-rule policy and nesting limit. See [Ruff's formatter compatibility guidance](https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules) for the formatting exclusions.
+The Oxlint hook loads its bundled policy automatically, including all 18 custom rules. A consumer's root `.oxlintrc.json` or `.oxlintrc.jsonc` can override it. ShellCheck's SC1091 and SC2250 exclusions remain in force. Ruff retains the
+hook's explicit preview-rule policy and nesting limit. See [Ruff's formatter compatibility guidance](https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules) for the formatting exclusions.
 
 Because this hook repository is public, local and CI runs do not need GitHub credentials or repository secrets to fetch it. Hooks skip languages without matching files; repositories with Go files need a root `go.mod` or `go.work` appropriate for `go vet ./...`.
 
-The Markdown hooks `unbold` and `unslop` build with Cargo during hook installation, so they need a Rust toolchain. The `cargo-fmt` and `cargo-clippy` hooks also require a root `Cargo.toml` and the Clippy and rustfmt components (`rustup component add clippy rustfmt`). They use the consuming repository’s selected toolchain and do not install one. Cargo checks the workspace’s default feature set; mutually exclusive features are not enabled together. Standard Clippy checks cover correctness, suspicious code, complexity, style, and performance. See [Clippy usage](https://doc.rust-lang.org/clippy/usage.html) and [threshold configuration](https://doc.rust-lang.org/clippy/lint_configuration.html).
+The Markdown hooks `unbold` and `unslop` build with Cargo during hook installation, so they need a Rust toolchain. The `cargo-fmt` and `cargo-clippy` hooks also require a root `Cargo.toml` and the Clippy and rustfmt components
+(`rustup component add clippy rustfmt`). They use the consuming repository’s selected toolchain and do not install one. Cargo checks the workspace’s default feature set; mutually exclusive features are not enabled together. Standard Clippy checks
+cover correctness, suspicious code, complexity, style, and performance. See [Clippy usage](https://doc.rust-lang.org/clippy/usage.html) and [threshold configuration](https://doc.rust-lang.org/clippy/lint_configuration.html).
 
 Keep `example_conf/` current whenever the hooks or their configuration change. The release command updates its revision, and CI tests the copied setup.
 
@@ -71,9 +75,12 @@ The catalogue contains 25 rules across the recommended and strict presets for:
 - em-dash, bold, parenthetical, and heading density;
 - pasted chatbot citation or UI residue.
 
-The recommended preset disables em-dash density, three-item-list density, question density, question-answer turns, short-sentence runs, parenthetical density, heading density, and uniform sentence lengths. These checks often flag legitimate reference documents and interview question banks. Strict enables them as informational review suggestions, not required edits. Do not mechanically replace punctuation, remove useful headings, or paraphrase source quotations to satisfy them.
+The recommended preset disables em-dash density, three-item-list density, question density, question-answer turns, short-sentence runs, parenthetical density, heading density, and uniform sentence lengths. These checks often flag legitimate
+reference documents and interview question banks. Strict enables them as informational review suggestions, not required edits. Do not mechanically replace punctuation, remove useful headings, or paraphrase source quotations to satisfy them.
 
-The linter preserves source positions while ignoring code fences, inline code, LaTeX math (`\(...\)`, `\[...\]`, `$...$`, and `$$...$$`), URLs, front matter, comments, blockquotes, tables, link destinations, and MDX tags. Equation references such as `(CW5)` do not count as parenthetical asides. Repetition rules reset at headings so API reference sections can use a consistent template without being mistaken for monotonous prose. By default, warnings and errors fail the hook; informational findings do not. `--fail-level info` explicitly makes advisory findings blocking. Use `--fail-level none` for an editorial review that never fails on findings.
+The linter preserves source positions while ignoring code fences, inline code, LaTeX math (`\(...\)`, `\[...\]`, `$...$`, and `$$...$$`), URLs, front matter, comments, blockquotes, tables, link destinations, and MDX tags. Equation
+references such as `(CW5)` do not count as parenthetical asides. Repetition rules reset at headings so API reference sections can use a consistent template without being mistaken for monotonous prose. By default, warnings and errors fail
+the hook; informational findings do not. `--fail-level info` explicitly makes advisory findings blocking. Use `--fail-level none` for an editorial review that never fails on findings.
 
 Use `.unslop.json` for repository-specific tuning. An example lives at `.unslop.example.json`.
 
@@ -118,9 +125,13 @@ The calibration under `.ci/fixtures/unslop/` includes a deliberately bloated cof
 
 The release tag pins each hook implementation and its tool version. Prek creates isolated Python, Node, Go, and Rust environments and prepares the required tools on first use.
 
-The shared Ruff policy disables docstring rules (`D`, `DOC`), copyright headers (`CPY001`), print bans (`T201`), exception-message formatting (`EM`, `TRY003`), forced absolute imports (`TID252`), required `__init__.py` files (`INP001`), and unittest-to-pytest conversion (`PT009`, `PT027`). These exclusions apply even when a consumer selects `ALL`; the hook preserves the consumer’s other ignored rules. Type annotations, correctness, security, and complexity checks remain available. The copied `ruff.toml` enables them and includes the same exclusions for direct Ruff runs.
+The shared Ruff policy disables docstring rules (`D`, `DOC`), copyright headers (`CPY001`), print bans (`T201`), exception-message formatting (`EM`, `TRY003`), forced absolute imports (`TID252`), required `__init__.py` files (`INP001`), and
+unittest-to-pytest conversion (`PT009`, `PT027`). These exclusions apply even when a consumer selects `ALL`; the hook preserves the consumer’s other ignored rules. Type annotations, correctness, security, and complexity checks remain
+available. The copied `ruff.toml` enables them and includes the same exclusions for direct Ruff runs.
 
-Project-local files such as `.oxfmtrc.jsonc` and `ruff.toml` control their respective tools. `ruff-check` always enables `SIM102` and preview rule `PLR1702`, allowing at most three nested blocks. The `oxlint` hook extends this repository's `.oxlintrc.json` with the consumer's root Oxlint config, allowing local overrides of the vendored [anti-slop](https://github.com/dmmulroy/anti-slop) and built-in rules. Hook arguments are passed to Oxlint. The Markdown `unslop` hook is separate from that JavaScript policy. `go-vet` runs once from the repository root, so enable it only where that root is the intended Go module or workspace.
+Project-local files such as `.oxfmtrc.jsonc` and `ruff.toml` control their respective tools. `ruff-check` always enables `SIM102` and preview rule `PLR1702`, allowing at most three nested blocks. The `oxlint` hook extends this repository's
+`.oxlintrc.json` with the consumer's root Oxlint config, allowing local overrides of the vendored [anti-slop](https://github.com/dmmulroy/anti-slop) and built-in rules. Hook arguments are passed to Oxlint. The Markdown `unslop` hook is
+separate from that JavaScript policy. `go-vet` runs once from the repository root, so enable it only where that root is the intended Go module or workspace.
 
 ## Development
 
@@ -136,7 +147,8 @@ The GitHub workflow in `.github/workflows/ci.yml` prepares the tools and calls t
 uv run --no-sync python3 .ci/hook_checks.py
 ```
 
-The Rust `unbold` and `unslop` tools and the Go `ys-gopls-check` wrapper live under `tools/`. File-backed test inputs and expected output live under `.ci/fixtures/<hook>/`; each group has a `cases.json` manifest. Inputs use `.txt` so repository formatters do not rewrite deliberately invalid examples.
+The Rust `unbold` and `unslop` tools and the Go `ys-gopls-check` wrapper live under `tools/`. File-backed test inputs and expected output live under `.ci/fixtures/<hook>/`; each group has a `cases.json` manifest. Inputs use `.txt` so
+repository formatters do not rewrite deliberately invalid examples.
 
 The end-to-end suite installs hooks from the committed HEAD in a temporary consuming repository. It checks lint failures, formatter output, ignored files, code preservation, and clean second runs. Commit implementation changes before running it.
 
