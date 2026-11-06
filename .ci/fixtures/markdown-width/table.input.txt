@@ -1,0 +1,3 @@
+| Option | Detail |
+| --- | --- |
+| Option | Detail that runs long because table cells cannot wrap. Detail that runs long because table cells cannot wrap. Detail that runs long because table cells cannot wrap. Detail that runs long because table cells cannot wrap. Detail that runs long because table cells cannot wrap. Detail that runs long because table cells cannot wrap. |

@@ -11,6 +11,11 @@
     "diagnostics": ["sample.md:2: 301 characters exceeds the limit of 300", "Create new lines or new sub-bullet points."]
   },
   {
+    "name": "table-rows-skipped",
+    "path": "sample.md",
+    "input": "table.input.txt"
+  },
+  {
     "name": "custom-limit",
     "path": "sample.md",
     "input": "custom.input.txt",

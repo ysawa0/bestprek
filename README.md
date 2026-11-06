@@ -10,7 +10,7 @@ Pre-commit hooks
 - `ruff-format`: format Python and Jupyter files
 - `unbold`: strip Markdown bold markers in place while preserving code and escaped punctuation
 - `unslop-prose`: lint Markdown prose for canned, repetitive, bloated, or mechanically over-polished writing
-- `markdown-width`: reject Markdown lines over 300 characters; configure with `--max-chars`
+- `markdown-width`: reject Markdown prose lines over 300 characters, skipping table rows; configure with `--max-chars`
 - `code-length`: reject code files over 1,000 lines; configure with `--max-lines`
 - `gofumpt`: format Go
 - `goimports`: format Go and fix imports
