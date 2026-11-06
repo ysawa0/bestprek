@@ -79,6 +79,13 @@
   language: python
   types: [markdown]
 
+- id: code-length
+  name: code length
+  description: "Reject code files over 1,000 lines; configure with --max-lines"
+  entry: ys-code-length
+  language: python
+  types_or: [python, pyi, go, javascript, jsx, ts, tsx, rust, shell, c, c++, c#, java, kotlin, swift, ruby, php, lua, scala]
+
 - id: directory-file-count
   name: directory file count
   description: "Reject subdirectories with more than 20 tracked files; configure with --max-files"

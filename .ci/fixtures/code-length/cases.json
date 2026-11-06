@@ -1,0 +1,31 @@
+[
+  {
+    "name": "at-limit",
+    "path": "at_limit.py",
+    "input": "line.input.txt",
+    "repeat": 1000
+  },
+  {
+    "name": "over-limit",
+    "path": "over_limit.go",
+    "input": "line.input.txt",
+    "repeat": 1001,
+    "diagnostics": ["over_limit.go: 1001 lines exceeds the limit of 1000", "Split or refactor the code file as needed."]
+  },
+  {
+    "name": "custom-limit",
+    "path": "custom.ts",
+    "input": "line.input.txt",
+    "repeat": 3,
+    "args": ["--max-lines", "2"],
+    "diagnostics": ["custom.ts: 3 lines exceeds the limit of 2"]
+  },
+  {
+    "name": "markdown-ignored",
+    "path": "notes.md",
+    "input": "line.input.txt",
+    "repeat": 1001,
+    "diagnostics": ["Skipped"],
+    "exit": 0
+  }
+]

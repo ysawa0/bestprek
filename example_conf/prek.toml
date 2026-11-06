@@ -44,6 +44,10 @@ id = "markdown-width"
 id = "markdown-links"
 
 [[repos.hooks]]
+id = "code-length"
+# args = ["--max-lines", "1000"]
+
+[[repos.hooks]]
 id = "directory-file-count"
 exclude = "(^|/)(archive|fixtures|profiles|check-evidence)/"
 # args = ["--max-files", "20"]
