@@ -57,7 +57,7 @@ def seed(work: Path) -> None:
         "sample.go": "gofumpt/format.expected.txt",
         "sample.sh": "shellcheck/braces-excluded.input.txt",
         "deployment.yaml": "example/multi-document.yaml.txt",
-        "README.md": "unslop/clean.input.txt",
+        "README.md": "unslop-prose/clean.input.txt",
     }
     for target, source in sources.items():
         shutil.copyfile(FIXTURES / source, work / target)
@@ -82,7 +82,7 @@ def check_rejections(work: Path) -> None:
         (
             "unslop-prose",
             "README.md",
-            "unslop/residue.input.txt",
+            "unslop-prose/residue.input.txt",
             "artifact.chatbot-residue",
         ),
         (

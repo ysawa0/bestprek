@@ -7,7 +7,7 @@ from itertools import product
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-FIXTURES = ROOT / ".ci" / "fixtures" / "unslop"
+FIXTURES = ROOT / ".ci" / "fixtures" / "unslop-prose"
 BIN = ROOT / "target" / "release" / "unslop"
 
 

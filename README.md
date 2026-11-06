@@ -120,7 +120,7 @@ unslop --format json README.md
 unslop --list-rules
 ```
 
-The calibration under `.ci/fixtures/unslop/` includes a deliberately bloated coffee article and a revised version. Tests require the noisy article to exercise structural rules and the revised article to produce no findings.
+The calibration under `.ci/fixtures/unslop-prose/` includes a deliberately bloated coffee article and a revised version. Tests require the noisy article to exercise structural rules and the revised article to produce no findings.
 
 ## Tool versions and configuration
 

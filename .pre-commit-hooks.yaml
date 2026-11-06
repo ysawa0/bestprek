@@ -56,7 +56,7 @@
   language: rust
   language_version: stable
   types: [markdown]
-  exclude: ^\.ci/fixtures/unslop/coffee-before\.md$
+  exclude: ^\.ci/fixtures/unslop-prose/coffee-before\.md$
 
 - id: markdown-length
   name: markdown length
