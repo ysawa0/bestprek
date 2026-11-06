@@ -84,7 +84,7 @@
   description: "Reject code files over 1,000 lines; configure with --max-lines"
   entry: ys-code-length
   language: python
-  types_or: [python, pyi, go, javascript, jsx, ts, tsx, rust, shell, c, c++, c#, java, kotlin, swift, ruby, php, lua, scala]
+  types_or: [python, pyi, go, javascript, jsx, ts, tsx, rust, shell, c, c++, c#, java, kotlin, swift, ruby, php, lua, scala, vue, svelte, dart, elixir, zig, haskell, perl]
 
 - id: directory-file-count
   name: directory file count

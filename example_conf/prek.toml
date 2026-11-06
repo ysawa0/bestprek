@@ -45,6 +45,7 @@ id = "markdown-links"
 
 [[repos.hooks]]
 id = "code-length"
+exclude = "(^|/)(vendor|generated)/|\\.pb\\.go$|_pb2(_grpc)?\\.pyi?$|\\.gen\\.(go|ts)$"
 # args = ["--max-lines", "1000"]
 
 [[repos.hooks]]
