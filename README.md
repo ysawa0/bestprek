@@ -76,7 +76,7 @@ The catalogue contains 25 rules across the recommended and strict presets for:
 - em-dash, bold, parenthetical, and heading density;
 - pasted chatbot citation or UI residue.
 
-The recommended preset disables em-dash density, three-item-list density, question density, question-answer turns, short-sentence runs, parenthetical density, heading density, and uniform sentence lengths. These checks often flag legitimate
+The recommended preset disables em-dash density, three-item-list density, question density, question-answer turns, short-sentence runs, parenthetical density, heading density, uniform sentence lengths, and loaded-word repetition. These checks often flag legitimate
 reference documents and interview question banks. Strict enables them as informational review suggestions, not required edits. Do not mechanically replace punctuation, remove useful headings, or paraphrase source quotations to satisfy them.
 
 The linter preserves source positions while ignoring code fences, inline code, LaTeX math (`\(...\)`, `\[...\]`, `$...$`, and `$$...$$`), URLs, front matter, comments, blockquotes, tables, link destinations, and MDX tags. Equation

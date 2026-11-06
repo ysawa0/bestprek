@@ -398,12 +398,12 @@
   {
     "id": "repetition.loaded-word",
     "summary": "Repeated abstract or promotional vocabulary",
-    "recommended_severity": "warning",
+    "recommended_severity": "off",
     "defaults": {
       "max": 2,
       "window_words": 500
     },
-    "strict_severity": null,
+    "strict_severity": "info",
     "strict_defaults": {
       "max": 1
     },

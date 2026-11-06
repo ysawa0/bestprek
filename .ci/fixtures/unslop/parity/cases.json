@@ -8,7 +8,8 @@
         "rhetoric.question-density": "warning",
         "rhythm.short-sentence-run": "warning",
         "rhetoric.tricolon-density": "info",
-        "density.em-dash": "warning"
+        "density.em-dash": "warning",
+        "repetition.loaded-word": "warning"
       }
     }
   },
@@ -209,7 +210,8 @@
         "rhetoric.question-density": "warning",
         "rhythm.short-sentence-run": "warning",
         "rhetoric.tricolon-density": "info",
-        "density.em-dash": "warning"
+        "density.em-dash": "warning",
+        "repetition.loaded-word": "warning"
       }
     },
     "input": "../coffee-before.md"
@@ -331,7 +333,8 @@
     "preset": "strict",
     "config": {
       "rules": {
-        "rhythm.short-sentence-run": "warning"
+        "rhythm.short-sentence-run": "warning",
+        "repetition.loaded-word": "warning"
       }
     }
   },
