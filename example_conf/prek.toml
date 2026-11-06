@@ -16,7 +16,7 @@ args = ["--allow-multiple-documents"]
 
 [[repos]]
 repo = "https://github.com/ysawa0/bestprek"
-rev = "1.35"
+rev = "1.36"
 
 [[repos.hooks]]
 id = "oxfmt"
