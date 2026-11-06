@@ -49,8 +49,8 @@
   types: [markdown]
   require_serial: true
 
-- id: unslop
-  name: unslop
+- id: unslop-prose
+  name: unslop prose
   description: "Lint Markdown prose for canned, repetitive, bloated, or mechanically over-polished writing"
   entry: unslop
   language: rust

@@ -79,7 +79,12 @@ def check_rejections(work: Path) -> None:
         ),
         ("cargo-clippy", "sample.rs", "cargo-clippy/nested.input.txt", "too nested"),
         ("oxlint", "sample.ts", "oxlint/bad.input.txt", "leaves input unparsed"),
-        ("unslop", "README.md", "unslop/residue.input.txt", "artifact.chatbot-residue"),
+        (
+            "unslop-prose",
+            "README.md",
+            "unslop/residue.input.txt",
+            "artifact.chatbot-residue",
+        ),
         (
             "check-yaml",
             "deployment.yaml",
@@ -133,7 +138,7 @@ def main() -> None:
         run(work, "run", "--all-files")
         check_rejections(work)
         shutil.copyfile(FIXTURES / "example/strict.md.txt", work / "README.md")
-        run(work, "run", "unslop", "--files", "README.md")
+        run(work, "run", "unslop-prose", "--files", "README.md")
         print("PASS copied example: recommended preset accepts strict-only prose")
         run(work, "run", "--all-files")
         print("PASS copied example: all hooks pass on clean files", flush=True)

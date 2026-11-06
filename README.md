@@ -9,7 +9,7 @@ Pre-commit hooks
 - `ruff-check`: lint Python and Jupyter files
 - `ruff-format`: format Python and Jupyter files
 - `unbold`: strip Markdown bold markers in place while preserving code and escaped punctuation
-- `unslop`: lint Markdown prose for canned, repetitive, bloated, or mechanically over-polished writing
+- `unslop-prose`: lint Markdown prose for canned, repetitive, bloated, or mechanically over-polished writing
 - `markdown-width`: reject Markdown lines over 300 characters; configure with `--max-chars`
 - `code-length`: reject code files over 1,000 lines; configure with `--max-lines`
 - `gofumpt`: format Go
@@ -55,7 +55,7 @@ hook's explicit preview-rule policy and nesting limit. See [Ruff's formatter com
 
 Because this hook repository is public, local and CI runs do not need GitHub credentials or repository secrets to fetch it. Hooks skip languages without matching files; repositories with Go files need a root `go.mod` or `go.work` appropriate for `go vet ./...`.
 
-The Markdown hooks `unbold` and `unslop` build with Cargo during hook installation, so they need a Rust toolchain. The `cargo-fmt` and `cargo-clippy` hooks also require a root `Cargo.toml` and the Clippy and rustfmt components
+The Markdown hooks `unbold` and `unslop-prose` build with Cargo during hook installation, so they need a Rust toolchain. The `cargo-fmt` and `cargo-clippy` hooks also require a root `Cargo.toml` and the Clippy and rustfmt components
 (`rustup component add clippy rustfmt`). They use the consuming repository’s selected toolchain and do not install one. Cargo checks the workspace’s default feature set; mutually exclusive features are not enabled together. Standard Clippy checks
 cover correctness, suspicious code, complexity, style, and performance. See [Clippy usage](https://doc.rust-lang.org/clippy/usage.html) and [threshold configuration](https://doc.rust-lang.org/clippy/lint_configuration.html).
 
@@ -63,7 +63,7 @@ Keep `example_conf/` current whenever the hooks or their configuration change. T
 
 ## Unslop
 
-The `unslop` hook is a deterministic prose linter written in Rust. It evaluates the text in front of it rather than guessing whether a person or model wrote it. Prek builds the native executable with Cargo during hook installation and runs independent file batches in parallel.
+The `unslop-prose` hook runs `unslop`, a deterministic prose linter written in Rust. It evaluates the text in front of it rather than guessing whether a person or model wrote it. Prek builds the native executable with Cargo during hook installation and runs independent file batches in parallel.
 
 The catalogue contains 25 rules across the recommended and strict presets for:
 
@@ -131,7 +131,7 @@ unittest-to-pytest conversion (`PT009`, `PT027`). These exclusions apply even wh
 available. The copied `ruff.toml` enables them and includes the same exclusions for direct Ruff runs.
 
 Project-local files such as `.oxfmtrc.jsonc` and `ruff.toml` control their respective tools. `ruff-check` always enables `SIM102` and preview rule `PLR1702`, allowing at most three nested blocks. The `oxlint` hook extends this repository's
-`.oxlintrc.json` with the consumer's root Oxlint config, allowing local overrides of the vendored [anti-slop](https://github.com/dmmulroy/anti-slop) and built-in rules. Hook arguments are passed to Oxlint. The Markdown `unslop` hook is
+`.oxlintrc.json` with the consumer's root Oxlint config, allowing local overrides of the vendored [anti-slop](https://github.com/dmmulroy/anti-slop) and built-in rules. Hook arguments are passed to Oxlint. The Markdown `unslop-prose` hook is
 separate from that JavaScript policy. `go-vet` runs once from the repository root, so enable it only where that root is the intended Go module or workspace.
 
 ## Development
