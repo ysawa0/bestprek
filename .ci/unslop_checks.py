@@ -238,6 +238,7 @@ def check_presets(work: Path) -> None:
             "short-run",
             "density-parenthetical",
             "structure-heading-density",
+            "repetition-loaded-word",
         ]
     )
     path.write_text(source)
@@ -249,6 +250,7 @@ def check_presets(work: Path) -> None:
         "rhythm.short-sentence-run",
         "density.parenthetical",
         "structure.heading-density",
+        "repetition.loaded-word",
     }
     for preset in ("recommended", "strict"):
         result = invoke(
