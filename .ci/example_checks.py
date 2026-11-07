@@ -61,9 +61,6 @@ def seed(work: Path) -> None:
     }
     for target, source in sources.items():
         shutil.copyfile(FIXTURES / source, work / target)
-    (work / "pyproject.toml").write_text(
-        '[project]\nname = "hooktest"\nversion = "0.1.0"\n'
-    )
     (work / "go.mod").write_text("module hooktest\n\ngo 1.25\n")
     (work / "Cargo.toml").write_text(
         '[package]\nname = "hooktest"\nversion = "0.1.0"\nedition = "2021"\n'
@@ -80,7 +77,6 @@ def check_rejections(work: Path) -> None:
             "example/annotations.py.txt",
             "Missing type annotation",
         ),
-        ("ty-check", "sample.py", "example/types.py.txt", "invalid-return-type"),
         ("cargo-clippy", "sample.rs", "cargo-clippy/nested.input.txt", "too nested"),
         ("oxlint", "sample.ts", "oxlint/bad.input.txt", "leaves input unparsed"),
         (

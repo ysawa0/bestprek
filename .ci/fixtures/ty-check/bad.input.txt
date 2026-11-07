@@ -1,7 +1,0 @@
-# Copyright (c) 2026 Example Authors
-"""Example module."""
-
-
-def greet(name: str) -> int:
-    """Return the supplied name."""
-    return name

@@ -34,9 +34,6 @@ id = "ruff-format"
 id = "ruff-check"
 
 [[repos.hooks]]
-id = "ty-check"
-
-[[repos.hooks]]
 id = "unslop-prose"
 
 [[repos.hooks]]

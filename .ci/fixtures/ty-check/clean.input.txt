@@ -1,6 +1,0 @@
-"""Example module."""
-
-
-def greet(name: str) -> str:
-    """Return the supplied name."""
-    return name

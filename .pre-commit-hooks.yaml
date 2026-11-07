@@ -20,15 +20,6 @@
   args: []
   require_serial: true
 
-- id: ty-check
-  name: ty check
-  description: "Type-check the Python project with ty"
-  entry: uvx ty@0.0.97 check
-  language: system
-  types_or: [python, pyi]
-  pass_filenames: false
-  require_serial: true
-
 - id: oxfmt
   name: oxfmt
   description: "Format JavaScript, JSX, TypeScript, TSX, and JSON files with oxfmt"
