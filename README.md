@@ -9,6 +9,7 @@ Pre-commit hooks
 - `oxlint-fix`: apply the `oxlint` policy's autofixes; manual stage, run with `prek run oxlint-fix --all-files`
 - `ruff-check`: lint Python and Jupyter files
 - `ruff-format`: format Python and Jupyter files
+- `ty-check`: type-check the whole Python project with ty
 - `unbold`: strip Markdown bold markers in place while preserving code and escaped punctuation
 - `unslop-prose`: lint Markdown prose for canned, repetitive, bloated, or mechanically over-polished writing
 - `markdown-width`: reject Markdown prose lines over 300 characters, skipping table rows; configure with `--max-chars`

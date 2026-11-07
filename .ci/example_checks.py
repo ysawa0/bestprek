@@ -77,6 +77,7 @@ def check_rejections(work: Path) -> None:
             "example/annotations.py.txt",
             "Missing type annotation",
         ),
+        ("ty-check", "sample.py", "example/types.py.txt", "invalid-return-type"),
         ("cargo-clippy", "sample.rs", "cargo-clippy/nested.input.txt", "too nested"),
         ("oxlint", "sample.ts", "oxlint/bad.input.txt", "leaves input unparsed"),
         (
