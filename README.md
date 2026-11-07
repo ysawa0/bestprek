@@ -6,6 +6,7 @@ Pre-commit hooks
 
 - `oxfmt`: format JavaScript, JSX, TypeScript, TSX, and JSON
 - `oxlint`: lint JavaScript, JSX, TypeScript, and TSX with the bundled anti-slop policy
+- `oxlint-fix`: apply the `oxlint` policy's autofixes; manual stage, run with `prek run oxlint-fix --all-files`
 - `ruff-check`: lint Python and Jupyter files
 - `ruff-format`: format Python and Jupyter files
 - `unbold`: strip Markdown bold markers in place while preserving code and escaped punctuation

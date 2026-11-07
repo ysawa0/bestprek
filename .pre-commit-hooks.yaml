@@ -40,6 +40,18 @@
   types_or: [javascript, jsx, ts, tsx]
   pass_filenames: true
 
+- id: oxlint-fix
+  name: oxlint fix
+  description: "Apply autofixes from the bundled oxlint policy; run manually"
+  entry: ys-oxlint
+  args: ["--fix"]
+  language: node
+  language_version: "24.19.0"
+  additional_dependencies: ["oxlint@1.80.0", "@oxlint/plugins@1.80.0"]
+  types_or: [javascript, jsx, ts, tsx]
+  pass_filenames: true
+  stages: [manual]
+
 - id: unbold
   name: unbold
   description: "Strip markdown bold markers (** and __) in place"

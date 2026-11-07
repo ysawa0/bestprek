@@ -1,0 +1,8 @@
+[
+  {
+    "name": "spacing",
+    "path": "sample.ts",
+    "input": "spacing.input.txt",
+    "expected": "spacing.expected.txt"
+  }
+]

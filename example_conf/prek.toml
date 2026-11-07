@@ -25,6 +25,9 @@ id = "oxfmt"
 id = "oxlint"
 
 [[repos.hooks]]
+id = "oxlint-fix"
+
+[[repos.hooks]]
 id = "ruff-format"
 
 [[repos.hooks]]
