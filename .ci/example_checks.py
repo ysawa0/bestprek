@@ -61,6 +61,9 @@ def seed(work: Path) -> None:
     }
     for target, source in sources.items():
         shutil.copyfile(FIXTURES / source, work / target)
+    (work / "pyproject.toml").write_text(
+        '[project]\nname = "hooktest"\nversion = "0.1.0"\n'
+    )
     (work / "go.mod").write_text("module hooktest\n\ngo 1.25\n")
     (work / "Cargo.toml").write_text(
         '[package]\nname = "hooktest"\nversion = "0.1.0"\nedition = "2021"\n'
