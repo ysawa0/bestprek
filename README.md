@@ -12,7 +12,10 @@ Pre-commit hooks
 - `unbold`: strip Markdown bold markers in place while preserving code and escaped punctuation
 - `unslop-prose`: lint Markdown prose for canned, repetitive, bloated, or mechanically over-polished writing
 - `markdown-width`: reject Markdown prose lines over 300 characters, skipping table rows; configure with `--max-chars`
+- `markdown-length`: reject Markdown files over 1,000 lines; configure with `--max-lines`
+- `markdown-links`: check that local Markdown link and image targets exist
 - `code-length`: reject code files over 1,000 lines; configure with `--max-lines`
+- `directory-file-count`: reject subdirectories with more than 20 tracked files; configure with `--max-files`
 - `gofumpt`: format Go
 - `goimports`: format Go and fix imports
 - `gopls-check`: run `gopls check` on Go files
