@@ -4,7 +4,7 @@ Run on the finished piece before it leaves your hands.
 
 Apply the Always section and each rule whose target appears.
 
-Done when every applied rule here passes its Pass line.
+Done when every applied rule here passes its Pass line and every final check below passes.
 
 ## Always
 
@@ -29,3 +29,18 @@ Target: An audit.
 Requirement: Treat every applied rule as the writing standard. Identify violations by rule number, repair them, and recheck the result. Keep authored rule wording in the layer and optional files. Select rules through the layers, optional triggers, and targets, never by dropping a rule that is difficult to satisfy.
 
 Pass: The final check accounts for every applied rule, and for all 55 in an exhaustive audit. Every departure within that scope cites an explicit user override rather than editorial preference.
+
+## Final checks
+
+These checks catch the misses that recur after every layer has run. Each one tests an existing rule mechanically; a failed check sends the piece back to that rule's layer.
+
+1. Report opening, Rule 25. Read the first sentence alone. In a report it states where things stand now, before any chronology.
+   - Fails: "The deploy failed at 08:00. We rolled back at 08:20. Service is now stable."
+   - Passes: "Service is stable. We rolled back the failed 08:00 deploy at 08:20."
+2. Shortest takeaway, Rule 52. Count the words in every authored sentence. The central takeaway has the fewest; a tie passes.
+   - Fails: "The migration is finished and every service now reads from the new database. Two services need index tuning." The takeaway has 13 words; the other sentence has 5.
+   - Passes: "The migration is finished. Every service now reads from the new database, and two still need index tuning."
+3. Sentence endings, Rule 2. Read the last few words of each sentence. A condition, date, source, or qualifier after the strongest word fails.
+   - Fails: "The change could cut costs by 30% if traffic holds."
+   - Passes: "The change could, if traffic holds, cut costs by 30%."
+4. Format and length. Count words against any limit, including headings when the limit covers them, and count sentences against any sentence count. Confirm every requested heading appears exactly as named.
