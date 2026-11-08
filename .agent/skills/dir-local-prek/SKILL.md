@@ -14,6 +14,7 @@ Any subdirectory with its own `prek.toml` is a separate prek project. The root c
 - The root top-level `exclude` does not reach nested hooks. A hook that used `always_run` to see files the root excludes can drop it.
 - A `local` repo needs at least one hook, so remove or comment out its `[[repos]]` header when the last hook moves out.
 - prek caches the project list. Run `prek list --refresh` after adding a nested config, or the new project is invisible.
+- prek skips configs in gitignored directories, so a nested project under `tmp/` or `build/` never loads.
 
 ## Steps
 
