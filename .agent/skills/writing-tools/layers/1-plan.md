@@ -2,16 +2,8 @@
 
 Run before any writing.
 
-## Branch tags
+Apply the Always section and each rule whose target appears.
 
-Record two tags in working notes. Every later layer reads them.
-
-- Form, per Rule 25: report, story, or hybrid. A hybrid takes both report and story sections, with story rules confined to its narrative part.
-- Size: short or length-capped (a message, a reply, or any length limit), standard, or multi-section (headings or several distinct parts).
-
-Done when both tags are recorded. A piece with any narrative passage is tagged story or hybrid.
-
-Apply the Always section, each section matching the piece's branch tags, and each rule whose target appears.
 Done when every applied rule here passes its Pass line.
 
 ## Always
@@ -34,29 +26,23 @@ Requirement: Before drafting, write a working outline that states the opening, t
 
 Pass: Every section has a defined job and position; the whole has an opening-to-ending route.
 
-## Multi-section piece
+## When the target appears
 
 ### 31. Build your work around a key question.
+
+Target: A multi-section piece.
 
 Requirement: Write the central question in a working note before drafting. Make each section answer it, supply necessary evidence, or resolve a supporting question. Remove material with none of those jobs. For a reference document, use the reader's common lookup need as the question.
 
 Pass: Every section has a direct relationship to the central question; the ending answers it or states the evidence gap.
 
-### 45. Break long projects into parts.
+### 41. Turn procrastination into rehearsal.
 
-Requirement: Divide a multi-section project into units with a defined job, inputs, and completion condition. Draft each against the shared brief and terminology. Reassemble the units and remove duplicate claims, missing links, and inconsistent terminology.
+Target: A blocked opening or argument.
 
-Pass: Every unit has a completion condition; the assembled piece is connected and internally consistent.
+Requirement: When blocked, rehearse one opening or speak through one version of the argument in a working note. Then write a provisional draft from it. Move unresolved details into marked gaps instead of restarting preparation.
 
-## Story or hybrid
-
-### 55. Look for the “inciting incident” to kick-start your story.
-
-Requirement: Start a story with the event that disrupts the prior situation and triggers the central action. Put necessary backstory after that event. In a hybrid, place the story's trigger immediately after the report lead. Preserve the actual event, stakes, and sequence in nonfiction.
-
-Pass: The narrative opens on a specific disruption with a consequence; backstory does not delay the trigger.
-
-## When the target appears
+Pass: A blocked start produces draft text after rehearsal rather than another planning loop.
 
 ### 42. Do your homework well in advance.
 
@@ -74,14 +60,6 @@ Requirement: When using a model text, extract its argument and separately map it
 
 Pass: Content and form have separate working notes; borrowed structure does not become copied prose or unsourced evidence.
 
-### 41. Turn procrastination into rehearsal.
-
-Target: A blocked opening or argument.
-
-Requirement: When blocked, rehearse one opening or speak through one version of the argument in a working note. Then write a provisional draft from it. Move unresolved details into marked gaps instead of restarting preparation.
-
-Pass: A blocked start produces draft text after rehearsal rather than another planning loop.
-
 ### 44. Save string.
 
 Target: Reusable facts or context surfacing during the work.
@@ -89,6 +67,14 @@ Target: Reusable facts or context surfacing during the work.
 Requirement: Capture reusable facts, observations, phrases, and questions in an authorized working note with provenance and date. Separate verified material from leads. Persist reusable context in the approved destination; retain task-only scraps in working notes.
 
 Pass: Saved material has provenance, a date, and a fact-versus-lead label; nothing is persisted to an unauthorized destination.
+
+### 45. Break long projects into parts.
+
+Target: A multi-section piece.
+
+Requirement: Divide a multi-section project into units with a defined job, inputs, and completion condition. Draft each against the shared brief and terminology. Reassemble the units and remove duplicate claims, missing links, and inconsistent terminology.
+
+Pass: Every unit has a completion condition; the assembled piece is connected and internally consistent.
 
 ### 48. Limit self-criticism in early drafts.
 
@@ -105,3 +91,11 @@ Target: Supplied critique or reviewer feedback.
 Requirement: For each critique received, identify the specific reader problem and the passage causing it. Correct factual errors. Apply editorial changes that fix the identified problem while preserving the brief. Account for a rejected recommendation with a concrete conflict or evidence-based reason.
 
 Pass: Every criticism is addressed by a correction or a stated reason; none is ignored or accepted without examining the passage.
+
+### 55. Look for the “inciting incident” to kick-start your story.
+
+Target: A story, or the narrative part of a hybrid.
+
+Requirement: Start a story with the event that disrupts the prior situation and triggers the central action. Put necessary backstory after that event. In a hybrid, place the story's trigger immediately after the report lead. Preserve the actual event, stakes, and sequence in nonfiction.
+
+Pass: The narrative opens on a specific disruption with a consequence; backstory does not delay the trigger.

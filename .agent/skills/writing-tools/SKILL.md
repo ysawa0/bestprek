@@ -6,19 +6,19 @@ disable-model-invocation: true
 
 # Writing Tools
 
-The 55 rules come in five layers, read one at a time as the work reaches them. Read each layer file only when its step starts, never ahead. Within a layer, the branch tags from Layer 1 decide which sections apply, and a rule with a Target line applies once its target appears. Every applied rule ends on its Pass line.
+The 55 rules come in five layers, read one at a time as the work reaches them. Read each layer file only when its step starts, never ahead. Within a layer, the Always section applies to every piece, and a rule with a Target line applies once its target appears. Every applied rule ends on its Pass line.
 
 ## Ground rules
 
 - Evidence lock. Facts, quantities, units, dates, names, attribution, quotations, uncertainty, causality, and ownership survive every edit. Measurements stay distinct from projections. An added factual claim is verified or marked as a gap. Invented detail belongs to fiction alone.
 - Authorized scope. Edit only what the user authorized, and leave quotations and out-of-scope text byte-identical. A spelling-only request returns spelling fixes alone.
-- Genre holds. A report stays a report under every layer; story sections apply only to pieces tagged story or hybrid.
+- Genre holds. A report stays a report under every layer; a story rule applies only where a narrative passage already exists.
 - Requirements, not advice. A Pass line is binary. Polishing ends when every applied rule passes and the requested format and length are met; an irreconcilable conflict is disclosed, not claimed as a pass.
-- Clean output. Deliver the prose plus essential gap or conflict notes. Rule numbers, tags, and check results appear only in an audit.
+- Clean output. Deliver the prose plus essential gap or conflict notes. Rule numbers and check results appear only in an audit.
 
 ## Playbooks
 
-Open a todo list whose first items are the matched playbook's steps, copied verbatim.
+Keep a todo list in working notes whose first items are the matched playbook's steps, copied verbatim. A todo tool is optional; the steps and their completion criteria still apply.
 
 - [Draft](playbooks/draft.md). New prose from a brief, notes, or facts.
 - [Revise](playbooks/revise.md). Edit, tighten, shorten, or restyle supplied prose.

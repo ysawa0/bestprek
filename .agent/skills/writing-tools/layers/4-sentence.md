@@ -2,7 +2,8 @@
 
 Work sentence by sentence, then word by word.
 
-Apply the Always section, each section matching the piece's branch tags, and each rule whose target appears.
+Apply the Always section and each rule whose target appears.
+
 Done when every applied rule here passes its Pass line.
 
 ## Always
@@ -63,14 +64,6 @@ Requirement: Set the register from the brief, then use words from that register 
 
 Pass: Vocabulary matches the purpose and audience; every register change follows an explicit change in speaker or form.
 
-## Story or hybrid
-
-### 13. Play with words, even in serious stories.
-
-Requirement: In playful prose, build wordplay from the subject's actual vocabulary and make its literal meaning intelligible. In serious prose, create verbal play through parallelism, sound, or a precise contrast rather than a joke at the subject's expense. Keep condolence, emergency, and strictly factual status text literal.
-
-Pass: Expressive prose has a subject-based verbal pattern or turn; protected literal forms contain no inserted joke.
-
 ## When the target appears
 
 ### 6. Take it easy on the -ings.
@@ -104,6 +97,14 @@ Target: A recurring key word or technical name.
 Requirement: Use a distinctive emphatic word once in its local passage; reserve its next occurrence for deliberate recurrence under Rule 33. Remove accidental nearby echoes. Use the same technical name for the same thing throughout; do not create false distinctions through synonym swapping.
 
 Pass: Repeated emphatic words have an identifiable structural role; repeated entity names remain consistent.
+
+### 13. Play with words, even in serious stories.
+
+Target: A story, or the narrative part of a hybrid.
+
+Requirement: In playful prose, build wordplay from the subject's actual vocabulary and make its literal meaning intelligible. In serious prose, create verbal play through parallelism, sound, or a precise contrast rather than a joke at the subject's expense. Keep condolence, emergency, and strictly factual status text literal.
+
+Pass: Expressive prose has a subject-based verbal pattern or turn; protected literal forms contain no inserted joke.
 
 ### 15. Pay attention to names.
 

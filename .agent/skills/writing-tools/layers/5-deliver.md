@@ -2,7 +2,8 @@
 
 Run on the finished piece before it leaves your hands.
 
-Apply the Always section, each section matching the piece's branch tags, and each rule whose target appears.
+Apply the Always section and each rule whose target appears.
+
 Done when every applied rule here passes its Pass line.
 
 ## Always
@@ -25,6 +26,6 @@ Pass: The three reader questions are answered; feedback provenance identifies an
 
 Target: An audit.
 
-Requirement: Treat every applied rule as the writing standard. Identify violations by rule number, repair them, and recheck the result. Keep authored rule wording in the layer files. Select rules through the layers and branch tags, never by dropping a rule that is difficult to satisfy.
+Requirement: Treat every applied rule as the writing standard. Identify violations by rule number, repair them, and recheck the result. Keep authored rule wording in the layer files. Select rules through the layers and targets, never by dropping a rule that is difficult to satisfy.
 
 Pass: The final check accounts for every applied rule, and for all 55 in an exhaustive audit. Every departure within that scope cites an explicit user override rather than editorial preference.
