@@ -9,7 +9,7 @@ uv run --no-sync python3 .ci/unslop_checks.py
 prek validate-config prek.toml
 prek validate-manifest .pre-commit-hooks.yaml
 prek run --all-files
-uvx ty check hooks scripts .ci
+uvx ty check pyhooks scripts .ci
 uv run --no-sync python3 .ci/hook_checks.py
 uv run --no-sync python3 .ci/example_checks.py
 uv run --no-sync python3 .ci/release_checks.py

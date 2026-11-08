@@ -30,7 +30,7 @@ require_serial = true
 [[repos.hooks]]
 id = "markdown-width"
 name = "markdown width"
-entry = "python3 -m hooks.markdown_width"
+entry = "python3 -m pyhooks.markdown_width"
 language = "system"
 types = ["markdown"]
 exclude = '^(\.agent/|\.ci/fixtures/|oxlint/anti-slop/vendor/)'
@@ -38,7 +38,7 @@ exclude = '^(\.agent/|\.ci/fixtures/|oxlint/anti-slop/vendor/)'
 [[repos.hooks]]
 id = "directory-file-count"
 name = "directory file count"
-entry = "python3 -m hooks.directory_count"
+entry = "python3 -m pyhooks.directory_count"
 language = "system"
 types = ["file"]
 exclude = "^(\\.ci/fixtures/|\\.github/release-notes/)"

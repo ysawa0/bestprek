@@ -13,12 +13,12 @@ dependencies = [
 ]
 
 [project.scripts]
-ys-ruff = "hooks.ruff:main"
-ys-markdown-length = "hooks.file_length:markdown"
-ys-markdown-width = "hooks.markdown_width:main"
-ys-code-length = "hooks.file_length:code"
-ys-markdown-links = "hooks.markdown_links:main"
-ys-directory-file-count = "hooks.directory_count:main"
+ys-ruff = "pyhooks.ruff:main"
+ys-markdown-length = "pyhooks.file_length:markdown"
+ys-markdown-width = "pyhooks.markdown_width:main"
+ys-code-length = "pyhooks.file_length:code"
+ys-markdown-links = "pyhooks.markdown_links:main"
+ys-directory-file-count = "pyhooks.directory_count:main"
 
 [tool.setuptools]
-packages = ["hooks"]
+packages = ["pyhooks"]
