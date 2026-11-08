@@ -14,9 +14,9 @@ dependencies = [
 
 [project.scripts]
 ys-ruff = "hooks.ruff:main"
-ys-markdown-length = "hooks.markdown_length:main"
+ys-markdown-length = "hooks.file_length:markdown"
 ys-markdown-width = "hooks.markdown_width:main"
-ys-code-length = "hooks.code_length:main"
+ys-code-length = "hooks.file_length:code"
 ys-markdown-links = "hooks.markdown_links:main"
 ys-directory-file-count = "hooks.directory_count:main"
 

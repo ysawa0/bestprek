@@ -2,8 +2,8 @@ import argparse
 from pathlib import Path
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser(description="Limit code file length")
+def check(description: str, advice: str) -> int:
+    parser = argparse.ArgumentParser(description=description)
     parser.add_argument("--max-lines", type=int, default=1000)
     parser.add_argument("files", nargs="+")
     args = parser.parse_args()
@@ -14,11 +14,19 @@ def main() -> int:
         if lines > args.max_lines:
             print(
                 f"{filename}: {lines} lines exceeds the limit of {args.max_lines}. "
-                "Split or refactor the code file as needed."
+                + advice
             )
             failed = True
     return int(failed)
 
 
-if __name__ == "__main__":
-    raise SystemExit(main())
+def code() -> int:
+    return check("Limit code file length", "Split or refactor the code file as needed.")
+
+
+def markdown() -> int:
+    return check(
+        "Limit Markdown file length",
+        'Move content into an "archive" subdirectory or delete content '
+        "that is no longer needed.",
+    )
