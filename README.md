@@ -149,7 +149,7 @@ The GitHub workflow in `.github/workflows/ci.yml` prepares the tools and calls t
 uv run --no-sync python3 .ci/hook_checks.py
 ```
 
-The Rust `unbold` and `unslop` tools and the Go `ys-gopls-check` wrapper live under `tools/`. File-backed test inputs and expected output live under `.ci/fixtures/<hook>/`; each group has a `cases.json` manifest. Inputs use `.txt` so
+The Rust `unbold` and `unslop` tools live under `prose/`; the Go `ys-gopls-check` wrapper lives under `ys-gopls-check/`. File-backed test inputs and expected output live under `.ci/fixtures/<hook>/`; each group has a `cases.json` manifest. Inputs use `.txt` so
 repository formatters do not rewrite deliberately invalid examples.
 
 The end-to-end suite installs hooks from the committed HEAD in a temporary consuming repository. It checks lint failures, formatter output, ignored files, code preservation, and clean second runs. Commit implementation changes before running it.

@@ -7,11 +7,11 @@ description = "Deterministic Markdown prose tools"
 
 [[bin]]
 name = "unslop"
-path = "tools/unslop/main.rs"
+path = "prose/unslop/main.rs"
 
 [[bin]]
 name = "unbold"
-path = "tools/unbold/main.rs"
+path = "prose/unbold/main.rs"
 
 [dependencies]
 regex = "=1.10.2"
