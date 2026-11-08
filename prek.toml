@@ -41,5 +41,5 @@ name = "directory file count"
 entry = "python3 -m hooks.directory_count"
 language = "system"
 types = ["file"]
-exclude = "^(\\.ci/fixtures/|\\.github/release-notes/|oxlint/anti-slop/rules/)"
+exclude = "^(\\.ci/fixtures/|\\.github/release-notes/)"
 require_serial = true
