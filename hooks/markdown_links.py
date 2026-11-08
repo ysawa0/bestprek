@@ -2,7 +2,7 @@ import sys
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
-from markdown_it import (  # ty: ignore  # Installed in prek's hook environment.
+from markdown_it import (
     MarkdownIt,
 )
 
