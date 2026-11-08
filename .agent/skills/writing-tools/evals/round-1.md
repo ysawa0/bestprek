@@ -1,6 +1,6 @@
 # Writing skill comparison with directory reads
 
-This is round 1. The [best-of-three comparison](../best-three/comparison.md) adds two fresh rounds per variant and reports all scores.
+This is round 1. The [best-of-three comparison](best-of-three.md) adds two fresh rounds per variant and reports all scores.
 
 The three agents independently read files in their own skill directories, using GPT-6 Sol at medium effort. Branch scored 17/20, layer 16/20, and both 13/20. This rerun uses the user's clarified tool permission and supersedes the earlier parent-supplied-file comparison.
 
@@ -16,15 +16,15 @@ Branch performed best on this rubric. The combined version still missed rules de
 
 Three fresh agents started with the same brief and their assigned skill directory. They read `SKILL.md` and followed its references without asking the parent for files. The parent supplied no skill text, expected answers, prior results, or feedback. Each agent was instructed to use tools only to read files or list directories inside its own skill directory. Writes, network access, other directories, other skills, and other agents were outside its scope.
 
-The skill versions were frozen at commit `18f7925`. The [manifest](manifest.json) preserves the previous committed primary prompt, ten primary criteria, ten selected regression cases, and scoring. The rubric predates this rerun. No skill rules changed during the run.
+The skill versions were frozen at commit `18f7925`. The [manifest](round-1-manifest.json) preserves the previous committed primary prompt, ten primary criteria, ten selected regression cases, and scoring. The rubric predates this rerun. No skill rules changed during the run.
 
 Each primary response was followed by a separate read-log block. After the primary task, the same agent received cases 1, 2, 5, 8, 9, 10, 11, 13, 17, and 21 as a batch. Each case had its own brief and scope. Read-log metadata is excluded from writing grades and word counts. Logs and tool-call counts are agent-reported; the directory restriction was an instruction rather than a separate filesystem sandbox.
 
 Verbatim responses, including read logs:
 
-- [Branch](branch.md), agent `/root/read_branch`.
-- [Layer](layer.md), agent `/root/read_layer`.
-- [Both](both.md), agent `/root/read_both`.
+- [Branch](round-1-branch.md), agent `/root/read_branch`.
+- [Layer](round-1-layer.md), agent `/root/read_layer`.
+- [Both](round-1-both.md), agent `/root/read_both`.
 
 ## File reading
 

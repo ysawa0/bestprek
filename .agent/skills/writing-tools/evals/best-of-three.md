@@ -2,6 +2,8 @@
 
 Layer has the highest complete-run score, 18/20, and the highest mean, 17/20. Branch and both each peak at 17/20. Layer's one-point lead depends on a narrow audit-accounting point; none of the variants demonstrates complete rule compliance.
 
+`writing-tools` ships the layer variant; the branch, both, flat, and checklist variants were removed.
+
 | Variant | Round 1 | Round 2 | Round 3 | Best | Mean |
 | --- | --- | --- | --- | --- | --- |
 | Layer | 16 | 18 | 17 | 18/20 | 17.00/20 |
@@ -12,11 +14,11 @@ Best selects one complete round per variant. Primary and probe scores stay paire
 
 ## Method and records
 
-The existing [directory-read trial](../direct/comparison.md) is round 1. Two additional rounds used six fresh `gpt-6-sol` agents at medium effort, one per variant per round. All nine agents used the same primary brief, ten primary criteria, ten probe prompts, and scoring. Each read only its assigned skill directory. The earlier experiment with parent-supplied files is excluded.
+The existing [directory-read trial](round-1.md) is round 1. Two additional rounds used six fresh `gpt-6-sol` agents at medium effort, one per variant per round. All nine agents used the same primary brief, ten primary criteria, ten probe prompts, and scoring. Each read only its assigned skill directory. The earlier experiment with parent-supplied files is excluded.
 
 The three skill versions stayed unchanged at commit `18f7925`. Agents received no previous outputs, grades, expected answers, or feedback. Within a round, the primary task and subsequent probe batch shared the same agent context. Read logs are self-reported, and the directory restriction was an instruction rather than a separate filesystem sandbox.
 
-The [manifest](manifest.json) records the protocol and rubric. [Scores](scores.json) preserve every criterion result and aggregate. Verbatim additional-round outputs and read logs are in [layer](layer.md), [branch](branch.md), and [both](both.md). Round 1 outputs remain in their original directory.
+The [manifest](best-of-three-manifest.json) records the protocol and rubric. [Scores](best-of-three-scores.json) preserve every criterion result and aggregate. Verbatim additional-round outputs and read logs are in [layer](rounds-2-3-layer.md), [branch](rounds-2-3-branch.md), and [both](rounds-2-3-both.md). Round 1 outputs remain in their original directory.
 
 | Variant and round | Primary /10 | Probes /10 | Total /20 | Primary words | Story words | Compression words | Primary + probe read calls |
 | --- | --- | --- | --- | --- | --- | --- | --- |

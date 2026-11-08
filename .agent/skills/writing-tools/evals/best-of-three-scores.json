@@ -1,7 +1,7 @@
 {
   "primary_order": "The ten criteria in manifest.json; 1 = pass, 0 = fail.",
   "probe_order": [1, 2, 5, 8, 9, 10, 11, 13, 17, 21],
-  "round_1_source": "../direct/comparison.md; scores retained unchanged.",
+  "round_1_source": "round-1.md; scores retained unchanged.",
   "selection": "Maximum paired primary-plus-probe total from one complete round.",
   "grading_notes": [
     "Only case-specific probe assertions earn points. Broader rule violations are reported separately.",
@@ -16,7 +16,7 @@
       "rounds": [
         {
           "round": 1,
-          "source": "../direct/layer.md",
+          "source": "round-1-layer.md",
           "primary_pass": [1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
           "primary": 9,
           "probe_pass": [1, 0, 0, 1, 1, 0, 1, 1, 1, 1],
@@ -25,7 +25,7 @@
         },
         {
           "round": 2,
-          "source": "layer.md",
+          "source": "rounds-2-3-layer.md",
           "primary_pass": [1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
           "primary": 9,
           "probe_pass": [1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
@@ -34,7 +34,7 @@
         },
         {
           "round": 3,
-          "source": "layer.md",
+          "source": "rounds-2-3-layer.md",
           "primary_pass": [1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
           "primary": 9,
           "probe_pass": [1, 1, 0, 1, 1, 0, 1, 1, 1, 1],
@@ -50,7 +50,7 @@
       "rounds": [
         {
           "round": 1,
-          "source": "../direct/branch.md",
+          "source": "round-1-branch.md",
           "primary_pass": [1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
           "primary": 9,
           "probe_pass": [1, 1, 0, 1, 1, 0, 1, 1, 1, 1],
@@ -59,7 +59,7 @@
         },
         {
           "round": 2,
-          "source": "branch.md",
+          "source": "rounds-2-3-branch.md",
           "primary_pass": [1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
           "primary": 9,
           "probe_pass": [1, 1, 0, 1, 1, 0, 1, 1, 1, 1],
@@ -68,7 +68,7 @@
         },
         {
           "round": 3,
-          "source": "branch.md",
+          "source": "rounds-2-3-branch.md",
           "primary_pass": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
           "primary": 10,
           "probe_pass": [1, 0, 0, 1, 0, 0, 1, 1, 1, 1],
@@ -84,7 +84,7 @@
       "rounds": [
         {
           "round": 1,
-          "source": "../direct/both.md",
+          "source": "round-1-both.md",
           "primary_pass": [1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
           "primary": 8,
           "probe_pass": [0, 0, 0, 1, 0, 0, 1, 1, 1, 1],
@@ -93,7 +93,7 @@
         },
         {
           "round": 2,
-          "source": "both.md",
+          "source": "rounds-2-3-both.md",
           "primary_pass": [1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
           "primary": 9,
           "probe_pass": [1, 1, 0, 1, 1, 0, 1, 1, 1, 1],
@@ -102,7 +102,7 @@
         },
         {
           "round": 3,
-          "source": "both.md",
+          "source": "rounds-2-3-both.md",
           "primary_pass": [1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
           "primary": 9,
           "probe_pass": [1, 0, 0, 1, 1, 0, 1, 1, 1, 1],

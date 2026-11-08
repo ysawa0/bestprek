@@ -1,6 +1,6 @@
 # Writing skill comparison
 
-The current result is the [best-of-three comparison](best-three/comparison.md). Layer scored highest, so `writing-tools` now ships the layer variant; the branch, both, flat, and checklist variants were removed. The report below records the earlier parent-supplied-file trial and is retained as history.
+The [best-of-three comparison](../evals/best-of-three.md) supersedes this report. It records the earlier parent-supplied-file trial and is retained as history.
 
 Three GPT-6 Sol agents at medium effort tested the layer, branch, and both variants on October 14, 2026. Layer and branch tied at 17/20 on the chosen rubric; both scored 15/20. The combined structure did not improve adherence in this trial.
 
@@ -24,17 +24,17 @@ The variants retain the same 55 rule requirements and pass criteria, with one au
 
 ## Method and artifacts
 
-The [manifest](comparison.json) fixes the primary prompt, ten primary criteria, selected regression cases, model, effort, transport, and scoring. It was written before the first primary result arrived. Each agent began with fresh context, the same user brief, and its variant's entrypoint. All three used `gpt-6-sol` with `medium` reasoning effort.
+The [manifest](parent-supplied-scores.json) fixes the primary prompt, ten primary criteria, selected regression cases, model, effort, transport, and scoring. It was written before the first primary result arrived. Each agent began with fresh context, the same user brief, and its variant's entrypoint. All three used `gpt-6-sol` with `medium` reasoning effort.
 
 Agents made zero tool calls. A `NEED path` reply requested a reference; the parent supplied that file's text and resumed the same agent. The parent supplied only requested references and gave no feedback, hints, expected answers, or grades. File headings were prefixed with a transport label; entrypoint Markdown spacing was compacted without changing its wording. All three followed the reference protocol. Layer and both requested their layers in order; branch requested its selected files together. Both selected the multi-section and short branches and skipped the story branches during the primary task.
 
-After the primary output, the same agents received ten additional prompts from [cases.md](cases.md): 1, 2, 5, 8, 9, 10, 11, 13, 17, and 21. Each probe was a separate brief within one batch. This preserves the user's requested three-agent design, but the probes share prior context. They are diagnostic probes rather than fresh-session executions of the full regression suite.
+After the primary output, the same agents received ten additional prompts from [cases.md](../evals/cases.md): 1, 2, 5, 8, 9, 10, 11, 13, 17, and 21. Each probe was a separate brief within one batch. This preserves the user's requested three-agent design, but the probes share prior context. They are diagnostic probes rather than fresh-session executions of the full regression suite.
 
 Verbatim outputs and ordered reference requests:
 
-- [Layer](results/layer.md), agent `/root/trial_layer`.
-- [Branch](results/branch.md), agent `/root/trial_branch`.
-- [Both](results/both.md), agent `/root/trial_both`.
+- [Layer](parent-supplied-layer.md), agent `/root/trial_layer`.
+- [Branch](parent-supplied-branch.md), agent `/root/trial_branch`.
+- [Both](parent-supplied-both.md), agent `/root/trial_both`.
 
 ## Primary brief grades
 
