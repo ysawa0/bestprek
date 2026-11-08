@@ -2,3 +2,5 @@ tmp/
 build/
 *.egg-info/
 target/
+.agent/skills/writing-tools/evals/
+.agent/skills/writing-tools/_deprecated/

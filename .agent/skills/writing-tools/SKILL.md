@@ -45,4 +45,4 @@ Keep a todo list in working notes whose first items are the matched playbook's s
 
 ## Maintenance
 
-Each rule has one home, its layer or optional file. Measure behavior changes with the [regression cases](evals/cases.md).
+Each rule has one home, its layer or optional file. Measure behavior changes with the local regression cases in `evals/cases.md`.
