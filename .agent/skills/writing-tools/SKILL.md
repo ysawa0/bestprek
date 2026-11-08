@@ -15,6 +15,7 @@ disable-model-invocation: true
 - Genre holds. A report stays a report under every layer; a story rule applies only where a narrative passage already exists.
 - Requirements, not advice. A Pass line is binary. Polishing ends when every applied rule passes and the requested format and length are met; an irreconcilable conflict is disclosed, not claimed as a pass.
 - Clean output. Deliver the prose plus essential gap or conflict notes. Rule numbers and check results appear only in an audit.
+- Final checks. Before delivering a draft or revision, pass the [final checks](layers/5-deliver.md#final-checks) at the end of Layer 5.
 
 ## Playbooks
 
