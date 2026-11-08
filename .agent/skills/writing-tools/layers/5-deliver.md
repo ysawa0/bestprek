@@ -26,6 +26,6 @@ Pass: The three reader questions are answered; feedback provenance identifies an
 
 Target: An audit.
 
-Requirement: Treat every applied rule as the writing standard. Identify violations by rule number, repair them, and recheck the result. Keep authored rule wording in the layer files. Select rules through the layers and targets, never by dropping a rule that is difficult to satisfy.
+Requirement: Treat every applied rule as the writing standard. Identify violations by rule number, repair them, and recheck the result. Keep authored rule wording in the layer and optional files. Select rules through the layers, optional triggers, and targets, never by dropping a rule that is difficult to satisfy.
 
 Pass: The final check accounts for every applied rule, and for all 55 in an exhaustive audit. Every departure within that scope cites an explicit user override rather than editorial preference.

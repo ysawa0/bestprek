@@ -48,22 +48,6 @@ Requirement: Pair each central abstract claim with a concrete example, observati
 
 Pass: The reader can move from claim to example and back; the inference does not exceed the evidence.
 
-### 26. Use dialogue as a form of action.
-
-Target: A story, or the narrative part of a hybrid.
-
-Requirement: Make every exchange change a decision, relationship, obstacle, or the reader's knowledge. Cut dialogue that repeats narration without advancing the scene. In nonfiction, use documented wording inside quotation marks and summarize undocumented exchanges without quotation marks.
-
-Pass: Every exchange changes something; every nonfiction quotation is traceable to its source.
-
-### 27. Reveal traits of character.
-
-Target: A story, or the narrative part of a hybrid.
-
-Requirement: Establish a character trait through an observable choice, action, habit, or sacrifice before naming the trait. Keep judgments about motive separate from reported behavior. Use more than a trait label to distinguish the person.
-
-Pass: Each stated trait has behavioral evidence; inferred motives are identified as inferences rather than reported facts.
-
 ### 28. Put odd and interesting things next to each other.
 
 Target: A contrast or comparison.
@@ -72,22 +56,6 @@ Requirement: Place the two sides of a contrast in adjacent sentences or paragrap
 
 Pass: The contrasting facts are adjacent, comparable on a named basis, and not presented as an unsupported causal relationship.
 
-### 34. Write from different cinematic angles.
-
-Target: A story, or the narrative part of a hybrid.
-
-Requirement: In scene-based writing, move through three scales: orient the setting, show the participant's action, then isolate a telling detail. Signal changes of place or viewpoint. Build every nonfiction scale from documented observation.
-
-Pass: Scenes contain setting, action, and detail; the reader can identify the viewpoint and any change of scale.
-
-### 38. Prefer archetypes to stereotypes.
-
-Target: A story, or the narrative part of a hybrid.
-
-Requirement: Ground a recognizable role in the individual's actions, circumstances, and contradictions. Replace stock trait bundles with the person's specific behavior. Use demographic facts only as facts; establish personality and motive from separate evidence.
-
-Pass: The individual is distinguishable from the role; no trait or motive rests solely on demographic membership.
-
 ### 51. Take advantage of narrative numbers.
 
 Target: Quantities.
@@ -95,11 +63,3 @@ Target: Quantities.
 Requirement: Attach units and timeframes to quantities. Give changes their baseline and comparison period. Distinguish counts, rates, percent changes, and percentage-point changes. Label estimates, extrapolations, and realized results. Verify each derived calculation and pair consequential figures with a concrete comparison from the evidence.
 
 Pass: Every number has interpretable scope; comparisons and arithmetic are correct; projections remain labeled as projections.
-
-### 54. Create a mosaic of detail to reveal character.
-
-Target: A story, or the narrative part of a hybrid.
-
-Requirement: For a character portrait, combine details from different categories: action, speech, habit, possessions, relationships, or a contradiction. Make each detail add a different facet. Replace multiple examples of the same trait with complementary evidence.
-
-Pass: The portrait contains more than one facet; every nonfiction detail is sourced and no inferred motive is presented as observation.

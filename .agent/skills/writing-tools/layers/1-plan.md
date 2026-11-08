@@ -36,14 +36,6 @@ Requirement: Write the central question in a working note before drafting. Make 
 
 Pass: Every section has a direct relationship to the central question; the ending answers it or states the evidence gap.
 
-### 41. Turn procrastination into rehearsal.
-
-Target: A blocked opening or argument.
-
-Requirement: When blocked, rehearse one opening or speak through one version of the argument in a working note. Then write a provisional draft from it. Move unresolved details into marked gaps instead of restarting preparation.
-
-Pass: A blocked start produces draft text after rehearsal rather than another planning loop.
-
 ### 42. Do your homework well in advance.
 
 Target: New factual material or added claims.
@@ -51,22 +43,6 @@ Target: New factual material or added claims.
 Requirement: Before writing new factual material, identify and obtain the evidence for its key claims. Record source locations and unresolved gaps. For a supplied-text rewrite, use the supplied facts; verify any added claim before including it. Finish evidence collection before polishing factual claims.
 
 Pass: Every added factual claim has a source; every unresolved dependency is marked rather than fabricated.
-
-### 43. Read for both form and content.
-
-Target: A model text.
-
-Requirement: When using a model text, extract its argument and separately map its opening, evidence order, transitions, cadence, and ending. Reuse the structural technique in new wording. Keep claims from the model separate from verified facts for the current piece.
-
-Pass: Content and form have separate working notes; borrowed structure does not become copied prose or unsourced evidence.
-
-### 44. Save string.
-
-Target: Reusable facts or context surfacing during the work.
-
-Requirement: Capture reusable facts, observations, phrases, and questions in an authorized working note with provenance and date. Separate verified material from leads. Persist reusable context in the approved destination; retain task-only scraps in working notes.
-
-Pass: Saved material has provenance, a date, and a fact-versus-lead label; nothing is persisted to an unauthorized destination.
 
 ### 45. Break long projects into parts.
 
@@ -83,19 +59,3 @@ Target: Drafting.
 Requirement: Complete a beginning-to-ending draft before line editing. Mark uncertainty in working notes and continue. After the complete draft exists, run the structural and sentence-level passes. Keep generating and judging as separate phases.
 
 Pass: A complete draft precedes polishing; all temporary factual gaps are resolved or disclosed before delivery.
-
-### 49. Learn from your critics.
-
-Target: Supplied critique or reviewer feedback.
-
-Requirement: For each critique received, identify the specific reader problem and the passage causing it. Correct factual errors. Apply editorial changes that fix the identified problem while preserving the brief. Account for a rejected recommendation with a concrete conflict or evidence-based reason.
-
-Pass: Every criticism is addressed by a correction or a stated reason; none is ignored or accepted without examining the passage.
-
-### 55. Look for the “inciting incident” to kick-start your story.
-
-Target: A story, or the narrative part of a hybrid.
-
-Requirement: Start a story with the event that disrupts the prior situation and triggers the central action. Put necessary backstory after that event. In a hybrid, place the story's trigger immediately after the report lead. Preserve the actual event, stakes, and sequence in nonfiction.
-
-Pass: The narrative opens on a specific disruption with a consequence; backstory does not delay the trigger.

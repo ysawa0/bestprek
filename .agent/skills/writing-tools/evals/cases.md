@@ -62,7 +62,7 @@ Pass: Meets length and preserves team ownership, estimated/conditional status, a
 
 Prompt: Run a full 55-tool audit of “The test passed. We will deploy tomorrow.” Treat these as supplied facts; this is an internal status update. Return the audit, not a rewrite.
 
-Pass: Follows the Audit playbook with all 55 in scope; accounts for every number 1–55 once; uses PASS, FAIL, NO TARGET with an absent object, or USER OVERRIDE with an explicit instruction. Reports violations as FAIL rather than relabeling them as inapplicable. Checks 2–3–1 and the shortest-insight rule even though the input is brief. Keeps narrative requirements scoped to actual story passages. Since the user requested an audit rather than a rewrite, reports required fixes without silently rewriting.
+Pass: Follows the Audit playbook with all 55 in scope; accounts for every number 1–55 once; uses PASS, FAIL, NO TARGET with an absent object, USER OVERRIDE with an explicit instruction, or UNOBSERVABLE for process rules the prose cannot show. Reports violations as FAIL rather than relabeling them as inapplicable. Checks 2–3–1 and the shortest-insight rule even though the input is brief. Keeps narrative requirements scoped to actual story passages. Since the user requested an audit rather than a rewrite, reports required fixes without silently rewriting.
 
 ## 11. Narrow scope beats stylistic ambition
 

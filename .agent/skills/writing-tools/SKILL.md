@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Writing Tools
 
-The 55 rules come in five layers, read one at a time as the work reaches them. Read each layer file only when its step starts, never ahead. Within a layer, the Always section applies to every piece, and a rule with a Target line applies once its target appears. Every applied rule ends on its Pass line.
+37 core rules come in five layers, read one at a time as the work reaches them. Read each layer file only when its step starts, never ahead. The other 18 rules live in optional files: read one only when its trigger appears, and apply its section for each layer as part of that layer. Within a layer, the Always section applies to every piece, and a rule with a Target line applies once its target appears. Every applied rule ends on its Pass line.
 
 ## Ground rules
 
@@ -28,12 +28,20 @@ Keep a todo list in working notes whose first items are the matched playbook's s
 
 | Layer | Rules |
 | --- | --- |
-| [1. Plan](layers/1-plan.md) | 24, 25, 31, 40, 41, 42, 43, 44, 45, 48, 49, 55 |
-| [2. Structure](layers/2-structure.md) | 10, 19, 29, 30, 32, 33, 35, 36, 37, 39 |
-| [3. Passage](layers/3-passage.md) | 14, 18, 20, 21, 22, 26, 27, 28, 34, 38, 51, 54 |
-| [4. Sentence](layers/4-sentence.md) | 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 15, 16, 17, 23, 52, 53 |
+| [1. Plan](layers/1-plan.md) | 24, 25, 31, 40, 42, 45, 48 |
+| [2. Structure](layers/2-structure.md) | 10, 19, 32, 33, 37, 39 |
+| [3. Passage](layers/3-passage.md) | 14, 18, 20, 21, 22, 28, 51 |
+| [4. Sentence](layers/4-sentence.md) | 1, 2, 3, 4, 5, 6, 7, 9, 11, 12, 15, 23, 52, 53 |
 | [5. Deliver](layers/5-deliver.md) | 46, 47, 50 |
+
+## Optional rules
+
+| File | Trigger | Rules |
+| --- | --- | --- |
+| [Story](optional/story.md) | A story, or the narrative part of a hybrid | 13, 26, 27, 29, 30, 34, 35, 36, 38, 54, 55 |
+| [Process](optional/process.md) | A blocked opening, a model text, reusable facts surfacing during the work, or supplied critique | 41, 43, 44, 49 |
+| [Flourish](optional/flourish.md) | A setup-and-turn sequence, a metaphor or comparison, or a quotation, paraphrase, or allusion | 8, 16, 17 |
 
 ## Maintenance
 
-Each rule has one home, its layer file. Measure behavior changes with the [regression cases](evals/cases.md).
+Each rule has one home, its layer or optional file. Measure behavior changes with the [regression cases](evals/cases.md).

@@ -82,14 +82,6 @@ Requirement: Give every long sentence one main-clause spine; attach its details 
 
 Pass: The main clause and each attachment are identifiable on one reading; sentence length alone has not determined a cut.
 
-### 8. Establish a pattern, then give it a twist.
-
-Target: A series or setup-and-turn sequence.
-
-Requirement: Use parallel grammatical forms for equivalent items. In a setup-and-turn sequence, establish the repeated form before the turn, then place the pattern-breaking item last. Make that item carry the change in meaning.
-
-Pass: Equivalent items are parallel; a deliberate break occurs at the turn rather than by accident.
-
 ### 12. Give key words their space.
 
 Target: A recurring key word or technical name.
@@ -98,14 +90,6 @@ Requirement: Use a distinctive emphatic word once in its local passage; reserve 
 
 Pass: Repeated emphatic words have an identifiable structural role; repeated entity names remain consistent.
 
-### 13. Play with words, even in serious stories.
-
-Target: A story, or the narrative part of a hybrid.
-
-Requirement: In playful prose, build wordplay from the subject's actual vocabulary and make its literal meaning intelligible. In serious prose, create verbal play through parallelism, sound, or a precise contrast rather than a joke at the subject's expense. Keep condolence, emergency, and strictly factual status text literal.
-
-Pass: Expressive prose has a subject-based verbal pattern or turn; protected literal forms contain no inserted joke.
-
 ### 15. Pay attention to names.
 
 Target: Names, titles, or labels.
@@ -113,22 +97,6 @@ Target: Names, titles, or labels.
 Requirement: Check every name, title, label, and spelling against the source. Introduce people and components unambiguously, then name them consistently. Apply requested anonymization consistently. Give fictional characters distinct names and keep the name-to-character mapping stable.
 
 Pass: Each name identifies one referent, matches its source or fictional assignment, and follows the chosen naming convention.
-
-### 16. Seek original images.
-
-Target: A metaphor or comparison.
-
-Requirement: Replace a stock metaphor with a concrete observation or a new comparison derived from the subject. For each comparison, identify the exact shared property. Keep one coherent image instead of mixing incompatible comparisons.
-
-Pass: Every image supplies a specific correspondence; no stock or mixed metaphor survives.
-
-### 17. Riff on the creative language of others.
-
-Target: Quotation, paraphrase, or allusion.
-
-Requirement: When borrowing language, distinguish quotation, paraphrase, and allusion. Quote exactly and credit the source; restate paraphrases in original wording and attribute distinctive borrowed ideas. Build the new passage around the present subject rather than copying another writer's expression.
-
-Pass: Borrowed language has a clear source and form; new language does new work rather than masquerading as an original quotation.
 
 ### 52. Express your best thought in the shortest sentence.
 
