@@ -23,11 +23,14 @@ Fixture fields:
 | `setup` | Consumer configuration or module files needed by this case |
 | `args` | Consumer hook arguments |
 | `exit` | Expected Prek exit status when the default does not apply |
+| `repeat` | Number of times to repeat the input |
+| `siblings` | Number of tracked sibling files to create next to `path` |
+| `exclude` | Hook `exclude` pattern for the consumer configuration |
 
 Without `expected`, file contents must remain byte-for-byte unchanged. The default exit status is 1 for formatter changes or required diagnostics, and 0 for accepted input. The runner removes each case's files and configuration before the next case.
 
 Payloads use `.txt` to keep repository hooks from formatting deliberate errors. Coffee calibration documents remain Markdown under `unslop-prose/`; the noisy article is excluded from routine prose linting and exercised by the tests.
 
-The suite checks all 22 published hooks and has accepted and rejected examples for all 15 vendored Oxlint rules. Coverage checks require a fixture group for each published hook and a rejection fixture for each enabled custom Oxlint rule.
+The suite checks all 22 published hooks and has accepted and rejected examples for all 18 custom Oxlint rules. Coverage checks require a fixture group for each published hook and a rejection fixture for each enabled custom Oxlint rule.
 
 The Unslop CLI check compares the Rust executable with saved Python diagnostics in `unslop-prose/parity/`, including a positive fixture for each of its 25 rules. It checks text and GitHub output, Unicode source locations, configuration errors, suppressions, and Markdown masking. It also repeats the transition check after a 20,000-line code block, with a 10-second timeout to catch repeated whitespace scans.
