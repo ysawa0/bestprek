@@ -5,3 +5,5 @@
 Use `bestprek-disable` to turn hooks off.
 12345678
 1234 <!-- bestprek-disable-line Markdown-Width -->
+# bestprek-disable
+123456789

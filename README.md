@@ -34,10 +34,10 @@ Pre-commit hooks
 A long line <!-- bestprek-disable-line markdown-width -- generated URL -->
 
 <!-- bestprek-disable-next-line markdown-width -->
-<!-- bestprek-disable markdown-width, unslop-prose --> and <!-- bestprek-enable markdown-width -->
+<!-- bestprek-disable markdown-width --> and <!-- bestprek-enable markdown-width -->
 ```
 
-Directives must open a comment. Omit the hook ids to suppress every hook that reads directives, put free text after ` -- `, and leave out `bestprek-enable` to suppress the rest of the file.
+Directives must open an HTML comment. Separate several hook ids with commas, or omit them to suppress every hook that reads directives; put free text after ` -- `, and leave out `bestprek-enable` to suppress the rest of the file.
 
 ## Setup
 

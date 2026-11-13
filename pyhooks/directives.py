@@ -4,7 +4,7 @@
 - `bestprek-disable-next-line` suppresses the following line.
 - `bestprek-disable` suppresses lines until `bestprek-enable` or the end of the file.
 
-A directive must open a comment (`<!--`, `#`, `//`, or `/*`). It takes optional
+A directive must open an HTML comment (`<!--`). It takes optional
 comma-separated hook ids and applies to every hook without them. Free text must
 follow ` -- `. Lines holding a directive are suppressed for the hooks it names.
 """
@@ -13,8 +13,8 @@ import re
 from collections.abc import Sequence
 
 DIRECTIVE = re.compile(
-    r"(?:<!--|#|//|/\*)\s*bestprek-(disable-next-line|disable-line|disable|enable)\b"
-    r"((?:[ ,]+[a-z0-9]+(?:-[a-z0-9]+)*)*)\s*(?=--|\*/|$)"
+    r"<!--\s*bestprek-(disable-next-line|disable-line|disable|enable)\b"
+    r"((?:[ ,]+[a-z0-9]+(?:-[a-z0-9]+)*)*)\s*(?=--|$)"
 )
 
 

@@ -12,12 +12,12 @@ def main() -> int:
     failed = False
     for filename in args.files:
         lines = Path(filename).read_text(encoding="utf-8").splitlines()
-        skipped = suppressed(lines, "markdown-width")
+        suppressed_lines = suppressed(lines, "markdown-width")
         for number, line in enumerate(lines, start=1):
             # Table rows cannot wrap, so only prose lines count.
             if (
                 len(line) > args.max_chars
-                and number not in skipped
+                and number not in suppressed_lines
                 and not line.lstrip().startswith("|")
             ):
                 print(

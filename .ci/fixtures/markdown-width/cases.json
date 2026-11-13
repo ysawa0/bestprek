@@ -33,6 +33,6 @@
     "path": "sample.md",
     "input": "scoped.input.txt",
     "args": ["--max-chars", "5"],
-    "diagnostics": ["sample.md:3: 6 characters exceeds the limit of 5", "sample.md:4: 51 characters exceeds the limit of 5", "sample.md:6: 8 characters exceeds the limit of 5", "sample.md:7: 50 characters exceeds the limit of 5"]
+    "diagnostics": ["sample.md:3: 6 characters exceeds the limit of 5", "sample.md:4: 51 characters exceeds the limit of 5", "sample.md:6: 8 characters exceeds the limit of 5", "sample.md:9: 9 characters exceeds the limit of 5", "sample.md:7: 50 characters exceeds the limit of 5"]
   }
 ]
