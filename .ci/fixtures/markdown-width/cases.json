@@ -21,5 +21,18 @@
     "input": "custom.input.txt",
     "args": ["--max-chars", "5"],
     "diagnostics": ["sample.md:1: 6 characters exceeds the limit of 5"]
+  },
+  {
+    "name": "directives",
+    "path": "sample.md",
+    "input": "directives.input.txt",
+    "args": ["--max-chars", "5"]
+  },
+  {
+    "name": "directives-scoped",
+    "path": "sample.md",
+    "input": "scoped.input.txt",
+    "args": ["--max-chars", "5"],
+    "diagnostics": ["sample.md:3: 6 characters exceeds the limit of 5", "sample.md:4: 51 characters exceeds the limit of 5"]
   }
 ]

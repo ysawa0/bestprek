@@ -1,6 +1,8 @@
 import argparse
 from pathlib import Path
 
+from pyhooks.directives import checked_lines
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Limit Markdown line width")
@@ -10,7 +12,7 @@ def main() -> int:
     failed = False
     for filename in args.files:
         lines = Path(filename).read_text(encoding="utf-8").splitlines()
-        for number, line in enumerate(lines, start=1):
+        for number, line in checked_lines(lines, "markdown-width"):
             # Table rows cannot wrap, so only prose lines count.
             if len(line) > args.max_chars and not line.lstrip().startswith("|"):
                 print(

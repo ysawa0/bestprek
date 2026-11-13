@@ -28,6 +28,17 @@ Pre-commit hooks
 - `shellcheck`: lint shell scripts
 - `shfmt`: format shell scripts
 
+`markdown-width` honors ESLint-style suppression comments, scoped by hook id:
+
+```markdown
+A long line <!-- bestprek-disable-line markdown-width -- generated URL -->
+
+<!-- bestprek-disable-next-line markdown-width -->
+<!-- bestprek-disable markdown-width, unslop-prose --> and <!-- bestprek-enable markdown-width -->
+```
+
+Omit the hook ids to suppress every hook that reads directives.
+
 ## Setup
 
 Agents installing or upgrading a consuming repository should follow [INSTALL.md](INSTALL.md) to update both the release pin and example configs.
