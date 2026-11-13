@@ -37,7 +37,7 @@ A long line <!-- bestprek-disable-line markdown-width -- generated URL -->
 <!-- bestprek-disable markdown-width, unslop-prose --> and <!-- bestprek-enable markdown-width -->
 ```
 
-Omit the hook ids to suppress every hook that reads directives.
+Directives must open a comment. Omit the hook ids to suppress every hook that reads directives, put free text after ` -- `, and leave out `bestprek-enable` to suppress the rest of the file.
 
 ## Setup
 

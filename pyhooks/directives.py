@@ -1,40 +1,39 @@
 """Inline suppression directives shared by bestprek hooks, modeled on ESLint.
 
-- `bestprek-disable-line` skips its own line.
-- `bestprek-disable-next-line` skips the following line.
-- `bestprek-disable` skips lines until `bestprek-enable`, or to the end of the file.
+- `bestprek-disable-line` suppresses its own line.
+- `bestprek-disable-next-line` suppresses the following line.
+- `bestprek-disable` suppresses lines until `bestprek-enable` or the end of the file.
 
-Each directive takes optional comma-separated hook ids and applies to every hook
-without them. Text after ` -- ` is a free-form reason. Directives work inside any
-comment syntax, such as `<!-- bestprek-disable-line markdown-width -- long URL -->`.
+A directive must open a comment (`<!--`, `#`, `//`, or `/*`). It takes optional
+comma-separated hook ids and applies to every hook without them. Free text must
+follow ` -- `. Lines holding a directive are suppressed for the hooks it names.
 """
 
 import re
-from collections.abc import Iterable, Iterator
+from collections.abc import Sequence
 
 DIRECTIVE = re.compile(
-    r"\bbestprek-(disable-next-line|disable-line|disable|enable)"
-    r"((?:[ ,]+[a-z][a-z0-9-]*)*)"
+    r"(?:<!--|#|//|/\*)\s*bestprek-(disable-next-line|disable-line|disable|enable)\b"
+    r"((?:[ ,]+[a-z0-9]+(?:-[a-z0-9]+)*)*)\s*(?=--|\*/|$)"
 )
 
 
-def checked_lines(lines: Iterable[str], hook: str) -> Iterator[tuple[int, str]]:
-    """Yield the numbered lines that `hook` should check."""
+def suppressed(lines: Sequence[str], hook: str) -> set[int]:
+    """Return the 1-based line numbers whose diagnostics `hook` should drop."""
+    result: set[int] = set()
     disabled = False
-    skip_next = False
     for number, line in enumerate(lines, start=1):
-        skip, skip_next = skip_next, False
+        if disabled:
+            result.add(number)
         for match in DIRECTIVE.finditer(line):
             hooks = re.split(r"[ ,]+", match[2].strip()) if match[2] else []
             if hooks and hook not in hooks:
                 continue
-            # A directive line never counts against the hooks it names.
-            skip = True
+            result.add(number)
             if match[1] == "disable":
                 disabled = True
             elif match[1] == "enable":
                 disabled = False
             elif match[1] == "disable-next-line":
-                skip_next = True
-        if not (skip or disabled):
-            yield number, line
+                result.add(number + 1)
+    return result
