@@ -66,12 +66,6 @@ id = "gofumpt"
 id = "gopls-check"
 
 [[repos.hooks]]
-id = "go-vet"
-
-[[repos.hooks]]
-id = "gocyclo"
-
-[[repos.hooks]]
 id = "revive"
 
 [[repos.hooks]]

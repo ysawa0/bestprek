@@ -19,8 +19,6 @@ Pre-commit hooks
 - `gofumpt`: format Go
 - `goimports`: format Go and fix imports
 - `gopls-check`: run `gopls check` on Go files
-- `go-vet`: run `go vet ./...` in the current Go module
-- `gocyclo`: reject Go functions with cyclomatic complexity above 15
 - `revive`: lint Go using `revive.toml`; the supplied config limits control-flow nesting to three levels using `max-control-nesting`. Revive counts `else if` nesting but does not count `range` loops.
   It also checks redundant branches and statements, constant conditions, defer mistakes, value-receiver mutations, and unhandled errors, with cognitive complexity capped at 15.
 - `cargo-fmt`: format every Rust package in the current Cargo workspace
@@ -67,7 +65,7 @@ The directory contains:
 The Oxlint hook loads its bundled policy automatically, including all 18 custom rules. A consumer's root `.oxlintrc.json` or `.oxlintrc.jsonc` can override it. ShellCheck's SC1091 and SC2250 exclusions remain in force. Ruff retains the
 hook's explicit preview-rule policy and nesting limit. See [Ruff's formatter compatibility guidance](https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules) for the formatting exclusions.
 
-Because this hook repository is public, local and CI runs do not need GitHub credentials or repository secrets to fetch it. Hooks skip languages without matching files; repositories with Go files need a root `go.mod` or `go.work` appropriate for `go vet ./...`.
+Because this hook repository is public, local and CI runs do not need GitHub credentials or repository secrets to fetch it. Hooks skip languages without matching files; repositories with Go files need a root `go.mod` or `go.work`.
 
 The Markdown hooks `unbold` and `unslop-prose` build with Cargo during hook installation, so they need a Rust toolchain. The `cargo-fmt` and `cargo-clippy` hooks also require a root `Cargo.toml` and the Clippy and rustfmt components
 (`rustup component add clippy rustfmt`). They use the consuming repository’s selected toolchain and do not install one. Cargo checks the workspace’s default feature set; mutually exclusive features are not enabled together. Standard Clippy checks
@@ -146,7 +144,7 @@ available. The copied `ruff.toml` enables them and includes the same exclusions 
 
 Project-local files such as `.oxfmtrc.jsonc` and `ruff.toml` control their respective tools. `ruff-check` always enables `SIM102` and preview rule `PLR1702`, allowing at most three nested blocks. The `oxlint` hook extends this repository's
 `.oxlintrc.json` with the consumer's root Oxlint config, allowing local overrides of the vendored [anti-slop](https://github.com/dmmulroy/anti-slop) and built-in rules. Hook arguments are passed to Oxlint. The Markdown `unslop-prose` hook is
-separate from that JavaScript policy. `go-vet` runs once from the repository root, so enable it only where that root is the intended Go module or workspace.
+separate from that JavaScript policy.
 
 ## Development
 

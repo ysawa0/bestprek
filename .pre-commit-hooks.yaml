@@ -137,26 +137,6 @@
   pass_filenames: true
   require_serial: true
 
-- id: go-vet
-  name: go vet
-  description: "Run go vet on the current Go module"
-  entry: go vet ./...
-  language: golang
-  language_version: "1.26.5"
-  types: [go]
-  pass_filenames: false
-  require_serial: true
-
-- id: gocyclo
-  name: gocyclo
-  description: "Reject Go functions with cyclomatic complexity above 15"
-  entry: gocyclo -over 15
-  language: golang
-  language_version: "1.26.5"
-  additional_dependencies: ["github.com/fzipp/gocyclo/cmd/gocyclo@v0.6.0"]
-  types: [go]
-  pass_filenames: true
-
 - id: revive
   name: revive
   description: "Lint Go with Revive and the project's revive.toml"

@@ -1,5 +1,0 @@
-package hooktest
-
-import "fmt"
-
-func badPrint() { fmt.Printf("%d", "text") }
