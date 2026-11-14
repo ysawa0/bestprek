@@ -3,13 +3,13 @@
     "name": "at-limit",
     "path": "at-limit.md",
     "input": "chunk.input.txt",
-    "repeat": 4096
+    "repeat": 2560
   },
   {
     "name": "over-limit",
     "path": "over-limit.md",
     "input": "chunk.input.txt",
-    "repeat": 4097,
-    "diagnostics": ["over-limit.md: 33 KB exceeds the limit of 32 KB.", "Move content into an \"archive\" subdirectory or delete content that is no longer needed."]
+    "repeat": 2561,
+    "diagnostics": ["over-limit.md: 21 KB exceeds the limit of 20 KB.", "Move content into an \"archive\" subdirectory or delete content that is no longer needed."]
   }
 ]

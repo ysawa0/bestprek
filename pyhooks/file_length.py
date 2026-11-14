@@ -31,7 +31,7 @@ def code() -> int:
 
 
 def markdown() -> int:
-    args = parse("Limit Markdown file size", "--max-kb", 32)
+    args = parse("Limit Markdown file size", "--max-kb", 20)
     failed = False
     for filename in args.files:
         size = Path(filename).stat().st_size

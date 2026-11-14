@@ -38,7 +38,7 @@ id = "unslop-prose"
 
 [[repos.hooks]]
 id = "markdown-length"
-# args = ["--max-kb", "32"]
+# args = ["--max-kb", "20"]
 
 [[repos.hooks]]
 id = "markdown-width"
