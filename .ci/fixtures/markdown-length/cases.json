@@ -10,6 +10,6 @@
     "path": "over-limit.md",
     "input": "chunk.input.txt",
     "repeat": 2561,
-    "diagnostics": ["over-limit.md: 21 KB exceeds the limit of 20 KB.", "Move content into an \"archive\" subdirectory or delete content that is no longer needed."]
+    "diagnostics": ["over-limit.md: 21 KB, over the 20 KB limit (~5k tokens).", "Why: agents load whole Markdown files", "Fix: split it into focused files"]
   }
 ]

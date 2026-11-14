@@ -2,11 +2,6 @@ import argparse
 import math
 from pathlib import Path
 
-ARCHIVE_ADVICE = (
-    'Move content into an "archive" subdirectory or delete content '
-    "that is no longer needed."
-)
-
 
 def parse(description: str, flag: str, default: int) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=description)
@@ -37,8 +32,13 @@ def markdown() -> int:
         size = Path(filename).stat().st_size
         if size > args.max_kb * 1024:
             print(
-                f"{filename}: {math.ceil(size / 1024)} KB exceeds the limit of "
-                f"{args.max_kb} KB. {ARCHIVE_ADVICE}"
+                f"{filename}: {math.ceil(size / 1024)} KB, over the "
+                f"{args.max_kb} KB limit (~{args.max_kb // 4}k tokens).\n"
+                "  Why: agents load whole Markdown files into context, so large "
+                "files waste tokens and bury the parts that matter.\n"
+                "  Fix: split it into focused files linked from a short index, "
+                "delete what is outdated, or move history into an archive/ "
+                "directory and add it to this hook's exclude in prek.toml."
             )
             failed = True
     return int(failed)
