@@ -1,5 +1,3 @@
-<!-- bestprek-disable-next-line markdown-width -->
-12345
 123456
 1234567 <!-- bestprek-disable-line unslop-prose -->
 Use `bestprek-disable` to turn hooks off.

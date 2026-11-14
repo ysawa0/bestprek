@@ -1,7 +1,6 @@
 """Inline suppression directives shared by bestprek hooks, modeled on ESLint.
 
 - `bestprek-disable-line` suppresses its own line.
-- `bestprek-disable-next-line` suppresses the following line.
 - `bestprek-disable` suppresses lines until `bestprek-enable` or the end of the file.
 
 A directive must open an HTML comment (`<!--`). It takes optional
@@ -13,7 +12,7 @@ import re
 from collections.abc import Sequence
 
 DIRECTIVE = re.compile(
-    r"<!--\s*bestprek-(disable-next-line|disable-line|disable|enable)\b"
+    r"<!--\s*bestprek-(disable-line|disable|enable)\b"
     r"((?:[ ,]+[a-z0-9]+(?:-[a-z0-9]+)*)*)\s*(?=--|$)"
 )
 
@@ -34,6 +33,4 @@ def suppressed(lines: Sequence[str], hook: str) -> set[int]:
                 disabled = True
             elif match[1] == "enable":
                 disabled = False
-            elif match[1] == "disable-next-line":
-                result.add(number + 1)
     return result

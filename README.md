@@ -33,7 +33,6 @@ Pre-commit hooks
 ```markdown
 A long line <!-- bestprek-disable-line markdown-width -- generated URL -->
 
-<!-- bestprek-disable-next-line markdown-width -->
 <!-- bestprek-disable markdown-width --> and <!-- bestprek-enable markdown-width -->
 ```
 
