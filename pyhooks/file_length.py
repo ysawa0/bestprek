@@ -37,7 +37,7 @@ def markdown() -> int:
                 "  Why: agents load whole Markdown files into context, so large "
                 "files waste tokens and bury the parts that matter.\n"
                 "  Fix: split it into focused files, "
-                "delete what is outdated, or move history into an archive/ "
+                "delete what is outdated or unneeded, or move history into an archive/ "
                 "directory and add it to this hook's exclude in prek.toml."
             )
             failed = True
