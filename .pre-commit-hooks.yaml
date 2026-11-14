@@ -72,7 +72,7 @@
 
 - id: markdown-length
   name: markdown length
-  description: "Reject Markdown files over 1,000 lines; configure with --max-lines"
+  description: "Reject Markdown files over 32 KB (~8k tokens); configure with --max-kb"
   entry: ys-markdown-length
   language: python
   types: [markdown]
