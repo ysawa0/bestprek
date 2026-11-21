@@ -41,6 +41,10 @@ id = "markdown-length"
 # args = ["--max-kb", "20"]
 
 [[repos.hooks]]
+id = "skill-length"
+# args = ["--max-kb", "8", "--max-ref-kb", "12"]
+
+[[repos.hooks]]
 id = "markdown-width"
 # args = ["--max-chars", "300"]
 

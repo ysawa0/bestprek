@@ -77,6 +77,14 @@
   language: python
   types: [markdown]
 
+- id: skill-length
+  name: skill length
+  description: "Reject agent skill files over 8 KB for SKILL.md and 12 KB for other Markdown in a skills/ directory; configure with --max-kb and --max-ref-kb"
+  entry: ys-skill-length
+  language: python
+  types: [markdown]
+  files: (^|/)skills/
+
 - id: markdown-links
   name: markdown links
   description: "Check local Markdown link and image targets"

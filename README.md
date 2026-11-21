@@ -13,6 +13,7 @@ Pre-commit hooks
 - `unslop-prose`: lint Markdown prose for canned, repetitive, bloated, or mechanically over-polished writing
 - `markdown-width`: reject Markdown prose lines over 300 characters, skipping table rows; configure with `--max-chars`
 - `markdown-length`: reject Markdown files over 20 KB, roughly 5k tokens; configure with `--max-kb`
+- `skill-length`: reject agent skill files in a `skills/` directory over 8 KB for `SKILL.md` and 12 KB for its other Markdown; configure with `--max-kb` and `--max-ref-kb`
 - `markdown-links`: check that local Markdown link and image targets exist
 - `code-length`: reject code files over 1,000 lines; configure with `--max-lines`
 - `directory-file-count`: reject subdirectories with more than 20 tracked files; configure with `--max-files`

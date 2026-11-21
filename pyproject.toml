@@ -15,6 +15,7 @@ dependencies = [
 [project.scripts]
 ys-ruff = "pyhooks.ruff:main"
 ys-markdown-length = "pyhooks.file_length:markdown"
+ys-skill-length = "pyhooks.file_length:skill"
 ys-markdown-width = "pyhooks.markdown_width:main"
 ys-code-length = "pyhooks.file_length:code"
 ys-markdown-links = "pyhooks.markdown_links:main"

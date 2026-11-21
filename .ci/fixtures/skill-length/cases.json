@@ -1,0 +1,34 @@
+[
+  {
+    "name": "skill-at-limit",
+    "path": ".claude/skills/demo/SKILL.md",
+    "input": "chunk.input.txt",
+    "repeat": 1024
+  },
+  {
+    "name": "skill-over-limit",
+    "path": ".claude/skills/demo/SKILL.md",
+    "input": "chunk.input.txt",
+    "repeat": 1025,
+    "diagnostics": ["SKILL.md: 9 KB, over the 8 KB limit (~2k tokens).", "Why: an agent loads the whole SKILL.md", "Fix: keep SKILL.md to when and how"]
+  },
+  {
+    "name": "reference-at-limit",
+    "path": ".claude/skills/demo/references/topic.md",
+    "input": "chunk.input.txt",
+    "repeat": 1536
+  },
+  {
+    "name": "reference-over-limit",
+    "path": ".claude/skills/demo/references/topic.md",
+    "input": "chunk.input.txt",
+    "repeat": 1537,
+    "diagnostics": ["topic.md: 13 KB, over the 12 KB limit (~3k tokens).", "Why: an agent loads a whole reference file", "Fix: split it into references that each cover one task"]
+  },
+  {
+    "name": "outside-skills",
+    "path": "docs/SKILL.md",
+    "input": "chunk.input.txt",
+    "repeat": 2000
+  }
+]
